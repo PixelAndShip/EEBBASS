@@ -1,6 +1,8 @@
 #include <iostream>
-#include "testh.h"
+#include "Environment/environment.h"
+
+
 int main(){
-    values v = values();
-    std::cout<<v.x+1/3000<<"Hello world!"<<"\n";
+    Agent a = Agent(0.0);
+    std::cout<<a.energy;
 }
