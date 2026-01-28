@@ -5,10 +5,11 @@
 class Agent{
 public:
 
-float healthCoef;
-float energyCoef;
-float speedCoef;
-float sightCoef;
+float maxHealth;
+float maxBite;
+float maxSpeed;
+float maxSight;
+
 
 
 float health;
@@ -22,7 +23,7 @@ Agent(){}
 
 Agent(float eRadiation)// default spawn
 {
-    generateCoefs();
+    generateMax();
 
     
     brain = new Brain(eRadiation);
@@ -37,9 +38,11 @@ Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, flo
     brain = new Brain(eRadiation,iBrain);
 }
 
-void generateCoefs(){
-    float total_coef = 10.0;
-    health = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*10;
+void generateMax(){
+    
+
+    float total_max = 10.0;
+    maxHealth, health = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*10;
     // rest is 10 - each calculated attribute value
     
 }
@@ -47,7 +50,7 @@ void generateCoefs(){
 
 void updateHealth(){
 
-    health += energy*energy - 2; // health updated on negative parabola dependency of energy
+
     if (health < 0){
         health = 0;
     }
