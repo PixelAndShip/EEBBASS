@@ -5,7 +5,7 @@
 class Agent{
 public:
 
-float maxHealth;
+float maxHealth; 
 float maxBite;
 float maxSpeed;
 float maxSight;
@@ -13,10 +13,11 @@ float maxSight;
 
 
 float health;
+float bite; // proportional to energy
 float energy;
 //color
-float speed;
-float sight;
+float speed; // proportional to energy
+float sight; // proportional to energy
 Brain* brain;
 
 Agent(){}
@@ -49,7 +50,8 @@ void generateMax(){
 
 
 void updateHealth(){
-
+    // health is exponentially related to energy, if energy drops past a certain point, start losing health, otherwise gain health slowly
+    // dropping point is directly related to max health value
 
     if (health < 0){
         health = 0;
