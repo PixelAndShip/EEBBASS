@@ -5,46 +5,41 @@
 class Agent{
 public:
 
-float maxHealth; 
-float maxBite;
-float maxSpeed;
-float maxSight;
+
 
 
 
 float health;
-float bite; // proportional to energy
+float bite; 
 float energy;
 //color
-float speed; // proportional to energy
-float sight; // proportional to energy
+float speed; 
+float sight; 
 Brain* brain;
 
 Agent(){}
 
-Agent(float eRadiation)// default spawn
+Agent(float eRadiation, std::mt19937 gen)// default spawn
 {
-    generateMax();
-
+    generateStart(gen);
     
     brain = new Brain(eRadiation);
     // calculate color
 }
 Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation){ // split spawn
 
-    float strength = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+   
     
 
 
     brain = new Brain(eRadiation,iBrain);
 }
 
-void generateMax(){
+void generateStart(std::mt19937 gen){
+    // https://www.geeksforgeeks.org/cpp/how-to-generate-random-number-in-range-in-cpp/
     
-
-    float total_max = 10.0;
-    maxHealth, health = static_cast <float> (rand()) / static_cast <float> (RAND_MAX)*10;
-    // rest is 10 - each calculated attribute value
+   
+   
     
 }
 
@@ -58,4 +53,9 @@ void updateHealth(){
     }
     
 }
+
+
+
+
+
 };

@@ -3,9 +3,11 @@
 
 
 int main(){
-   
-    srand (static_cast <unsigned> (time(0)));
+    
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    
 
-    Agent a = Agent(0.0);
+    Agent a = Agent(0.0, gen);
     std::cout<<a.energy;
 }

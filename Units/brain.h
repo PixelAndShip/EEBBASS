@@ -1,12 +1,11 @@
 #pragma once
-
-
+#include "BrainNodes/ConditionalInputNodes.h"
+#include "BrainNodes/OutputNodes.h"
 
 class Brain{
 public:
 // brain structure
-// input nodes pointer
-// conditional nodes pointer
+std::vector<ConditionalInputNode*> conditionalInputNodes;
 // output nodes pointer
 
 Brain(){}
@@ -19,4 +18,13 @@ Brain(float eRadiation, Brain iBrain){
     // initialize brain
 }
 
+
+void manageConnections(){
+
+}
+
+
+void sendSignal(){
+
+}
 };
