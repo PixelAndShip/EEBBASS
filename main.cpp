@@ -7,6 +7,7 @@ int main(){
    
 
     Agent a;
+   
     a.energy = 0;
     a.health = 10.0;
     std::cout<<a.energy;

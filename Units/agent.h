@@ -18,8 +18,12 @@ float sight;
 Brain* brain;
 
 Agent(){
-    health, bite, energy, speed, sight = 1;
-   
+    health = 1.0;
+    bite = 1.0;
+    energy = 1.0;
+    speed = 1.0;
+    sight = 1.0;
+    
 }
 
 Agent(float eRadiation, std::mt19937 gen)// default spawn
