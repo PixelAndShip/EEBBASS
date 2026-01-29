@@ -8,8 +8,8 @@ int main(){
 
     Agent a;
    
-    a.energy = 0;
-    a.health = 10.0;
+    a.energy = 1;
+    a.health = 1.0;
     std::cout<<a.energy;
     a.updateHealth();
     std::cout<<"\n"<<a.health<<" "<< a.energy;
