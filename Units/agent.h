@@ -17,7 +17,10 @@ float speed;
 float sight; 
 Brain* brain;
 
-Agent(){}
+Agent(){
+    health, bite, energy, speed, sight = 1;
+   
+}
 
 Agent(float eRadiation, std::mt19937 gen)// default spawn
 {
@@ -47,6 +50,9 @@ void generateStart(std::mt19937 gen){
 void updateHealth(){
     // health is exponentially related to energy, if energy drops past a certain point, start losing health, otherwise gain health slowly
     // dropping point is directly related to max health value
+
+    health += -1/(exp(energy*0.1)-0.1*health)+1/(health*0.5);
+    energy*=0.9;
 
     if (health < 0){
         health = 0;

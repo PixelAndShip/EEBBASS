@@ -4,10 +4,12 @@
 
 int main(){
     
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    
+   
 
-    Agent a = Agent(0.0, gen);
+    Agent a;
+    a.energy = 0;
+    a.health = 10.0;
     std::cout<<a.energy;
+    a.updateHealth();
+    std::cout<<"\n"<<a.health<<" "<< a.energy;
 }
