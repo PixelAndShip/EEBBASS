@@ -1,6 +1,6 @@
 #pragma once
 #include "BrainNodes/ConditionalInputNodes.h"
-
+#include "BrainNodes/NodeVariables.cpp"
 
 class Brain{
 public:

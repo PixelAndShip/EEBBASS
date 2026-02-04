@@ -6,5 +6,5 @@ class ConditionalInputNode{
 public:
 float weight;
 std::vector<OutputNode*> outputNodes;
-std::vector<ConditionalInputNode*> inputOutputNodes;
+std::vector<ConditionalInputNode*> inputOutputNode;
 };

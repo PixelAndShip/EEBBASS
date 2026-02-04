@@ -15,6 +15,7 @@ float energy;
 //color
 float speed; 
 float sight; 
+std::string facing;
 Brain* brain;
 
 Agent(){
