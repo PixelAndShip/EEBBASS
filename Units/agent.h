@@ -6,19 +6,26 @@ class Agent{
 public:
 
 
+// dynamic coefficients:
+float cHealth;
+float cSpeed;
 
-
-
+// dynamic values:
 float health;
 float bite; 
 float energy;
 //color
 float speed; 
-float sight; 
+float sight;
+
+// dynamic states:
 std::string facing;
+
 Brain* brain;
 
 Agent(){
+    cHealth = 0.5;
+    cSpeed = 1/(1-cHealth);
     health = 1.0;
     bite = 1.0;
     energy = 1.0;
@@ -51,17 +58,32 @@ void generateStart(std::mt19937 gen){
     
 }
 
+void updateSpeed(float deltaEnergy){
+    speed = 1/(3*cSpeed)*deltaEnergy-1;
+    if(speed <0){
+        speed = 0;
+    }
+}
 
-void updateHealth(){
-    // health is exponentially related to energy, if energy drops past a certain point, start losing health, otherwise gain health slowly
-    // dropping point is directly related to max health value
 
-    health += (exp(0.5*energy)-exp(0.1*health))/(exp(energy)-1);
-    energy*=0.5;
+void updateHealth(float deltaEnergy){
+    if (cHealth <0.2){
+        cHealth = 0.2;
+    }
+    else if(cHealth >1){
+        cHealth = 1;
+    }
 
+    float deltaHealth = (1/10*cHealth)*health*deltaEnergy-health;
+    if(deltaHealth < -2){
+        deltaHealth = -2;
+    }
+    energy-=deltaEnergy;
+    health+=deltaHealth;
     if (health < 0){
         health = 0;
     }
+    
     
 }
 
