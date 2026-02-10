@@ -1,7 +1,7 @@
 #pragma once
-#include "BrainNodes/ConditionalInputNodes.h"
+#include "BrainNodes/ConditionalInputNode.h"
 #include "BrainNodes/NodeVariables.cpp"
-
+#include <random>
 class Brain{
 public:
 // brain structure
@@ -10,8 +10,12 @@ std::vector<int> actions;
 
 Brain(){}
 
-Brain(float eRadiation){
+Brain(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist){
     // initialize brain
+    int conditionalInputNodeCount = dist(gen);
+    for (int i = 0; i<conditionalInputNodeCount;i++){
+        
+    }
 }
 
 Brain(float eRadiation, Brain iBrain){
