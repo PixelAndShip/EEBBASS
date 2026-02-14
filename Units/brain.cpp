@@ -52,7 +52,7 @@ void Brain::addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,Co
             addConnection(eRadiation,endOfChain,gen,inputChainLast,sensesDist,actionsDist,mutationChance);
         }
     }
-    else if(mutated and !endOfChain){
+    if(mutated and !endOfChain){
         size_t mutatedSense = sensesDist(gen);
         auto nodeName = std::next(Senses.begin(),mutatedSense);
         ConditionalInputNode* newInputNode = new ConditionalInputNode();
