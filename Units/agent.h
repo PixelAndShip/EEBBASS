@@ -15,79 +15,24 @@ float health;
 float bite; 
 float energy;
 //color
-float speed; 
-float sight;
+float speed; // adrenalin
+int sight;
 
-// dynamic states:
-std::string facing;
+
 
 Brain* brain;
 
-Agent(){
-    cHealth = 0.5;
-    cSpeed = 1/(1-cHealth);
-    health = 1.0;
-    bite = 1.0;
-    energy = 1.0;
-    speed = 1.0;
-    sight = 1.0;
-    
-}
+Agent();
 
-Agent(float eRadiation, std::mt19937 gen, std::uniform_int_distribution<>& dist)// default spawn
-{
-    generateStart(gen);
-    
-    brain = new Brain(eRadiation,gen,dist);
-    // calculate color
-}
-Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation){ // split spawn
+Agent(float eRadiation, std::mt19937 gen, std::uniform_int_distribution<>& dist);// default spawn
 
-   
-    
+Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation);// split spawn
 
+void generateStart(std::mt19937 gen);
 
-    brain = new Brain(eRadiation,iBrain);
-}
+void updateSpeed(float deltaEnergy);
 
-void generateStart(std::mt19937 gen){
-    // https://www.geeksforgeeks.org/cpp/how-to-generate-random-number-in-range-in-cpp/
-    
-   
-   
-    
-}
-
-void updateSpeed(float deltaEnergy){
-    speed = 1/(3*cSpeed)*deltaEnergy-1;
-    if(speed <0){
-        speed = 0;
-    }
-}
-
-
-void updateHealth(float deltaEnergy){
-    if (cHealth <0.2){
-        cHealth = 0.2;
-    }
-    else if(cHealth >1){
-        cHealth = 1;
-    }
-
-    float deltaHealth = (1/10*cHealth)*health*deltaEnergy-health;
-    if(deltaHealth < -2){
-        deltaHealth = -2;
-    }
-    energy-=deltaEnergy;
-    health+=deltaHealth;
-    if (health < 0){
-        health = 0;
-    }
-    
-    
-}
-
-
+void updateHealth(float deltaEnergy);
 
 
 

@@ -11,7 +11,7 @@ Brain::Brain(float eRadiation, Brain iBrain){
 }
 
 Brain::Brain(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist){
-    // initialize brain
+    
     int conditionalInputNodeCount = dist(gen);
     
     ConditionalInputNode* inputChainFirst;
@@ -44,7 +44,7 @@ void Brain::addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,Co
     
     if (mutated and endOfChain){
         size_t mutatedAction = actionsDist(gen);
-        auto nodeName = std::next(Actions.begin(),mutatedAction);
+        auto node = std::next(Actions.begin(),mutatedAction);
         OutputNode* newOutputNode = new OutputNode();
         // initialize action
         mutated = (mutationChance(gen)/100.0)<=eRadiation;
@@ -54,7 +54,7 @@ void Brain::addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,Co
     }
     if(mutated and !endOfChain){
         size_t mutatedSense = sensesDist(gen);
-        auto nodeName = std::next(Senses.begin(),mutatedSense);
+        auto node = std::next(Senses.begin(),mutatedSense);
         ConditionalInputNode* newInputNode = new ConditionalInputNode();
         // initialize sense
         mutated = (mutationChance(gen)/100.0)<=eRadiation;

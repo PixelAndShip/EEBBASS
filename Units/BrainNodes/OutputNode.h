@@ -6,7 +6,7 @@ class OutputNode{
 public:
 float weight;
 float energyCost;
-// action
+unsigned int key;
 
 
 };

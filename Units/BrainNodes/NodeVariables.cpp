@@ -18,17 +18,13 @@ const std::unordered_map<int,std::string> Senses = {
 };
 
 const std::unordered_map<int,std::string> Actions = {
-    {0,"MoveLeft"},
-    {1,"MoveRight"},
+    {0,"MoveLeft"}, 
+    {1,"MoveRight"}, 
     {2,"MoveUp"},
     {3,"MoveDown"},
-    {4,"SpinLeft"},
-    {5,"SpinRight"},
-    {6,"Bite"},
-    {7,"Split"},
-    {8,"ChangeCHealth"},
-    {9,"ChangeCSpeed"},
-    {10,"ExpendEnergyOnHealth"},
-    {11,"ExpendEnergyOnSpeed"}
-      
+    {4,"Bite"},
+    {5,"Split"},
+    {6,"ExpendEnergyOnHealth"},
+    {7,"ExpendEnergyOnSpeed"},
+    {8,"ChangeCHealth"}
 };
