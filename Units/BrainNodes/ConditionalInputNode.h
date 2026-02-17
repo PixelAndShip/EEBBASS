@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 class OutputNode;
 
 class ConditionalInputNode{
@@ -9,4 +10,6 @@ float setAmount;
 unsigned int key;
 std::vector<OutputNode*> outputNodes;
 ConditionalInputNode* inputOutputNode;
+
+
 };
