@@ -2,6 +2,8 @@
 #include "brain.h"
 #include <random>
 
+
+
 class Agent{
 public:
 
@@ -14,7 +16,10 @@ float cSpeed;
 float health;
 float bite; 
 float energy;
-//color
+
+int red,green,blue,transparency;
+int x,y;
+
 float speed; // adrenalin
 int sight;
 

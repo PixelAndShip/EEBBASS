@@ -4,7 +4,7 @@
 #include "BrainNodes/NodeVariables.cpp"
 #include <random>
 #include <iterator>
-
+#include <cmath>
 
 class ConditionalInputNode;
 class OutputNode;

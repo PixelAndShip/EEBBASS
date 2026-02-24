@@ -20,10 +20,6 @@ Agent::Agent(float eRadiation, std::mt19937 gen, std::uniform_int_distribution<>
 
 Agent::Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation){ // split spawn
 
-   
-    
-
-
     brain = new Brain(eRadiation,iBrain);
 }
 
@@ -35,6 +31,8 @@ void Agent::generateStart(std::mt19937 gen){
 void Agent::updateSpeed(float deltaEnergy){ // increase / decrease adrenalin
     float deltaSpeed = 1/(3*cSpeed)*deltaEnergy-0.2*speed;
     speed += deltaSpeed;
+    blue = std::round(cSpeed*255);
+    
     if(speed <0){
         speed = 0;
     }
@@ -57,6 +55,6 @@ void Agent::updateHealth(float deltaEnergy){
     if (health < 0){
         health = 0;
     }
-    
+    green = std::round(cHealth*255);
     
 }

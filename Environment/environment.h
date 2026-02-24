@@ -6,7 +6,7 @@ class Environment{
 public:
 float radiation;
 int carbon_count;
-std::vector<Agent*> agentCount;
+std::unordered_map<std::string,Agent*> Agents = {};
 // plant count
 // Area
 
@@ -20,6 +20,9 @@ this means each moment needs to be subdivided into submoments:
 determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
 */
+void manageSubMoment(Agent* agent, std::unordered_map<std::string,bool>* managedAgentCoordinates);
+
+
 
 void makeWindow();
 };
