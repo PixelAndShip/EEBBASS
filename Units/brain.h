@@ -30,4 +30,8 @@ void addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,Condition
 void manageConnections();
 
 void sendSignal();
+
+
+
+
 };

@@ -13,5 +13,8 @@ int main(){
     
     a.energy = 1;
     a.health = 1.0;
+
+    Environment env;
+    env.makeWindow();
     
 }

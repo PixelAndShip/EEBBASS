@@ -11,11 +11,19 @@
                 "main.cpp",                 
                 "Units/BrainNodes/*.cpp",
                 "Units/*.cpp",
+                "Environment/*.cpp",
                 "-I.",
                 "-IUnits",
                 "-IUnits/BrainNodes",
                 "-o",
-                "${fileDirname}/main"
+                "${fileDirname}/main",
+                "-lraylib",
+                "-lGL", 
+                "-lm",
+                "-lpthread",
+                "-ldl",
+                "-lrt",
+                "-lX11"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -26,5 +34,6 @@
                 "isDefault": true
             }
         }
+        
     ]
 }

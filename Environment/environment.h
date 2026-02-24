@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 #include "Units/agent.h"
-
+#include "raylib.h"
 class Environment{
 public:
 float radiation;
 int carbon_count;
-std::vector<Agent> agentCount;
+std::vector<Agent*> agentCount;
 // plant count
 // Area
 
@@ -20,4 +20,6 @@ this means each moment needs to be subdivided into submoments:
 determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
 */
+
+void makeWindow();
 };
