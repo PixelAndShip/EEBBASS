@@ -15,6 +15,6 @@ int main(){
     a.health = 1.0;
 
     Environment env;
-    env.makeWindow();
-    
+    //env.makeWindow();
+    env.agentProximityCheck("12_31");
 }
