@@ -1,5 +1,5 @@
 #include "environment.h"
-
+#include <vector>
 
 void Environment::ManagePlantCount(){} // makes sure sim does not crash
 
@@ -13,48 +13,44 @@ void Environment::manageMoment(){
     */
     std::unordered_map<std::string,bool> managedAgentCoordinates = {};
     for (const auto& data: Agents){
-        std::string key = data.first;
-        if (managedAgentCoordinates.find(key)!=managedAgentCoordinates.end()){
+        std::string coords = data.first;
+        if (managedAgentCoordinates.find(coords)!=managedAgentCoordinates.end()){
             continue;
         }
-        Agent* agent = data.second;
-        manageSubMoment(key,agent,&managedAgentCoordinates);
+      
+        manageSubMoment(coords,&managedAgentCoordinates);
     }
 
 } 
 
-void Environment::manageSubMoment(std::string coords,Agent* agent,std::unordered_map<std::string,bool>* managedAgentCoordinates){
+void Environment::manageSubMoment(std::string coords,std::unordered_map<std::string,bool>* managedAgentCoordinates){
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
+    std::vector<std::string> agentCoordsInProximity = agentProximityCheck(coords);
 
+    
 }
 
 std::vector<std::string> Environment::agentProximityCheck(std::string coords){
     // check agent radius for other agents
     std::vector<std::string> agentCoordsInProximity = {};
-    bool split = false;
-    std::string aXS,aYS="";
-    for (char c : coords){
-        if(c=='_'){
-            split = true;
-            continue;
-        }
-        if(!split){
-            aXS+=c;
-        }
-        else{
-            aYS+=c;
-        }
-    }
+    auto _pos = coords.find("_");
     int aX,aY;
     try{
-        aX = std::stoi(aXS);
-        aY = std::stoi(aYS);
+        aX = std::stoi(coords.substr(0, _pos));
+        aY = std::stoi(coords.substr(_pos + 1));
     }
     catch(...){
         return agentCoordsInProximity;
     }
-
-    
+    std::vector<std::string> InRadius = {"0_-1","1_-1","1_0","1_1","0_1","-1_1","-1_0","-1_-1"};
+    for (std::string r : InRadius){
+        auto _pos = r.find("_");
+        int dx = std::stoi(r.substr(0, _pos));
+        int dy = std::stoi(r.substr(_pos + 1));
+        if(Agents.find((std::to_string(aX+dx))+"_"+std::to_string(aY+dy))!=Agents.end()){
+            agentCoordsInProximity.push_back(std::to_string(aX+dx)+"_"+std::to_string(aY+dy));
+        }
+    }
 
     return agentCoordsInProximity;
 }
@@ -69,7 +65,7 @@ void Environment::makeWindow(){
         BeginDrawing();
         ClearBackground(BLACK);
         manageMoment(); // implement
-        
+        DrawCircle(100,200,10,RED);
        
         EndDrawing();
     }

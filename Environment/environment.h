@@ -21,7 +21,7 @@ this means each moment needs to be subdivided into submoments:
 determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
 */
-void manageSubMoment(std::string coords, Agent* agent, std::unordered_map<std::string,bool>* managedAgentCoordinates);
+void manageSubMoment(std::string coords, std::unordered_map<std::string,bool>* managedAgentCoordinates);
 
 std::vector<std::string> agentProximityCheck(std::string coords);
 
