@@ -18,7 +18,7 @@ int main(){
     env.Agents.insert({"12_3",&a});
     env.Agents.insert({"12_4",&a});
     env.Agents.insert({"11_2",&a});
-    // env.makeWindow();
+    env.makeWindow();
     std::vector<std::string> cords = env.agentProximityCheck("12_3");
     for (std::string c : cords){
         std::cout<<c;
