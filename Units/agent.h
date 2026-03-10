@@ -35,9 +35,6 @@ Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, flo
 
 void generateStart(std::mt19937 gen);
 
-void updateSpeed(float deltaEnergy);
-
-void updateHealth(float deltaEnergy);
 
 
 

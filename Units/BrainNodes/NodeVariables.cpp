@@ -28,3 +28,4 @@ const std::unordered_map<int,std::string> Actions = {
     {7,"ExpendEnergyOnSpeed"}, // passive action
     {8,"ChangeCHealth"} // passive action
 };
+

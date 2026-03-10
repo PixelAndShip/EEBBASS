@@ -28,33 +28,3 @@ void Agent::generateStart(std::mt19937 gen){
 
 }
 
-void Agent::updateSpeed(float deltaEnergy){ // increase / decrease adrenalin
-    float deltaSpeed = 1/(3*cSpeed)*deltaEnergy-0.2*speed;
-    speed += deltaSpeed;
-    blue = std::round(cSpeed*255);
-    
-    if(speed <0){
-        speed = 0;
-    }
-}
-
-void Agent::updateHealth(float deltaEnergy){
-    if (cHealth <0.2){
-        cHealth = 0.2;
-    }
-    else if(cHealth >1){
-        cHealth = 1;
-    }
-
-    float deltaHealth = (1/10*cHealth)*health*deltaEnergy-0.5*health;
-    if(deltaHealth < -2){
-        deltaHealth = -2;
-    }
-    energy-=deltaEnergy;
-    health+=deltaHealth;
-    if (health < 0){
-        health = 0;
-    }
-    green = std::round(cHealth*255);
-    
-}

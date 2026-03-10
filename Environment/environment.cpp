@@ -26,7 +26,7 @@ void Environment::manageMoment(){
 void Environment::manageSubMoment(std::string coords,std::unordered_map<std::string,bool>* managedAgentCoordinates){
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
     std::vector<std::string> agentCoordsInProximity = agentProximityCheck(coords);
-
+    
     
 }
 
