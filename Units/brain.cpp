@@ -17,16 +17,7 @@ Brain::~Brain(){
 }
 
 void Brain::deleteChain(ConditionalInputNode* node){
-    if (!node){
-        return;
-    }
-    deleteChain(node->inputOutputNode);
-
-    for (OutputNode* outputNode : node->outputNodes){
-        delete outputNode;
-    }
-
-    delete node;
+    // Implement chain deletion of node arrays
 }
 
 Brain::Brain(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist){
@@ -52,10 +43,8 @@ Brain::Brain(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<
 }
 
 
-void Brain::addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,ConditionalInputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance){
-    if (inputChainLast==nullptr){
-        return;
-    }
+void Brain::addConnection(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance){
+    
 
     
     bool mutated = (mutationChance(gen)/100.0)<=eRadiation;
@@ -73,19 +62,6 @@ void Brain::addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,Co
         }
     }
     if(mutated and !endOfChain){
-        size_t mutatedSense = sensesDist(gen);
-        auto node = std::next(Senses.begin(),mutatedSense);
-        ConditionalInputNode* newInputNode = new ConditionalInputNode();
-        newInputNode->key = node->first;
-        // loop through brain and check if node already exists, 0.5 chance to connect to it or make another one
-        mutated = (mutationChance(gen)/100.0)<=eRadiation;
-        endOfChain = (mutationChance(gen)/100.0)<=eRadiation;
-       
-        if(mutated){
-            // need to check if newInputNode or inputChainLast->inputOutputNode needs to be parsed
-            addConnection(eRadiation,endOfChain,gen,newInputNode,sensesDist,actionsDist,mutationChance);
-        }
-
     }
     
     

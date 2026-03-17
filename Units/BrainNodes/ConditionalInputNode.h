@@ -8,8 +8,8 @@ public:
 float weight;
 float setAmount;
 unsigned int key;
-std::vector<OutputNode*> outputNodes;
-ConditionalInputNode* inputOutputNode;
+std::vector<ConditionalInputNode*> InputNodes;
+std::vector<OutputNode*> OutputNodes;
 
 
 };
