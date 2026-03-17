@@ -7,9 +7,10 @@ class ConditionalInputNode{
 public:
 float weight;
 float setAmount;
-unsigned int key;
+unsigned int key=255;
 std::vector<ConditionalInputNode*> InputNodes;
-std::vector<OutputNode*> OutputNodes;
+OutputNode* OutputNode;
 
+~ConditionalInputNode();
 
 };
