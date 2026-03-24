@@ -24,7 +24,7 @@ Brain(float eRadiation, Brain iBrain);
 
 void deleteChain(ConditionalInputNode* node);
 
-void addConnection(float eRadiation,bool endOfChain, std::mt19937& gen,ConditionalInputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance);
+void addConnection(float eRadiation,std::mt19937& gen,ConditionalInputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance);
 
 
 void manageConnections();
