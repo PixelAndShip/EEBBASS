@@ -1,5 +1,4 @@
 #pragma once
-class ConditionalInputNode;
 class Agent;
 
 class OutputNode{
@@ -16,4 +15,5 @@ void bite(Agent* Opponent, Agent* Self);
 
 void move(Agent* Self, char Direction);
 
+void updateCHealth(Agent* Self, float Amount);
 };

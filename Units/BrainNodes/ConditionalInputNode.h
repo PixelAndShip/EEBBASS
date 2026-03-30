@@ -1,16 +1,16 @@
 #pragma once
 #include <vector>
 #include <memory>
-class OutputNode;
+#include "OutputNode.h"
 
 class ConditionalInputNode{
 public:
 float weight;
 float setAmount;
 unsigned int key=255;
-std::vector<ConditionalInputNode*> InputNodes;
-OutputNode* OutputNode;
+std::vector<ConditionalInputNode*> inputNodes;
+OutputNode* outputNode;
 
-~ConditionalInputNode();
+
 
 };

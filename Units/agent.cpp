@@ -1,6 +1,7 @@
 #include "agent.h"
 
 
+
 Agent::Agent(){
     cHealth = 0.5;
     cSpeed = 1/(cHealth);
@@ -11,19 +12,20 @@ Agent::Agent(){
     sight = 1;
 }
 
-Agent::Agent(float eRadiation, std::mt19937 gen, std::uniform_int_distribution<>& dist){
+Agent::Agent(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist): brain(eRadiation,gen,dist){
+    
     generateStart(gen);
     
-    brain = new Brain(eRadiation,gen,dist);
+   
     // calculate color
 }
 
-Agent::Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation){ // split spawn
+Agent::Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain& iBrain, float eRadiation):brain(eRadiation,iBrain){ // split spawn
 
-    brain = new Brain(eRadiation,iBrain);
+    
 }
 
-void Agent::generateStart(std::mt19937 gen){
+void Agent::generateStart(std::mt19937& gen){
 // https://www.geeksforgeeks.org/cpp/how-to-generate-random-number-in-range-in-cpp/
 
 }
