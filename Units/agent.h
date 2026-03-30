@@ -25,15 +25,16 @@ int sight;
 
 
 
-Brain* brain;
+Brain brain;
 
 Agent();
 
-Agent(float eRadiation, std::mt19937 gen, std::uniform_int_distribution<>& dist);// default spawn
+Agent(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist);// default spawn
 
-Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain iBrain, float eRadiation);// split spawn
+Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain& iBrain, float eRadiation);// split spawn
 
-void generateStart(std::mt19937 gen);
+void generateStart(std::mt19937& gen);
+
 
 
 

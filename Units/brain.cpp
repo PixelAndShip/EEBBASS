@@ -3,23 +3,33 @@
 #include "BrainNodes/OutputNode.h"
 
 
+
 Brain::Brain(){}
 
 
-Brain::Brain(float eRadiation, Brain iBrain){
+Brain::Brain(float eRadiation, Brain& iBrain){
     // initialize brain
 }
 
 Brain::~Brain(){
     for (ConditionalInputNode* inputNode : conditionalInputNodes){
-        delete inputNode;
+        deleteBrain(inputNode);
     }
 }
-
-
+void Brain::deleteBrain(ConditionalInputNode* node){
+    if(!node) return;
+    for(ConditionalInputNode* child : node->inputNodes){
+        deleteBrain(child);
+    }
+    delete node->outputNode;
+    node->outputNode=nullptr;
+    delete node;
+}
 
 Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>& dist){
-    int conditionalInputNodeCount = dist(gen);
+    
+    int conditionalInputNodeCount = 10;//dist(gen);
+
     conditionalInputNodes.resize(conditionalInputNodeCount);
     std::uniform_int_distribution<> sensesDist(0,Senses.size()-1);
     
@@ -31,8 +41,11 @@ Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>
 
 
     for(int i = 0;i<conditionalInputNodeCount;i++){
+      
         ConditionalInputNode* startNode = new ConditionalInputNode();
+        
         addConnection(eRadiation,gen,startNode,sensesDist,actionsDist,mutationChance);
+        
         conditionalInputNodes[i] = startNode;
         
     }
@@ -48,27 +61,31 @@ void Brain::addConnection(float eRadiation,std::mt19937& gen, ConditionalInputNo
     bool mutated = (mutationChance(gen)/100.0)<=eRadiation;
     
     if (mutated){
-        std::uniform_int_distribution<> dist(0,3);
+        
+        size_t mutatedSense = sensesDist(gen);
+        auto node = std::next(Senses.begin(),mutatedSense);
+        inputChainLast->key = node->first;
+
+        std::uniform_int_distribution<> dist(0,2);
         int nextNodesCount = dist(gen);
-        inputChainLast->InputNodes.resize(nextNodesCount);
-        for(int i = 0;i<inputChainLast->InputNodes.size()-1;i++){
-            size_t mutatedSense = sensesDist(gen);
-            auto node = std::next(Actions.begin(),mutatedSense);
+        inputChainLast->inputNodes.resize(nextNodesCount);
+
+        for(int i = 0;i<inputChainLast->inputNodes.size();i++){  
             ConditionalInputNode* newInputNode = new ConditionalInputNode(); // initalize attributes
-            newInputNode->key = node->first;
-            inputChainLast->InputNodes[i]=newInputNode;
+            inputChainLast->inputNodes[i]=newInputNode;
             addConnection(eRadiation,gen,newInputNode,sensesDist,actionsDist,mutationChance);
         }
         
         
     }
-    else{
-        if(inputChainLast->OutputNode!=nullptr){
-            size_t mutatedSense = sensesDist(gen);
-            auto node = std::next(Actions.begin(),mutatedSense);
+    else if(inputChainLast->key!=255){
+        if(inputChainLast->outputNode==nullptr){
+           
+            size_t mutatedAction = actionsDist(gen);
+            auto node = std::next(Actions.begin(),mutatedAction);
             OutputNode* newOutputNode = new OutputNode(); // initalize attributes
             newOutputNode->key = node->first;
-            inputChainLast->OutputNode=newOutputNode;
+            inputChainLast->outputNode=newOutputNode;
 
         }
         
@@ -79,3 +96,4 @@ void Brain::addConnection(float eRadiation,std::mt19937& gen, ConditionalInputNo
     
     return;
 }
+

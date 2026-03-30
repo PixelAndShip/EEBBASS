@@ -12,8 +12,9 @@ void OutputNode::updateSpeed(float deltaEnergy, Agent* Self){ // increase / decr
     }
 }
 
+
 void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
-    if (Self->cHealth  <0.2){
+    if (Self->cHealth < 0.2){
         Self->cHealth = 0.2;
     }
     else if(Self->cHealth >1){
@@ -32,6 +33,8 @@ void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
     Self->green = std::round(Self->cHealth*255);
     
 }
+
+
 
 
 void OutputNode::bite(Agent* Opponent, Agent* Self){
