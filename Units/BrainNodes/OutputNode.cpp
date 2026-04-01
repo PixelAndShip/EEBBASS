@@ -3,32 +3,29 @@
 
 
 void OutputNode::updateSpeed(float deltaEnergy, Agent* Self){ // increase / decrease adrenalin
-    float deltaSpeed = 1/(3*Self->cSpeed)*deltaEnergy-0.2*Self->speed;
-    Self->speed += deltaSpeed;
+    Self->energy-=deltaEnergy;
+    Self->speed += deltaEnergy;
+
     Self->blue = std::round(Self->cSpeed*255);
     
     if(Self->speed <0){
         Self->speed = 0;
     }
+    if (Self->energy < 0){
+        Self->energy = 0;
+    }
 }
 
 
 void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
-    if (Self->cHealth < 0.2){
-        Self->cHealth = 0.2;
-    }
-    else if(Self->cHealth >1){
-        Self->cHealth = 1;
-    }
-
-    float deltaHealth = (1/10*Self->cHealth)*Self->health*deltaEnergy-0.5*Self->health;
-    if(deltaHealth < -2){
-        deltaHealth = -2;
-    }
+    
     Self->energy-=deltaEnergy;
-    Self->health+=deltaHealth;
+    Self->health+=deltaEnergy;
     if (Self->health < 0){
         Self->health = 0;
+    }
+    if (Self->energy < 0){
+        Self->energy = 0;
     }
     Self->green = std::round(Self->cHealth*255);
     
