@@ -6,7 +6,7 @@ void OutputNode::updateSpeed(float deltaEnergy, Agent* Self){ // increase / decr
     Self->energy-=deltaEnergy;
     Self->speed += deltaEnergy;
 
-    Self->blue = std::round(Self->cSpeed*255);
+    Self->blue = std::round(Self->speed*255);
     
     if(Self->speed <0){
         Self->speed = 0;
@@ -27,7 +27,7 @@ void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
     if (Self->energy < 0){
         Self->energy = 0;
     }
-    Self->green = std::round(Self->cHealth*255);
+    Self->green = std::round(Self->health*255);
     
 }
 
