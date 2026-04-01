@@ -28,7 +28,7 @@ void Brain::deleteBrain(ConditionalInputNode* node){
 
 Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>& dist){
     
-    int conditionalInputNodeCount = 10;//dist(gen);
+    int conditionalInputNodeCount = dist(gen);
 
     conditionalInputNodes.resize(conditionalInputNodeCount);
     std::uniform_int_distribution<> sensesDist(0,Senses.size()-1);
@@ -47,7 +47,7 @@ Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>
         addConnection(eRadiation,gen,startNode,sensesDist,actionsDist,mutationChance);
         
         conditionalInputNodes[i] = startNode;
-        
+     
     }
     
 }
