@@ -1,19 +1,24 @@
 #pragma once
 #include <vector>
-#include "Units/agent.h"
-#include "raylib.h"
 #include <iostream>
+#include <random>
+#include "raylib.h"
+#include "spider.h"
+
 class Environment{
 public:
 float radiation;
 int carbon_count;
-std::unordered_map<std::string,Agent*> Agents = {};
+
+std::mt19937 gen;
+std::uniform_int_distribution<> dist;
+std::unordered_map<std::string,Agent*> agents = {};
 // plant count
 // Area
 
-void ManagePlantCount(); // makes sure sim does not crash
+void managePlantCount(); // makes sure sim does not crash
 
-void ManageAgentCount(); // makes sure sim does not crash
+void manageAgentCount(); // makes sure sim does not crash
 
 void manageMoment(); /*
 loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
@@ -24,6 +29,8 @@ determening which agent gets to perform their external action first is determine
 void manageSubMoment(std::string coords, std::unordered_map<std::string,bool>* managedAgentCoordinates);
 
 std::vector<std::string> agentProximityCheck(std::string coords);
+
+OutputNode getAction(InputNode* parentNode);
 
 void makeWindow();
 };

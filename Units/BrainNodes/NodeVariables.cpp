@@ -10,11 +10,7 @@ const std::unordered_map<int,std::string> Senses = {
     {4,"EnergyCountAboveSet"},
     {5,"EnergyCountBelowSet"},
     {6,"HealthCountAboveSet"},
-    {7,"HealthCountBelowSet"},
-    {8,"cHealtAboveSet"},
-    {9,"cHealthBelowSet"},
-    {10,"cSpeedAboveSet"},
-    {11,"cSpeedBelowSet"}
+    {7,"HealthCountBelowSet"}
 };
 
 const std::unordered_map<int,std::string> Actions = {
@@ -25,7 +21,6 @@ const std::unordered_map<int,std::string> Actions = {
     {4,"Bite"},
     {5,"Split"},
     {6,"ExpendEnergyOnHealth"}, // passive action
-    {7,"ExpendEnergyOnSpeed"}, // passive action
-    {8,"ChangeCHealth"} // passive action
+    {7,"ExpendEnergyOnSpeed"} // passive action
 };
 

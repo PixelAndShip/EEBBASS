@@ -3,8 +3,6 @@
 
 
 Agent::Agent(){
-    cHealth = 0.5;
-    cSpeed = 1/(cHealth);
     health = 1.0;
     bite = 1.0;
     energy = 1.0;

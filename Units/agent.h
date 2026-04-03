@@ -8,9 +8,6 @@ class Agent{
 public:
 
 
-// dynamic coefficients:
-float cHealth;
-float cSpeed;
 
 // dynamic values:
 float health;

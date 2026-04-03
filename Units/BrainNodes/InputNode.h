@@ -2,14 +2,20 @@
 #include <vector>
 #include <memory>
 #include "OutputNode.h"
+#include <any>
 
-class ConditionalInputNode{
+
+class InputNode{
 public:
 float weight;
+std::any something;
 float setAmount;
+int red,green,blue,transparency;
 unsigned int key=255;
-std::vector<ConditionalInputNode*> inputNodes;
+std::vector<InputNode*> inputNodes;
 OutputNode* outputNode;
+
+
 
 
 
