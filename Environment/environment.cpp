@@ -1,9 +1,9 @@
 #include "environment.h"
 #include <vector>
 
-void Environment::ManagePlantCount(){} // makes sure sim does not crash
+void Environment::managePlantCount(){} // makes sure sim does not crash
 
-void Environment::ManageAgentCount(){} // makes sure sim does not crash
+void Environment::manageAgentCount(){} // makes sure sim does not crash
 
 void Environment::manageMoment(){
     /*
@@ -12,7 +12,7 @@ void Environment::manageMoment(){
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
     std::unordered_map<std::string,bool> managedAgentCoordinates = {};
-    for (const auto& data: Agents){
+    for (const auto& data: agents){
         std::string coords = data.first;
         if (managedAgentCoordinates.find(coords)!=managedAgentCoordinates.end()){
             continue;
@@ -28,7 +28,17 @@ void Environment::manageSubMoment(std::string coords,std::unordered_map<std::str
     std::vector<std::string> agentCoordsInProximity = agentProximityCheck(coords);
     
     
+    for(std::string agentCoords : agentCoordsInProximity){
+        managedAgentCoordinates->insert({agentCoords,true});
+    }
 }
+
+OutputNode Environment::getAction(InputNode* parentNode){
+    
+}
+
+
+
 
 std::vector<std::string> Environment::agentProximityCheck(std::string coords){
     // check agent radius for other agents
@@ -47,7 +57,7 @@ std::vector<std::string> Environment::agentProximityCheck(std::string coords){
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if(Agents.find((std::to_string(aX+dx))+"_"+std::to_string(aY+dy))!=Agents.end()){
+        if(agents.find((std::to_string(aX+dx))+"_"+std::to_string(aY+dy))!=agents.end()){
             agentCoordsInProximity.push_back(std::to_string(aX+dx)+"_"+std::to_string(aY+dy));
         }
     }

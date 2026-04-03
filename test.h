@@ -6,11 +6,11 @@ class Test{
 public:
 static void proximityCheck(Agent a){
     Environment env;
-    env.Agents.insert({"12_3",&a});
-    env.Agents.insert({"12_4",&a});
-    env.Agents.insert({"11_2",&a});
-    env.Agents.insert({"110_2",&a});
-    env.Agents.insert({"11_3",&a});
+    env.agents.insert({"12_3",&a});
+    env.agents.insert({"12_4",&a});
+    env.agents.insert({"11_2",&a});
+    env.agents.insert({"110_2",&a});
+    env.agents.insert({"11_3",&a});
     //env.makeWindow();
     std::vector<std::string> cords = env.agentProximityCheck("12_3");
     for (std::string c : cords){
@@ -18,7 +18,7 @@ static void proximityCheck(Agent a){
     }
 }
 
-static void printBrain(ConditionalInputNode* node, int depth = 0) {
+static void printBrain(InputNode* node, int depth = 0) {
     if (!node) return;
 
     // Indent based on depth
@@ -39,7 +39,7 @@ static void printBrain(ConditionalInputNode* node, int depth = 0) {
     std::cout << "\n";
 
     // Recurse to children
-    for (ConditionalInputNode* cn : node->inputNodes) {
+    for (InputNode* cn : node->inputNodes) {
         printBrain(cn, depth + 1);
     }
 }

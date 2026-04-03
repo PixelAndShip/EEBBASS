@@ -1,8 +1,7 @@
-#include "OutputNode.h"
-#include "Units/agent.h"
+#include "spider.h"
 
 
-void OutputNode::updateSpeed(float deltaEnergy, Agent* Self){ // increase / decrease adrenalin
+void Spider::updateSpeed(float deltaEnergy, Agent* Self){ 
     Self->energy-=deltaEnergy;
     Self->speed += deltaEnergy;
 
@@ -17,7 +16,7 @@ void OutputNode::updateSpeed(float deltaEnergy, Agent* Self){ // increase / decr
 }
 
 
-void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
+void Spider::updateHealth(float deltaEnergy, Agent* Self){
     
     Self->energy-=deltaEnergy;
     Self->health+=deltaEnergy;
@@ -34,11 +33,11 @@ void OutputNode::updateHealth(float deltaEnergy, Agent* Self){
 
 
 
-void OutputNode::bite(Agent* Opponent, Agent* Self){
+void Spider::bite(Agent* Opponent, float energyCost){
     Opponent->health-=energyCost;
 }
 
-void OutputNode::move(Agent* Self, char Direction){
+void Spider::move(Agent* Self, char Direction){
     switch (Direction){
         case 'u':
             Self->y-=1;
