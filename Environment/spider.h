@@ -1,6 +1,6 @@
 #pragma once
 #include "Units/agent.h"
-
+#include "Units/plant.h"
 class Spider{
 public:
 
@@ -8,20 +8,20 @@ public:
 
 {0,"SeeSomething"},
 {1,"SeeColor"},
-{2,"SeeInRangeSomething"},
-{3,"SeeInRangeColor"},
-{4,"EnergyCountAboveSet"},
-{5,"EnergyCountBelowSet"},
-{6,"HealthCountAboveSet"},
-{7,"HealthCountBelowSet"}
+{2,"EnergyCountAboveSet"},
+{3,"EnergyCountBelowSet"},
+{4,"HealthCountAboveSet"},
+{5,"HealthCountBelowSet"}
 
 */
 
-static void seeSomething();
+bool seeSomething(std::vector<std::string>& proximateCoords,std::unordered_map<std::string,Agent*>& Agents, char& unit);
 
-static void seeColor();
+bool seeColor();
 
-static void seeInRangeSomething();
+
+
+
 
 /*
 

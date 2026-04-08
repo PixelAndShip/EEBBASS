@@ -38,8 +38,6 @@ OutputNode Environment::getAction(InputNode* parentNode){
 }
 
 
-
-
 std::vector<std::string> Environment::agentProximityCheck(std::string coords){
     // check agent radius for other agents
     std::vector<std::string> agentCoordsInProximity = {};
@@ -64,6 +62,8 @@ std::vector<std::string> Environment::agentProximityCheck(std::string coords){
 
     return agentCoordsInProximity;
 }
+
+
 
 
 void Environment::makeWindow(){
