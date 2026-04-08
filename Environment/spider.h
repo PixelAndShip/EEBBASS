@@ -1,9 +1,15 @@
 #pragma once
 #include "Units/agent.h"
 #include "Units/plant.h"
+
 class Spider{
+
+
+
 public:
 
+std::vector<std::string> proximate;
+std::unordered_map<std::string,Agent*> Agents;
 /*
 
 {0,"SeeSomething"},
@@ -15,12 +21,9 @@ public:
 
 */
 
-bool seeSomething(std::vector<std::string>& proximateCoords,std::unordered_map<std::string,Agent*>& Agents, char& unit);
+bool seeSomething(char& unit);
 
 bool seeColor();
-
-
-
 
 
 /*

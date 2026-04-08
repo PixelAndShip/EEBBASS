@@ -6,11 +6,11 @@ class Test{
 public:
 static void proximityCheck(Agent a){
     Environment env;
-    env.agents.insert({"12_3",&a});
-    env.agents.insert({"12_4",&a});
-    env.agents.insert({"11_2",&a});
-    env.agents.insert({"110_2",&a});
-    env.agents.insert({"11_3",&a});
+    env.spider.Agents.insert({"12_3",&a});
+    env.spider.Agents.insert({"12_4",&a});
+    env.spider.Agents.insert({"11_2",&a});
+    env.spider.Agents.insert({"110_2",&a});
+    env.spider.Agents.insert({"11_3",&a});
     //env.makeWindow();
     std::vector<std::string> cords = env.agentProximityCheck("12_3");
     for (std::string c : cords){
