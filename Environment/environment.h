@@ -13,8 +13,11 @@ int carbon_count;
 std::mt19937 gen;
 std::uniform_int_distribution<> dist;
 std::unordered_map<std::string,Agent*> agents = {};
+std::unordered_map<std::string,Plant*> plants = {};
 // plant count
 // Area
+
+Spider spider = Spider();
 
 void managePlantCount(); // makes sure sim does not crash
 

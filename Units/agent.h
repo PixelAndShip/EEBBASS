@@ -18,7 +18,6 @@ int red,green,blue,transparency;
 int x,y;
 
 float speed; // adrenalin
-int sight;
 
 
 

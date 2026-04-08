@@ -7,7 +7,7 @@ Agent::Agent(){
     bite = 1.0;
     energy = 1.0;
     speed = 1.0;
-    sight = 1;
+   
 }
 
 Agent::Agent(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist): brain(eRadiation,gen,dist){
