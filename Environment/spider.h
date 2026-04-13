@@ -26,8 +26,9 @@ std::unordered_map<std::string,Plant*> Plants;
 
 bool seeSomething(char& unit);
 
-bool seeColor();
+bool seeColor(int red,int green,int blue, int transparency, int setRed,int setGreen, int setBlue,int setTransparency);
 
+bool energyCountAboveSet(float energy, float setAmount);
 
 /*
 

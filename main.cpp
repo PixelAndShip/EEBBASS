@@ -3,32 +3,23 @@
 
 #include "test.h"
 
-int main(){
+int main()
+{
     Environment e = Environment();
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0,7);
+    std::uniform_int_distribution<> dist(0, 7);
 
     e.gen = gen;
     e.dist = dist;
-    
-    
 
-    Agent a= Agent(0.75,e.gen,e.dist);
-
+    Agent a = Agent(0.75, e.gen, e.dist);
 
     a.energy = 1;
     a.health = 1.0;
-    
-    for (InputNode* cn : a.brain.inputNodes){
+
+    for (InputNode *cn : a.brain.inputNodes)
+    {
         Test::printBrain(cn);
     }
-    
-
-
 }
-
-
-
-
-

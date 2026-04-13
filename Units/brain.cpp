@@ -1,6 +1,4 @@
 #include "brain.h"
-#include "BrainNodes/InputNode.h"
-#include "BrainNodes/OutputNode.h"
 
 
 
