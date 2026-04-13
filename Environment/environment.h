@@ -9,11 +9,13 @@ class Environment{
 public:
 float radiation;
 int carbon_count;
-
+int maxBrainLevel = 5;
 std::mt19937 gen;
 std::uniform_int_distribution<> dist;
-std::unordered_map<std::string,Agent*> agents = {};
-std::unordered_map<std::string,Plant*> plants = {};
+
+
+
+std::unordered_map<std::string,Plant*> Plants;
 // plant count
 // Area
 

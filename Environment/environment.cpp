@@ -12,8 +12,8 @@ void Environment::manageMoment(){
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
     std::unordered_map<std::string,bool> managedAgentCoordinates = {};
-    for (const auto& data: agents){
-        std::string coords = data.first;
+    for (std::string coords: spider.proximateAgents){
+        
         if (managedAgentCoordinates.find(coords)!=managedAgentCoordinates.end()){
             continue;
         }
@@ -25,10 +25,10 @@ void Environment::manageMoment(){
 
 void Environment::manageSubMoment(std::string coords,std::unordered_map<std::string,bool>* managedAgentCoordinates){
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    std::vector<std::string> agentCoordsInProximity = agentProximityCheck(coords);
+    spider.proximateAgents = agentProximityCheck(coords);
     
     
-    for(std::string agentCoords : agentCoordsInProximity){
+    for(std::string agentCoords : spider.proximateAgents){
         managedAgentCoordinates->insert({agentCoords,true});
     }
 }
@@ -55,7 +55,7 @@ std::vector<std::string> Environment::agentProximityCheck(std::string coords){
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if(agents.find((std::to_string(aX+dx))+"_"+std::to_string(aY+dy))!=agents.end()){
+        if(spider.Agents.find((std::to_string(aX+dx))+"_"+std::to_string(aY+dy))!=spider.Agents.end()){
             agentCoordsInProximity.push_back(std::to_string(aX+dx)+"_"+std::to_string(aY+dy));
         }
     }

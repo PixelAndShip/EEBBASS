@@ -8,7 +8,7 @@
 class InputNode{
 public:
 float weight;
-std::any something;
+char something;
 float setAmount;
 int red,green,blue,transparency;
 unsigned int key=255;

@@ -14,10 +14,9 @@ int main(){
     
     
 
-    Agent a= Agent(0.5,e.gen,e.dist);
+    Agent a= Agent(0.75,e.gen,e.dist);
 
-    
-    
+
     a.energy = 1;
     a.health = 1.0;
     

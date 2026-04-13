@@ -1,14 +1,15 @@
 #include "spider.h"
 
 
-bool Spider::seeSomething(std::vector<std::string>& proximate, std::unordered_map<std::string,Agent*>& Agents, char& unit){
-    if(proximate.empty()){
+bool Spider::seeSomething(char& unit){
+    if(proximateAgents.empty() and unit == 'a'){
         return false;
     }
-    
+    else if(proximatePlants.empty() and unit == 'p'){
+        return false;
+    }
+    return true;
 }
-
-
 
 
 void Spider::updateSpeed(float deltaEnergy, Agent* Self){ 
