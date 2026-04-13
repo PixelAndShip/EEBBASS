@@ -1,11 +1,12 @@
 #pragma once
-#include "BrainNodes/NodeVariables.cpp"
+
 #include <random>
 #include <iterator>
 #include <cmath>
 #include <iostream>
-#include "BrainNodes/InputNode.h"
 
+#include "BrainNodes/inputNode.h"
+#include "BrainNodes/nodeVariables.cpp"
 
 
 
