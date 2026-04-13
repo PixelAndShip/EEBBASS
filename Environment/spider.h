@@ -8,8 +8,11 @@ class Spider{
 
 public:
 
-std::vector<std::string> proximate;
+std::vector<std::string> proximateAgents;
 std::unordered_map<std::string,Agent*> Agents;
+
+std::vector<std::string> proximatePlants;
+std::unordered_map<std::string,Plant*> Plants;
 /*
 
 {0,"SeeSomething"},

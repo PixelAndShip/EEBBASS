@@ -44,7 +44,7 @@ Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>
       
         InputNode* startNode = new InputNode();
         
-        addConnection(eRadiation,gen,startNode,sensesDist,actionsDist,mutationChance);
+        addConnection(eRadiation,gen,startNode,sensesDist,actionsDist,mutationChance,0);
         
         inputNodes[i] = startNode;
      
@@ -53,9 +53,18 @@ Brain::Brain(float eRadiation,std::mt19937& gen, std::uniform_int_distribution<>
 }
 
 
-void Brain::addConnection(float eRadiation,std::mt19937& gen, InputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance){
+void Brain::addConnection(
+    float eRadiation,std::mt19937& gen,
+    InputNode* inputChainLast, 
+    std::uniform_int_distribution<>& sensesDist, 
+    std::uniform_int_distribution<>& actionsDist, 
+    std::uniform_int_distribution<>& mutationChance,
+    int level)
+    {
 
-    
+    if (level>=5){
+        return;
+    }
 
     
     bool mutated = (mutationChance(gen)/100.0)<=eRadiation;
@@ -73,7 +82,7 @@ void Brain::addConnection(float eRadiation,std::mt19937& gen, InputNode* inputCh
         for(int i = 0;i<inputChainLast->inputNodes.size();i++){  
             InputNode* newInputNode = new InputNode(); // initalize attributes
             inputChainLast->inputNodes[i]=newInputNode;
-            addConnection(eRadiation,gen,newInputNode,sensesDist,actionsDist,mutationChance);
+            addConnection(eRadiation,gen,newInputNode,sensesDist,actionsDist,mutationChance,level+1);
         }
         
         

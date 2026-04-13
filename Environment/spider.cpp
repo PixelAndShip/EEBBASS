@@ -2,10 +2,13 @@
 
 
 bool Spider::seeSomething(char& unit){
-    if(proximate.empty()){
+    if(proximateAgents.empty() and unit == 'a'){
         return false;
     }
-    
+    else if(proximatePlants.empty() and unit == 'p'){
+        return false;
+    }
+    return true;
 }
 
 

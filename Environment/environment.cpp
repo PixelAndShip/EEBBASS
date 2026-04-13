@@ -12,8 +12,8 @@ void Environment::manageMoment(){
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
     std::unordered_map<std::string,bool> managedAgentCoordinates = {};
-    for (const auto& data: spider.Agents){
-        std::string coords = data.first;
+    for (std::string coords: spider.proximateAgents){
+        
         if (managedAgentCoordinates.find(coords)!=managedAgentCoordinates.end()){
             continue;
         }
@@ -25,10 +25,10 @@ void Environment::manageMoment(){
 
 void Environment::manageSubMoment(std::string coords,std::unordered_map<std::string,bool>* managedAgentCoordinates){
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    spider.proximate = agentProximityCheck(coords);
+    spider.proximateAgents = agentProximityCheck(coords);
     
     
-    for(std::string agentCoords : spider.proximate){
+    for(std::string agentCoords : spider.proximateAgents){
         managedAgentCoordinates->insert({agentCoords,true});
     }
 }

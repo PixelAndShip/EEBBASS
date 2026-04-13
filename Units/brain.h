@@ -31,7 +31,7 @@ Brain& operator=(const Brain&) = delete;
 Brain(Brain&&) = delete;
 Brain& operator=(Brain&&) = delete;
 
-void addConnection(float eRadiation,std::mt19937& gen, InputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance);
+void addConnection(float eRadiation,std::mt19937& gen, InputNode* inputChainLast, std::uniform_int_distribution<>& sensesDist, std::uniform_int_distribution<>& actionsDist, std::uniform_int_distribution<>& mutationChance, int level);
 
 
 void manageConnections();
