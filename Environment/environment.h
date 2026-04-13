@@ -5,37 +5,36 @@
 #include "raylib.h"
 #include "spider.h"
 
-class Environment{
+class Environment
+{
 public:
-float radiation;
-int carbon_count;
-int maxBrainLevel = 5;
-std::mt19937 gen;
-std::uniform_int_distribution<> dist;
+    float radiation;
+    int carbon_count;
+    int maxBrainLevel = 5;
+    std::mt19937 gen;
+    std::uniform_int_distribution<> dist;
 
+    std::unordered_map<std::string, Plant *> Plants;
+    // plant count
+    // Area
 
+    Spider spider = Spider();
 
-std::unordered_map<std::string,Plant*> Plants;
-// plant count
-// Area
+    void managePlantCount(); // makes sure sim does not crash
 
-Spider spider = Spider();
+    void manageAgentCount(); // makes sure sim does not crash
 
-void managePlantCount(); // makes sure sim does not crash
+    void manageMoment(); /*
+    loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
+    this means each moment needs to be subdivided into submoments:
+    determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
-void manageAgentCount(); // makes sure sim does not crash
+    */
+    void manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates);
 
-void manageMoment(); /*
-loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
-this means each moment needs to be subdivided into submoments:
-determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
+    std::vector<std::string> agentProximityCheck(std::string coords);
 
-*/
-void manageSubMoment(std::string coords, std::unordered_map<std::string,bool>* managedAgentCoordinates);
+    OutputNode getAction(InputNode *parentNode);
 
-std::vector<std::string> agentProximityCheck(std::string coords);
-
-OutputNode getAction(InputNode* parentNode);
-
-void makeWindow();
+    void makeWindow();
 };

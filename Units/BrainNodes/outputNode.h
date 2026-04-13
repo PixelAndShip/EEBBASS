@@ -1,13 +1,36 @@
 #pragma once
 class Agent;
 
-class OutputNode{
+class OutputNode
+{
+private:
+    float weight;
+    float energyCost;
+    unsigned int key;
+
 public:
-float weight;
-float energyCost;
-unsigned int key;
-
-
-
-
+    void setWeight(float iW)
+    {
+        weight = iW;
+    }
+    void setEnergyCost(float iEC)
+    {
+        energyCost = iEC;
+    }
+    void setKey(unsigned int iK)
+    {
+        key = iK;
+    }
+    float getWeight()
+    {
+        return weight;
+    }
+    float getEnergyCost()
+    {
+        return energyCost;
+    }
+    float getKey()
+    {
+        return key;
+    }
 };
