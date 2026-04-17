@@ -40,6 +40,21 @@ bool Spider::energyCountAboveSet(float energy, float setAmount)
     return energy >= setAmount;
 }
 
+bool Spider::energyCountBelowSet(float energy, float setAmount)
+{
+    return energy < setAmount;
+}
+
+bool Spider::healthCountAboveSet(float health, float setAmount)
+{
+    return health >= setAmount;
+}
+
+bool Spider::healthCountBelowSet(float health, float setAmount)
+{
+    return health < setAmount;
+}
+
 void Spider::updateSpeed(float deltaEnergy, Agent *Self)
 {
     Self->energy -= deltaEnergy;
