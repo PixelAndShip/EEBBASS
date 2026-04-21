@@ -20,9 +20,9 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
 
     int InputNodeCount = dist(gen);
 
-    std::uniform_int_distribution<> sensesDist(0, Senses.size() - 1);
+    std::uniform_int_distribution<> sensesDist(0, getSenses().size() - 1);
 
-    std::uniform_int_distribution<> actionsDist(0, Actions.size() - 1);
+    std::uniform_int_distribution<> actionsDist(0, getActions().size() - 1);
 
     std::uniform_int_distribution<> mutationChance(0, 100);
 
@@ -57,7 +57,7 @@ void Brain::addConnection(
     {
 
         size_t mutatedSense = sensesDist(gen);
-        auto node = std::next(Senses.begin(), mutatedSense);
+        auto node = std::next(getSenses().begin(), mutatedSense);
         inputChainLast->setKey(node->first);
 
         std::uniform_int_distribution<> dist(0, 2);
@@ -76,7 +76,7 @@ void Brain::addConnection(
         {
 
             size_t mutatedAction = actionsDist(gen);
-            auto node = std::next(Actions.begin(), mutatedAction);
+            auto node = std::next(getActions().begin(), mutatedAction);
             OutputNode *newOutputNode = new OutputNode(); // initalize attributes
             newOutputNode->setKey(node->first);
             inputChainLast->setOutputNode(newOutputNode);

@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "BrainNodes/inputNode.h"
-#include "BrainNodes/nodeVariables.cpp"
 
 class OutputNode;
 class Brain

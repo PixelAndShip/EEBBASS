@@ -1,5 +1,5 @@
 #pragma once
-class Agent;
+#include "DataTypes/datatypes.h"
 
 class OutputNode
 {

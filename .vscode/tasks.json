@@ -8,17 +8,18 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "main.cpp",                 
+                "main.cpp",
                 "Units/BrainNodes/*.cpp",
                 "Units/*.cpp",
                 "Environment/*.cpp",
+                "DataTypes/datatypes.h",
                 "-I.",
                 "-IUnits",
                 "-IUnits/BrainNodes",
                 "-o",
                 "${fileDirname}/main",
                 "-lraylib",
-                "-lGL", 
+                "-lGL",
                 "-lm",
                 "-lpthread",
                 "-ldl",
@@ -28,12 +29,13 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "problemMatcher": ["$gcc"],
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
         }
-        
     ]
 }
