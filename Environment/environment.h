@@ -34,7 +34,5 @@ public:
 
     std::vector<std::string> agentProximityCheck(std::string coords);
 
-    OutputNode getAction(InputNode *parentNode);
-
     void makeWindow();
 };

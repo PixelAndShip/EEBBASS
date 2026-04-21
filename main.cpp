@@ -13,13 +13,18 @@ int main()
     e.gen = gen;
     e.dist = dist;
 
-    Agent a = Agent(0.75, e.gen, e.dist);
+    Agent a = Agent(0.7, e.gen, e.dist);
 
-    a.energy = 1;
-    a.health = 1.0;
+    a.setEnergy(1);
+    a.setHealth(1);
+    a.setAgentColor({1, 2, 3, 4});
 
-    for (InputNode *cn : a.brain.inputNodes)
-    {
-        Test::printBrain(cn);
-    }
+    // for (InputNode *cn : a.getBrain().getInputNodes())
+    // {
+    //     Test::printBrain(cn);
+    // }
+
+    Plant p = Plant();
+    Test::getType(&p);
+    Test::getType(&a);
 }

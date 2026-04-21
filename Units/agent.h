@@ -1,38 +1,105 @@
 #pragma once
 #include "brain.h"
 #include <random>
+struct AgentColor
+{
+    int red, green, blue, transparency;
+};
+class Agent
+{
 
+private:
+    float health;
+    float bite;
+    float energy;
 
+    AgentColor agentColor;
+    int x, y;
 
-class Agent{
+    float speed;
+    Brain brain;
+
 public:
+    void setHealth(float iH)
+    {
+        health = iH;
+    }
 
+    void setBite(float iB)
+    {
+        bite = iB;
+    }
+    void setEnergy(float iE)
+    {
+        energy = iE;
+    }
+    void setAgentColor(AgentColor iAC)
+    {
+        agentColor = iAC;
+    }
 
+    void setX(int iX)
+    {
+        x = iX;
+    }
 
-// dynamic values:
-float health;
-float bite; 
-float energy;
+    void setY(int iY)
+    {
+        y = iY;
+    }
 
-int red,green,blue,transparency;
-int x,y;
+    void setSpeed(float iS)
+    {
+        speed = iS;
+    }
 
-float speed; // adrenalin
+    void setBrain() // idk if possible, brain consists of pointer tree, issues might arise if copied over. Brain currently is created via constructor.
+    {
+    }
 
+    float getHealth()
+    {
+        return health;
+    }
 
+    float getBite()
+    {
+        return bite;
+    }
 
-Brain brain;
+    float getEnergy()
+    {
+        return energy;
+    }
 
-Agent();
+    AgentColor getAgentColor()
+    {
+        return agentColor;
+    }
 
-Agent(float eRadiation, std::mt19937& gen, std::uniform_int_distribution<>& dist);// default spawn
+    int getX()
+    {
+        return x;
+    }
+    int getY()
+    {
+        return y;
+    }
+    float getSpeed()
+    {
+        return speed;
+    }
 
-Agent(float iHealth, float iEnergy,float iSpeed, float iSight, Brain& iBrain, float eRadiation);// split spawn
+    const Brain &getBrain()
+    {
+        return brain;
+    }
 
-void generateStart(std::mt19937& gen);
+    Agent();
 
+    Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist); // default spawn
 
+    Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation); // split spawn
 
-
-
+    void generateStart(std::mt19937 &gen);
 };

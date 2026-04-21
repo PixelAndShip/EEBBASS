@@ -1,11 +1,7 @@
 #pragma once
 
-
-class Plant{
+class Plant
+{
+private:
 public:
-
-
-
 };
-
-

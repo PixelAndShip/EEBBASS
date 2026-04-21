@@ -53,4 +53,16 @@ public:
             printBrain(cn, depth + 1);
         }
     }
+
+    static void getType(auto *data)
+    {
+        if (typeid(*data) == typeid(Agent))
+        {
+            std::cout << "a";
+        }
+        else if (typeid(*data) == typeid(Plant))
+        {
+            std::cout << "p";
+        }
+    }
 };

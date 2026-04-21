@@ -2,11 +2,11 @@
 
 bool Spider::seeSomething(char &unit)
 {
-    if (proximateAgents.empty() and unit == 'a')
+    if (proximateAgentCoords.empty() and unit == 'a')
     {
         return false;
     }
-    else if (proximatePlants.empty() and unit == 'p')
+    else if (proximatePlantCoords.empty() and unit == 'p')
     {
         return false;
     }
@@ -40,55 +40,98 @@ bool Spider::energyCountAboveSet(float energy, float setAmount)
     return energy >= setAmount;
 }
 
+bool Spider::energyCountBelowSet(float energy, float setAmount)
+{
+    return energy < setAmount;
+}
+
+bool Spider::healthCountAboveSet(float health, float setAmount)
+{
+    return health >= setAmount;
+}
+
+bool Spider::healthCountBelowSet(float health, float setAmount)
+{
+    return health < setAmount;
+}
+
 void Spider::updateSpeed(float deltaEnergy, Agent *Self)
 {
-    Self->energy -= deltaEnergy;
-    Self->speed += deltaEnergy;
+    float currentEnergy = Self->getEnergy();
+    float currentSpeed = Self->getSpeed();
+    Self->setEnergy(currentEnergy - deltaEnergy);
+    Self->setSpeed(currentSpeed += deltaEnergy);
+    int blue = std::round(Self->getSpeed() * 255);
+    Self->setAgentColor({Self->getAgentColor().red, Self->getAgentColor().green, blue, Self->getAgentColor().transparency});
 
-    Self->blue = std::round(Self->speed * 255);
-
-    if (Self->speed < 0)
+    if (Self->getSpeed() < 0)
     {
-        Self->speed = 0;
+        Self->setSpeed(0);
     }
-    if (Self->energy < 0)
+    if (Self->getEnergy() < 0)
     {
-        Self->energy = 0;
+        Self->setEnergy(0);
     }
 }
 
 void Spider::updateHealth(float deltaEnergy, Agent *Self)
 {
+    float currentEnergy = Self->getEnergy();
+    float currentHealth = Self->getHealth();
+    Self->setEnergy(currentEnergy - deltaEnergy);
+    Self->setHealth(currentHealth += deltaEnergy);
+    int green = std::round(Self->getHealth() * 255);
+    Self->setAgentColor({Self->getAgentColor().red, green, Self->getAgentColor().blue, Self->getAgentColor().transparency});
 
-    Self->energy -= deltaEnergy;
-    Self->health += deltaEnergy;
-    if (Self->health < 0)
+    if (Self->getSpeed() < 0)
     {
-        Self->health = 0;
+        Self->setSpeed(0);
     }
-    if (Self->energy < 0)
+    if (Self->getEnergy() < 0)
     {
-        Self->energy = 0;
+        Self->setEnergy(0);
     }
-    Self->green = std::round(Self->health * 255);
 }
 
-void Spider::bite(Agent *Opponent, float energyCost)
+void Spider::bite(auto *Opponent, float energyCost)
 {
-    Opponent->health -= energyCost;
+
+    if (typeid(*Opponent) == typeid(Agent))
+    {
+        float currentOpponentHealth = Opponent->getHealth();
+        Opponent->setHealth(currentOpponentHealth -= energyCost);
+    }
+    else if (typeid(*Opponent) == typeid(Plant))
+    {
+        return;
+    }
 }
 
 void Spider::move(Agent *Self, char Direction)
 {
+    int currentX = Self->getX();
+    int currentY = Self->getY();
     switch (Direction)
     {
     case 'u':
-        Self->y -= 1;
+        Self->setY(currentY - 1);
     case 'd':
-        Self->y += 1;
+        Self->setY(currentY + 1);
     case 'l':
-        Self->x -= 1;
+        Self->setX(currentX - 1);
     case 'r':
-        Self->x += 1;
+        Self->setX(currentX + 1);
     }
+}
+
+void Spider::manageSubMoment()
+{
+    if (proximateAgentCoords.empty())
+    {
+        return;
+    }
+}
+
+OutputNode Spider::getAction(InputNode *parentNode)
+{
 }
