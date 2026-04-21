@@ -2,9 +2,9 @@
 #include "Environment/environment.h"
 #include <random>
 
-class Test
+namespace Test
 {
-public:
+
     static void proximityCheck(Agent a)
     {
         Environment env;
@@ -33,7 +33,7 @@ public:
         std::cout << indent;
         if (node->getKey() != 255)
         {
-            std::cout << node->getKey() << "|" << Senses.at(node->getKey());
+            std::cout << node->getKey() << "|" << getSenses().at(node->getKey());
         }
         else
         {

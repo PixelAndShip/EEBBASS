@@ -2,12 +2,8 @@
 #include <vector>
 #include <memory>
 #include "outputNode.h"
-#include <any>
 
-struct UnitColor
-{
-    int red, green, blue, transparency;
-};
+#include <any>
 
 class InputNode
 {

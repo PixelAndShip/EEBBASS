@@ -1,10 +1,6 @@
 #pragma once
 #include "brain.h"
 #include <random>
-struct AgentColor
-{
-    int red, green, blue, transparency;
-};
 class Agent
 {
 
@@ -13,7 +9,7 @@ private:
     float bite;
     float energy;
 
-    AgentColor agentColor;
+    UnitColor agentColor;
     int x, y;
 
     float speed;
@@ -33,7 +29,7 @@ public:
     {
         energy = iE;
     }
-    void setAgentColor(AgentColor iAC)
+    void setAgentColor(UnitColor iAC)
     {
         agentColor = iAC;
     }
@@ -72,7 +68,7 @@ public:
         return energy;
     }
 
-    AgentColor getAgentColor()
+    UnitColor getAgentColor()
     {
         return agentColor;
     }

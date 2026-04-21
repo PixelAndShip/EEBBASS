@@ -19,12 +19,12 @@ int main()
     a.setHealth(1);
     a.setAgentColor({1, 2, 3, 4});
 
-    // for (InputNode *cn : a.getBrain().getInputNodes())
-    // {
-    //     Test::printBrain(cn);
-    // }
+    for (InputNode *cn : a.getBrain().getInputNodes())
+    {
+        Test::printBrain(cn);
+    }
 
-    Plant p = Plant();
-    Test::getType(&p);
-    Test::getType(&a);
+    // Plant p = Plant();
+    // Test::getType(&p);
+    // Test::getType(&a);
 }
