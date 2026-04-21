@@ -6,10 +6,10 @@ class Spider
 {
 
 public:
-    std::vector<std::string> proximateAgents;
+    std::vector<std::string> proximateAgentCoords;
     std::unordered_map<std::string, Agent *> Agents;
 
-    std::vector<std::string> proximatePlants;
+    std::vector<std::string> proximatePlantCoords;
     std::unordered_map<std::string, Plant *> Plants;
     /*
 
@@ -51,9 +51,10 @@ public:
 
     void updateHealth(float deltaEnergy, Agent *Self);
 
-    void bite(Agent *Opponent, float energyCost);
+    void bite(auto *Opponent, float energyCost);
 
     void move(Agent *Self, char Direction);
 
-    void updateCHealth(Agent *Self, float Amount);
+    OutputNode getAction(InputNode *parentNode);
+    void manageSubMoment();
 };

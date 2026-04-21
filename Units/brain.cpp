@@ -87,3 +87,8 @@ void Brain::addConnection(
 
     return;
 }
+
+const std::vector<InputNode *> &Brain::getInputNodes() const
+{
+    return inputNodes;
+}
