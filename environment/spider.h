@@ -1,6 +1,6 @@
 #pragma once
-#include "Units/agent.h"
-#include "Units/plant.h"
+#include "units/agent.h"
+#include "units/plant.h"
 
 class Spider
 {

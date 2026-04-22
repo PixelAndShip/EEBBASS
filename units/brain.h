@@ -5,9 +5,9 @@
 #include <cmath>
 #include <iostream>
 
-#include "BrainNodes/inputNode.h"
+#include "brain_nodes/input_node.h"
 
-class OutputNode;
+// class OutputNode;
 class Brain
 {
 private:
