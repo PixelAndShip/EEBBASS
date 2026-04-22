@@ -3,28 +3,29 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++ build ALL files (subdirs)",
+            "label": "C/C++: g++-20 ALL files (Raylib)",
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "main.cpp",
-                "units/brain_nodes/*.cpp",
-                "units/*.cpp",
-                "environment/*.cpp",
-                "data_management/*.h",
+                "-std=c++20",
                 "-I.",
-                "-I.units",
-                "-I.units/BrainNodes",
-                "-o",
-                "${fileDirname}/main",
+                "-Iunits",
+                "-Iunits/brain_nodes",
+                "main.cpp",
+                "environment/*.cpp",
+                "units/*.cpp",
+                "units/brain_nodes/*.cpp",
+                "-L/usr/local/lib",
                 "-lraylib",
                 "-lGL",
                 "-lm",
                 "-lpthread",
                 "-ldl",
                 "-lrt",
-                "-lX11"
+                "-lX11",
+                "-o",
+                "${fileDirname}/main"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -36,6 +37,17 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Valgrind Memcheck",
+            "type": "shell",
+            "command": "valgrind",
+            "args": [
+                "--leak-check=full",
+                "--show-leak-kinds=all",
+                "${fileDirname}/main"
+            ],
+            "dependsOn": "C/C++: g++-20 ALL files (Raylib)"
         }
     ]
 }
