@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Environment/environment.h"
+#include "environment/environment.h"
 #include <random>
 
 namespace Test
