@@ -27,44 +27,19 @@ void Environment::manageMoment()
 
 void Environment::manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates)
 {
+    if (managedAgentCoordinates == nullptr)
+    {
+        return;
+    }
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    spider.proximateAgentCoords = agentProximityCheck(coords);
+    spider.setProximities(coords);
 
     for (std::string agentCoords : spider.proximateAgentCoords)
     {
         managedAgentCoordinates->insert({agentCoords, true});
     }
     spider.proximateAgentCoords.clear();
-}
-
-std::vector<std::string> Environment::agentProximityCheck(std::string coords)
-{
-    // check agent radius for other agents
-    std::vector<std::string> agentCoordsInProximity = {};
-    auto _pos = coords.find("_");
-    int aX, aY;
-    try
-    {
-        aX = std::stoi(coords.substr(0, _pos));
-        aY = std::stoi(coords.substr(_pos + 1));
-    }
-    catch (...)
-    {
-        return agentCoordsInProximity;
-    }
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
-    for (std::string r : InRadius)
-    {
-        auto _pos = r.find("_");
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-        if (spider.Agents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != spider.Agents.end())
-        {
-            agentCoordsInProximity.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
-        }
-    }
-
-    return agentCoordsInProximity;
+    spider.proximatePlantCoords.clear();
 }
 
 void Environment::makeWindow()

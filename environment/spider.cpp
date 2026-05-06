@@ -124,9 +124,44 @@ void Spider::move(Agent *Self, char Direction)
     }
 }
 
+void Spider::setProximities(std::string coords)
+{
+
+    auto _pos = coords.find("_");
+    int aX, aY;
+    try
+    {
+        aX = std::stoi(coords.substr(0, _pos));
+        aY = std::stoi(coords.substr(_pos + 1));
+    }
+    catch (...)
+    {
+        return;
+    }
+    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
+    for (std::string r : InRadius)
+    {
+        auto _pos = r.find("_");
+        int dx = std::stoi(r.substr(0, _pos));
+        int dy = std::stoi(r.substr(_pos + 1));
+        if (Agents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != Agents.end())
+        {
+            proximateAgentCoords.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
+        } // maybe else if
+        if (Plants.find(std::to_string(aX + dx) + "_" + std::to_string(aY + dy)) != Plants.end())
+        {
+            proximatePlantCoords.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
+        }
+    }
+}
+
 void Spider::manageSubMoment()
 {
     if (proximateAgentCoords.empty())
+    {
+        return;
+    }
+    if (proximatePlantCoords.empty())
     {
         return;
     }
