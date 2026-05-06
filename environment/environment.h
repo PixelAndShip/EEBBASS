@@ -14,10 +14,6 @@ public:
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
 
-    std::unordered_map<std::string, Plant *> Plants;
-    // plant count
-    // Area
-
     Spider spider = Spider();
 
     void managePlantCount(); // makes sure sim does not crash
@@ -31,8 +27,6 @@ public:
 
     */
     void manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates);
-
-    std::vector<std::string> agentProximityCheck(std::string coords);
 
     void makeWindow();
 };

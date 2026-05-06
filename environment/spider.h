@@ -55,6 +55,8 @@ public:
 
     void move(Agent *Self, char Direction);
 
+    void setProximities(std::string coords);
+
     OutputNode getAction(InputNode *parentNode);
     void manageSubMoment();
 };
