@@ -5,20 +5,34 @@
 namespace Test
 {
 
-    static void proximityCheck(Agent a)
+    static void proximityCheck(Agent *a)
     {
         Environment env;
-        env.spider.Agents.insert({"12_3", &a});
-        env.spider.Agents.insert({"12_4", &a});
-        env.spider.Agents.insert({"11_2", &a});
-        env.spider.Agents.insert({"110_2", &a});
-        env.spider.Agents.insert({"11_3", &a});
+        env.spider.Agents.insert({"12_3", a});
+        env.spider.Agents.insert({"12_4", a});
+        env.spider.Agents.insert({"11_2", a});
+        env.spider.Agents.insert({"110_2", a});
+        env.spider.Agents.insert({"11_3", a});
+        Plant *pl = new Plant();
+        env.spider.Plants.insert({"12_3", pl});
+        env.spider.Plants.insert({"12_4", pl});
+        env.spider.Plants.insert({"121_3", pl});
         // env.makeWindow();
-        std::vector<std::string> cords = env.agentProximityCheck("12_3");
-        for (std::string c : cords)
+        std::cout << std::to_string(a->getX()) + "_" + std::to_string(a->getY()) + "\n";
+        env.spider.setProximities(std::to_string(a->getX()) + "_" + std::to_string(a->getY()));
+        for (auto c : env.spider.proximateCoords)
         {
-            std::cout << c;
+            if (env.spider.Agents.find(c.first) != env.spider.Agents.end())
+            {
+                std::cout << "Agent: ";
+            }
+            else if (env.spider.Plants.find(c.first) != env.spider.Plants.end())
+            {
+                std::cout << "Plant: ";
+            }
+            std::cout << c.first;
         }
+        std::cout << "\n";
     }
 
     static void printBrain(InputNode *node, int depth = 0)

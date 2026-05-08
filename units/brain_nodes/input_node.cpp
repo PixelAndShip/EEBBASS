@@ -1,5 +1,33 @@
 #include "input_node.h"
 
+InputNode::InputNode() {};
+
+// float weight = 1;
+// float setAmount = 0;
+// UnitColor unitColor = {255, 255, 255, 255};
+// unsigned int key = 255;
+// std::vector<InputNode *> inputNodes = {};
+// OutputNode *outputNode = nullptr;
+
+InputNode::InputNode(std::mt19937 &gen)
+{
+    std::uniform_int_distribution<> weightDist(0, 99);
+    std::uniform_int_distribution<> setAmountDist(0, 255);
+    std::uniform_int_distribution<> unitColorRedDist(0, 255);
+    std::uniform_int_distribution<> unitColorGreenDist(0, 255);
+    std::uniform_int_distribution<> unitColorBlueDist(0, 255);
+    std::uniform_int_distribution<> unitColorTransparencyDist(0, 255);
+    std::uniform_int_distribution<> sensesDist(0, getSenses().size() - 1);
+    weight = weightDist(gen) / 100.0;
+    setAmount = setAmountDist(gen);
+    unitColor = {
+        unitColorRedDist(gen),
+        unitColorGreenDist(gen),
+        unitColorBlueDist(gen),
+        unitColorTransparencyDist(gen)};
+    key = sensesDist(gen);
+}
+
 InputNode::~InputNode()
 {
     for (InputNode *child : inputNodes)
@@ -13,10 +41,7 @@ void InputNode::setWeight(float iW)
 {
     weight = iW;
 }
-void InputNode::setUnit(char iU)
-{
-    unit = iU;
-}
+
 void InputNode::setSetAmount(float iSA)
 {
     setAmount = iSA;
@@ -57,10 +82,7 @@ float InputNode::getWeight()
 {
     return weight;
 }
-char InputNode::getUnit()
-{
-    return unit;
-}
+
 float InputNode::getSetAmount()
 {
     return setAmount;

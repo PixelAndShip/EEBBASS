@@ -13,18 +13,30 @@ int main()
     e.gen = gen;
     e.dist = dist;
 
-    Agent a = Agent(0.7, e.gen, e.dist);
-
+    Agent a = Agent(0.5, e.gen, e.dist);
     a.setEnergy(1);
     a.setHealth(1);
     a.setAgentColor({1, 2, 3, 4});
+    a.setX(12);
+    a.setY(3);
 
-    for (InputNode *cn : a.getBrain().getInputNodes())
-    {
-        Test::printBrain(cn);
-    }
+    Agent b = Agent(0.5, e.gen, e.dist);
+    b.setEnergy(2);
+    b.setHealth(4);
+    b.setAgentColor({12, 22, 32, 42});
+    b.setX(11);
+    b.setY(3);
+
+    e.spider.Agents.insert({a.getCoords(), &a});
+    e.spider.Agents.insert({b.getCoords(), &b});
+    // for (InputNode *cn : a.getBrain().getInputNodes())
+    // {
+    //     Test::printBrain(cn);
+    // }
     // e.makeWindow();
     // Plant p = Plant();
     // Test::getType(&p);
     // Test::getType(&a);
+    // Test::proximityCheck(&a);
+    e.manageMoment();
 }

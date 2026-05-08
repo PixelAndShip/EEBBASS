@@ -1,16 +1,20 @@
 #pragma once
 #include "units/agent.h"
 #include "units/plant.h"
-
+#include <queue>
 class Spider
 {
 
 public:
-    std::vector<std::string> proximateAgentCoords;
+    std::unordered_map<std::string, bool> proximateCoords;
     std::unordered_map<std::string, Agent *> Agents;
-
-    std::vector<std::string> proximatePlantCoords;
     std::unordered_map<std::string, Plant *> Plants;
+
+    std::random_device rd;
+    std::mt19937 gen;
+    std::uniform_int_distribution<> dist;
+
+    Spider();
     /*
 
     {0,"SeeSomething"},
@@ -22,7 +26,7 @@ public:
 
     */
 
-    bool seeSomething(char &unit);
+    bool seeSomething();
 
     bool seeColor(int red, int green, int blue, int transparency, int setRed, int setGreen, int setBlue, int setTransparency);
 
@@ -56,7 +60,9 @@ public:
     void move(Agent *Self, char Direction);
 
     void setProximities(std::string coords);
+    std::vector<std::string> getProximateAgents(std::string coords);
+    std::vector<std::string> getProximatePlants(std::string coords);
 
-    OutputNode getAction(InputNode *parentNode);
+    OutputNode *getAction(InputNode *parentNode);
     void manageSubMoment();
 };

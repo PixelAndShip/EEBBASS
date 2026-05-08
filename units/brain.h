@@ -1,8 +1,5 @@
 #pragma once
 
-#include <random>
-#include <iterator>
-#include <cmath>
 #include <iostream>
 
 #include "brain_nodes/input_node.h"
@@ -28,7 +25,7 @@ public:
     Brain &operator=(Brain &&) = delete;
 
     const std::vector<InputNode *> &getInputNodes() const;
-    void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &sensesDist, std::uniform_int_distribution<> &actionsDist, std::uniform_int_distribution<> &mutationChance, int level);
+    void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level);
 
     void manageConnections();
 
