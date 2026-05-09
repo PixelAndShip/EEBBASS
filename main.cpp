@@ -6,25 +6,27 @@
 int main()
 {
     Environment e = Environment();
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, 7);
-
-    e.gen = gen;
-    e.dist = dist;
-
-    Agent a = Agent(0.7, e.gen, e.dist);
-
-    a.setEnergy(1);
-    a.setHealth(1);
-    a.setAgentColor({1, 2, 3, 4});
-
-    for (InputNode *cn : a.getBrain().getInputNodes())
+    Agent a, b, c = Agent(e.radiation, e.gen, e.dist);
+    Plant p = Plant();
+    a.setX(24);
+    b.setY(24);
+    c.setX(111);
+    e.spider->PastAgents.insert({a.getCoords(), &a});
+    e.spider->PastAgents.insert({b.getCoords(), &b});
+    e.spider->PastAgents.insert({c.getCoords(), &c});
+    e.spider->PastPlants.insert({"26_25", &p});
+    for (auto a : e.spider->PastAgents)
     {
-        Test::printBrain(cn);
+        for (InputNode *i : a.second->getBrain().getInputNodes())
+        {
+            Test::printBrain(i);
+        }
     }
+    e.manageMoment();
+
     // e.makeWindow();
-    // Plant p = Plant();
+
     // Test::getType(&p);
     // Test::getType(&a);
+    // Test::proximityCheck(&a);
 }

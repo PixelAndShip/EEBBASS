@@ -16,7 +16,7 @@ private:
     Brain brain;
 
 public:
-    void setHealth(float iH)
+        void setHealth(float iH)
     {
         health = iH;
     }
@@ -90,7 +90,10 @@ public:
     {
         return brain;
     }
-
+    std::string getCoords()
+    {
+        return std::to_string(x) + "_" + std::to_string(y);
+    }
     Agent();
 
     Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist); // default spawn

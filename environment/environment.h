@@ -10,11 +10,13 @@ class Environment
 public:
     float radiation;
     int carbon_count;
-    int maxBrainLevel = 5;
+    int maxBrainLevel;
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
 
-    Spider spider = Spider();
+    Spider *spider = nullptr;
+
+    Environment();
 
     void managePlantCount(); // makes sure sim does not crash
 
@@ -26,6 +28,7 @@ public:
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
     */
+
     void manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates);
 
     void makeWindow();

@@ -1,6 +1,22 @@
 #include "environment.h"
 #include <vector>
 
+Environment::Environment()
+{
+
+    radiation = 0.5;
+    int carbon_count = 1;
+    int maxBrainLevel = 5;
+
+    spider = new Spider();
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::uniform_int_distribution<> d(0, 7);
+
+    gen = g;
+    dist = d;
+}
+
 void Environment::managePlantCount() {} // makes sure sim does not crash
 
 void Environment::manageAgentCount() {} // makes sure sim does not crash
@@ -12,34 +28,38 @@ void Environment::manageMoment()
     this means each moment needs to be subdivided into submoments:
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
+    std::string agentCoords = "";
+
     std::unordered_map<std::string, bool> managedAgentCoordinates = {};
-    for (std::string coords : spider.proximateAgentCoords)
+    std::unordered_map<std::string, Agent *> currentAgents = spider->PastAgents;
+    for (auto cs : currentAgents)
     {
+        agentCoords = cs.first;
 
-        if (managedAgentCoordinates.find(coords) != managedAgentCoordinates.end())
+        if (managedAgentCoordinates.find(agentCoords) == managedAgentCoordinates.end())
         {
-            continue;
+            manageSubMoment(agentCoords, &managedAgentCoordinates);
         }
-
-        manageSubMoment(coords, &managedAgentCoordinates);
     }
 }
 
 void Environment::manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates)
 {
+
     if (managedAgentCoordinates == nullptr)
     {
         return;
     }
+    // std::cout << "initiated manageSubMoment \n";
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    spider.setProximities(coords);
-
-    for (std::string agentCoords : spider.proximateAgentCoords)
+    spider->setProximities(coords);
+    spider->manageSubMoment();
+    // std::cout << "finishedSetProximites and manageSubmomentSpider \n";
+    for (auto coords : spider->proximateCoords)
     {
-        managedAgentCoordinates->insert({agentCoords, true});
+        managedAgentCoordinates->insert({coords.first, true});
     }
-    spider.proximateAgentCoords.clear();
-    spider.proximatePlantCoords.clear();
+    spider->proximateCoords.clear();
 }
 
 void Environment::makeWindow()

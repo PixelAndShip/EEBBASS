@@ -5,20 +5,34 @@
 namespace Test
 {
 
-    static void proximityCheck(Agent a)
+    static void proximityCheck(Agent *a)
     {
         Environment env;
-        env.spider.Agents.insert({"12_3", &a});
-        env.spider.Agents.insert({"12_4", &a});
-        env.spider.Agents.insert({"11_2", &a});
-        env.spider.Agents.insert({"110_2", &a});
-        env.spider.Agents.insert({"11_3", &a});
+        env.spider->PastAgents.insert({"12_3", a});
+        env.spider->PastAgents.insert({"12_4", a});
+        env.spider->PastAgents.insert({"11_2", a});
+        env.spider->PastAgents.insert({"110_2", a});
+        env.spider->PastAgents.insert({"11_3", a});
+        Plant *pl = new Plant();
+        env.spider->PastPlants.insert({"12_3", pl});
+        env.spider->PastPlants.insert({"12_4", pl});
+        env.spider->PastPlants.insert({"121_3", pl});
         // env.makeWindow();
-        std::vector<std::string> cords = env.agentProximityCheck("12_3");
-        for (std::string c : cords)
+        std::cout << std::to_string(a->getX()) + "_" + std::to_string(a->getY()) + "\n";
+        env.spider->setProximities(std::to_string(a->getX()) + "_" + std::to_string(a->getY()));
+        for (auto c : env.spider->proximateCoords)
         {
-            std::cout << c;
+            if (env.spider->PastAgents.find(c.first) != env.spider->PastAgents.end())
+            {
+                std::cout << "Agent: ";
+            }
+            else if (env.spider->PastPlants.find(c.first) != env.spider->PastPlants.end())
+            {
+                std::cout << "Plant: ";
+            }
+            std::cout << c.first;
         }
+        std::cout << "\n";
     }
 
     static void printBrain(InputNode *node, int depth = 0)
@@ -43,7 +57,7 @@ namespace Test
         // If it has an output node, show it as a leaf
         if (node->getOutputNode())
         {
-            std::cout << "  -> OUT:" << node->getOutputNode()->getKey();
+            std::cout << "---" << node->getOutputNode()->getKey() << "|" << getActions().at(node->getOutputNode()->getKey());
         }
         std::cout << "\n";
 
