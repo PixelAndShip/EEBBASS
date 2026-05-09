@@ -6,37 +6,27 @@
 int main()
 {
     Environment e = Environment();
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, 7);
+    Agent a, b, c = Agent(e.radiation, e.gen, e.dist);
+    Plant p = Plant();
+    a.setX(24);
+    b.setY(24);
+    c.setX(111);
+    e.spider->PastAgents.insert({a.getCoords(), &a});
+    e.spider->PastAgents.insert({b.getCoords(), &b});
+    e.spider->PastAgents.insert({c.getCoords(), &c});
+    e.spider->PastPlants.insert({"26_25", &p});
+    for (auto a : e.spider->PastAgents)
+    {
+        for (InputNode *i : a.second->getBrain().getInputNodes())
+        {
+            Test::printBrain(i);
+        }
+    }
+    e.manageMoment();
 
-    e.gen = gen;
-    e.dist = dist;
-
-    Agent a = Agent(0.5, e.gen, e.dist);
-    a.setEnergy(1);
-    a.setHealth(1);
-    a.setAgentColor({1, 2, 3, 4});
-    a.setX(12);
-    a.setY(3);
-
-    Agent b = Agent(0.5, e.gen, e.dist);
-    b.setEnergy(2);
-    b.setHealth(4);
-    b.setAgentColor({12, 22, 32, 42});
-    b.setX(11);
-    b.setY(3);
-
-    e.spider.Agents.insert({a.getCoords(), &a});
-    e.spider.Agents.insert({b.getCoords(), &b});
-    // for (InputNode *cn : a.getBrain().getInputNodes())
-    // {
-    //     Test::printBrain(cn);
-    // }
     // e.makeWindow();
-    // Plant p = Plant();
+
     // Test::getType(&p);
     // Test::getType(&a);
     // Test::proximityCheck(&a);
-    e.manageMoment();
 }

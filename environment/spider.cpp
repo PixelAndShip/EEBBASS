@@ -147,13 +147,13 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
         return proximateAgentCs;
     }
 
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1", "0_0"};
+    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
     for (std::string r : InRadius)
     {
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if (Agents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != Agents.end())
+        if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastAgents.end())
         {
             proximateAgentCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
@@ -176,13 +176,13 @@ std::vector<std::string> Spider::getProximatePlants(std::string coords)
         return proximatePlantCs;
     }
 
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1", "0_0"};
+    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
     for (std::string r : InRadius)
     {
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if (Plants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != Plants.end())
+        if (PastPlants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastPlants.end())
         {
             proximatePlantCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
@@ -224,30 +224,31 @@ void Spider::manageSubMoment()
         return;
     }
 
-    // std::cout << "initiating spider submoment \n";
     for (auto cs : proximateCoords)
     {
-        if (Agents.find(cs.first) == Agents.end())
+        if (PastAgents.find(cs.first) == PastAgents.end())
         {
             continue;
         }
-        if (Plants.find(cs.first) != Plants.end())
+        if (PastPlants.find(cs.first) != PastPlants.end())
         {
             continue;
         }
-        // std::cout << "output: " << cs.first;
+
         OutputNode *action = nullptr;
-        if (Agents.at(cs.first) != nullptr and !Agents.at(cs.first)->getBrain().getInputNodes().empty())
+        int actionKey = 255;
+
+        if (PastAgents.at(cs.first) != nullptr and !PastAgents.at(cs.first)->getBrain().getInputNodes().empty())
         {
-            action = getAction(Agents.at(cs.first)->getBrain().getInputNodes().at(0));
+            action = getAction(PastAgents.at(cs.first)->getBrain().getInputNodes().at(0));
         }
         if (action != nullptr)
         {
-            // std::cout << action->getKey();
             if (action->getKey() < getActions().size())
             {
-
-                std::cout << getActions().at(action->getKey()) << "\n";
+                actionKey = action->getKey();
+                std::cout << "\n"
+                          << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
             }
         }
     }
@@ -263,23 +264,20 @@ OutputNode *Spider::getAction(InputNode *parentNode)
 
     for (InputNode *in : parentNode->getInputNodes())
     {
-        if (in == nullptr)
+        if (in == nullptr or activateNode < in->getWeight())
         {
             continue;
-        }
-        if (activateNode < in->getWeight())
-        {
-            return nullptr;
         }
 
         if (in->getInputNodes().empty() and in->getOutputNode() != nullptr and in->getOutputNode()->getKey() != 255)
         {
-
+            std::cout << getSenses().at(in->getKey()) << " ";
             return in->getOutputNode();
         }
         OutputNode *on = getAction(in);
         if (on != nullptr)
         {
+            std::cout << getSenses().at(in->getKey()) << " ";
             return on;
         }
     }

@@ -1,6 +1,22 @@
 #include "environment.h"
 #include <vector>
 
+Environment::Environment()
+{
+
+    radiation = 0.5;
+    int carbon_count = 1;
+    int maxBrainLevel = 5;
+
+    spider = new Spider();
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::uniform_int_distribution<> d(0, 7);
+
+    gen = g;
+    dist = d;
+}
+
 void Environment::managePlantCount() {} // makes sure sim does not crash
 
 void Environment::manageAgentCount() {} // makes sure sim does not crash
@@ -15,7 +31,7 @@ void Environment::manageMoment()
     std::string agentCoords = "";
 
     std::unordered_map<std::string, bool> managedAgentCoordinates = {};
-    std::unordered_map<std::string, Agent *> currentAgents = spider.Agents;
+    std::unordered_map<std::string, Agent *> currentAgents = spider->PastAgents;
     for (auto cs : currentAgents)
     {
         agentCoords = cs.first;
@@ -36,14 +52,14 @@ void Environment::manageSubMoment(std::string coords, std::unordered_map<std::st
     }
     // std::cout << "initiated manageSubMoment \n";
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    spider.setProximities(coords);
-    spider.manageSubMoment();
+    spider->setProximities(coords);
+    spider->manageSubMoment();
     // std::cout << "finishedSetProximites and manageSubmomentSpider \n";
-    for (auto coords : spider.proximateCoords)
+    for (auto coords : spider->proximateCoords)
     {
         managedAgentCoordinates->insert({coords.first, true});
     }
-    spider.proximateCoords.clear();
+    spider->proximateCoords.clear();
 }
 
 void Environment::makeWindow()

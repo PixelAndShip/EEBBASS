@@ -16,7 +16,7 @@ private:
     Brain brain;
 
 public:
-    void setHealth(float iH)
+        void setHealth(float iH)
     {
         health = iH;
     }
@@ -100,5 +100,5 @@ public:
 
     Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation); // split spawn
 
-        void generateStart(std::mt19937 &gen);
+    void generateStart(std::mt19937 &gen);
 };

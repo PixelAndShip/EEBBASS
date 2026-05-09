@@ -6,9 +6,12 @@ class Spider
 {
 
 public:
+    std::unordered_map<std::string, Agent *> NextAgents;
+    std::unordered_map<std::string, Agent *> NextPlants;
+    std::unordered_map<std::string, Agent *> PastAgents;
+    std::unordered_map<std::string, Plant *> PastPlants;
+
     std::unordered_map<std::string, bool> proximateCoords;
-    std::unordered_map<std::string, Agent *> Agents;
-    std::unordered_map<std::string, Plant *> Plants;
 
     std::random_device rd;
     std::mt19937 gen;
