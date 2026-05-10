@@ -155,6 +155,7 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
         int dy = std::stoi(r.substr(_pos + 1));
         if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastAgents.end())
         {
+
             proximateAgentCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
     }
@@ -192,26 +193,30 @@ std::vector<std::string> Spider::getProximatePlants(std::string coords)
 
 void Spider::setProximities(std::string startCoords)
 {
-    std::queue<std::string> toVisit;
-    toVisit.push(startCoords);
+
+    std::queue<std::string> uncheckedQueue;
     proximateCoords[startCoords] = true;
+    uncheckedQueue.push(startCoords);
 
-    while (!toVisit.empty())
+    while (!uncheckedQueue.empty())
     {
-        std::string current = toVisit.front();
-        toVisit.pop();
+        std::string current = uncheckedQueue.front();
+        uncheckedQueue.pop();
 
-        auto agents = getProximateAgents(current);
-        auto plants = getProximatePlants(current);
+        std::vector<std::string> proximateAgents = getProximateAgents(current);
+        std::vector<std::string> proximatePlants = getProximatePlants(current);
 
-        agents.insert(agents.end(), plants.begin(), plants.end());
+        std::vector<std::string> coords;
+        coords.reserve(proximateAgents.size() + proximatePlants.size());
+        coords.insert(coords.end(), proximateAgents.begin(), proximateAgents.end());
+        coords.insert(coords.end(), proximatePlants.begin(), proximatePlants.end());
 
-        for (const auto &neighbor : agents)
+        for (const std::string &coord : coords)
         {
-            if (proximateCoords.find(neighbor) == proximateCoords.end())
+            if (proximateCoords.find(coord) == proximateCoords.end())
             {
-                proximateCoords[neighbor] = true;
-                toVisit.push(neighbor);
+                proximateCoords[coord] = true;
+                uncheckedQueue.push(coord);
             }
         }
     }
@@ -226,12 +231,10 @@ void Spider::manageSubMoment()
 
     for (auto cs : proximateCoords)
     {
+
         if (PastAgents.find(cs.first) == PastAgents.end())
         {
-            continue;
-        }
-        if (PastPlants.find(cs.first) != PastPlants.end())
-        {
+
             continue;
         }
 
@@ -246,6 +249,7 @@ void Spider::manageSubMoment()
         {
             if (action->getKey() < getActions().size())
             {
+
                 actionKey = action->getKey();
                 std::cout << "\n"
                           << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
@@ -260,7 +264,7 @@ OutputNode *Spider::getAction(InputNode *parentNode)
     {
         return nullptr;
     }
-    float activateNode = dist(gen) / 100.0;
+    float activateNode = 1; // dist(gen) / 100.0;
 
     for (InputNode *in : parentNode->getInputNodes())
     {

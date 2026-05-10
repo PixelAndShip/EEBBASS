@@ -30,36 +30,29 @@ void Environment::manageMoment()
     */
     std::string agentCoords = "";
 
-    std::unordered_map<std::string, bool> managedAgentCoordinates = {};
-    std::unordered_map<std::string, Agent *> currentAgents = spider->PastAgents;
-    for (auto cs : currentAgents)
+    for (auto cs : spider->PastAgents)
     {
         agentCoords = cs.first;
 
-        if (managedAgentCoordinates.find(agentCoords) == managedAgentCoordinates.end())
-        {
-            manageSubMoment(agentCoords, &managedAgentCoordinates);
-        }
+        manageSubMoment(agentCoords);
     }
 }
 
-void Environment::manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates)
+void Environment::manageSubMoment(std::string coords)
 {
 
-    if (managedAgentCoordinates == nullptr)
-    {
-        return;
-    }
     // std::cout << "initiated manageSubMoment \n";
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    spider->setProximities(coords);
-    spider->manageSubMoment();
-    // std::cout << "finishedSetProximites and manageSubmomentSpider \n";
-    for (auto coords : spider->proximateCoords)
+    // std::cout << "?" << coords << "?";
+    if (spider->proximateCoords.find(coords) == spider->proximateCoords.end() and coords != "")
     {
-        managedAgentCoordinates->insert({coords.first, true});
+        spider->proximateCoords.clear();
+
+        spider->proximateCoords[coords] = true;
+        spider->setProximities(coords);
+        spider->manageSubMoment();
     }
-    spider->proximateCoords.clear();
+    // std::cout << "finishedSetProximites and manageSubmomentSpider \n";
 }
 
 void Environment::makeWindow()
