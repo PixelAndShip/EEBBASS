@@ -11,7 +11,7 @@ int main()
     Agent c = Agent(e.radiation, e.gen, e.dist);
     Plant p = Plant();
     a.setX(24);
-    b.setY(24);
+    b.setX(23);
     c.setX(111);
     e.spider->PastAgents.insert({a.getCoords(), &a});
     e.spider->PastAgents.insert({b.getCoords(), &b});

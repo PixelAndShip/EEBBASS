@@ -264,7 +264,7 @@ OutputNode *Spider::getAction(InputNode *parentNode)
     {
         return nullptr;
     }
-    float activateNode = 1; // dist(gen) / 100.0;
+    float activateNode = dist(gen) / 100.0;
 
     for (InputNode *in : parentNode->getInputNodes())
     {
