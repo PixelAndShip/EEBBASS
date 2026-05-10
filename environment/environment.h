@@ -29,7 +29,7 @@ public:
 
     */
 
-    void manageSubMoment(std::string coords, std::unordered_map<std::string, bool> *managedAgentCoordinates);
+    void manageSubMoment(std::string coords);
 
     void makeWindow();
 };
