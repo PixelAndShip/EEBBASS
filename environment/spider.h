@@ -67,5 +67,7 @@ public:
     std::vector<std::string> getProximatePlants(std::string coords);
 
     OutputNode *getAction(InputNode *parentNode);
+
+    void manageAction(Agent *Self, OutputNode *ActionNode);
     void manageSubMoment();
 };

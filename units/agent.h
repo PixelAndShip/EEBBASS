@@ -16,7 +16,7 @@ private:
     Brain brain;
 
 public:
-        void setHealth(float iH)
+    void setHealth(float iH)
     {
         health = iH;
     }
@@ -96,7 +96,7 @@ public:
     }
     Agent();
 
-    Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist); // default spawn
+    Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth); // default spawn
 
     Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation); // split spawn
 

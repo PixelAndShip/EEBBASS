@@ -6,9 +6,9 @@
 int main()
 {
     Environment e = Environment();
-    Agent a = Agent(e.radiation, e.gen, e.dist);
-    Agent b = Agent(e.radiation, e.gen, e.dist);
-    Agent c = Agent(e.radiation, e.gen, e.dist);
+    Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     Plant p = Plant();
     a.setX(24);
     b.setX(23);

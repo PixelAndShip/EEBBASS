@@ -11,6 +11,7 @@ public:
     float radiation;
     int carbon_count;
     int maxBrainLevel;
+    int maxBrainChildNodes;
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
 

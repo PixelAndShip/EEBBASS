@@ -11,10 +11,9 @@ Agent::Agent()
     speed = 1.0;
 }
 
-Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist) : brain(eRadiation, gen, dist)
+Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth) : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
 {
     generateStart(gen);
-
     // calculate color
 }
 

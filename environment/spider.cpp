@@ -287,3 +287,8 @@ OutputNode *Spider::getAction(InputNode *parentNode)
     }
     return nullptr;
 }
+
+void Spider::manageAction(Agent *Self, OutputNode *ActionNode)
+{
+    return;
+}

@@ -5,9 +5,9 @@ Environment::Environment()
 {
 
     radiation = 0.5;
-    int carbon_count = 1;
-    int maxBrainLevel = 5;
-
+    carbon_count = 1;
+    maxBrainLevel = 5;
+    maxBrainChildNodes = 2;
     spider = new Spider();
     std::random_device rd;
     std::mt19937 g(rd());
@@ -47,7 +47,6 @@ void Environment::manageSubMoment(std::string coords)
     if (spider->proximateCoords.find(coords) == spider->proximateCoords.end() and coords != "")
     {
         spider->proximateCoords.clear();
-
         spider->proximateCoords[coords] = true;
         spider->setProximities(coords);
         spider->manageSubMoment();
