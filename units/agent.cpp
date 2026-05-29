@@ -5,6 +5,7 @@ Agent::Agent()
     health = 1.0;
     bite = 1.0;
     energy = 1.0;
+    age = 1;
     agentColor = {200, 200, 200, 200};
     x = 25;
     y = 25;

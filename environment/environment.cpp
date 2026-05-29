@@ -43,9 +43,10 @@ void Environment::manageSubMoment(std::string coords)
 
     // std::cout << "initiated manageSubMoment \n";
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    // std::cout << "?" << coords << "?";
+
     if (spider->proximateCoords.find(coords) == spider->proximateCoords.end() and coords != "")
     {
+        // std::cout << "?" << coords << "?";
         spider->proximateCoords.clear();
         spider->proximateCoords[coords] = true;
         spider->setProximities(coords);

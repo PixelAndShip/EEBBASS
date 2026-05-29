@@ -8,6 +8,7 @@ private:
     float health;
     float bite;
     float energy;
+    float age;
 
     UnitColor agentColor;
     int x, y;
@@ -28,6 +29,10 @@ public:
     void setEnergy(float iE)
     {
         energy = iE;
+    }
+    void setAge(float iA)
+    {
+        age = iA;
     }
     void setAgentColor(UnitColor iAC)
     {
@@ -67,7 +72,10 @@ public:
     {
         return energy;
     }
-
+    float getAge()
+    {
+        return age;
+    }
     UnitColor getAgentColor()
     {
         return agentColor;
