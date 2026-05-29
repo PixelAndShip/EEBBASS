@@ -59,6 +59,16 @@ bool Spider::healthCountBelowSet(float health, float setAmount)
     return health < setAmount;
 }
 
+bool Spider::ageCountAboveSet(float age, float setAmount)
+{
+    return age >= setAmount;
+}
+
+bool Spider::ageCountBelowSet(float age, float setAmount)
+{
+    return age < setAmount;
+}
+
 void Spider::updateSpeed(float deltaEnergy, Agent *Self)
 {
     float currentEnergy = Self->getEnergy();
@@ -234,7 +244,6 @@ void Spider::manageSubMoment()
 
         if (PastAgents.find(cs.first) == PastAgents.end())
         {
-
             continue;
         }
 
@@ -249,10 +258,10 @@ void Spider::manageSubMoment()
         {
             if (action->getKey() < getActions().size())
             {
-
                 actionKey = action->getKey();
                 std::cout << "\n"
                           << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
+                manageAction(PastAgents[cs.first], action);
             }
         }
     }

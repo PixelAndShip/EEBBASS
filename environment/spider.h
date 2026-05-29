@@ -26,7 +26,8 @@ public:
     {3,"EnergyCountBelowSet"},
     {4,"HealthCountAboveSet"},
     {5,"HealthCountBelowSet"}
-
+    {6, "AgeCountAboveSet"},
+    {7, "AgeCountBelowSet"}};
     */
 
     bool seeSomething();
@@ -41,7 +42,11 @@ public:
 
     bool healthCountBelowSet(float health, float setAmount);
 
-    /*
+    bool ageCountAboveSet(float age, float setAmount);
+
+    bool ageCountBelowSet(float age, float setAmount);
+
+        /*
 
     {0,"MoveLeft"},
     {1,"MoveRight"},
