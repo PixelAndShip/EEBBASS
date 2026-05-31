@@ -75,7 +75,7 @@ void Spider::updateSpeed(float deltaEnergy, Agent *Self)
     float currentSpeed = Self->getSpeed();
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setSpeed(currentSpeed += deltaEnergy);
-    int blue = std::round(Self->getSpeed() * 255);
+    unsigned int blue = std::round(Self->getSpeed() * 255);
     Self->setAgentColor({Self->getAgentColor().red, Self->getAgentColor().green, blue, Self->getAgentColor().transparency});
 
     if (Self->getSpeed() < 0)
@@ -94,7 +94,7 @@ void Spider::updateHealth(float deltaEnergy, Agent *Self)
     float currentHealth = Self->getHealth();
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setHealth(currentHealth += deltaEnergy);
-    int green = std::round(Self->getHealth() * 255);
+    unsigned int green = std::round(Self->getHealth() * 255);
     Self->setAgentColor({Self->getAgentColor().red, green, Self->getAgentColor().blue, Self->getAgentColor().transparency});
 
     if (Self->getSpeed() < 0)

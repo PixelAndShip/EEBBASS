@@ -10,8 +10,9 @@ int main()
     Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     Plant p = Plant();
-    a.setX(24);
-    b.setX(23);
+
+    a.setX(240);
+    b.setX(50);
     c.setX(111);
     e.spider->PastAgents.insert({a.getCoords(), &a});
     e.spider->PastAgents.insert({b.getCoords(), &b});

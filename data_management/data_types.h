@@ -4,7 +4,7 @@
 
 struct UnitColor
 {
-    int red, green, blue, transparency;
+    unsigned int red, green, blue, transparency;
 };
 
 inline const std::unordered_map<int, std::string> &getSenses()

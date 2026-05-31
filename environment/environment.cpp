@@ -65,7 +65,19 @@ void Environment::makeWindow()
         BeginDrawing();
         ClearBackground(BLACK);
         manageMoment(); // implement
-        DrawCircle(100, 200, 10, RED);
+        for (auto ac : spider->PastAgents)
+        {
+
+            DrawCircle(
+                ac.second->getX(),
+                ac.second->getY(),
+                20,
+                (Color){
+                    (unsigned char)ac.second->getAgentColor().red,
+                    (unsigned char)ac.second->getAgentColor().green,
+                    (unsigned char)ac.second->getAgentColor().blue,
+                    (unsigned char)ac.second->getAgentColor().transparency});
+        }
 
         EndDrawing();
     }

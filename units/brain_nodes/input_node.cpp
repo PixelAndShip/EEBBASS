@@ -21,10 +21,10 @@ InputNode::InputNode(std::mt19937 &gen)
     weight = weightDist(gen) / 100.0;
     setAmount = setAmountDist(gen);
     unitColor = {
-        unitColorRedDist(gen),
-        unitColorGreenDist(gen),
-        unitColorBlueDist(gen),
-        unitColorTransparencyDist(gen)};
+        (unsigned int)unitColorRedDist(gen),
+        (unsigned int)unitColorGreenDist(gen),
+        (unsigned int)unitColorBlueDist(gen),
+        (unsigned int)unitColorTransparencyDist(gen)};
     key = sensesDist(gen);
 }
 
