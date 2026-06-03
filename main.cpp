@@ -6,12 +6,13 @@
 int main()
 {
     Environment e = Environment();
-    Agent a = Agent(e.radiation, e.gen, e.dist);
-    Agent b = Agent(e.radiation, e.gen, e.dist);
-    Agent c = Agent(e.radiation, e.gen, e.dist);
+    Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     Plant p = Plant();
-    a.setX(24);
-    b.setY(24);
+
+    a.setX(240);
+    b.setX(50);
     c.setX(111);
     e.spider->PastAgents.insert({a.getCoords(), &a});
     e.spider->PastAgents.insert({b.getCoords(), &b});

@@ -5,9 +5,9 @@ Environment::Environment()
 {
 
     radiation = 0.5;
-    int carbon_count = 1;
-    int maxBrainLevel = 5;
-
+    carbon_count = 1;
+    maxBrainLevel = 5;
+    maxBrainChildNodes = 2;
     spider = new Spider();
     std::random_device rd;
     std::mt19937 g(rd());
@@ -43,11 +43,11 @@ void Environment::manageSubMoment(std::string coords)
 
     // std::cout << "initiated manageSubMoment \n";
     // go through sorounding agent brains and determine first actions, add managed to managedAgentCoordinates
-    // std::cout << "?" << coords << "?";
+
     if (spider->proximateCoords.find(coords) == spider->proximateCoords.end() and coords != "")
     {
+        // std::cout << "?" << coords << "?";
         spider->proximateCoords.clear();
-
         spider->proximateCoords[coords] = true;
         spider->setProximities(coords);
         spider->manageSubMoment();
@@ -65,7 +65,19 @@ void Environment::makeWindow()
         BeginDrawing();
         ClearBackground(BLACK);
         manageMoment(); // implement
-        DrawCircle(100, 200, 10, RED);
+        for (auto ac : spider->PastAgents)
+        {
+
+            DrawCircle(
+                ac.second->getX(),
+                ac.second->getY(),
+                20,
+                (Color){
+                    (unsigned char)ac.second->getAgentColor().red,
+                    (unsigned char)ac.second->getAgentColor().green,
+                    (unsigned char)ac.second->getAgentColor().blue,
+                    (unsigned char)ac.second->getAgentColor().transparency});
+        }
 
         EndDrawing();
     }

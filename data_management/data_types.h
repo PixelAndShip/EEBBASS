@@ -4,7 +4,7 @@
 
 struct UnitColor
 {
-    int red, green, blue, transparency;
+    unsigned int red, green, blue, transparency;
 };
 
 inline const std::unordered_map<int, std::string> &getSenses()
@@ -15,7 +15,9 @@ inline const std::unordered_map<int, std::string> &getSenses()
         {2, "EnergyCountAboveSet"},
         {3, "EnergyCountBelowSet"},
         {4, "HealthCountAboveSet"},
-        {5, "HealthCountBelowSet"}};
+        {5, "HealthCountBelowSet"},
+        {6, "AgeCountAboveSet"},
+        {7, "AgeCountBelowSet"}};
     return Senses;
 }
 
@@ -29,7 +31,7 @@ inline const std::unordered_map<int, std::string> &getActions()
         {4, "Bite"},
         {5, "Split"},
         {6, "ExpendEnergyOnHealth"}, // passive action
-        {7, "ExpendEnergyOnSpeed"}   // passive action
-    };
+        {7, "ExpendEnergyOnSpeed"},  // passive action
+        {8, "BiteColor"}};
     return Actions;
 }

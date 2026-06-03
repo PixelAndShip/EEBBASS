@@ -8,6 +8,7 @@ private:
     float health;
     float bite;
     float energy;
+    float age;
 
     UnitColor agentColor;
     int x, y;
@@ -16,7 +17,7 @@ private:
     Brain brain;
 
 public:
-        void setHealth(float iH)
+    void setHealth(float iH)
     {
         health = iH;
     }
@@ -28,6 +29,10 @@ public:
     void setEnergy(float iE)
     {
         energy = iE;
+    }
+    void setAge(float iA)
+    {
+        age = iA;
     }
     void setAgentColor(UnitColor iAC)
     {
@@ -67,7 +72,10 @@ public:
     {
         return energy;
     }
-
+    float getAge()
+    {
+        return age;
+    }
     UnitColor getAgentColor()
     {
         return agentColor;
@@ -96,7 +104,7 @@ public:
     }
     Agent();
 
-    Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist); // default spawn
+    Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth); // default spawn
 
     Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation); // split spawn
 

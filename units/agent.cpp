@@ -5,16 +5,24 @@ Agent::Agent()
     health = 1.0;
     bite = 1.0;
     energy = 1.0;
-    agentColor = {200, 200, 200, 200};
+    age = 1;
+    agentColor = {200, 200, 200, 255};
     x = 25;
     y = 25;
     speed = 1.0;
 }
 
-Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist) : brain(eRadiation, gen, dist)
+Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth) : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
 {
+    health = 1.0;
+    bite = 1.0;
+    energy = 1.0;
+    age = 1;
+    agentColor = {200, 200, 200, 255};
+    x = 25;
+    y = 25;
+    speed = 1.0;
     generateStart(gen);
-
     // calculate color
 }
 

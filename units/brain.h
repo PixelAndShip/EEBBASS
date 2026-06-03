@@ -13,7 +13,7 @@ private:
 public:
     Brain();
 
-    Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist);
+    Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
     Brain(float eRadiation, Brain &iBrain);
 
@@ -25,9 +25,7 @@ public:
     Brain &operator=(Brain &&) = delete;
 
     const std::vector<InputNode *> &getInputNodes() const;
-    void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level);
-
+    void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level, int childNodeCount, int brainDepth);
     void manageConnections();
-
     void sendSignal();
 };
