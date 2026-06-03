@@ -30,9 +30,9 @@ public:
     {7, "AgeCountBelowSet"}};
     */
 
-    bool seeSomething();
+    bool seeSomething(std::string AgentCoordinates);
 
-    bool seeColor(int red, int green, int blue, int transparency, int setRed, int setGreen, int setBlue, int setTransparency);
+    bool seeColor(std::string AgentCoordinates, UnitColor c, UnitColor setC);
 
     bool energyCountAboveSet(float energy, float setAmount);
 
@@ -46,33 +46,36 @@ public:
 
     bool ageCountBelowSet(float age, float setAmount);
 
-        /*
+    /*
 
-    {0,"MoveLeft"},
-    {1,"MoveRight"},
-    {2,"MoveUp"},
-    {3,"MoveDown"},
-    {4,"Bite"},
-    {5,"Split"},
-    {6,"ExpendEnergyOnHealth"}, // passive action
-    {7,"ExpendEnergyOnSpeed"} // passive action
+{0,"MoveLeft"},
+{1,"MoveRight"},
+{2,"MoveUp"},
+{3,"MoveDown"},
+{4,"Bite"},
+{5,"Split"},
+{6,"ExpendEnergyOnHealth"}, // passive action
+{7,"ExpendEnergyOnSpeed"} // passive action
 
-    */
+*/
 
     void updateSpeed(float deltaEnergy, Agent *Self);
 
     void updateHealth(float deltaEnergy, Agent *Self);
 
-    void bite(auto *Opponent, float energyCost);
+    void bite(std::string AgentCoordinates, float energyCost);
 
-    void move(Agent *Self, char Direction);
+    void move(std::string AgentCoordinates, char Direction);
+
+    void biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost);
 
     void setProximities(std::string coords);
     std::vector<std::string> getProximateAgents(std::string coords);
     std::vector<std::string> getProximatePlants(std::string coords);
 
-    OutputNode *getAction(InputNode *parentNode);
+    bool manageSense(std::string AgentCoordinates, InputNode *Sense);
+    OutputNode *getAction(std::string AgentCoordinates, InputNode *parentNode);
 
-    void manageAction(Agent *Self, OutputNode *ActionNode);
+    void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();
 };

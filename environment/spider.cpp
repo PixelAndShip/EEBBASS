@@ -8,35 +8,19 @@ Spider::Spider()
     dist = d;
 }
 
-bool Spider::seeSomething()
+bool Spider::seeSomething(std::string AgentCoordinates)
 {
-    if (!proximateCoords.empty())
-    {
-        return true;
-    }
+    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
+
     return false;
 }
 
 bool Spider::seeColor(
-    int red,
-    int green,
-    int blue,
-    int transparency,
-    int setRed,
-    int setGreen,
-    int setBlue,
-    int setTransparency)
+    std::string AgentCoordinates,
+    UnitColor c,
+    UnitColor setC)
 {
-    int lRed = red - 10;
-    int lGreen = green - 10;
-    int lBlue = blue - 10;
-    int hRed = red + 10;
-    int hGreen = green + 10;
-    int hBlue = blue + 10;
-    bool redInRange = (setRed >= lRed and setRed <= hRed);
-    bool greenInRange = (setGreen >= lGreen and setGreen <= hGreen);
-    bool blueInRange = (setBlue >= lBlue and setBlue <= hBlue);
-    return (redInRange and greenInRange and blueInRange);
+    return false;
 }
 
 bool Spider::energyCountAboveSet(float energy, float setAmount)
@@ -107,39 +91,36 @@ void Spider::updateHealth(float deltaEnergy, Agent *Self)
     }
 }
 
-void Spider::bite(auto *Opponent, float energyCost)
+void Spider::bite(std::string AgentCoordinates, float energyCost)
 {
 
-    if (typeid(*Opponent) == typeid(Agent))
-    {
-        float currentOpponentHealth = Opponent->getHealth();
-        Opponent->setHealth(currentOpponentHealth -= energyCost);
-    }
-    else if (typeid(*Opponent) == typeid(Plant))
-    {
-        return;
-    }
+    return;
 }
 
-void Spider::move(Agent *Self, char Direction)
+void Spider::move(std::string AgentCoordinates, char Direction)
 {
-    int currentX = Self->getX();
-    int currentY = Self->getY();
+    int currentX = PastAgents.at(AgentCoordinates)->getX();
+    int currentY = PastAgents.at(AgentCoordinates)->getY();
     switch (Direction)
     {
     case 'u':
-        Self->setY(currentY - 1);
+        PastAgents.at(AgentCoordinates)->setY(currentY - 1);
         break;
     case 'd':
-        Self->setY(currentY + 1);
+        PastAgents.at(AgentCoordinates)->setY(currentY + 1);
         break;
     case 'l':
-        Self->setX(currentX - 1);
+        PastAgents.at(AgentCoordinates)->setX(currentX - 1);
         break;
     case 'r':
-        Self->setX(currentX + 1);
+        PastAgents.at(AgentCoordinates)->setX(currentX + 1);
         break;
     }
+}
+
+void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
+{
+    return;
 }
 
 std::vector<std::string> Spider::getProximateAgents(std::string coords)
@@ -252,7 +233,7 @@ void Spider::manageSubMoment()
 
         if (PastAgents.at(cs.first) != nullptr and !PastAgents.at(cs.first)->getBrain().getInputNodes().empty())
         {
-            action = getAction(PastAgents.at(cs.first)->getBrain().getInputNodes().at(0));
+            action = getAction(cs.first, PastAgents.at(cs.first)->getBrain().getInputNodes().at(0));
         }
         if (action != nullptr)
         {
@@ -261,13 +242,39 @@ void Spider::manageSubMoment()
                 actionKey = action->getKey();
                 std::cout << "\n"
                           << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
-                manageAction(PastAgents[cs.first], action);
+                manageAction(cs.first, action);
             }
         }
     }
 }
 
-OutputNode *Spider::getAction(InputNode *parentNode)
+// {0, "SeeSomething"},
+// {1, "SeeColor"},
+// {2, "EnergyCountAboveSet"},
+// {3, "EnergyCountBelowSet"},
+// {4, "HealthCountAboveSet"},
+// {5, "HealthCountBelowSet"},
+// {6, "AgeCountAboveSet"},
+// {7, "AgeCountBelowSet"}};
+
+bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
+{
+    if (AgentCoordinates == "" or Sense == nullptr)
+    {
+        return false;
+    }
+    switch (Sense->getKey())
+    {
+    case 0:
+        return seeSomething(AgentCoordinates);
+        break;
+    default:
+        break;
+    }
+    return false;
+}
+
+OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNode)
 {
     if (parentNode == nullptr or parentNode->getInputNodes().empty())
     {
@@ -287,7 +294,8 @@ OutputNode *Spider::getAction(InputNode *parentNode)
             std::cout << getSenses().at(in->getKey()) << " ";
             return in->getOutputNode();
         }
-        OutputNode *on = getAction(in);
+
+        OutputNode *on = getAction(AgentCoordinates, in);
         if (on != nullptr)
         {
             std::cout << getSenses().at(in->getKey()) << " ";
@@ -297,7 +305,12 @@ OutputNode *Spider::getAction(InputNode *parentNode)
     return nullptr;
 }
 
-void Spider::manageAction(Agent *Self, OutputNode *ActionNode)
+void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
 {
+    if (AgentCoordinates == "" or ActionNode == nullptr)
+    {
+        return;
+    }
+
     return;
 }
