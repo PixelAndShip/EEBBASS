@@ -7,6 +7,7 @@ struct UnitColor
     unsigned int red, green, blue, transparency;
 };
 
+std::vector<char> directions = {'u', 'd', 'l', 'r'};
 inline const std::unordered_map<int, std::string> &getSenses()
 {
     static const std::unordered_map<int, std::string> Senses = {

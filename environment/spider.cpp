@@ -11,15 +11,49 @@ Spider::Spider()
 bool Spider::seeSomething(std::string AgentCoordinates)
 {
     std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
-
-    return false;
+    if (proximateAgentCs.empty())
+    {
+        return false;
+    }
+    return true;
 }
 
 bool Spider::seeColor(
     std::string AgentCoordinates,
-    UnitColor c,
     UnitColor setC)
 {
+    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
+    if (proximateAgentCs.empty())
+    {
+        return false;
+    }
+    Agent *ag = nullptr;
+    UnitColor clr = {};
+    unsigned int r, g, b, t;
+    bool r_in_range = false;
+    bool g_in_range = false;
+    bool b_in_range = false;
+    bool t_in_range = false;
+    for (std::string cs : proximateAgentCs)
+    {
+        ag = PastAgents.at(cs);
+        if (ag != nullptr)
+        {
+            clr = ag->getAgentColor();
+            r = clr.red;
+            g = clr.green;
+            b = clr.blue;
+            t = clr.transparency;
+            r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
+            g_in_range = g <= setC.green + 10 and r >= setC.green - 10;
+            b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
+            t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
+            if (r_in_range and g_in_range and b_in_range and t_in_range)
+            {
+                return true;
+            }
+        }
+    }
     return false;
 }
 
@@ -97,7 +131,7 @@ void Spider::bite(std::string AgentCoordinates, float energyCost)
     return;
 }
 
-void Spider::move(std::string AgentCoordinates, char Direction)
+void Spider::move(std::string AgentCoordinates, char Direction) // move agent to newagents, check if can be moved to nextagents without collision
 {
     int currentX = PastAgents.at(AgentCoordinates)->getX();
     int currentY = PastAgents.at(AgentCoordinates)->getY();
@@ -268,6 +302,8 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     case 0:
         return seeSomething(AgentCoordinates);
         break;
+    case 1:
+        return seeColor(AgentCoordinates, Sense->getUnitColor());
     default:
         break;
     }

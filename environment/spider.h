@@ -32,7 +32,7 @@ public:
 
     bool seeSomething(std::string AgentCoordinates);
 
-    bool seeColor(std::string AgentCoordinates, UnitColor c, UnitColor setC);
+    bool seeColor(std::string AgentCoordinates, UnitColor setC);
 
     bool energyCountAboveSet(float energy, float setAmount);
 
