@@ -152,6 +152,14 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     }
 }
 
+void Spider::setNextAgent(std::string coords, Agent *Self)
+{
+    if (NextAgents.find(coords) == NextAgents.end())
+    {
+        NextAgents[coords] = Self;
+    }
+}
+
 void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
 {
     return;
@@ -253,7 +261,8 @@ void Spider::manageSubMoment()
     {
         return;
     }
-
+    std::unordered_map<std::string, OutputNode *> activeAgentOutputs = {};
+    std::vector<std::string> activeAgents = {};
     for (auto cs : proximateCoords)
     {
 
@@ -273,13 +282,19 @@ void Spider::manageSubMoment()
         {
             if (action->getKey() < getActions().size())
             {
-                actionKey = action->getKey();
-                std::cout << "\n"
-                          << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
-                manageAction(cs.first, action);
+                // actionKey = action->getKey();
+                // std::cout << "\n" << cs.first << ":Output: " << getActions().at(actionKey) << "\n";
+                activeAgentOutputs[cs.first] = action;
+                activeAgents.push_back(cs.first);
             }
         }
     }
+
+    std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents);
+}
+
+std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
+{
 }
 
 // {0, "SeeSomething"},
@@ -347,6 +362,6 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     {
         return;
     }
-
+    setNextAgent(PastAgents.at(AgentCoordinates)->getCoords(), PastAgents.at(AgentCoordinates));
     return;
 }
