@@ -8,13 +8,11 @@ private:
     float energyCost = 1;
     unsigned int key = 255;
     UnitColor unitColor = {255, 255, 255, 255};
-    char direction = ' ';
 
 public:
     OutputNode() {};
     OutputNode(std::mt19937 &gen)
     {
-        std::uniform_int_distribution<> directionDist(0, 3);
         std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> setAmountDist(0, 255);
         std::uniform_int_distribution<> unitColorRedDist(0, 255);
@@ -32,7 +30,6 @@ public:
         weight = weightDist(gen) / 100.0;
         energyCost = energyCostDist(gen);
         key = actionsDist(gen);
-        direction = directions.at(directionDist(gen));
     }
 
     void setWeight(float iW)
@@ -47,6 +44,12 @@ public:
     {
         key = iK;
     }
+
+    void setUnitColor(UnitColor iC)
+    {
+        unitColor = iC;
+    }
+
     float getWeight()
     {
         return weight;
@@ -58,5 +61,10 @@ public:
     float getKey()
     {
         return key;
+    }
+
+    UnitColor getUnitColor()
+    {
+        return unitColor;
     }
 };

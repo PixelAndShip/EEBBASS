@@ -312,20 +312,40 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     {
         return false;
     }
-    switch (Sense->getKey())
+    int key = Sense->getKey();
+    switch (key)
     {
     case 0:
         return seeSomething(AgentCoordinates);
         break;
     case 1:
         return seeColor(AgentCoordinates, Sense->getUnitColor());
+        break;
+    case 2:
+        return energyCountAboveSet(PastAgents[AgentCoordinates]->getEnergy(), Sense->getSetAmount());
+        break;
+    case 3:
+        return energyCountBelowSet(PastAgents[AgentCoordinates]->getEnergy(), Sense->getSetAmount());
+        break;
+    case 4:
+        return healthCountAboveSet(PastAgents[AgentCoordinates]->getHealth(), Sense->getSetAmount());
+        break;
+    case 5:
+        return healthCountBelowSet(PastAgents[AgentCoordinates]->getHealth(), Sense->getSetAmount());
+        break;
+    case 6:
+        return ageCountAboveSet(PastAgents[AgentCoordinates]->getAge(), Sense->getSetAmount());
+        break;
+    case 7:
+        return ageCountBelowSet(PastAgents[AgentCoordinates]->getAge(), Sense->getSetAmount());
+        break;
     default:
         break;
     }
     return false;
 }
 
-OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNode)
+OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNode) // incorporate manageAction and manageSense
 {
     if (parentNode == nullptr or parentNode->getInputNodes().empty())
     {
@@ -356,12 +376,55 @@ OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNod
     return nullptr;
 }
 
+// {0, "MoveLeft"},
+// {1, "MoveRight"},
+// {2, "MoveUp"},
+// {3, "MoveDown"},
+// {4, "Bite"},
+// {5, "Split"},
+// {6, "ExpendEnergyOnHealth"}, // passive action
+// {7, "ExpendEnergyOnSpeed"},  // passive action
+// {8, "BiteColor"}};
+
 void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
 {
     if (AgentCoordinates == "" or ActionNode == nullptr)
     {
         return;
     }
+    int key = ActionNode->getKey();
+    switch (key)
+    {
+    case 0:
+        move(AgentCoordinates, 'l');
+        break;
+    case 1:
+        move(AgentCoordinates, 'r');
+        break;
+    case 2:
+        move(AgentCoordinates, 'u');
+        break;
+    case 3:
+        move(AgentCoordinates, 'd');
+        break;
+    case 4:
+        bite(AgentCoordinates, ActionNode->getEnergyCost()); // implement
+    case 5:
+        // implement split
+        break;
+    case 6:
+        updateHealth(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
+        break;
+    case 7:
+        updateSpeed(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
+        break;
+    case 8:
+        biteColor(AgentCoordinates, ActionNode->getUnitColor(), ActionNode->getEnergyCost()); // implement
+        break;
+    default:
+        break;
+    }
+
     setNextAgent(PastAgents.at(AgentCoordinates)->getCoords(), PastAgents.at(AgentCoordinates));
     return;
 }
