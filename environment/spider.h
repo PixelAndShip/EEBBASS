@@ -2,6 +2,7 @@
 #include "units/agent.h"
 #include "units/plant.h"
 #include <queue>
+#include <algorithm>
 class Spider
 {
 

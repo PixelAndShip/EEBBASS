@@ -127,8 +127,17 @@ void Spider::updateHealth(float deltaEnergy, Agent *Self)
 
 void Spider::bite(std::string AgentCoordinates, float energyCost)
 {
-
-    return;
+    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
+    if (proximateAgentCs.empty())
+    {
+        return;
+    }
+    Agent *ag = nullptr;
+    ag = PastAgents[proximateAgentCs[0]];
+    if (ag != nullptr)
+    {
+        ag->setHealth(ag->getHealth() - energyCost);
+    }
 }
 
 void Spider::move(std::string AgentCoordinates, char Direction) // move agent to newagents, check if can be moved to nextagents without collision
@@ -162,7 +171,39 @@ void Spider::setNextAgent(std::string coords, Agent *Self)
 
 void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
 {
-    return;
+    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
+    if (proximateAgentCs.empty())
+    {
+        return;
+    }
+    Agent *ag = nullptr;
+    UnitColor clr = {};
+    unsigned int r, g, b, t;
+    bool r_in_range = false;
+    bool g_in_range = false;
+    bool b_in_range = false;
+    bool t_in_range = false;
+    for (std::string cs : proximateAgentCs)
+    {
+        ag = PastAgents.at(cs);
+        if (ag != nullptr)
+        {
+            clr = ag->getAgentColor();
+            r = clr.red;
+            g = clr.green;
+            b = clr.blue;
+            t = clr.transparency;
+            r_in_range = r <= Target.red + 10 and r >= Target.red - 10;
+            g_in_range = g <= Target.green + 10 and r >= Target.green - 10;
+            b_in_range = b <= Target.blue + 10 and b >= Target.blue - 10;
+            t_in_range = t <= Target.transparency + 10 and t >= Target.transparency - 10;
+            if (r_in_range and g_in_range and b_in_range and t_in_range)
+            {
+                ag->setHealth(ag->getHealth() - energyCost);
+                break;
+            }
+        }
+    }
 }
 
 std::vector<std::string> Spider::getProximateAgents(std::string coords)
@@ -295,6 +336,14 @@ void Spider::manageSubMoment()
 
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
 {
+    std::sort(agents.begin(), agents.end(),
+              [this](const std::string &a, const std::string &b)
+              {
+                  auto agentA = PastAgents.at(a);
+                  auto agentB = PastAgents.at(b);
+                  return agentA->getSpeed() > agentB->getSpeed();
+              });
+    return agents;
 }
 
 // {0, "SeeSomething"},

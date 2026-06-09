@@ -24,7 +24,6 @@ public:
     void insertInputNodeAt(int index, InputNode *iN);
     void deleteInputNode(int index);
     void setOutputNode(OutputNode *iON);
-
     float getWeight();
     float getSetAmount();
     UnitColor getUnitColor();
