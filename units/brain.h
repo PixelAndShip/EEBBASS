@@ -24,6 +24,8 @@ public:
     Brain(Brain &&) = delete;
     Brain &operator=(Brain &&) = delete;
 
+    void addCopiedConnection(float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth);
+
     const std::vector<InputNode *> &getInputNodes() const;
     void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level, int childNodeCount, int brainDepth);
     void manageConnections();

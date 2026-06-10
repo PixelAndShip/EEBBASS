@@ -32,6 +32,20 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
     }
 }
 
+void Brain::addCopiedConnection(
+    float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth)
+{
+    if (parentLastInputNode->getInputNodes().empty())
+    {
+        return;
+    }
+    for (int i = 0; i < parentLastInputNode->getInputNodes().size(); i++)
+    {
+        // create inputnode with mutation inclusion
+        lastInputNode->insertInputNodeAt(i, nullptr); // change nullptr
+    }
+}
+
 void Brain::addConnection(
     float eRadiation, std::mt19937 &gen,
     InputNode *inputChainLast,

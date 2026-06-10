@@ -3,7 +3,6 @@
 Agent::Agent()
 {
     health = 1.0;
-    bite = 1.0;
     energy = 1.0;
     age = 1;
     agentColor = {200, 200, 200, 255};
@@ -15,7 +14,6 @@ Agent::Agent()
 Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth) : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
 {
     health = 1.0;
-    bite = 1.0;
     energy = 1.0;
     age = 1;
     agentColor = {200, 200, 200, 255};
@@ -28,6 +26,9 @@ Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
 
 Agent::Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation) : brain(eRadiation, iBrain)
 { // split spawn
+    health = iHealth / 2.0;
+    energy = iEnergy / 2.0;
+    speed = iSpeed / 2.0;
 }
 
 void Agent::generateStart(std::mt19937 &gen)

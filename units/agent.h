@@ -6,7 +6,6 @@ class Agent
 
 private:
     float health;
-    float bite;
     float energy;
     float age;
 
@@ -22,10 +21,6 @@ public:
         health = iH;
     }
 
-    void setBite(float iB)
-    {
-        bite = iB;
-    }
     void setEnergy(float iE)
     {
         energy = iE;
@@ -61,11 +56,6 @@ public:
     float getHealth()
     {
         return health;
-    }
-
-    float getBite()
-    {
-        return bite;
     }
 
     float getEnergy()
