@@ -11,22 +11,22 @@ private:
 
 public:
     OutputNode() {};
+    OutputNode(std::mt19937 &gen, OutputNode *copyNode)
+    {
+        // initalize mutation
+    }
     OutputNode(std::mt19937 &gen)
     {
         std::uniform_int_distribution<> weightDist(0, 99);
-        std::uniform_int_distribution<> setAmountDist(0, 255);
-        std::uniform_int_distribution<> unitColorRedDist(0, 255);
-        std::uniform_int_distribution<> unitColorGreenDist(0, 255);
-        std::uniform_int_distribution<> unitColorBlueDist(0, 255);
-        std::uniform_int_distribution<> unitColorTransparencyDist(0, 255);
+        std::uniform_int_distribution<> colorDist(0, 255);
         std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> energyCostDist(1, 10);
         std::uniform_int_distribution<> actionsDist(0, getActions().size() - 1);
         unitColor = {
-            (unsigned int)unitColorRedDist(gen),
-            (unsigned int)unitColorGreenDist(gen),
-            (unsigned int)unitColorBlueDist(gen),
-            (unsigned int)unitColorTransparencyDist(gen)};
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen)};
         weight = weightDist(gen) / 100.0;
         energyCost = energyCostDist(gen);
         key = actionsDist(gen);

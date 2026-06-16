@@ -36,7 +36,7 @@ void Brain::addCopiedConnection(
     float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth)
 {
 
-    std::uniform_int_distribution<> newSiblingNodeChance(0, 100);
+    std::uniform_int_distribution<> newNodeChance(0, 100);
     if (parentLastInputNode->getInputNodes().empty())
     {
         return;
@@ -46,11 +46,21 @@ void Brain::addCopiedConnection(
 
         InputNode *copyNode = parentLastInputNode->getInputNodes()[i];
         InputNode *copiedNode = new InputNode(gen, copyNode);
+        if (copyNode->getOutputNode() != nullptr)
+        {
+            OutputNode *copyOutNode = copyNode->getOutputNode();
+            OutputNode *copiedOutNode = new OutputNode(gen, copyOutNode);
+        }
         lastInputNode->appendInputNode(copiedNode);
-        if (newSiblingNodeChance(gen) <= 5 and parentLastInputNode->getInputNodes().size() < childNodeCount)
+        if (newNodeChance(gen) <= 5 and parentLastInputNode->getInputNodes().size() < childNodeCount)
         {
             InputNode *newNode = new InputNode(gen);
             lastInputNode->appendInputNode(copiedNode);
+        }
+        if (newNodeChance(gen) <= 5 and copiedNode->getOutputNode() != nullptr)
+        {
+            OutputNode *newOutputNode = new OutputNode(gen);
+            copiedNode->setOutputNode(newOutputNode);
         }
         addCopiedConnection(eRadiation, gen, copyNode, copiedNode, level + 1, childNodeCount, brainDepth);
     }
