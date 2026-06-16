@@ -2,6 +2,7 @@
 #include "units/agent.h"
 #include "units/plant.h"
 #include <queue>
+#include <algorithm>
 class Spider
 {
 
@@ -32,7 +33,7 @@ public:
 
     bool seeSomething(std::string AgentCoordinates);
 
-    bool seeColor(std::string AgentCoordinates, UnitColor c, UnitColor setC);
+    bool seeColor(std::string AgentCoordinates, UnitColor setC);
 
     bool energyCountAboveSet(float energy, float setAmount);
 
@@ -73,8 +74,12 @@ public:
     std::vector<std::string> getProximateAgents(std::string coords);
     std::vector<std::string> getProximatePlants(std::string coords);
 
+    void setNextAgent(std::string coords, Agent *Self);
+
     bool manageSense(std::string AgentCoordinates, InputNode *Sense);
     OutputNode *getAction(std::string AgentCoordinates, InputNode *parentNode);
+
+    std::vector<std::string> sortAgentsBySpeed(std::vector<std::string> agents);
 
     void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();

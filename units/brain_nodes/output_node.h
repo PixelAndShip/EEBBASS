@@ -11,22 +11,39 @@ private:
 
 public:
     OutputNode() {};
+    OutputNode(std::mt19937 &gen, OutputNode *copyNode)
+    {
+        // initalize mutation
+        std::uniform_int_distribution<> mutationDist(-2, 2);
+        std::uniform_int_distribution<> keyMutationChance(0, 100);
+        weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 1.0f, 99.0f);
+        energyCost = std::clamp(copyNode->getEnergyCost() + mutationDist(gen), 1.0f, 255.0f);
+        unitColor = copyNode->getUnitColor();
+        key = copyNode->getKey();
+        int mutatedKeyChance = keyMutationChance(gen);
+        if (mutatedKeyChance <= 5)
+        {
+            int newKey = static_cast<int>(key) + mutationDist(gen);
+
+            key = static_cast<unsigned int>(
+                std::clamp(
+                    newKey,
+                    0,
+                    static_cast<int>(getActions().size()) - 1));
+        }
+    }
     OutputNode(std::mt19937 &gen)
     {
         std::uniform_int_distribution<> weightDist(0, 99);
-        std::uniform_int_distribution<> setAmountDist(0, 255);
-        std::uniform_int_distribution<> unitColorRedDist(0, 255);
-        std::uniform_int_distribution<> unitColorGreenDist(0, 255);
-        std::uniform_int_distribution<> unitColorBlueDist(0, 255);
-        std::uniform_int_distribution<> unitColorTransparencyDist(0, 255);
+        std::uniform_int_distribution<> colorDist(0, 255);
         std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> energyCostDist(1, 10);
         std::uniform_int_distribution<> actionsDist(0, getActions().size() - 1);
         unitColor = {
-            (unsigned int)unitColorRedDist(gen),
-            (unsigned int)unitColorGreenDist(gen),
-            (unsigned int)unitColorBlueDist(gen),
-            (unsigned int)unitColorTransparencyDist(gen)};
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen),
+            (unsigned int)colorDist(gen)};
         weight = weightDist(gen) / 100.0;
         energyCost = energyCostDist(gen);
         key = actionsDist(gen);
@@ -44,6 +61,12 @@ public:
     {
         key = iK;
     }
+
+    void setUnitColor(UnitColor iC)
+    {
+        unitColor = iC;
+    }
+
     float getWeight()
     {
         return weight;
@@ -55,5 +78,10 @@ public:
     float getKey()
     {
         return key;
+    }
+
+    UnitColor getUnitColor()
+    {
+        return unitColor;
     }
 };

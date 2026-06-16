@@ -15,7 +15,7 @@ public:
 
     Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
-    Brain(float eRadiation, Brain &iBrain);
+    Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth);
 
     ~Brain();
 
@@ -23,6 +23,8 @@ public:
     Brain &operator=(const Brain &) = delete;
     Brain(Brain &&) = delete;
     Brain &operator=(Brain &&) = delete;
+
+    void addCopiedConnection(float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth);
 
     const std::vector<InputNode *> &getInputNodes() const;
     void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level, int childNodeCount, int brainDepth);

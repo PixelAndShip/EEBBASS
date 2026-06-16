@@ -9,9 +9,32 @@ InputNode::InputNode() {};
 // std::vector<InputNode *> inputNodes = {};
 // OutputNode *outputNode = nullptr;
 
+InputNode::InputNode(std::mt19937 &gen, InputNode *copyNode)
+{
+    std::uniform_int_distribution<> mutationDist(-2, 2);
+    std::uniform_int_distribution<> keyMutationChance(0, 100);
+    weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 1.0f, 99.0f);
+
+    setAmount = std::clamp(copyNode->getSetAmount() + mutationDist(gen), 0.0f, 255.0f);
+
+    unitColor = copyNode->getUnitColor();
+    key = copyNode->getKey();
+    int mutatedKeyChance = keyMutationChance(gen);
+    if (mutatedKeyChance <= 5)
+    {
+        int newKey = static_cast<int>(key) + mutationDist(gen);
+
+        key = static_cast<unsigned int>(
+            std::clamp(
+                newKey,
+                0,
+                static_cast<int>(getSenses().size()) - 1));
+    }
+}
+
 InputNode::InputNode(std::mt19937 &gen)
 {
-    std::uniform_int_distribution<> weightDist(0, 99);
+    std::uniform_int_distribution<> weightDist(1, 99);
     std::uniform_int_distribution<> setAmountDist(0, 255);
     std::uniform_int_distribution<> unitColorRedDist(0, 255);
     std::uniform_int_distribution<> unitColorGreenDist(0, 255);
