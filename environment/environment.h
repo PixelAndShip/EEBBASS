@@ -19,6 +19,8 @@ public:
 
     Environment();
 
+    void manageSimulation();
+
     void managePlantCount(); // makes sure sim does not crash
 
     void manageAgentCount(); // makes sure sim does not crash

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "output_node.h"
-
+#include <algorithm>
 class InputNode
 {
 private:
@@ -14,6 +14,7 @@ private:
 
 public:
     InputNode();
+    InputNode(std::mt19937 &gen, InputNode *copyNode);
     InputNode(std::mt19937 &gen);
     ~InputNode();
     void setWeight(float iW);

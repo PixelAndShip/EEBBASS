@@ -15,7 +15,7 @@ Brain::~Brain()
     }
 }
 
-Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth)
+Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount = 3, int brainDepth = 4)
 {
 
     int InputNodeCount = dist(gen);
@@ -35,15 +35,26 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
 void Brain::addCopiedConnection(
     float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth)
 {
+
+    std::uniform_int_distribution<> newSiblingNodeChance(0, 100);
     if (parentLastInputNode->getInputNodes().empty())
     {
         return;
     }
     for (int i = 0; i < parentLastInputNode->getInputNodes().size(); i++)
     {
-        // create inputnode with mutation inclusion
-        lastInputNode->insertInputNodeAt(i, nullptr); // change nullptr
+
+        InputNode *copyNode = parentLastInputNode->getInputNodes()[i];
+        InputNode *copiedNode = new InputNode(gen, copyNode);
+        lastInputNode->appendInputNode(copiedNode);
+        if (newSiblingNodeChance(gen) <= 5 and parentLastInputNode->getInputNodes().size() < childNodeCount)
+        {
+            InputNode *newNode = new InputNode(gen);
+            lastInputNode->appendInputNode(copiedNode);
+        }
+        addCopiedConnection(eRadiation, gen, copyNode, copiedNode, level + 1, childNodeCount, brainDepth);
     }
+    // need to add action child node processing
 }
 
 void Brain::addConnection(
@@ -51,8 +62,8 @@ void Brain::addConnection(
     InputNode *inputChainLast,
     std::uniform_int_distribution<> &mutationChance,
     int level,
-    int childNodeCount = 2,
-    int brainDepth = 5)
+    int childNodeCount = 3,
+    int brainDepth = 4)
 {
 
     if (level >= brainDepth)
@@ -73,7 +84,7 @@ void Brain::addConnection(
 
             InputNode *newInputNode = new InputNode(gen); // initalize attributes
 
-            inputChainLast->insertInputNodeAt(i, newInputNode);
+            inputChainLast->appendInputNode(newInputNode);
             addConnection(eRadiation, gen, newInputNode, mutationChance, level + 1, childNodeCount, brainDepth);
         }
     }
