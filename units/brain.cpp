@@ -2,9 +2,16 @@
 
 Brain::Brain() {}
 
-Brain::Brain(float eRadiation, Brain &iBrain)
+Brain::Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
 {
     // initialize brain
+    std::vector<InputNode *> copyInputNodes = iBrain.getInputNodes();
+
+    for (InputNode *iN : copyInputNodes)
+    {
+        InputNode *newInputNode = new InputNode(gen, iN);
+        addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
+    }
 }
 
 Brain::~Brain()
@@ -15,7 +22,7 @@ Brain::~Brain()
     }
 }
 
-Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount = 3, int brainDepth = 4)
+Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth)
 {
 
     int InputNodeCount = dist(gen);
@@ -28,14 +35,14 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
         InputNode *startNode = new InputNode(gen);
         addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
 
-        inputNodes.insert(inputNodes.begin() + i, startNode);
+        inputNodes.push_back(startNode);
     }
 }
 
 void Brain::addCopiedConnection(
-    float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth)
+    float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount = 3, int brainDepth = 4)
 {
-
+    inputNodes.push_back(lastInputNode);
     std::uniform_int_distribution<> newNodeChance(0, 100);
     if (parentLastInputNode->getInputNodes().empty())
     {
@@ -50,12 +57,13 @@ void Brain::addCopiedConnection(
         {
             OutputNode *copyOutNode = copyNode->getOutputNode();
             OutputNode *copiedOutNode = new OutputNode(gen, copyOutNode);
+            copiedNode->setOutputNode(copiedOutNode);
         }
         lastInputNode->appendInputNode(copiedNode);
         if (newNodeChance(gen) <= 5 and parentLastInputNode->getInputNodes().size() < childNodeCount)
         {
             InputNode *newNode = new InputNode(gen);
-            lastInputNode->appendInputNode(copiedNode);
+            lastInputNode->appendInputNode(newNode);
         }
         if (newNodeChance(gen) <= 5 and copiedNode->getOutputNode() != nullptr)
         {

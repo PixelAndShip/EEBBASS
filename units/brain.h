@@ -15,7 +15,7 @@ public:
 
     Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
-    Brain(float eRadiation, Brain &iBrain);
+    Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth);
 
     ~Brain();
 

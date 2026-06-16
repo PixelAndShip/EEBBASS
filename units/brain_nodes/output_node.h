@@ -14,6 +14,23 @@ public:
     OutputNode(std::mt19937 &gen, OutputNode *copyNode)
     {
         // initalize mutation
+        std::uniform_int_distribution<> mutationDist(-2, 2);
+        std::uniform_int_distribution<> keyMutationChance(0, 100);
+        weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 1.0f, 99.0f);
+        energyCost = std::clamp(copyNode->getEnergyCost() + mutationDist(gen), 1.0f, 255.0f);
+        unitColor = copyNode->getUnitColor();
+        key = copyNode->getKey();
+        int mutatedKeyChance = keyMutationChance(gen);
+        if (mutatedKeyChance <= 5)
+        {
+            int newKey = static_cast<int>(key) + mutationDist(gen);
+
+            key = static_cast<unsigned int>(
+                std::clamp(
+                    newKey,
+                    0,
+                    static_cast<int>(getActions().size()) - 1));
+        }
     }
     OutputNode(std::mt19937 &gen)
     {
