@@ -44,6 +44,23 @@ public:
         y = iY;
     }
 
+    void setCoords(std::string coords)
+    {
+        auto _pos = coords.find("_");
+        int aX, aY;
+        try
+        {
+            aX = std::stoi(coords.substr(0, _pos));
+            aY = std::stoi(coords.substr(_pos + 1));
+        }
+        catch (...)
+        {
+            return;
+        }
+        x = aX;
+        y = aY;
+    }
+
     void setSpeed(float iS)
     {
         speed = iS;

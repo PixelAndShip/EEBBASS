@@ -72,7 +72,6 @@ void Brain::addCopiedConnection(
         }
         addCopiedConnection(eRadiation, gen, copyNode, copiedNode, level + 1, childNodeCount, brainDepth);
     }
-    // need to add action child node processing
 }
 
 void Brain::addConnection(

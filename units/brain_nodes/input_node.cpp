@@ -13,7 +13,7 @@ InputNode::InputNode(std::mt19937 &gen, InputNode *copyNode)
 {
     std::uniform_int_distribution<> mutationDist(-2, 2);
     std::uniform_int_distribution<> keyMutationChance(0, 100);
-    weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 1.0f, 99.0f);
+    weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 0.01f, 0.99f);
 
     setAmount = std::clamp(copyNode->getSetAmount() + mutationDist(gen), 0.0f, 255.0f);
 

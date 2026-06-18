@@ -72,6 +72,7 @@ public:
 
     void setProximities(std::string coords);
     std::vector<std::string> getProximateAgents(std::string coords);
+    std::string getSplitCoords(std::string ParentCoords);
     std::vector<std::string> getProximatePlants(std::string coords);
 
     void setNextAgent(std::string coords, Agent *Self);
@@ -80,6 +81,8 @@ public:
     OutputNode *getAction(std::string AgentCoordinates, InputNode *parentNode);
 
     std::vector<std::string> sortAgentsBySpeed(std::vector<std::string> agents);
+
+    void splitNewAgent(std::string ParentCoords);
 
     void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();

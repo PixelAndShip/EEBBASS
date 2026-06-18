@@ -142,29 +142,33 @@ void Spider::bite(std::string AgentCoordinates, float energyCost)
 
 void Spider::move(std::string AgentCoordinates, char Direction) // move agent to newagents, check if can be moved to nextagents without collision
 {
-    int currentX = PastAgents.at(AgentCoordinates)->getX();
-    int currentY = PastAgents.at(AgentCoordinates)->getY();
+    int aX = PastAgents.at(AgentCoordinates)->getX();
+    int aY = PastAgents.at(AgentCoordinates)->getY();
     switch (Direction)
     {
     case 'u':
-        PastAgents.at(AgentCoordinates)->setY(currentY - 1);
+        aY -= 1;
         break;
     case 'd':
-        PastAgents.at(AgentCoordinates)->setY(currentY + 1);
+        aY += 1;
         break;
     case 'l':
-        PastAgents.at(AgentCoordinates)->setX(currentX - 1);
+        aX -= 1;
         break;
     case 'r':
-        PastAgents.at(AgentCoordinates)->setX(currentX + 1);
+        aX += 1;
         break;
     }
+    std::string coords = aX + "_" + aY;
+    setNextAgent(coords, PastAgents[AgentCoordinates]);
 }
 
 void Spider::setNextAgent(std::string coords, Agent *Self)
 {
-    if (NextAgents.find(coords) == NextAgents.end())
+    // need to implement border check
+    if (NextAgents.find(coords) == NextAgents.end() and NextPlants.find(coords) == NextPlants.end())
     {
+        Self->setCoords(coords);
         NextAgents[coords] = Self;
     }
 }
@@ -229,11 +233,39 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
         int dy = std::stoi(r.substr(_pos + 1));
         if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastAgents.end())
         {
-
             proximateAgentCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
     }
     return proximateAgentCs;
+}
+
+std::string Spider::getSplitCoords(std::string ParentCoords)
+{
+
+    auto _pos = ParentCoords.find("_");
+    int aX, aY;
+    try
+    {
+        aX = std::stoi(ParentCoords.substr(0, _pos));
+        aY = std::stoi(ParentCoords.substr(_pos + 1));
+    }
+    catch (...)
+    {
+        return "";
+    }
+
+    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
+    for (std::string r : InRadius)
+    {
+        auto _pos = r.find("_");
+        int dx = std::stoi(r.substr(0, _pos));
+        int dy = std::stoi(r.substr(_pos + 1));
+        if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == PastAgents.end() and PastPlants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == PastPlants.end())
+        {
+            return ((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy));
+        }
+    }
+    return "";
 }
 
 std::vector<std::string> Spider::getProximatePlants(std::string coords)
@@ -331,7 +363,7 @@ void Spider::manageSubMoment()
         }
     }
 
-    std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents);
+    std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents); // incorporate manageAction for each
 }
 
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
@@ -394,7 +426,7 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     return false;
 }
 
-OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNode) // incorporate manageAction and manageSense
+OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNode) // incorporate manageSense
 {
     if (parentNode == nullptr or parentNode->getInputNodes().empty())
     {
@@ -473,7 +505,15 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     default:
         break;
     }
+}
 
-    setNextAgent(PastAgents.at(AgentCoordinates)->getCoords(), PastAgents.at(AgentCoordinates));
-    return;
+void Spider::splitNewAgent(std::string ParentCoords)
+{
+    std::string childCoords = getSplitCoords(ParentCoords);
+    if (childCoords == "")
+    {
+        return;
+    }
+    Agent *childAgent = new Agent(); // implement split behavior
+    setNextAgent(childCoords, childAgent);
 }
