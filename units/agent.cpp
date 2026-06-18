@@ -24,7 +24,7 @@ Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
     // calculate color
 }
 
-Agent::Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation) : brain(eRadiation, iBrain)
+Agent::Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation, std::mt19937 &gen, int childNodeCount, int brainDepth) : brain(eRadiation, gen, iBrain, childNodeCount, brainDepth)
 { // split spawn
     health = iHealth / 2.0;
     energy = iEnergy / 2.0;

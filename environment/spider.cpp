@@ -491,7 +491,7 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     case 4:
         bite(AgentCoordinates, ActionNode->getEnergyCost()); // implement
     case 5:
-        // implement split
+        splitNewAgent(AgentCoordinates);
         break;
     case 6:
         updateHealth(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
