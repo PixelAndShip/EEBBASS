@@ -6,6 +6,9 @@ Spider::Spider()
     std::uniform_int_distribution<> d(0, 100);
     gen = g;
     dist = d;
+    radiation = 0.5;
+    maxBrainChildNodes = 3;
+    maxBrainLevel = 4;
 }
 
 bool Spider::seeSomething(std::string AgentCoordinates)
@@ -163,16 +166,6 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     setNextAgent(coords, PastAgents[AgentCoordinates]);
 }
 
-void Spider::setNextAgent(std::string coords, Agent *Self)
-{
-    // need to implement border check
-    if (NextAgents.find(coords) == NextAgents.end() and NextPlants.find(coords) == NextPlants.end())
-    {
-        Self->setCoords(coords);
-        NextAgents[coords] = Self;
-    }
-}
-
 void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
 {
     std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
@@ -228,6 +221,8 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
     std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
     for (std::string r : InRadius)
     {
+        int maxBrainLevel;
+        int maxBrainChildNodes;
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
@@ -436,7 +431,7 @@ OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNod
 
     for (InputNode *in : parentNode->getInputNodes())
     {
-        if (in == nullptr or activateNode < in->getWeight())
+        if (in == nullptr or activateNode < in->getWeight() or manageSense(AgentCoordinates, in) == false)
         {
             continue;
         }
@@ -482,6 +477,7 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     case 1:
         move(AgentCoordinates, 'r');
         break;
+        int Radiation = 0.5;
     case 2:
         move(AgentCoordinates, 'u');
         break;
@@ -489,9 +485,9 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
         move(AgentCoordinates, 'd');
         break;
     case 4:
-        bite(AgentCoordinates, ActionNode->getEnergyCost()); // implement
+        bite(AgentCoordinates, ActionNode->getEnergyCost());
     case 5:
-        // implement split
+        splitNewAgent(AgentCoordinates);
         break;
     case 6:
         updateHealth(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
@@ -500,20 +496,39 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
         updateSpeed(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
         break;
     case 8:
-        biteColor(AgentCoordinates, ActionNode->getUnitColor(), ActionNode->getEnergyCost()); // implement
+        biteColor(AgentCoordinates, ActionNode->getUnitColor(), ActionNode->getEnergyCost());
         break;
     default:
         break;
     }
 }
 
+void Spider::setNextAgent(std::string coords, Agent *Self)
+{
+    // need to implement border check
+    if (NextAgents.find(coords) == NextAgents.end() and NextPlants.find(coords) == NextPlants.end())
+    {
+        Self->setCoords(coords);
+        NextAgents[coords] = Self;
+    }
+    else
+    {
+        delete Self;
+    }
+}
+
 void Spider::splitNewAgent(std::string ParentCoords)
 {
+    if (PastAgents.find(ParentCoords) == PastAgents.end())
+    {
+        return;
+    }
     std::string childCoords = getSplitCoords(ParentCoords);
     if (childCoords == "")
     {
         return;
     }
-    Agent *childAgent = new Agent(); // implement split behavior
+
+    Agent *childAgent = new Agent(PastAgents[ParentCoords]->getHealth(), PastAgents[ParentCoords]->getEnergy(), PastAgents[ParentCoords]->getSpeed(), PastAgents[ParentCoords]->getBrain(), radiation, gen, maxBrainChildNodes, maxBrainLevel); // implement split behavior
     setNextAgent(childCoords, childAgent);
 }

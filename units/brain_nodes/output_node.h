@@ -16,7 +16,7 @@ public:
         // initalize mutation
         std::uniform_int_distribution<> mutationDist(-2, 2);
         std::uniform_int_distribution<> keyMutationChance(0, 100);
-        weight = std::clamp(copyNode->getWeight() + mutationDist(gen), 0.01f, 0.99f);
+        weight = std::clamp(copyNode->getWeight() + mutationDist(gen) / 100.0f, 0.01f, 0.99f);
         energyCost = std::clamp(copyNode->getEnergyCost() + mutationDist(gen), 1.0f, 255.0f);
         unitColor = copyNode->getUnitColor();
         key = copyNode->getKey();
@@ -36,7 +36,6 @@ public:
     {
         std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> colorDist(0, 255);
-        std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> energyCostDist(1, 10);
         std::uniform_int_distribution<> actionsDist(0, getActions().size() - 1);
         unitColor = {
@@ -75,7 +74,7 @@ public:
     {
         return energyCost;
     }
-    float getKey()
+    unsigned int getKey()
     {
         return key;
     }
