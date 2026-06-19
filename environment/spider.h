@@ -14,6 +14,9 @@ public:
 
     std::unordered_map<std::string, bool> proximateCoords;
 
+    float radiation;
+    int maxBrainLevel;
+    int maxBrainChildNodes;
     std::random_device rd;
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;

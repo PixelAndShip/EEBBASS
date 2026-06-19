@@ -113,7 +113,7 @@ public:
 
     Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth); // default spawn
 
-    Agent(float iHealth, float iEnergy, float iSpeed, float iSight, Brain &iBrain, float eRadiation, std::mt19937 &gen, int childNodeCount, int brainDepth); // split spawn
+    Agent(float iHealth, float iEnergy, float iSpeed, const Brain &iBrain, float eRadiation, std::mt19937 &gen, int childNodeCount, int brainDepth); // split spawn
 
     void generateStart(std::mt19937 &gen);
 };
