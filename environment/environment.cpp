@@ -17,6 +17,10 @@ Environment::Environment()
     dist = d;
 }
 
+void Environment::manageSimulation()
+{
+}
+
 void Environment::managePlantCount() {} // makes sure sim does not crash
 
 void Environment::manageAgentCount() {} // makes sure sim does not crash
@@ -52,6 +56,7 @@ void Environment::manageSubMoment(std::string coords)
         spider->setProximities(coords);
         spider->manageSubMoment();
     }
+
     // std::cout << "finishedSetProximites and manageSubmomentSpider \n";
 }
 

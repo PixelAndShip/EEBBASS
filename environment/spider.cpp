@@ -359,6 +359,12 @@ void Spider::manageSubMoment()
     }
 
     std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents); // incorporate manageAction for each
+
+    for (std::string ag : sortedAgentsBySpeed)
+    {
+        manageAction(ag, activeAgentOutputs[ag]);
+    }
+    // moving units from past to next needs to be implemented
 }
 
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
@@ -436,7 +442,7 @@ OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNod
             continue;
         }
 
-        if (in->getInputNodes().empty() and in->getOutputNode() != nullptr and in->getOutputNode()->getKey() != 255)
+        if (in->getOutputNode() != nullptr and in->getInputNodes().empty() and in->getOutputNode()->getKey() != 255 and activateNode >= in->getWeight())
         {
             std::cout << getSenses().at(in->getKey()) << " ";
             return in->getOutputNode();
