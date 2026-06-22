@@ -89,4 +89,6 @@ public:
 
     void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();
+
+    void moveProximateToNext();
 };

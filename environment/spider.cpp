@@ -364,7 +364,19 @@ void Spider::manageSubMoment()
     {
         manageAction(ag, activeAgentOutputs[ag]);
     }
-    // moving units from past to next needs to be implemented
+    moveProximateToNext();
+}
+
+void Spider::moveProximateToNext()
+{
+    for (auto pa : proximateCoords)
+    {
+        auto pair = PastAgents.find(pa.first);
+        if (NextAgents.find(pa.first) == NextAgents.end() and pair != PastAgents.end())
+        {
+            NextAgents.insert(PastAgents.extract(pair));
+        }
+    }
 }
 
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
