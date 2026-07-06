@@ -12,7 +12,7 @@ Environment::Environment()
     std::random_device rd;
     std::mt19937 g(rd());
     std::uniform_int_distribution<> d(0, 7);
-
+    std::uniform_int_distribution<> insideBorders(0, 800);
     gen = g;
     dist = d;
 }
@@ -21,7 +21,9 @@ void Environment::manageSimulation()
 {
 }
 
-void Environment::managePlantCount() {} // makes sure sim does not crash
+void Environment::managePlantCount()
+{
+} // makes sure sim does not crash
 
 void Environment::manageAgentCount() {} // makes sure sim does not crash
 
@@ -40,6 +42,11 @@ void Environment::manageMoment()
 
         manageSubMoment(agentCoords);
     }
+    /*
+        for(auto pa : spider->PastAgents){
+            spider->setNextAgent(pa.first,pa.second);
+        }
+    */
 }
 
 void Environment::manageSubMoment(std::string coords)
@@ -69,10 +76,9 @@ void Environment::makeWindow()
     {
         BeginDrawing();
         ClearBackground(BLACK);
-        manageMoment(); // implement
+
         for (auto ac : spider->PastAgents)
         {
-
             DrawCircle(
                 ac.second->getX(),
                 ac.second->getY(),
@@ -85,6 +91,35 @@ void Environment::makeWindow()
         }
 
         EndDrawing();
+        manageMoment();
     }
     CloseWindow();
+}
+
+void Environment::startSimulation()
+{
+    int AgentCount = 8; // temporary
+
+    for (int i = 0; i < AgentCount; i++)
+    {
+        Agent *genesis = new Agent(radiation, gen, dist, maxBrainChildNodes, maxBrainLevel);
+        generateCoords(genesis);
+        spider->PastAgents[genesis->getCoords()] = genesis;
+    }
+}
+
+void Environment::generateCoords(Agent *ag)
+{
+    int x = insideBorders(gen);
+    int y = insideBorders(gen);
+    for (auto ac : spider->PastAgents)
+    {
+        if (ac.second->getX() == x and ac.second->getY() == y)
+        {
+            generateCoords(ag);
+            return;
+        }
+    }
+    ag->setX(x);
+    ag->setY(y);
 }

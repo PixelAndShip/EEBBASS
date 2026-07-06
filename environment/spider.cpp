@@ -11,6 +11,17 @@ Spider::Spider()
     maxBrainLevel = 4;
 }
 
+Spider::Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800)
+{
+    std::mt19937 g(rd());
+    std::uniform_int_distribution<> d(0, 100);
+    gen = g;
+    dist = d;
+    radiation = rad;
+    maxBrainChildNodes = maxBL;
+    maxBrainLevel = maxBCN;
+}
+
 bool Spider::seeSomething(std::string AgentCoordinates)
 {
     std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
@@ -150,20 +161,28 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     switch (Direction)
     {
     case 'u':
-        aY -= 1;
+        aY -= 20;
         break;
     case 'd':
-        aY += 1;
+        aY += 20;
         break;
     case 'l':
-        aX -= 1;
+        aX -= 20;
         break;
     case 'r':
-        aX += 1;
+        aX += 20;
         break;
     }
+
     std::string coords = aX + "_" + aY;
-    setNextAgent(coords, PastAgents[AgentCoordinates]);
+    if (borderCheck(coords) == true)
+    {
+        setNextAgent(coords, PastAgents[AgentCoordinates]);
+    }
+    else
+    {
+        setNextAgent(AgentCoordinates, PastAgents[AgentCoordinates]);
+    }
 }
 
 void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
@@ -495,7 +514,6 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     case 1:
         move(AgentCoordinates, 'r');
         break;
-        int Radiation = 0.5;
     case 2:
         move(AgentCoordinates, 'u');
         break;
@@ -521,10 +539,29 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
     }
 }
 
+bool Spider::borderCheck(std::string coords)
+{
+    auto _pos = coords.find("_");
+    int aX, aY;
+    try
+    {
+        aX = std::stoi(coords.substr(0, _pos));
+        aY = std::stoi(coords.substr(_pos + 1));
+    }
+    catch (...)
+    {
+        return false;
+    }
+    bool inside = aX >= 0 and aX <= terrariumWidth and aY >= 0 and aY <= terrariumHeight;
+    return inside;
+}
+
 void Spider::setNextAgent(std::string coords, Agent *Self)
 {
-    // need to implement border check
-    if (NextAgents.find(coords) == NextAgents.end() and NextPlants.find(coords) == NextPlants.end())
+    bool notTransfered = NextAgents.find(coords) == NextAgents.end();
+    bool notPlant = NextPlants.find(coords) == NextPlants.end();
+    bool insideBorders = borderCheck(coords) == true;
+    if (notTransfered and notPlant and insideBorders)
     {
         Self->setCoords(coords);
         NextAgents[coords] = Self;

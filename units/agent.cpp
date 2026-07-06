@@ -30,3 +30,7 @@ Agent::Agent(float iHealth, float iEnergy, float iSpeed, const Brain &iBrain, fl
     energy = iEnergy / 2.0;
     speed = iSpeed / 2.0;
 }
+
+void Agent::generateStart(std::mt19937 &gen)
+{
+}

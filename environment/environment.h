@@ -14,6 +14,7 @@ public:
     int maxBrainChildNodes;
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
+    std::uniform_int_distribution<> insideBorders;
 
     Spider *spider = nullptr;
 
@@ -35,4 +36,8 @@ public:
     void manageSubMoment(std::string coords);
 
     void makeWindow();
+
+    void startSimulation();
+
+    void generateCoords(Agent *ag);
 };
