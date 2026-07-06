@@ -11,6 +11,17 @@ Spider::Spider()
     maxBrainLevel = 4;
 }
 
+Spider::~Spider()
+{
+    for (auto ag1 : PastAgents)
+    {
+        delete ag1.second;
+    }
+    for (auto ag2 : NextAgents)
+    {
+        delete ag2.second;
+    }
+}
 Spider::Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800)
 {
     std::mt19937 g(rd());
@@ -106,8 +117,8 @@ void Spider::updateSpeed(float deltaEnergy, Agent *Self)
     float currentEnergy = Self->getEnergy();
     float currentSpeed = Self->getSpeed();
     Self->setEnergy(currentEnergy - deltaEnergy);
-    Self->setSpeed(currentSpeed += deltaEnergy);
-    unsigned int blue = std::round(Self->getSpeed() * 255);
+    Self->setSpeed(currentSpeed + deltaEnergy);
+    unsigned int blue = std::clamp(static_cast<int>(std::round(Self->getSpeed())), 0, 255);
     Self->setAgentColor({Self->getAgentColor().red, Self->getAgentColor().green, blue, Self->getAgentColor().transparency});
 
     if (Self->getSpeed() < 0)
@@ -125,13 +136,13 @@ void Spider::updateHealth(float deltaEnergy, Agent *Self)
     float currentEnergy = Self->getEnergy();
     float currentHealth = Self->getHealth();
     Self->setEnergy(currentEnergy - deltaEnergy);
-    Self->setHealth(currentHealth += deltaEnergy);
-    unsigned int green = std::round(Self->getHealth() * 255);
+    Self->setHealth(currentHealth + deltaEnergy);
+    unsigned int green = std::clamp(static_cast<int>(std::round(Self->getHealth())), 0, 255);
     Self->setAgentColor({Self->getAgentColor().red, green, Self->getAgentColor().blue, Self->getAgentColor().transparency});
 
-    if (Self->getSpeed() < 0)
+    if (Self->getHealth() < 0)
     {
-        Self->setSpeed(0);
+        Self->setHealth(0);
     }
     if (Self->getEnergy() < 0)
     {
@@ -177,11 +188,7 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     std::string coords = aX + "_" + aY;
     if (borderCheck(coords) == true)
     {
-        setNextAgent(coords, PastAgents[AgentCoordinates]);
-    }
-    else
-    {
-        setNextAgent(AgentCoordinates, PastAgents[AgentCoordinates]);
+        PastAgents[AgentCoordinates]->setCoords(coords);
     }
 }
 
@@ -375,6 +382,7 @@ void Spider::manageSubMoment()
                 activeAgents.push_back(cs.first);
             }
         }
+        setNextAgent(PastAgents[cs.first]->getCoords(), PastAgents[cs.first]);
     }
 
     std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents); // incorporate manageAction for each
@@ -559,16 +567,13 @@ bool Spider::borderCheck(std::string coords)
 void Spider::setNextAgent(std::string coords, Agent *Self)
 {
     bool notTransfered = NextAgents.find(coords) == NextAgents.end();
+    bool notTransfered2 = PastAgents.find(coords) != NextAgents.find(coords);
     bool notPlant = NextPlants.find(coords) == NextPlants.end();
     bool insideBorders = borderCheck(coords) == true;
-    if (notTransfered and notPlant and insideBorders)
+    if (notTransfered and notTransfered2 and notPlant and insideBorders)
     {
         Self->setCoords(coords);
         NextAgents[coords] = Self;
-    }
-    else
-    {
-        delete Self;
     }
 }
 
