@@ -17,11 +17,16 @@ public:
     float radiation;
     int maxBrainLevel;
     int maxBrainChildNodes;
+
+    int terrariumWidth;
+    int terrariumHeight;
+
     std::random_device rd;
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
 
     Spider();
+    Spider(float rad, int maxBL, int maxBCN, int terW, int terH);
     /*
 
     {0,"SeeSomething"},
@@ -89,4 +94,8 @@ public:
 
     void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();
+
+    void moveProximateToNext();
+
+    bool borderCheck(std::string coords);
 };
