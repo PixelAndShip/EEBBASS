@@ -26,6 +26,7 @@ public:
     std::uniform_int_distribution<> dist;
 
     Spider();
+    ~Spider();
     Spider(float rad, int maxBL, int maxBCN, int terW, int terH);
     /*
 

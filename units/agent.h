@@ -16,6 +16,13 @@ private:
     Brain brain;
 
 public:
+    void updateColor()
+    {
+        agentColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
+        agentColor.green = std::clamp(static_cast<int>(std::round(health)), 0, 255);
+        agentColor.blue = std::clamp(static_cast<int>(std::round(speed)), 0, 255);
+    }
+
     void setHealth(float iH)
     {
         health = iH;

@@ -17,6 +17,11 @@ Environment::Environment()
     dist = d;
 }
 
+Environment::~Environment()
+{
+    delete spider;
+}
+
 void Environment::manageSimulation()
 {
 }
@@ -39,14 +44,26 @@ void Environment::manageMoment()
     for (auto cs : spider->PastAgents)
     {
         agentCoords = cs.first;
-
         manageSubMoment(agentCoords);
     }
-    /*
-        for(auto pa : spider->PastAgents){
-            spider->setNextAgent(pa.first,pa.second);
+
+    spider->PastAgents.clear();
+    spider->PastAgents = std::move(spider->NextAgents);
+    spider->NextAgents.clear();
+
+    for (auto hg : spider->PastAgents)
+    {
+        hg.second->setHealth(hg.second->getHealth() - 1);
+        if (hg.second->getHealth() <= 0)
+        {
+            delete spider->PastAgents[hg.first];
+            spider->PastAgents.erase(hg.first);
         }
-    */
+        else
+        {
+            hg.second->updateColor();
+        }
+    }
 }
 
 void Environment::manageSubMoment(std::string coords)
@@ -76,7 +93,6 @@ void Environment::makeWindow()
     {
         BeginDrawing();
         ClearBackground(BLACK);
-
         for (auto ac : spider->PastAgents)
         {
             DrawCircle(
@@ -89,7 +105,6 @@ void Environment::makeWindow()
                     (unsigned char)ac.second->getAgentColor().blue,
                     (unsigned char)ac.second->getAgentColor().transparency});
         }
-
         EndDrawing();
         manageMoment();
     }
@@ -99,13 +114,13 @@ void Environment::makeWindow()
 void Environment::startSimulation()
 {
     int AgentCount = 8; // temporary
-
     for (int i = 0; i < AgentCount; i++)
     {
         Agent *genesis = new Agent(radiation, gen, dist, maxBrainChildNodes, maxBrainLevel);
         generateCoords(genesis);
         spider->PastAgents[genesis->getCoords()] = genesis;
     }
+    makeWindow();
 }
 
 void Environment::generateCoords(Agent *ag)

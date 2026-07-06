@@ -6,28 +6,30 @@
 int main()
 {
     Environment e = Environment();
-    Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
-    Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
-    Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
-    Plant p = Plant();
 
-    a.setX(240);
-    b.setX(50);
-    c.setX(111);
-    e.spider->PastAgents.insert({a.getCoords(), &a});
-    e.spider->PastAgents.insert({b.getCoords(), &b});
-    e.spider->PastAgents.insert({c.getCoords(), &c});
+    e.startSimulation();
+    // Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    // Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    // Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
+    // Plant p = Plant();
 
-    e.spider->PastPlants.insert({"26_25", &p});
-    for (auto a : e.spider->PastAgents)
-    {
-        std::cout << "|||" << a.first << "|||" << "\n";
-        for (InputNode *i : a.second->getBrain().getInputNodes())
-        {
-            Test::printBrain(i);
-        }
-    }
-    e.manageMoment();
+    // a.setX(240);
+    // b.setX(50);
+    // c.setX(111);
+    // e.spider->PastAgents.insert({a.getCoords(), &a});
+    // e.spider->PastAgents.insert({b.getCoords(), &b});
+    // e.spider->PastAgents.insert({c.getCoords(), &c});
+
+    // e.spider->PastPlants.insert({"26_25", &p});
+    // for (auto a : e.spider->PastAgents)
+    // {
+    //     std::cout << "|||" << a.first << "|||" << "\n";
+    //     for (InputNode *i : a.second->getBrain().getInputNodes())
+    //     {
+    //         Test::printBrain(i);
+    //     }
+    // }
+    // e.manageMoment();
 
     // e.makeWindow();
 
