@@ -12,9 +12,10 @@ Environment::Environment()
     std::random_device rd;
     std::mt19937 g(rd());
     std::uniform_int_distribution<> d(0, 7);
-    std::uniform_int_distribution<> insideBorders(0, 800);
+    std::uniform_int_distribution<> iB(0, 800);
     gen = g;
     dist = d;
+    insideBorders = iB;
 }
 
 Environment::~Environment()
@@ -39,6 +40,10 @@ void Environment::manageMoment()
     this means each moment needs to be subdivided into submoments:
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
+
+    std::cout << "Past before: " << spider->PastAgents.size() << '\n';
+    std::cout << "Next before: " << spider->NextAgents.size() << '\n';
+
     std::string agentCoords = "";
 
     for (auto cs : spider->PastAgents)
@@ -49,21 +54,30 @@ void Environment::manageMoment()
 
     spider->PastAgents.clear();
     spider->PastAgents = std::move(spider->NextAgents);
+
     spider->NextAgents.clear();
 
-    for (auto hg : spider->PastAgents)
+    for (auto it = spider->PastAgents.begin(); it != spider->PastAgents.end();)
     {
-        hg.second->setHealth(hg.second->getHealth() - 1);
-        if (hg.second->getHealth() <= 0)
+        Agent *agent = it->second;
+
+        agent->setHealth(agent->getHealth() - 1);
+
+        if (agent->getHealth() <= 0)
         {
-            delete spider->PastAgents[hg.first];
-            spider->PastAgents.erase(hg.first);
+
+            delete agent;
+            it = spider->PastAgents.erase(it);
         }
         else
         {
-            hg.second->updateColor();
+            agent->updateColor();
+            ++it;
         }
     }
+
+    std::cout << "Past after: " << spider->PastAgents.size() << '\n';
+    std::cout << "Next after: " << spider->NextAgents.size() << '\n';
 }
 
 void Environment::manageSubMoment(std::string coords)
@@ -75,6 +89,7 @@ void Environment::manageSubMoment(std::string coords)
     if (spider->proximateCoords.find(coords) == spider->proximateCoords.end() and coords != "")
     {
         // std::cout << "?" << coords << "?";
+
         spider->proximateCoords.clear();
         spider->proximateCoords[coords] = true;
         spider->setProximities(coords);
@@ -87,10 +102,11 @@ void Environment::manageSubMoment(std::string coords)
 void Environment::makeWindow()
 {
     InitWindow(800, 800, "Environment");
-    SetTargetFPS(60);
+    SetTargetFPS(1);
 
     while (!WindowShouldClose())
     {
+
         BeginDrawing();
         ClearBackground(BLACK);
         for (auto ac : spider->PastAgents)
@@ -98,7 +114,7 @@ void Environment::makeWindow()
             DrawCircle(
                 ac.second->getX(),
                 ac.second->getY(),
-                20,
+                10,
                 (Color){
                     (unsigned char)ac.second->getAgentColor().red,
                     (unsigned char)ac.second->getAgentColor().green,
@@ -116,6 +132,7 @@ void Environment::startSimulation()
     int AgentCount = 8; // temporary
     for (int i = 0; i < AgentCount; i++)
     {
+
         Agent *genesis = new Agent(radiation, gen, dist, maxBrainChildNodes, maxBrainLevel);
         generateCoords(genesis);
         spider->PastAgents[genesis->getCoords()] = genesis;

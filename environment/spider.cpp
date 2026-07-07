@@ -9,6 +9,8 @@ Spider::Spider()
     radiation = 0.5;
     maxBrainChildNodes = 3;
     maxBrainLevel = 4;
+    terrariumHeight = 800;
+    terrariumWidth = 800;
 }
 
 Spider::~Spider()
@@ -31,6 +33,8 @@ Spider::Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int ter
     radiation = rad;
     maxBrainChildNodes = maxBL;
     maxBrainLevel = maxBCN;
+    terrariumHeight = terH;
+    terrariumWidth = terW;
 }
 
 bool Spider::seeSomething(std::string AgentCoordinates)
@@ -172,20 +176,20 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     switch (Direction)
     {
     case 'u':
-        aY -= 20;
+        aY -= 10;
         break;
     case 'd':
-        aY += 20;
+        aY += 10;
         break;
     case 'l':
-        aX -= 20;
+        aX -= 10;
         break;
     case 'r':
-        aX += 20;
+        aX += 10;
         break;
     }
 
-    std::string coords = aX + "_" + aY;
+    std::string coords = std::to_string(aX) + "_" + std::to_string(aY);
     if (borderCheck(coords) == true)
     {
         PastAgents[AgentCoordinates]->setCoords(coords);
@@ -244,7 +248,7 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
         return proximateAgentCs;
     }
 
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
+    std::vector<std::string> InRadius = {"0_-20", "20_-20", "20_0", "20_20", "0_20", "-20_20", "-20_0", "-20_-20"};
     for (std::string r : InRadius)
     {
         int maxBrainLevel;
@@ -275,7 +279,7 @@ std::string Spider::getSplitCoords(std::string ParentCoords)
         return "";
     }
 
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
+    std::vector<std::string> InRadius = {"0_-20", "20_-20", "20_0", "20_10", "0_20", "-20_10", "-20_0", "-20_-20"};
     for (std::string r : InRadius)
     {
         auto _pos = r.find("_");
@@ -304,7 +308,7 @@ std::vector<std::string> Spider::getProximatePlants(std::string coords)
         return proximatePlantCs;
     }
 
-    std::vector<std::string> InRadius = {"0_-1", "1_-1", "1_0", "1_1", "0_1", "-1_1", "-1_0", "-1_-1"};
+    std::vector<std::string> InRadius = {"0_-20", "20_-20", "20_0", "20_10", "0_20", "-20_10", "-20_0", "-20_-20"};
     for (std::string r : InRadius)
     {
         auto _pos = r.find("_");
@@ -382,7 +386,10 @@ void Spider::manageSubMoment()
                 activeAgents.push_back(cs.first);
             }
         }
-        setNextAgent(PastAgents[cs.first]->getCoords(), PastAgents[cs.first]);
+
+        // std::cout << "Adding " << cs.first
+        //           << "  Next size = " << NextAgents.size()
+        //           << '\n';
     }
 
     std::vector<std::string> sortedAgentsBySpeed = sortAgentsBySpeed(activeAgents); // incorporate manageAction for each
@@ -391,7 +398,13 @@ void Spider::manageSubMoment()
     {
         manageAction(ag, activeAgentOutputs[ag]);
     }
-    moveProximateToNext();
+    for (auto &agent : PastAgents)
+    {
+        if (NextAgents.find(agent.first) == NextAgents.end())
+        {
+            setNextAgent(agent.first, agent.second);
+        }
+    }
 }
 
 void Spider::moveProximateToNext()
@@ -483,14 +496,17 @@ OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNod
 
         if (in->getOutputNode() != nullptr and in->getInputNodes().empty() and in->getOutputNode()->getKey() != 255 and activateNode >= in->getWeight())
         {
-            std::cout << getSenses().at(in->getKey()) << " ";
-            return in->getOutputNode();
+            // std::cout << getSenses().at(in->getKey()) << " ";
+            if (activateNode >= in->getOutputNode()->getWeight())
+            {
+                return in->getOutputNode();
+            }
         }
 
         OutputNode *on = getAction(AgentCoordinates, in);
         if (on != nullptr)
         {
-            std::cout << getSenses().at(in->getKey()) << " ";
+            // std::cout << getSenses().at(in->getKey()) << " ";
             return on;
         }
     }
@@ -530,6 +546,7 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
         break;
     case 4:
         bite(AgentCoordinates, ActionNode->getEnergyCost());
+        break;
     case 5:
         splitNewAgent(AgentCoordinates);
         break;
@@ -567,13 +584,19 @@ bool Spider::borderCheck(std::string coords)
 void Spider::setNextAgent(std::string coords, Agent *Self)
 {
     bool notTransfered = NextAgents.find(coords) == NextAgents.end();
-    bool notTransfered2 = PastAgents.find(coords) != NextAgents.find(coords);
     bool notPlant = NextPlants.find(coords) == NextPlants.end();
     bool insideBorders = borderCheck(coords) == true;
-    if (notTransfered and notTransfered2 and notPlant and insideBorders)
+    std::cout
+        << "coords = " << coords
+        << " transfer=" << notTransfered
+        << " plant=" << notPlant
+        << " border=" << insideBorders
+        << '\n';
+
+    if (notTransfered and notPlant and insideBorders)
     {
         Self->setCoords(coords);
-        NextAgents[coords] = Self;
+        NextAgents.emplace(coords, Self);
     }
 }
 
