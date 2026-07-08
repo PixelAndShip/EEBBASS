@@ -13,6 +13,7 @@
                 "-Iunits",
                 "-Iunits/brain_nodes",
                 "main.cpp",
+                "data_management/*.cpp",
                 "environment/*.cpp",
                 "units/*.cpp",
                 "units/brain_nodes/*.cpp",

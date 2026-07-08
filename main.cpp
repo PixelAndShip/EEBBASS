@@ -1,13 +1,14 @@
 #include <iostream>
-#include "environment/environment.h"
+#include "data_management/sim_manager.h"
 
 #include "test.h"
 
 int main()
 {
-    Environment e = Environment();
+    SimManager sm = SimManager();
 
-    e.startSimulation();
+    sm.logSimCycle();
+    sm.getEnvironment()->startSimulation();
     // Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);

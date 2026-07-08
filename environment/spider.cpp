@@ -176,16 +176,16 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     switch (Direction)
     {
     case 'u':
-        aY -= 10;
+        aY -= 20;
         break;
     case 'd':
-        aY += 10;
+        aY += 20;
         break;
     case 'l':
-        aX -= 10;
+        aX -= 20;
         break;
     case 'r':
-        aX += 10;
+        aX += 20;
         break;
     }
 

@@ -54,7 +54,6 @@ void Environment::manageMoment()
 
     spider->PastAgents.clear();
     spider->PastAgents = std::move(spider->NextAgents);
-
     spider->NextAgents.clear();
 
     for (auto it = spider->PastAgents.begin(); it != spider->PastAgents.end();)
@@ -132,7 +131,6 @@ void Environment::startSimulation()
     int AgentCount = 8; // temporary
     for (int i = 0; i < AgentCount; i++)
     {
-
         Agent *genesis = new Agent(radiation, gen, dist, maxBrainChildNodes, maxBrainLevel);
         generateCoords(genesis);
         spider->PastAgents[genesis->getCoords()] = genesis;
