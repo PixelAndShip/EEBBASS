@@ -2,10 +2,10 @@
 
 Agent::Agent()
 {
-    health = 1.0;
-    energy = 1.0;
+    health = 100.0;
+    energy = 100.0;
     age = 1;
-    agentColor = {200, 200, 200, 255};
+    agentColor = {100, 100, 1, 255};
     x = 25;
     y = 25;
     speed = 1.0;
@@ -13,10 +13,10 @@ Agent::Agent()
 
 Agent::Agent(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth) : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
 {
-    health = 1.0;
-    energy = 1.0;
+    health = 100.0;
+    energy = 100.0;
     age = 1;
-    agentColor = {200, 200, 200, 255};
+    agentColor = {100, 100, 1, 255};
     x = 25;
     y = 25;
     speed = 1.0;
