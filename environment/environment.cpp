@@ -41,22 +41,15 @@ void Environment::manageMoment()
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
     */
 
-    std::cout << "Past before: " << spider->PastAgents.size() << '\n';
-    std::cout << "Next before: " << spider->NextAgents.size() << '\n';
-
     std::string agentCoords = "";
 
-    for (auto cs : spider->PastAgents)
+    for (auto cs : spider->Agents)
     {
         agentCoords = cs.first;
         manageSubMoment(agentCoords);
     }
 
-    spider->PastAgents.clear();
-    spider->PastAgents = std::move(spider->NextAgents);
-    spider->NextAgents.clear();
-
-    for (auto it = spider->PastAgents.begin(); it != spider->PastAgents.end();)
+    for (auto it = spider->Agents.begin(); it != spider->Agents.end();)
     {
         Agent *agent = it->second;
 
@@ -66,7 +59,7 @@ void Environment::manageMoment()
         {
 
             delete agent;
-            it = spider->PastAgents.erase(it);
+            it = spider->Agents.erase(it);
         }
         else
         {
@@ -75,8 +68,8 @@ void Environment::manageMoment()
         }
     }
 
-    std::cout << "Past after: " << spider->PastAgents.size() << '\n';
-    std::cout << "Next after: " << spider->NextAgents.size() << '\n';
+    // std::cout << "Past after: " << spider->PastAgents.size() << '\n';
+    // std::cout << "Next after: " << spider->NextAgents.size() << '\n';
 }
 
 void Environment::manageSubMoment(std::string coords)
@@ -108,7 +101,7 @@ void Environment::makeWindow()
 
         BeginDrawing();
         ClearBackground(BLACK);
-        for (auto ac : spider->PastAgents)
+        for (auto ac : spider->Agents)
         {
             DrawCircle(
                 ac.second->getX(),
@@ -133,7 +126,7 @@ void Environment::startSimulation()
     {
         Agent *genesis = new Agent(radiation, gen, dist, maxBrainChildNodes, maxBrainLevel);
         generateCoords(genesis);
-        spider->PastAgents[genesis->getCoords()] = genesis;
+        spider->Agents[genesis->getCoords()] = genesis;
     }
     makeWindow();
 }
@@ -142,7 +135,7 @@ void Environment::generateCoords(Agent *ag)
 {
     int x = insideBorders(gen);
     int y = insideBorders(gen);
-    for (auto ac : spider->PastAgents)
+    for (auto ac : spider->Agents)
     {
         if (ac.second->getX() == x and ac.second->getY() == y)
         {

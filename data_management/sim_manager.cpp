@@ -17,7 +17,7 @@ void SimManager::logSimCycle()
     std::string fileName = "ES_Log_" + std::to_string(cycle) + ".txt";
     std::ofstream logFile(fileName);
     std::string data = "";
-    for (auto &a : currentEnvironment->spider->PastAgents)
+    for (auto &a : currentEnvironment->spider->Agents)
     {
         std::cout << a.first << '\n';
 
@@ -30,6 +30,7 @@ void SimManager::logSimCycle()
             std::cout << "Node = " << i << '\n';
             data += outputBrain(i, 0);
         }
+        data += "\n";
     }
     logFile << data;
     logFile.close();

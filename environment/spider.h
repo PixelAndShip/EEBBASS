@@ -7,10 +7,8 @@ class Spider
 {
 
 public:
-    std::unordered_map<std::string, Agent *> NextAgents;
-    std::unordered_map<std::string, Agent *> NextPlants;
-    std::unordered_map<std::string, Agent *> PastAgents;
-    std::unordered_map<std::string, Plant *> PastPlants;
+    std::unordered_map<std::string, Agent *> Agents;
+    std::unordered_map<std::string, Plant *> Plants;
 
     std::unordered_map<std::string, bool> proximateCoords;
 
@@ -27,7 +25,7 @@ public:
 
     Spider();
     ~Spider();
-    Spider(float rad, int maxBL, int maxBCN, int terW, int terH);
+    Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
     /*
 
     {0,"SeeSomething"},
@@ -84,7 +82,7 @@ public:
     std::string getSplitCoords(std::string ParentCoords);
     std::vector<std::string> getProximatePlants(std::string coords);
 
-    void setNextAgent(std::string coords, Agent *Self);
+    void setNextAgent(std::string oldCoords, std::string newCoords, Agent *Self);
 
     bool manageSense(std::string AgentCoordinates, InputNode *Sense);
     OutputNode *getAction(std::string AgentCoordinates, InputNode *parentNode);
@@ -95,8 +93,6 @@ public:
 
     void manageAction(std::string AgentCoordinates, OutputNode *ActionNode);
     void manageSubMoment();
-
-    void moveProximateToNext();
 
     bool borderCheck(std::string coords);
 };

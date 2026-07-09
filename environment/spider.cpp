@@ -15,16 +15,12 @@ Spider::Spider()
 
 Spider::~Spider()
 {
-    for (auto ag1 : PastAgents)
+    for (auto ag1 : Agents)
     {
         delete ag1.second;
     }
-    for (auto ag2 : NextAgents)
-    {
-        delete ag2.second;
-    }
 }
-Spider::Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800)
+Spider::Spider(float rad, int maxBL, int maxBCN, int terW, int terH)
 {
     std::mt19937 g(rd());
     std::uniform_int_distribution<> d(0, 100);
@@ -65,7 +61,7 @@ bool Spider::seeColor(
     bool t_in_range = false;
     for (std::string cs : proximateAgentCs)
     {
-        ag = PastAgents.at(cs);
+        ag = Agents.at(cs);
         if (ag != nullptr)
         {
             clr = ag->getAgentColor();
@@ -74,7 +70,7 @@ bool Spider::seeColor(
             b = clr.blue;
             t = clr.transparency;
             r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
-            g_in_range = g <= setC.green + 10 and r >= setC.green - 10;
+            g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
             b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
             t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
             if (r_in_range and g_in_range and b_in_range and t_in_range)
@@ -120,6 +116,10 @@ void Spider::updateSpeed(float deltaEnergy, Agent *Self)
 {
     float currentEnergy = Self->getEnergy();
     float currentSpeed = Self->getSpeed();
+    if (currentEnergy <= 0)
+    {
+        return;
+    }
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setSpeed(currentSpeed + deltaEnergy);
     unsigned int blue = std::clamp(static_cast<int>(std::round(Self->getSpeed())), 0, 255);
@@ -137,8 +137,13 @@ void Spider::updateSpeed(float deltaEnergy, Agent *Self)
 
 void Spider::updateHealth(float deltaEnergy, Agent *Self)
 {
+
     float currentEnergy = Self->getEnergy();
     float currentHealth = Self->getHealth();
+    if (currentEnergy <= 0 or currentHealth <= 0)
+    {
+        return;
+    }
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setHealth(currentHealth + deltaEnergy);
     unsigned int green = std::clamp(static_cast<int>(std::round(Self->getHealth())), 0, 255);
@@ -162,7 +167,7 @@ void Spider::bite(std::string AgentCoordinates, float energyCost)
         return;
     }
     Agent *ag = nullptr;
-    ag = PastAgents[proximateAgentCs[0]];
+    ag = Agents.at(proximateAgentCs[0]);
     if (ag != nullptr)
     {
         ag->setHealth(ag->getHealth() - energyCost);
@@ -171,8 +176,8 @@ void Spider::bite(std::string AgentCoordinates, float energyCost)
 
 void Spider::move(std::string AgentCoordinates, char Direction) // move agent to newagents, check if can be moved to nextagents without collision
 {
-    int aX = PastAgents.at(AgentCoordinates)->getX();
-    int aY = PastAgents.at(AgentCoordinates)->getY();
+    int aX = Agents.at(AgentCoordinates)->getX();
+    int aY = Agents.at(AgentCoordinates)->getY();
     switch (Direction)
     {
     case 'u':
@@ -192,7 +197,7 @@ void Spider::move(std::string AgentCoordinates, char Direction) // move agent to
     std::string coords = std::to_string(aX) + "_" + std::to_string(aY);
     if (borderCheck(coords) == true)
     {
-        PastAgents[AgentCoordinates]->setCoords(coords);
+        Agents.at(AgentCoordinates)->setCoords(coords);
     }
 }
 
@@ -212,7 +217,7 @@ void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float ene
     bool t_in_range = false;
     for (std::string cs : proximateAgentCs)
     {
-        ag = PastAgents.at(cs);
+        ag = Agents.at(cs);
         if (ag != nullptr)
         {
             clr = ag->getAgentColor();
@@ -256,7 +261,7 @@ std::vector<std::string> Spider::getProximateAgents(std::string coords)
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastAgents.end())
+        if (Agents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != Agents.end())
         {
             proximateAgentCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
@@ -285,7 +290,7 @@ std::string Spider::getSplitCoords(std::string ParentCoords)
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if (PastAgents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == PastAgents.end() and PastPlants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == PastPlants.end())
+        if (Agents.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == Agents.end() and Plants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) == Plants.end())
         {
             return ((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy));
         }
@@ -314,7 +319,7 @@ std::vector<std::string> Spider::getProximatePlants(std::string coords)
         auto _pos = r.find("_");
         int dx = std::stoi(r.substr(0, _pos));
         int dy = std::stoi(r.substr(_pos + 1));
-        if (PastPlants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != PastPlants.end())
+        if (Plants.find((std::to_string(aX + dx)) + "_" + std::to_string(aY + dy)) != Plants.end())
         {
             proximatePlantCs.push_back(std::to_string(aX + dx) + "_" + std::to_string(aY + dy));
         }
@@ -364,7 +369,7 @@ void Spider::manageSubMoment()
     for (auto cs : proximateCoords)
     {
 
-        if (PastAgents.find(cs.first) == PastAgents.end())
+        if (Agents.find(cs.first) == Agents.end())
         {
             continue;
         }
@@ -372,9 +377,9 @@ void Spider::manageSubMoment()
         OutputNode *action = nullptr;
         int actionKey = 255;
 
-        if (PastAgents.at(cs.first) != nullptr and !PastAgents.at(cs.first)->getBrain().getInputNodes().empty())
+        if (Agents.at(cs.first) != nullptr and !Agents.at(cs.first)->getBrain().getInputNodes().empty())
         {
-            action = getAction(cs.first, PastAgents.at(cs.first)->getBrain().getInputNodes().at(0));
+            action = getAction(cs.first, Agents.at(cs.first)->getBrain().getInputNodes().at(0));
         }
         if (action != nullptr)
         {
@@ -398,24 +403,17 @@ void Spider::manageSubMoment()
     {
         manageAction(ag, activeAgentOutputs[ag]);
     }
-    for (auto &agent : PastAgents)
-    {
-        if (NextAgents.find(agent.first) == NextAgents.end())
-        {
-            setNextAgent(agent.first, agent.second);
-        }
-    }
-}
+    std::vector<std::pair<std::string, std::string>> moves;
 
-void Spider::moveProximateToNext()
-{
-    for (auto pa : proximateCoords)
+    for (auto a : Agents)
     {
-        auto pair = PastAgents.find(pa.first);
-        if (NextAgents.find(pa.first) == NextAgents.end() and pair != PastAgents.end())
-        {
-            NextAgents.insert(PastAgents.extract(pair));
-        }
+        if (a.first != a.second->getCoords())
+            moves.emplace_back(a.first, a.second->getCoords());
+    }
+
+    for (auto [oldKey, newKey] : moves)
+    {
+        setNextAgent(oldKey, newKey, Agents.at(oldKey));
     }
 }
 
@@ -424,8 +422,8 @@ std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agen
     std::sort(agents.begin(), agents.end(),
               [this](const std::string &a, const std::string &b)
               {
-                  auto agentA = PastAgents.at(a);
-                  auto agentB = PastAgents.at(b);
+                  auto agentA = Agents.at(a);
+                  auto agentB = Agents.at(b);
                   return agentA->getSpeed() > agentB->getSpeed();
               });
     return agents;
@@ -456,22 +454,22 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
         return seeColor(AgentCoordinates, Sense->getUnitColor());
         break;
     case 2:
-        return energyCountAboveSet(PastAgents[AgentCoordinates]->getEnergy(), Sense->getSetAmount());
+        return energyCountAboveSet(Agents.at(AgentCoordinates)->getEnergy(), Sense->getSetAmount());
         break;
     case 3:
-        return energyCountBelowSet(PastAgents[AgentCoordinates]->getEnergy(), Sense->getSetAmount());
+        return energyCountBelowSet(Agents.at(AgentCoordinates)->getEnergy(), Sense->getSetAmount());
         break;
     case 4:
-        return healthCountAboveSet(PastAgents[AgentCoordinates]->getHealth(), Sense->getSetAmount());
+        return healthCountAboveSet(Agents.at(AgentCoordinates)->getHealth(), Sense->getSetAmount());
         break;
     case 5:
-        return healthCountBelowSet(PastAgents[AgentCoordinates]->getHealth(), Sense->getSetAmount());
+        return healthCountBelowSet(Agents.at(AgentCoordinates)->getHealth(), Sense->getSetAmount());
         break;
     case 6:
-        return ageCountAboveSet(PastAgents[AgentCoordinates]->getAge(), Sense->getSetAmount());
+        return ageCountAboveSet(Agents.at(AgentCoordinates)->getAge(), Sense->getSetAmount());
         break;
     case 7:
-        return ageCountBelowSet(PastAgents[AgentCoordinates]->getAge(), Sense->getSetAmount());
+        return ageCountBelowSet(Agents.at(AgentCoordinates)->getAge(), Sense->getSetAmount());
         break;
     default:
         break;
@@ -525,7 +523,7 @@ OutputNode *Spider::getAction(std::string AgentCoordinates, InputNode *parentNod
 
 void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
 {
-    if (AgentCoordinates == "" or ActionNode == nullptr)
+    if (AgentCoordinates == "" or ActionNode == nullptr or Agents.at(AgentCoordinates)->getHealth() <= 0)
     {
         return;
     }
@@ -551,10 +549,10 @@ void Spider::manageAction(std::string AgentCoordinates, OutputNode *ActionNode)
         splitNewAgent(AgentCoordinates);
         break;
     case 6:
-        updateHealth(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
+        updateHealth(ActionNode->getEnergyCost(), Agents[AgentCoordinates]);
         break;
     case 7:
-        updateSpeed(ActionNode->getEnergyCost(), PastAgents[AgentCoordinates]);
+        updateSpeed(ActionNode->getEnergyCost(), Agents[AgentCoordinates]);
         break;
     case 8:
         biteColor(AgentCoordinates, ActionNode->getUnitColor(), ActionNode->getEnergyCost());
@@ -581,28 +579,32 @@ bool Spider::borderCheck(std::string coords)
     return inside;
 }
 
-void Spider::setNextAgent(std::string coords, Agent *Self)
+void Spider::setNextAgent(std::string oldCoords, std::string newCoords, Agent *Self)
 {
-    bool notTransfered = NextAgents.find(coords) == NextAgents.end();
-    bool notPlant = NextPlants.find(coords) == NextPlants.end();
-    bool insideBorders = borderCheck(coords) == true;
-    std::cout
-        << "coords = " << coords
-        << " transfer=" << notTransfered
-        << " plant=" << notPlant
-        << " border=" << insideBorders
-        << '\n';
+    bool spotNotTaken = Agents.find(newCoords) == Agents.end();
+    bool notPlant = Plants.find(oldCoords) == Plants.end();
+    bool insideBorders = borderCheck(newCoords) == true;
+    // std::cout
+    //     << "coords = " << coords
+    //     << " transfer=" << spotNotTaken
+    //     << " plant=" << notPlant
+    //     << " border=" << insideBorders
+    //     << '\n';
 
-    if (notTransfered and notPlant and insideBorders)
+    if (spotNotTaken and notPlant and insideBorders)
     {
-        Self->setCoords(coords);
-        NextAgents.emplace(coords, Self);
+        if (Agents.find(oldCoords) != Agents.end())
+        {
+            Agents.erase(oldCoords);
+        }
+        Self->setCoords(newCoords);
+        Agents[newCoords] = Self;
     }
 }
 
 void Spider::splitNewAgent(std::string ParentCoords)
 {
-    if (PastAgents.find(ParentCoords) == PastAgents.end())
+    if (Agents.find(ParentCoords) == Agents.end())
     {
         return;
     }
@@ -612,6 +614,6 @@ void Spider::splitNewAgent(std::string ParentCoords)
         return;
     }
 
-    Agent *childAgent = new Agent(PastAgents[ParentCoords]->getHealth(), PastAgents[ParentCoords]->getEnergy(), PastAgents[ParentCoords]->getSpeed(), PastAgents[ParentCoords]->getBrain(), radiation, gen, maxBrainChildNodes, maxBrainLevel); // implement split behavior
-    setNextAgent(childCoords, childAgent);
+    Agent *childAgent = new Agent(Agents[ParentCoords]->getHealth(), Agents[ParentCoords]->getEnergy(), Agents[ParentCoords]->getSpeed(), Agents[ParentCoords]->getBrain(), radiation, gen, maxBrainChildNodes, maxBrainLevel); // implement split behavior
+    setNextAgent(childCoords, childCoords, childAgent);
 }

@@ -7,8 +7,8 @@ int main()
 {
     SimManager sm = SimManager();
 
-    sm.logSimCycle();
     sm.getEnvironment()->startSimulation();
+    sm.logSimCycle();
     // Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
