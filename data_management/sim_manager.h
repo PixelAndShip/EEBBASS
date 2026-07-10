@@ -18,5 +18,5 @@ public:
     }
     void setCycle(int c) { cycle = c; };
     void logSimCycle();
-    std::string outputBrain(InputNode *node, int depth);
+    std::string outputBrain(InputNode *node, int depth = 0);
 };

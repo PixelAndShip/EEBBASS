@@ -3,12 +3,21 @@
 #include "units/plant.h"
 #include <queue>
 #include <algorithm>
+struct PendingAction
+{
+    std::string coords;
+    OutputNode *action;
+};
+
 class Spider
 {
 
 public:
     std::unordered_map<std::string, Agent *> Agents;
     std::unordered_map<std::string, Plant *> Plants;
+
+    std::vector<PendingAction> actionQueue;
+    std::vector<std::pair<std::string, Agent *>> pendingBirths;
 
     std::unordered_map<std::string, bool> proximateCoords;
 
