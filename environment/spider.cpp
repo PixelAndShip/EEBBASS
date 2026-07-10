@@ -600,6 +600,10 @@ void Spider::setNextAgent(std::string oldCoords, std::string newCoords, Agent *S
         Self->setCoords(newCoords);
         Agents[newCoords] = Self;
     }
+    else
+    {
+        Self->setCoords(oldCoords);
+    }
 }
 
 void Spider::splitNewAgent(std::string ParentCoords)

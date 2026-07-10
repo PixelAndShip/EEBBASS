@@ -94,7 +94,7 @@ void Environment::manageSubMoment(std::string coords)
 void Environment::makeWindow()
 {
     InitWindow(800, 800, "Environment");
-    SetTargetFPS(1);
+    SetTargetFPS(30);
 
     while (!WindowShouldClose())
     {

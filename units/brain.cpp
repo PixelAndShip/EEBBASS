@@ -10,6 +10,7 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int child
     for (InputNode *iN : copyInputNodes)
     {
         InputNode *newInputNode = new InputNode(gen, iN);
+        inputNodes.push_back(newInputNode);
         addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
 }
@@ -33,16 +34,15 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
     {
 
         InputNode *startNode = new InputNode(gen);
-        addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
-
         inputNodes.push_back(startNode);
+        addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
     }
 }
 
 void Brain::addCopiedConnection(
     float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount = 3, int brainDepth = 4)
 {
-    inputNodes.push_back(lastInputNode);
+
     std::uniform_int_distribution<> newNodeChance(0, 100);
     if (parentLastInputNode->getInputNodes().empty())
     {
