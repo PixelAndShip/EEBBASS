@@ -516,9 +516,9 @@ std::string Spider::getSplitCoords(std::string ParentCoords)
             "0_-20",
             "20_-20",
             "20_0",
-            "20_10",
+            "20_20",
             "0_20",
-            "-20_10",
+            "-20_20",
             "-20_0",
             "-20_-20"};
 
@@ -575,9 +575,9 @@ std::vector<std::string> Spider::getProximatePlants(std::string coords)
             "0_-20",
             "20_-20",
             "20_0",
-            "20_10",
+            "20_20",
             "0_20",
-            "-20_10",
+            "-20_20",
             "-20_0",
             "-20_-20"};
 

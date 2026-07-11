@@ -82,13 +82,13 @@ Agent::Agent(
 {
     DEBUG_LOG("Starting split spawn Agent constructor");
 
-    health = iHealth / 2.0;
+    health = iHealth;
     DEBUG_LOG("Split health from " << iHealth << " to " << health);
 
-    energy = iEnergy / 2.0;
+    energy = iEnergy;
     DEBUG_LOG("Split energy from " << iEnergy << " to " << energy);
 
-    speed = iSpeed / 2.0;
+    speed = iSpeed;
     DEBUG_LOG("Split speed from " << iSpeed << " to " << speed);
 
     age = 1;

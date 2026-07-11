@@ -72,14 +72,17 @@ void Environment::manageMoment()
               << spider->Agents.size()
               << " agents");
 
-    for (auto cs : spider->Agents)
+    std::vector<std::string> coords;
+
+    for (auto &[c, a] : spider->Agents)
+        coords.push_back(c);
+
+    for (auto &c : coords)
     {
-        agentCoords = cs.first;
-
         DEBUG_LOG("Processing Agent at "
-                  << agentCoords);
-
-        manageSubMoment(agentCoords);
+                  << c);
+        if (spider->Agents.find(c) != spider->Agents.end())
+            manageSubMoment(c);
     }
 
     DEBUG_LOG("Applying passive health drain");
