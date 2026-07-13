@@ -17,9 +17,7 @@ inline const std::unordered_map<int, std::string> &getSenses()
         {2, "EnergyCountAboveSet"},
         {3, "EnergyCountBelowSet"},
         {4, "HealthCountAboveSet"},
-        {5, "HealthCountBelowSet"},
-        {6, "AgeCountAboveSet"},
-        {7, "AgeCountBelowSet"}};
+        {5, "HealthCountBelowSet"}};
     return Senses;
 }
 

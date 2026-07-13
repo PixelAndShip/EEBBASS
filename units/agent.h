@@ -1,6 +1,5 @@
 #pragma once
 #include "brain.h"
-#include "data_management/debug.h"
 #include <random>
 
 class Agent
@@ -8,7 +7,6 @@ class Agent
 private:
     float health;
     float energy;
-    float age;
 
     UnitColor agentColor;
     int x, y;
@@ -42,12 +40,6 @@ public:
     {
         DEBUG_LOG("Setting energy from " << energy << " to " << iE);
         energy = iE;
-    }
-
-    void setAge(float iA)
-    {
-        DEBUG_LOG("Setting age from " << age << " to " << iA);
-        age = iA;
     }
 
     void setAgentColor(UnitColor iAC)
@@ -123,12 +115,6 @@ public:
     {
         DEBUG_LOG("Getting energy: " << energy);
         return energy;
-    }
-
-    float getAge()
-    {
-        DEBUG_LOG("Getting age: " << age);
-        return age;
     }
 
     UnitColor getAgentColor()

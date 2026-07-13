@@ -10,9 +10,6 @@ Agent::Agent()
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
 
-    age = 1;
-    DEBUG_LOG("Set age: " << age);
-
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
               << agentColor.red << ", "
@@ -45,9 +42,6 @@ Agent::Agent(
 
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
-
-    age = 1;
-    DEBUG_LOG("Set age: " << age);
 
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
@@ -90,9 +84,6 @@ Agent::Agent(
 
     speed = iSpeed;
     DEBUG_LOG("Split speed from " << iSpeed << " to " << speed);
-
-    age = 1;
-    DEBUG_LOG("Set age: " << age);
 
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set initial Agent color: "

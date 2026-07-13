@@ -68,546 +68,6 @@ Spider::Spider(float rad, int maxBL, int maxBCN, int terW, int terH)
     DEBUG_LOG("Finished custom Spider constructor");
 }
 
-bool Spider::seeSomething(std::string AgentCoordinates)
-{
-    DEBUG_LOG("Checking if Agent at " << AgentCoordinates << " sees something");
-
-    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
-
-    if (proximateAgentCs.empty())
-    {
-        DEBUG_LOG("No nearby agents found");
-        return false;
-    }
-
-    DEBUG_LOG("Found " << proximateAgentCs.size() << " nearby agent(s)");
-
-    return true;
-}
-
-bool Spider::seeColor(
-    std::string AgentCoordinates,
-    UnitColor setC)
-{
-    DEBUG_LOG("Checking nearby colors around Agent at " << AgentCoordinates);
-
-    DEBUG_LOG("Target color: "
-              << setC.red << ", "
-              << setC.green << ", "
-              << setC.blue << ", "
-              << setC.transparency);
-
-    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
-
-    if (proximateAgentCs.empty())
-    {
-        DEBUG_LOG("No nearby agents found");
-        return false;
-    }
-
-    Agent *ag = nullptr;
-    UnitColor clr = {};
-
-    unsigned int r, g, b, t;
-
-    bool r_in_range = false;
-    bool g_in_range = false;
-    bool b_in_range = false;
-    bool t_in_range = false;
-
-    for (std::string cs : proximateAgentCs)
-    {
-        DEBUG_LOG("Checking Agent at " << cs);
-
-        ag = Agents.at(cs);
-
-        if (ag != nullptr)
-        {
-            clr = ag->getAgentColor();
-
-            r = clr.red;
-            g = clr.green;
-            b = clr.blue;
-            t = clr.transparency;
-
-            DEBUG_LOG("Agent color: "
-                      << r << ", "
-                      << g << ", "
-                      << b << ", "
-                      << t);
-
-            r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
-            g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
-            b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
-            t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
-
-            if (r_in_range and g_in_range and b_in_range and t_in_range)
-            {
-                DEBUG_LOG("Matching color found");
-                return true;
-            }
-        }
-    }
-
-    DEBUG_LOG("No matching colors found");
-
-    return false;
-}
-
-bool Spider::energyCountAboveSet(float energy, float setAmount)
-{
-    DEBUG_LOG("Checking energy above set amount: "
-              << energy << " >= " << setAmount);
-
-    return energy >= setAmount;
-}
-
-bool Spider::energyCountBelowSet(float energy, float setAmount)
-{
-    DEBUG_LOG("Checking energy below set amount: "
-              << energy << " < " << setAmount);
-
-    return energy < setAmount;
-}
-
-bool Spider::healthCountAboveSet(float health, float setAmount)
-{
-    DEBUG_LOG("Checking health above set amount: "
-              << health << " >= " << setAmount);
-
-    return health >= setAmount;
-}
-
-bool Spider::healthCountBelowSet(float health, float setAmount)
-{
-    DEBUG_LOG("Checking health below set amount: "
-              << health << " < " << setAmount);
-
-    return health < setAmount;
-}
-
-bool Spider::ageCountAboveSet(float age, float setAmount)
-{
-    DEBUG_LOG("Checking age above set amount: "
-              << age << " >= " << setAmount);
-
-    return age >= setAmount;
-}
-
-bool Spider::ageCountBelowSet(float age, float setAmount)
-{
-    DEBUG_LOG("Checking age below set amount: "
-              << age << " < " << setAmount);
-
-    return age < setAmount;
-}
-
-void Spider::updateSpeed(float deltaEnergy, Agent *Self)
-{
-    DEBUG_LOG("Updating Agent speed using energy: " << deltaEnergy);
-
-    if (Self == nullptr)
-    {
-        DEBUG_LOG("Cannot update speed: Agent is nullptr");
-        return;
-    }
-
-    float currentEnergy = Self->getEnergy();
-    float currentSpeed = Self->getSpeed();
-
-    DEBUG_LOG("Current energy: " << currentEnergy);
-    DEBUG_LOG("Current speed: " << currentSpeed);
-
-    if (currentEnergy <= 0.001)
-    {
-        DEBUG_LOG("Cannot increase speed: no energy");
-        return;
-    }
-
-    Self->setEnergy(currentEnergy - deltaEnergy);
-    Self->setSpeed(currentSpeed + deltaEnergy);
-
-    unsigned int blue = std::clamp(
-        static_cast<int>(std::round(Self->getSpeed())),
-        0,
-        255);
-
-    UnitColor clr = Self->getAgentColor();
-
-    Self->setAgentColor(
-        {clr.red, clr.green, blue, clr.transparency});
-
-    if (Self->getSpeed() < 0)
-    {
-        DEBUG_LOG("Speed below zero, setting to 0");
-        Self->setSpeed(0);
-    }
-
-    if (Self->getEnergy() < 0)
-    {
-        DEBUG_LOG("Energy below zero, setting to 0");
-        Self->setEnergy(0);
-    }
-
-    DEBUG_LOG("Finished updating speed");
-}
-
-void Spider::updateHealth(float deltaEnergy, Agent *Self)
-{
-    DEBUG_LOG("Updating Agent health using energy: " << deltaEnergy);
-
-    if (Self == nullptr)
-    {
-        DEBUG_LOG("Cannot update health: Agent is nullptr");
-        return;
-    }
-
-    float currentEnergy = Self->getEnergy();
-    float currentHealth = Self->getHealth();
-
-    DEBUG_LOG("Current energy: " << currentEnergy);
-    DEBUG_LOG("Current health: " << currentHealth);
-
-    if (currentEnergy <= 0.001 or currentHealth <= 0.001)
-    {
-        DEBUG_LOG("Cannot update health: insufficient energy or dead agent");
-        return;
-    }
-
-    Self->setEnergy(currentEnergy - deltaEnergy);
-    Self->setHealth(currentHealth + deltaEnergy);
-
-    unsigned int green = std::clamp(
-        static_cast<int>(std::round(Self->getHealth())),
-        0,
-        255);
-
-    UnitColor clr = Self->getAgentColor();
-
-    Self->setAgentColor(
-        {clr.red, green, clr.blue, clr.transparency});
-
-    if (Self->getHealth() < 0)
-    {
-        DEBUG_LOG("Health below zero, setting to 0");
-        Self->setHealth(0);
-    }
-
-    if (Self->getEnergy() < 0)
-    {
-        DEBUG_LOG("Energy below zero, setting to 0");
-        Self->setEnergy(0);
-    }
-
-    DEBUG_LOG("Finished updating health");
-}
-
-void Spider::bite(std::string AgentCoordinates, float energyCost)
-{
-    DEBUG_LOG("Agent at " << AgentCoordinates
-                          << " attempting bite with cost "
-                          << energyCost);
-
-    std::vector<std::string> proximateAgentCs = getProximateAgents(AgentCoordinates);
-
-    if (proximateAgentCs.empty())
-    {
-        DEBUG_LOG("No nearby agents to bite");
-        return;
-    }
-
-    Agent *ag = Agents.at(proximateAgentCs[0]);
-
-    if (ag != nullptr)
-    {
-        DEBUG_LOG("Biting Agent at " << proximateAgentCs[0]);
-
-        ag->setHealth(ag->getHealth() - energyCost);
-    }
-
-    DEBUG_LOG("Finished bite");
-}
-
-void Spider::move(std::string AgentCoordinates, char Direction)
-{
-    DEBUG_LOG("Moving Agent at "
-              << AgentCoordinates
-              << " direction "
-              << Direction);
-
-    int aX = Agents.at(AgentCoordinates)->getX();
-    int aY = Agents.at(AgentCoordinates)->getY();
-
-    switch (Direction)
-    {
-    case 'u':
-        aY -= 20;
-        break;
-
-    case 'd':
-        aY += 20;
-        break;
-
-    case 'l':
-        aX -= 20;
-        break;
-
-    case 'r':
-        aX += 20;
-        break;
-    }
-
-    std::string coords =
-        std::to_string(aX) + "_" + std::to_string(aY);
-
-    DEBUG_LOG("New movement target: " << coords);
-
-    if (borderCheck(coords))
-    {
-        DEBUG_LOG("Movement allowed");
-        Agents.at(AgentCoordinates)->setCoords(coords);
-    }
-    else
-    {
-        DEBUG_LOG("Movement blocked by border");
-    }
-}
-
-void Spider::biteColor(std::string AgentCoordinates, UnitColor Target, float energyCost)
-{
-    DEBUG_LOG("Agent at " << AgentCoordinates
-                          << " attempting color bite");
-
-    DEBUG_LOG("Target color: "
-              << Target.red << ", "
-              << Target.green << ", "
-              << Target.blue << ", "
-              << Target.transparency);
-
-    std::vector<std::string> proximateAgentCs =
-        getProximateAgents(AgentCoordinates);
-
-    if (proximateAgentCs.empty())
-    {
-        DEBUG_LOG("No nearby agents to bite");
-        return;
-    }
-
-    for (std::string cs : proximateAgentCs)
-    {
-        DEBUG_LOG("Checking Agent at " << cs);
-
-        Agent *ag = Agents.at(cs);
-
-        if (ag != nullptr)
-        {
-            UnitColor clr = ag->getAgentColor();
-
-            bool r_in_range =
-                clr.red <= Target.red + 10 and
-                clr.red >= Target.red - 10;
-
-            bool g_in_range =
-                clr.green <= Target.green + 10 and
-                clr.green >= Target.green - 10;
-
-            bool b_in_range =
-                clr.blue <= Target.blue + 10 and
-                clr.blue >= Target.blue - 10;
-
-            bool t_in_range =
-                clr.transparency <= Target.transparency + 10 and
-                clr.transparency >= Target.transparency - 10;
-
-            if (r_in_range and
-                g_in_range and
-                b_in_range and
-                t_in_range)
-            {
-                DEBUG_LOG("Matching color found, applying bite");
-
-                ag->setHealth(
-                    ag->getHealth() - energyCost);
-
-                break;
-            }
-        }
-    }
-
-    DEBUG_LOG("Finished color bite");
-}
-std::vector<std::string> Spider::getProximateAgents(std::string coords)
-{
-    DEBUG_LOG("Getting proximate agents for coordinates: " << coords);
-
-    std::vector<std::string> proximateAgentCs = {};
-
-    auto _pos = coords.find("_");
-
-    int aX, aY;
-
-    try
-    {
-        aX = std::stoi(coords.substr(0, _pos));
-        aY = std::stoi(coords.substr(_pos + 1));
-    }
-    catch (...)
-    {
-        DEBUG_LOG("Failed to parse coordinates: " << coords);
-        return proximateAgentCs;
-    }
-
-    std::vector<std::string> InRadius =
-        {
-            "0_-20",
-            "20_-20",
-            "20_0",
-            "20_20",
-            "0_20",
-            "-20_20",
-            "-20_0",
-            "-20_-20"};
-
-    for (std::string r : InRadius)
-    {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-
-        std::string checkCoords =
-            std::to_string(aX + dx) + "_" +
-            std::to_string(aY + dy);
-
-        if (Agents.find(checkCoords) != Agents.end())
-        {
-            DEBUG_LOG("Found proximate Agent at " << checkCoords);
-            proximateAgentCs.push_back(checkCoords);
-        }
-    }
-
-    DEBUG_LOG("Found " << proximateAgentCs.size()
-                       << " proximate agent(s)");
-
-    return proximateAgentCs;
-}
-
-std::string Spider::getSplitCoords(std::string ParentCoords)
-{
-    DEBUG_LOG("Finding split location for Agent at " << ParentCoords);
-
-    auto _pos = ParentCoords.find("_");
-
-    int aX, aY;
-
-    try
-    {
-        aX = std::stoi(ParentCoords.substr(0, _pos));
-        aY = std::stoi(ParentCoords.substr(_pos + 1));
-    }
-    catch (...)
-    {
-        DEBUG_LOG("Failed to parse parent coordinates");
-        return "";
-    }
-
-    std::vector<std::string> InRadius =
-        {
-            "0_-20",
-            "20_-20",
-            "20_0",
-            "20_20",
-            "0_20",
-            "-20_20",
-            "-20_0",
-            "-20_-20"};
-
-    for (std::string r : InRadius)
-    {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-
-        std::string newCoords =
-            std::to_string(aX + dx) + "_" +
-            std::to_string(aY + dy);
-
-        if (Agents.find(newCoords) == Agents.end() and
-            Plants.find(newCoords) == Plants.end())
-        {
-            DEBUG_LOG("Found available split location: "
-                      << newCoords);
-
-            return newCoords;
-        }
-    }
-
-    DEBUG_LOG("No available split location found");
-
-    return "";
-}
-
-std::vector<std::string> Spider::getProximatePlants(std::string coords)
-{
-    DEBUG_LOG("Getting proximate plants for coordinates: "
-              << coords);
-
-    std::vector<std::string> proximatePlantCs = {};
-
-    auto _pos = coords.find("_");
-
-    int aX, aY;
-
-    try
-    {
-        aX = std::stoi(coords.substr(0, _pos));
-        aY = std::stoi(coords.substr(_pos + 1));
-    }
-    catch (...)
-    {
-        DEBUG_LOG("Failed to parse coordinates");
-        return proximatePlantCs;
-    }
-
-    std::vector<std::string> InRadius =
-        {
-            "0_-20",
-            "20_-20",
-            "20_0",
-            "20_20",
-            "0_20",
-            "-20_20",
-            "-20_0",
-            "-20_-20"};
-
-    for (std::string r : InRadius)
-    {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-
-        std::string checkCoords =
-            std::to_string(aX + dx) + "_" +
-            std::to_string(aY + dy);
-
-        if (Plants.find(checkCoords) != Plants.end())
-        {
-            DEBUG_LOG("Found proximate plant at "
-                      << checkCoords);
-
-            proximatePlantCs.push_back(checkCoords);
-        }
-    }
-
-    DEBUG_LOG("Found "
-              << proximatePlantCs.size()
-              << " proximate plant(s)");
-
-    return proximatePlantCs;
-}
-
 void Spider::setProximities(std::string startCoords)
 {
     DEBUG_LOG("Setting proximities starting from "
@@ -631,10 +91,10 @@ void Spider::setProximities(std::string startCoords)
                   << current);
 
         std::vector<std::string> proximateAgents =
-            getProximateAgents(current);
+            getProximateAgents(&Agents, current);
 
         std::vector<std::string> proximatePlants =
-            getProximatePlants(current);
+            getProximatePlants(&Plants, current);
 
         std::vector<std::string> coords;
 
@@ -700,10 +160,16 @@ void Spider::manageSubMoment()
             continue;
         }
 
-        OutputNode *action =
-            getAction(
-                coords,
-                agent->getBrain().getInputNodes().at(0));
+        std::vector<InputNode *> rootNodes = agent->getBrain().getInputNodes();
+        OutputNode *action = nullptr;
+        for (InputNode *rootNode : rootNodes)
+        {
+            action = getAction(coords, rootNode);
+            if (action != nullptr)
+            {
+                break;
+            }
+        }
 
         if (action != nullptr and
             action->getKey() < getActions().size())
@@ -842,11 +308,13 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     {
     case 0:
         DEBUG_LOG("Sense: SeeSomething");
-        return seeSomething(AgentCoordinates);
+        return seeSomething(&Agents, &Plants, AgentCoordinates);
 
     case 1:
         DEBUG_LOG("Sense: SeeColor");
         return seeColor(
+            &Agents,
+            &Plants,
             AgentCoordinates,
             Sense->getUnitColor());
 
@@ -874,18 +342,6 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
             Agents.at(AgentCoordinates)->getHealth(),
             Sense->getSetAmount());
 
-    case 6:
-        DEBUG_LOG("Sense: AgeCountAboveSet");
-        return ageCountAboveSet(
-            Agents.at(AgentCoordinates)->getAge(),
-            Sense->getSetAmount());
-
-    case 7:
-        DEBUG_LOG("Sense: AgeCountBelowSet");
-        return ageCountBelowSet(
-            Agents.at(AgentCoordinates)->getAge(),
-            Sense->getSetAmount());
-
     default:
         DEBUG_LOG("Unknown sense key");
         break;
@@ -896,85 +352,95 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
 
 OutputNode *Spider::getAction(
     std::string AgentCoordinates,
-    InputNode *parentNode)
+    InputNode *node)
 {
     DEBUG_LOG("Getting action for Agent at "
               << AgentCoordinates);
 
-    if (parentNode == nullptr)
+    if (node == nullptr)
     {
-        DEBUG_LOG("Parent node is null");
+        DEBUG_LOG("Node is nullptr");
         return nullptr;
     }
 
-    if (parentNode->getInputNodes().empty())
-    {
-        DEBUG_LOG("Parent node has no children");
-        return nullptr;
-    }
-
-    float activateNode = dist(gen) / 100.0;
+    float activateNode = dist(gen) / 100.0f;
 
     DEBUG_LOG("Activation roll: "
               << activateNode);
 
-    for (InputNode *in : parentNode->getInputNodes())
+    DEBUG_LOG("Evaluating InputNode");
+    DEBUG_LOG("Node key: "
+              << node->getKey());
+
+    float weight = node->getWeight();
+
+    DEBUG_LOG("Node weight: "
+              << weight);
+
+    if (activateNode >= weight)
     {
-        if (in == nullptr)
-        {
-            DEBUG_LOG("Skipping null InputNode");
-            continue;
-        }
-
-        float weight = in->getWeight();
-
-        DEBUG_LOG("Checking InputNode with weight "
-                  << weight);
-
-        if (activateNode < weight)
-        {
-            DEBUG_LOG("Activation failed");
-            continue;
-        }
-
-        if (!manageSense(AgentCoordinates, in))
-        {
-            DEBUG_LOG("Sense failed");
-            continue;
-        }
-
-        DEBUG_LOG("Sense passed");
-
-        if (in->getOutputNode() != nullptr and
-            in->getInputNodes().empty() and
-            in->getOutputNode()->getKey() != 255)
-        {
-            DEBUG_LOG("Checking OutputNode");
-
-            if (activateNode >= in->getOutputNode()->getWeight())
-            {
-                DEBUG_LOG("OutputNode activated with key "
-                          << in->getOutputNode()->getKey());
-
-                return in->getOutputNode();
-            }
-
-            DEBUG_LOG("OutputNode activation failed");
-        }
-
-        OutputNode *on =
-            getAction(
-                AgentCoordinates,
-                in);
-
-        if (on != nullptr)
-        {
-            DEBUG_LOG("Child node returned action");
-            return on;
-        }
+        DEBUG_LOG("Node activation failed");
+        return nullptr;
     }
 
-    DEBUG_LOG("No action found");
+    DEBUG_LOG("Node activated");
+
+    if (!manageSense(AgentCoordinates, node))
+    {
+        DEBUG_LOG("Sense failed");
+        return nullptr;
+    }
+
+    DEBUG_LOG("Sense passed");
+
+    if (node->getOutputNode() != nullptr and
+        node->getOutputNode()->getKey() != 255)
+    {
+        DEBUG_LOG("Checking OutputNode");
+
+        DEBUG_LOG("Output weight: "
+                  << node->getOutputNode()->getWeight());
+
+        if (activateNode < node->getOutputNode()->getWeight())
+        {
+            DEBUG_LOG("OutputNode activated with key "
+                      << node->getOutputNode()->getKey());
+
+            return node->getOutputNode();
+        }
+
+        DEBUG_LOG("OutputNode activation failed");
+    }
+
+    DEBUG_LOG("Checking "
+              << node->getInputNodes().size()
+              << " child node(s)");
+
+    for (InputNode *child : node->getInputNodes())
+    {
+        if (child == nullptr)
+        {
+            DEBUG_LOG("Skipping nullptr child");
+            continue;
+        }
+
+        DEBUG_LOG("Descending into child");
+
+        OutputNode *action =
+            getAction(
+                AgentCoordinates,
+                child);
+
+        if (action != nullptr)
+        {
+            DEBUG_LOG("Child returned action");
+            return action;
+        }
+
+        DEBUG_LOG("Child returned no action");
+    }
+
+    DEBUG_LOG("No action found in this branch");
 
     return nullptr;
 }
@@ -1007,27 +473,29 @@ void Spider::manageAction(
     {
     case 0:
         DEBUG_LOG("Action: Move Left");
-        move(AgentCoordinates, 'l');
+        move(&Agents, AgentCoordinates, 'l');
         break;
 
     case 1:
         DEBUG_LOG("Action: Move Right");
-        move(AgentCoordinates, 'r');
+        move(&Agents, AgentCoordinates, 'r');
         break;
 
     case 2:
         DEBUG_LOG("Action: Move Up");
-        move(AgentCoordinates, 'u');
+        move(&Agents, AgentCoordinates, 'u');
         break;
 
     case 3:
         DEBUG_LOG("Action: Move Down");
-        move(AgentCoordinates, 'd');
+        move(&Agents, AgentCoordinates, 'd');
         break;
 
     case 4:
         DEBUG_LOG("Action: Bite");
         bite(
+            &Agents,
+            &Plants,
             AgentCoordinates,
             ActionNode->getEnergyCost());
         break;
@@ -1057,6 +525,8 @@ void Spider::manageAction(
         DEBUG_LOG("Action: Bite color");
 
         biteColor(
+            &Agents,
+            &Plants,
             AgentCoordinates,
             ActionNode->getUnitColor(),
             ActionNode->getEnergyCost());
@@ -1160,7 +630,7 @@ void Spider::splitNewAgent(std::string ParentCoords)
         return;
     }
     std::string childCoords =
-        getSplitCoords(ParentCoords);
+        getSplitCoords(&Agents, &Plants, ParentCoords);
 
     if (childCoords == "")
     {
