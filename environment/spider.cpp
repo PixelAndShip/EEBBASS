@@ -39,6 +39,13 @@ Spider::~Spider()
         delete ag1.second;
     }
 
+    for (auto pl1 : Plants)
+    {
+        DEBUG_LOG("Deleting Plant at coordinates: " << pl1.first
+                                                    << " pointer: " << pl1.second);
+        delete pl1.second;
+    }
+
     DEBUG_LOG("Finished Spider destructor");
 }
 

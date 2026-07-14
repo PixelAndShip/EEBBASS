@@ -85,39 +85,39 @@ bool seeColor(
         }
     }
 
-    // for (std::string cs : proximatePlantCs)
-    // {
-    //     DEBUG_LOG("Checking Plant at " << cs);
+    for (std::string cs : proximatePlantCs)
+    {
+        DEBUG_LOG("Checking Plant at " << cs);
 
-    //     pl = Plants->at(cs);
+        pl = Plants->at(cs);
 
-    //     if (ag != nullptr)
-    //     {
-    //         clr = pl->getPlantColor();
+        if (ag != nullptr)
+        {
+            clr = pl->getPlantColor();
 
-    //         r = clr.red;
-    //         g = clr.green;
-    //         b = clr.blue;
-    //         t = clr.transparency;
+            r = clr.red;
+            g = clr.green;
+            b = clr.blue;
+            t = clr.transparency;
 
-    //         DEBUG_LOG("Plant color: "
-    //                   << r << ", "
-    //                   << g << ", "
-    //                   << b << ", "
-    //                   << t);
+            DEBUG_LOG("Plant color: "
+                      << r << ", "
+                      << g << ", "
+                      << b << ", "
+                      << t);
 
-    //         r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
-    //         g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
-    //         b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
-    //         t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
+            r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
+            g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
+            b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
+            t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
 
-    //         if (r_in_range and g_in_range and b_in_range and t_in_range)
-    //         {
-    //             DEBUG_LOG("Matching color found");
-    //             return true;
-    //         }
-    //     }
-    // }
+            if (r_in_range and g_in_range and b_in_range and t_in_range)
+            {
+                DEBUG_LOG("Matching color found");
+                return true;
+            }
+        }
+    }
 
     DEBUG_LOG("No matching colors found");
 
@@ -280,23 +280,23 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
         DEBUG_LOG("No nearby agents to bite");
     }
 
-    // std::vector<std::string> proximatePlantCs = getProximatePlants(Plants, AgentCoordinates);
+    std::vector<std::string> proximatePlantCs = getProximatePlants(Plants, AgentCoordinates);
 
-    // if (!proximatePlantCs.empty())
-    // {
-    //     Plant *pl = Plants->at(proximatePlantCs[0]);
+    if (!proximatePlantCs.empty())
+    {
+        Plant *pl = Plants->at(proximatePlantCs[0]);
 
-    //     if (pl != nullptr)
-    //     {
-    //         DEBUG_LOG("Biting Plant at " << proximatePlantCs[0]);
+        if (pl != nullptr)
+        {
+            DEBUG_LOG("Biting Plant at " << proximatePlantCs[0]);
 
-    //         pl->setHealth(pl->getHealth() - energyCost);
-    //     }
-    // }
-    // else
-    // {
-    //     DEBUG_LOG("No nearby plants to bite");
-    // }
+            pl->setHealth(pl->getHealth() - energyCost);
+        }
+    }
+    else
+    {
+        DEBUG_LOG("No nearby plants to bite");
+    }
     DEBUG_LOG("Finished bite");
 }
 
@@ -396,46 +396,46 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
             }
         }
     }
-    // for (std::string cs2 : proximatePlantCs)
-    // {
-    //     DEBUG_LOG("Checking Plant at " << cs2);
+    for (std::string cs2 : proximatePlantCs)
+    {
+        DEBUG_LOG("Checking Plant at " << cs2);
 
-    //     Plant *pl = Plants->at(cs2);
+        Plant *pl = Plants->at(cs2);
 
-    //     if (pl != nullptr)
-    //     {
-    //         UnitColor clr = pl->getPlantColor();
+        if (pl != nullptr)
+        {
+            UnitColor clr = pl->getPlantColor();
 
-    //         bool r_in_range =
-    //             clr.red <= Target.red + 10 and
-    //             clr.red >= Target.red - 10;
+            bool r_in_range =
+                clr.red <= Target.red + 10 and
+                clr.red >= Target.red - 10;
 
-    //         bool g_in_range =
-    //             clr.green <= Target.green + 10 and
-    //             clr.green >= Target.green - 10;
+            bool g_in_range =
+                clr.green <= Target.green + 10 and
+                clr.green >= Target.green - 10;
 
-    //         bool b_in_range =
-    //             clr.blue <= Target.blue + 10 and
-    //             clr.blue >= Target.blue - 10;
+            bool b_in_range =
+                clr.blue <= Target.blue + 10 and
+                clr.blue >= Target.blue - 10;
 
-    //         bool t_in_range =
-    //             clr.transparency <= Target.transparency + 10 and
-    //             clr.transparency >= Target.transparency - 10;
+            bool t_in_range =
+                clr.transparency <= Target.transparency + 10 and
+                clr.transparency >= Target.transparency - 10;
 
-    //         if (r_in_range and
-    //             g_in_range and
-    //             b_in_range and
-    //             t_in_range)
-    //         {
-    //             DEBUG_LOG("Matching color found, applying bite");
+            if (r_in_range and
+                g_in_range and
+                b_in_range and
+                t_in_range)
+            {
+                DEBUG_LOG("Matching color found, applying bite");
 
-    //             pl->setHealth(
-    //                 pl->getHealth() - energyCost);
+                pl->setHealth(
+                    pl->getHealth() - energyCost);
 
-    //             return;
-    //         }
-    //     }
-    // }
+                return;
+            }
+        }
+    }
     DEBUG_LOG("Finished color bite");
 }
 
