@@ -653,9 +653,7 @@ void Spider::splitNewAgent(std::string ParentCoords)
 
     parent->setHealth(
         parent->getHealth() / 2.0f);
-
-    parent->setEnergy(
-        parent->getEnergy() / 2.0f);
+    parent->setEnergy(parent->getEnergy() / 2.0f);
 
     DEBUG_LOG("Creating child Agent at "
               << childCoords);

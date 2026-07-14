@@ -87,10 +87,11 @@ void Environment::manageMoment()
 
     DEBUG_LOG("Applying passive health drain");
 
+    Agent *agent = nullptr;
     for (auto it = spider->Agents.begin();
          it != spider->Agents.end();)
     {
-        Agent *agent = it->second;
+        agent = it->second;
 
         if (agent == nullptr)
         {
@@ -217,7 +218,7 @@ void Environment::makeWindow()
         DEBUG_LOG("Updating simulation");
 
         manageMoment();
-    }
+        }
 
     DEBUG_LOG("Closing window");
 
