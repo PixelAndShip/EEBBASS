@@ -661,6 +661,7 @@ void Spider::splitNewAgent(std::string ParentCoords)
     Agent *child = new Agent(
         parent->getHealth(),
         parent->getEnergy(),
+        parent->getPlantDiet(),
         parent->getSpeed(),
         parent->getBrain(),
         radiation,

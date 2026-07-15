@@ -7,7 +7,7 @@ class Agent
 private:
     float health;
     float energy;
-
+    float plantDiet;
     UnitColor agentColor;
     int x, y;
 
@@ -40,6 +40,12 @@ public:
     {
         DEBUG_LOG("Setting energy from " << energy << " to " << iE);
         energy = iE;
+    }
+
+    void setPlantDiet(float iPD)
+    {
+        DEBUG_LOG("Setting plant diet from " << plantDiet << " to " << iPD);
+        plantDiet = iPD;
     }
 
     void setAgentColor(UnitColor iAC)
@@ -117,6 +123,12 @@ public:
         return energy;
     }
 
+    float getPlantDiet()
+    {
+        DEBUG_LOG("Getting plant diet: " << plantDiet);
+        return plantDiet;
+    }
+
     UnitColor getAgentColor()
     {
         DEBUG_LOG("Getting Agent color: "
@@ -171,6 +183,7 @@ public:
     Agent(
         float iHealth,
         float iEnergy,
+        float iPlantDiet,
         float iSpeed,
         const Brain &iBrain,
         float eRadiation,

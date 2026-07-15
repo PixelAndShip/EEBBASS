@@ -10,6 +10,9 @@ Agent::Agent()
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
 
+    plantDiet = 0.5;
+    DEBUG_LOG("Set plant diet: " << plantDiet);
+
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
               << agentColor.red << ", "
@@ -43,6 +46,9 @@ Agent::Agent(
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
 
+    plantDiet = 0.5;
+    DEBUG_LOG("Set plant diet: " << plantDiet);
+
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
               << agentColor.red << ", "
@@ -66,6 +72,7 @@ Agent::Agent(
 Agent::Agent(
     float iHealth,
     float iEnergy,
+    float iPlantDiet,
     float iSpeed,
     const Brain &iBrain,
     float eRadiation,
@@ -81,6 +88,9 @@ Agent::Agent(
 
     energy = iEnergy;
     DEBUG_LOG("Split energy from " << iEnergy << " to " << energy);
+
+    plantDiet = iPlantDiet;
+    DEBUG_LOG("Split plant diet from " << iPlantDiet << " to " << plantDiet);
 
     speed = iSpeed;
     DEBUG_LOG("Split speed from " << iSpeed << " to " << speed);

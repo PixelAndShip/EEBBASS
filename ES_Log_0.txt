@@ -1,60 +1,30 @@
-3|EnergyCountBelowSet|0.760000---1|MoveRight|0.120000
+0|SeeSomething|0.390000---3|MoveDown|0.650000
+3|EnergyCountBelowSet|0.750000---2|MoveUp|0.800000
+4|HealthCountAboveSet|0.330000---4|Bite|0.440000
 
-4|HealthCountAboveSet|0.380000
-0|SeeSomething|0.490000
-0|SeeSomething|0.830000---2|MoveUp|0.050000
-
-0|SeeSomething|0.940000
-  4|HealthCountAboveSet|0.600000
-2|EnergyCountAboveSet|0.550000
-3|EnergyCountBelowSet|0.670000
-
-0|SeeSomething|0.940000
-  4|HealthCountAboveSet|0.600000
-2|EnergyCountAboveSet|0.570000
-3|EnergyCountBelowSet|0.660000
-
-1|SeeColor|0.280000---4|Bite|0.710000
-5|HealthCountBelowSet|0.230000
-5|HealthCountBelowSet|0.760000---6|ExpendEnergyOnHealth|0.250000
-
-0|SeeSomething|0.950000
-  4|HealthCountAboveSet|0.610000
-2|EnergyCountAboveSet|0.570000
-3|EnergyCountBelowSet|0.680000
+1|SeeColor|0.270000
+  0|SeeSomething|0.110000---6|ExpendEnergyOnHealth|0.160000
 
 
-4|HealthCountAboveSet|0.860000
-  1|SeeColor|0.980000---5|Split|0.270000
-1|SeeColor|0.330000
-  4|HealthCountAboveSet|0.850000---5|Split|0.760000
-  3|EnergyCountBelowSet|0.040000---0|MoveLeft|0.570000
-1|SeeColor|0.560000---8|BiteColor|0.230000
-3|EnergyCountBelowSet|0.820000---7|ExpendEnergyOnSpeed|0.750000
+4|HealthCountAboveSet|0.890000---0|MoveLeft|0.480000
 
-0|SeeSomething|0.930000
-  4|HealthCountAboveSet|0.610000
-2|EnergyCountAboveSet|0.590000
-3|EnergyCountBelowSet|0.680000
+2|EnergyCountAboveSet|0.050000
+4|HealthCountAboveSet|0.180000
 
-3|EnergyCountBelowSet|0.970000
-2|EnergyCountAboveSet|0.320000
-  3|EnergyCountBelowSet|0.650000
-3|EnergyCountBelowSet|0.880000---8|BiteColor|0.470000
-
-1|SeeColor|0.940000
-  4|HealthCountAboveSet|0.580000
-2|EnergyCountAboveSet|0.550000
-3|EnergyCountBelowSet|0.650000
-
-0|SeeSomething|0.970000
-  4|HealthCountAboveSet|0.590000
-2|EnergyCountAboveSet|0.560000
-3|EnergyCountBelowSet|0.650000
+4|HealthCountAboveSet|0.850000---7|ExpendEnergyOnSpeed|0.960000
+3|EnergyCountBelowSet|0.640000---8|BiteColor|0.090000
+2|EnergyCountAboveSet|0.450000---4|Bite|0.210000
+0|SeeSomething|0.810000
+  2|EnergyCountAboveSet|0.250000
+    4|HealthCountAboveSet|0.730000---3|MoveDown|0.040000
+  2|EnergyCountAboveSet|0.180000
+    4|HealthCountAboveSet|0.840000---8|BiteColor|0.050000
+    0|SeeSomething|0.370000---5|Split|0.080000
+1|SeeColor|0.830000
+  0|SeeSomething|0.530000---2|MoveUp|0.220000
+4|HealthCountAboveSet|0.330000
 
 
-0|SeeSomething|0.970000
-  4|HealthCountAboveSet|0.580000
-2|EnergyCountAboveSet|0.580000
-3|EnergyCountBelowSet|0.680000
+0|SeeSomething|0.250000
+  0|SeeSomething|0.090000---3|MoveDown|0.880000
 

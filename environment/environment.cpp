@@ -218,7 +218,7 @@ void Environment::makeWindow()
         DEBUG_LOG("Updating simulation");
 
         manageMoment();
-        }
+    }
 
     DEBUG_LOG("Closing window");
 
