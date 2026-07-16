@@ -4,11 +4,12 @@
 #include <random>
 #include "raylib.h"
 #include "spider.h"
-
+#include <unistd.h>
 class Environment
 {
 public:
     float radiation;
+    int iteration;
     int carbon_count;
     int maxBrainLevel;
     int maxBrainChildNodes;
