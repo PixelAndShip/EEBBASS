@@ -8,6 +8,7 @@
 class Environment
 {
 public:
+    int identifier;
     float radiation;
     int iteration;
     int carbon_count;

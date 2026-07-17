@@ -4,7 +4,7 @@
 Environment::Environment()
 {
     DEBUG_LOG("Starting Environment constructor");
-
+    identifier = 0;
     radiation = 0.5;
     iteration = 0;
     carbon_count = 1;
@@ -44,7 +44,18 @@ Environment::~Environment()
     DEBUG_LOG("Deleting Spider");
 
     delete spider;
-
+    std::stringstream writtenData;
+    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(identifier) + ".txt";
+    std::ifstream CurrentLog(fileName);
+    if (CurrentLog)
+    {
+        writtenData << CurrentLog.rdbuf();
+    }
+    std::string data = writtenData.str();
+    CurrentLog.close();
+    std::ofstream endOfSim(fileName);
+    endOfSim << data + "\n=========================================\n";
+    endOfSim.close();
     DEBUG_LOG("Finished Environment destructor");
 }
 
@@ -56,13 +67,16 @@ void Environment::manageSimulation()
     SetTargetFPS(5);
     while (!WindowShouldClose() and iteration < 100)
     {
+        DEBUG_LOG("Staring simulation iteration: " + std::to_string(iteration));
         manageMoment();
         BeginDrawing();
         ClearBackground(BLACK);
         makeWindow();
         EndDrawing();
+        DEBUG_LOG("Ending simulation iteration: " + std::to_string(iteration));
         iteration++;
     }
+    DEBUG_LOG("Ending simulation");
     CloseWindow();
 }
 
@@ -222,6 +236,7 @@ void Environment::startSimulation()
 
         Agent *genesis =
             new Agent(
+                identifier,
                 radiation,
                 gen,
                 dist,
