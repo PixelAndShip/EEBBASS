@@ -262,6 +262,12 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
                           << " attempting bite with cost "
                           << energyCost);
 
+    Agent *agent = Agents->at(AgentCoordinates);
+    if (agent == nullptr)
+    {
+        DEBUG_LOG("Bite failed: Agent is nullptr");
+        return;
+    }
     std::vector<std::string> proximateAgentCs = getProximateAgents(Agents, AgentCoordinates);
 
     if (!proximateAgentCs.empty())
@@ -271,8 +277,9 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
         if (ag != nullptr)
         {
             DEBUG_LOG("Biting Agent at " << proximateAgentCs[0]);
-
             ag->setHealth(ag->getHealth() - energyCost);
+            agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()));
+            return;
         }
     }
     else
@@ -289,8 +296,9 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
         if (pl != nullptr)
         {
             DEBUG_LOG("Biting Plant at " << proximatePlantCs[0]);
-
             pl->setHealth(pl->getHealth() - energyCost);
+            agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet());
+            return;
         }
     }
     else
@@ -338,9 +346,15 @@ void move(const std::unordered_map<std::string, Agent *> *Agents, std::string Ag
 
 void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates, UnitColor Target, float energyCost)
 {
+
     DEBUG_LOG("Agent at " << AgentCoordinates
                           << " attempting color bite");
-
+    Agent *agent = Agents->at(AgentCoordinates);
+    if (agent == nullptr)
+    {
+        DEBUG_LOG("Bite failed: Agent is nullptr");
+        return;
+    }
     DEBUG_LOG("Target color: "
               << Target.red << ", "
               << Target.green << ", "
@@ -355,12 +369,12 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
         DEBUG_LOG("No nearby agents to bite");
         return;
     }
-
+    Agent *ag = nullptr;
     for (std::string cs : proximateAgentCs)
     {
         DEBUG_LOG("Checking Agent at " << cs);
 
-        Agent *ag = Agents->at(cs);
+        ag = Agents->at(cs);
 
         if (ag != nullptr)
         {
@@ -391,16 +405,18 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
 
                 ag->setHealth(
                     ag->getHealth() - energyCost);
-
+                agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()));
                 return;
             }
         }
+        ag = nullptr;
     }
+    Plant *pl = nullptr;
     for (std::string cs2 : proximatePlantCs)
     {
         DEBUG_LOG("Checking Plant at " << cs2);
 
-        Plant *pl = Plants->at(cs2);
+        pl = Plants->at(cs2);
 
         if (pl != nullptr)
         {
@@ -431,10 +447,11 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
 
                 pl->setHealth(
                     pl->getHealth() - energyCost);
-
+                agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet());
                 return;
             }
         }
+        pl = nullptr;
     }
     DEBUG_LOG("Finished color bite");
 }

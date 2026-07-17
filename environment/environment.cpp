@@ -4,8 +4,9 @@
 Environment::Environment()
 {
     DEBUG_LOG("Starting Environment constructor");
-
+    identifier = 0;
     radiation = 0.5;
+    iteration = 0;
     carbon_count = 1;
 
     maxBrainLevel = 5;
@@ -43,13 +44,40 @@ Environment::~Environment()
     DEBUG_LOG("Deleting Spider");
 
     delete spider;
-
+    std::stringstream writtenData;
+    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(identifier) + ".txt";
+    std::ifstream CurrentLog(fileName);
+    if (CurrentLog)
+    {
+        writtenData << CurrentLog.rdbuf();
+    }
+    std::string data = writtenData.str();
+    CurrentLog.close();
+    std::ofstream endOfSim(fileName);
+    endOfSim << data + "\n=========================================\n";
+    endOfSim.close();
     DEBUG_LOG("Finished Environment destructor");
 }
 
 void Environment::manageSimulation()
 {
     DEBUG_LOG("Managing simulation");
+    startSimulation();
+    InitWindow(800, 800, "Environment");
+    SetTargetFPS(5);
+    while (!WindowShouldClose() and iteration < 100)
+    {
+        DEBUG_LOG("Staring simulation iteration: " + std::to_string(iteration));
+        manageMoment();
+        BeginDrawing();
+        ClearBackground(BLACK);
+        makeWindow();
+        EndDrawing();
+        DEBUG_LOG("Ending simulation iteration: " + std::to_string(iteration));
+        iteration++;
+    }
+    DEBUG_LOG("Ending simulation");
+    CloseWindow();
 }
 
 void Environment::managePlantCount()
@@ -87,10 +115,11 @@ void Environment::manageMoment()
 
     DEBUG_LOG("Applying passive health drain");
 
+    Agent *agent = nullptr;
     for (auto it = spider->Agents.begin();
          it != spider->Agents.end();)
     {
-        Agent *agent = it->second;
+        agent = it->second;
 
         if (agent == nullptr)
         {
@@ -169,61 +198,25 @@ void Environment::manageSubMoment(std::string coords)
     DEBUG_LOG("Finished sub moment for "
               << coords);
 }
-
 void Environment::makeWindow()
 {
-    DEBUG_LOG("Creating window");
 
-    InitWindow(800, 800, "Environment");
-
-    SetTargetFPS(5);
-
-    DEBUG_LOG("Window initialized");
-
-    while (!WindowShouldClose())
+    for (auto &[coords, agent] : spider->Agents)
     {
-        BeginDrawing();
+        if (!agent)
+            continue;
 
-        ClearBackground(BLACK);
+        UnitColor color = agent->getAgentColor();
 
-        DEBUG_LOG("Drawing "
-                  << spider->Agents.size()
-                  << " agents");
-
-        for (auto ac : spider->Agents)
-        {
-            if (ac.second == nullptr)
-            {
-                DEBUG_LOG("Skipping null Agent");
-                continue;
-            }
-
-            UnitColor color =
-                ac.second->getAgentColor();
-
-            DrawCircle(
-                ac.second->getX(),
-                ac.second->getY(),
-                10,
-                (Color){
-                    (unsigned char)color.red,
-                    (unsigned char)color.green,
-                    (unsigned char)color.blue,
-                    (unsigned char)color.transparency});
-        }
-
-        EndDrawing();
-
-        DEBUG_LOG("Updating simulation");
-
-        manageMoment();
+        DrawCircle(
+            agent->getX(),
+            agent->getY(),
+            10,
+            {(unsigned char)color.red,
+             (unsigned char)color.green,
+             (unsigned char)color.blue,
+             (unsigned char)color.transparency});
     }
-
-    DEBUG_LOG("Closing window");
-
-    CloseWindow();
-
-    DEBUG_LOG("Window closed");
 }
 
 void Environment::startSimulation()
@@ -243,6 +236,7 @@ void Environment::startSimulation()
 
         Agent *genesis =
             new Agent(
+                identifier,
                 radiation,
                 gen,
                 dist,
@@ -261,8 +255,6 @@ void Environment::startSimulation()
     }
 
     DEBUG_LOG("Starting window");
-
-    makeWindow();
 }
 
 void Environment::generateCoords(Agent *ag)

@@ -17,6 +17,6 @@ public:
         currentEnvironment = en;
     }
     void setCycle(int c) { cycle = c; };
-    void logSimCycle();
-    std::string outputBrain(InputNode *node, int depth = 0);
+    // void logSimCycle();
+    // std::string outputBrain(InputNode *node, int depth = 0);
 };

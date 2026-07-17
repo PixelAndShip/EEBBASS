@@ -10,6 +10,9 @@ Agent::Agent()
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
 
+    plantDiet = 0.5;
+    DEBUG_LOG("Set plant diet: " << plantDiet);
+
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
               << agentColor.red << ", "
@@ -28,20 +31,27 @@ Agent::Agent()
 }
 
 Agent::Agent(
+    int identifier,
     float eRadiation,
     std::mt19937 &gen,
     std::uniform_int_distribution<> &dist,
     int childNodeCount,
     int brainDepth)
-    : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, gen, dist, childNodeCount, brainDepth)
 {
     DEBUG_LOG("Starting generated Agent constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Identifier from " << identifier << " to " << env_identifier);
 
     health = 100.0;
     DEBUG_LOG("Set health: " << health);
 
     energy = 100.0;
     DEBUG_LOG("Set energy: " << energy);
+
+    plantDiet = 0.5;
+    DEBUG_LOG("Set plant diet: " << plantDiet);
 
     agentColor = {100, 100, 1, 255};
     DEBUG_LOG("Set Agent color: "
@@ -64,23 +74,31 @@ Agent::Agent(
 }
 
 Agent::Agent(
+    int identifier,
     float iHealth,
     float iEnergy,
+    float iPlantDiet,
     float iSpeed,
     const Brain &iBrain,
     float eRadiation,
     std::mt19937 &gen,
     int childNodeCount,
     int brainDepth)
-    : brain(eRadiation, gen, iBrain, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, gen, iBrain, childNodeCount, brainDepth)
 {
     DEBUG_LOG("Starting split spawn Agent constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Split identifier from " << identifier << " to " << env_identifier);
 
     health = iHealth;
     DEBUG_LOG("Split health from " << iHealth << " to " << health);
 
     energy = iEnergy;
     DEBUG_LOG("Split energy from " << iEnergy << " to " << energy);
+
+    plantDiet = iPlantDiet;
+    DEBUG_LOG("Split plant diet from " << iPlantDiet << " to " << plantDiet);
 
     speed = iSpeed;
     DEBUG_LOG("Split speed from " << iSpeed << " to " << speed);

@@ -145,15 +145,19 @@ void Spider::manageSubMoment()
 
     DEBUG_LOG("Cleared action queue");
 
-    for (auto [coords, agent] : Agents)
+    for (auto &[coords, bol] : proximateCoords)
     {
         DEBUG_LOG("Checking Agent at " << coords);
 
-        if (agent == nullptr)
+        auto it = Agents.find(coords);
+
+        if (it == Agents.end() or it->second == nullptr)
         {
-            DEBUG_LOG("Skipping null Agent");
+            DEBUG_LOG("Agent no longer exists at " << coords);
             continue;
         }
+
+        Agent *agent = it->second;
 
         if (agent->getHealth() <= 0.001)
         {
@@ -223,15 +227,17 @@ void Spider::manageSubMoment()
 
     std::vector<std::pair<std::string, std::string>> moves;
 
-    for (auto [oldCoords, agent] : Agents)
+    for (auto &[oldCoords, exists] : proximateCoords)
     {
+        auto it = Agents.find(oldCoords);
+
+        if (it == Agents.end())
+            continue;
+
+        Agent *agent = it->second;
+
         if (oldCoords != agent->getCoords())
         {
-            DEBUG_LOG("Detected movement from "
-                      << oldCoords
-                      << " to "
-                      << agent->getCoords());
-
             moves.push_back(
                 {oldCoords, agent->getCoords()});
         }
@@ -269,7 +275,7 @@ void Spider::manageSubMoment()
     }
 
     pendingBirths.clear();
-
+    proximateCoords.clear();
     DEBUG_LOG("Finished sub moment management");
 }
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
@@ -651,18 +657,25 @@ void Spider::splitNewAgent(std::string ParentCoords)
               << " and energy "
               << parent->getEnergy());
 
+    float newHealth = parent->getHealth() / 2.0f;
+    float newEnergy = parent->getEnergy() / 2.0f;
+    if (newHealth < 0.001 or newEnergy < 0.001)
+    {
+        DEBUG_LOG("Too low energy or health for split");
+        return;
+    }
     parent->setHealth(
         parent->getHealth() / 2.0f);
-
-    parent->setEnergy(
-        parent->getEnergy() / 2.0f);
+    parent->setEnergy(parent->getEnergy() / 2.0f);
 
     DEBUG_LOG("Creating child Agent at "
               << childCoords);
 
     Agent *child = new Agent(
+        parent->getIdentifier(),
         parent->getHealth(),
         parent->getEnergy(),
+        parent->getPlantDiet(),
         parent->getSpeed(),
         parent->getBrain(),
         radiation,
