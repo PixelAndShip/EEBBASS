@@ -5,6 +5,7 @@
 class Agent
 {
 private:
+    int env_identifier;
     float health;
     float energy;
     float plantDiet;
@@ -28,6 +29,11 @@ public:
                   << agentColor.green << ", "
                   << agentColor.blue << ", "
                   << agentColor.transparency);
+    }
+
+    void setIdentifier(int iD)
+    {
+        env_identifier = iD;
     }
 
     void setHealth(float iH)
@@ -111,6 +117,11 @@ public:
         DEBUG_LOG("setBrain() called (currently unimplemented)");
     }
 
+    int getIdentifier()
+    {
+        return env_identifier;
+    }
+
     float getHealth()
     {
         DEBUG_LOG("Getting health: " << health);
@@ -174,6 +185,7 @@ public:
     Agent();
 
     Agent(
+        int identifier,
         float eRadiation,
         std::mt19937 &gen,
         std::uniform_int_distribution<> &dist,
@@ -181,6 +193,7 @@ public:
         int brainDepth);
 
     Agent(
+        int identifier,
         float iHealth,
         float iEnergy,
         float iPlantDiet,

@@ -31,14 +31,18 @@ Agent::Agent()
 }
 
 Agent::Agent(
+    int identifier,
     float eRadiation,
     std::mt19937 &gen,
     std::uniform_int_distribution<> &dist,
     int childNodeCount,
     int brainDepth)
-    : brain(eRadiation, gen, dist, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, gen, dist, childNodeCount, brainDepth)
 {
     DEBUG_LOG("Starting generated Agent constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Identifier from " << identifier << " to " << env_identifier);
 
     health = 100.0;
     DEBUG_LOG("Set health: " << health);
@@ -70,6 +74,7 @@ Agent::Agent(
 }
 
 Agent::Agent(
+    int identifier,
     float iHealth,
     float iEnergy,
     float iPlantDiet,
@@ -79,9 +84,12 @@ Agent::Agent(
     std::mt19937 &gen,
     int childNodeCount,
     int brainDepth)
-    : brain(eRadiation, gen, iBrain, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, gen, iBrain, childNodeCount, brainDepth)
 {
     DEBUG_LOG("Starting split spawn Agent constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Split identifier from " << identifier << " to " << env_identifier);
 
     health = iHealth;
     DEBUG_LOG("Split health from " << iHealth << " to " << health);

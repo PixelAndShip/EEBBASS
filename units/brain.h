@@ -1,21 +1,22 @@
 #pragma once
 
 #include <iostream>
-
+#include <sstream>
 #include "brain_nodes/input_node.h"
 
 // class OutputNode;
 class Brain
 {
 private:
+    int env_identifier;
     std::vector<InputNode *> inputNodes;
 
 public:
     Brain();
 
-    Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
+    Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
-    Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth);
+    Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth);
 
     ~Brain();
 
@@ -30,4 +31,9 @@ public:
     void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level, int childNodeCount, int brainDepth);
     void manageConnections();
     void sendSignal();
+
+    void setIdentifier(int iD) { env_identifier = iD; };
+    int getIdentifier() { return env_identifier; };
+    void logBrain();
+    std::string outputBrain(InputNode *node, int depth = 0);
 };

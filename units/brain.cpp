@@ -5,9 +5,12 @@ Brain::Brain()
     DEBUG_LOG("Default Brain constructor called");
 }
 
-Brain::Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
+Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
 {
     DEBUG_LOG("Starting Brain copy constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Split identifier from " << identifier << " to " << env_identifier);
 
     std::vector<InputNode *> copyInputNodes = iBrain.getInputNodes();
     DEBUG_LOG("Copying " << copyInputNodes.size() << " root InputNode(s)");
@@ -21,7 +24,7 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, const Brain &iBrain, int child
 
         addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
-
+    logBrain();
     DEBUG_LOG("Finished Brain copy constructor");
 }
 
@@ -39,9 +42,12 @@ Brain::~Brain()
     DEBUG_LOG("Finished destroying Brain");
 }
 
-Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth)
+Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth)
 {
     DEBUG_LOG("Starting random Brain constructor");
+
+    env_identifier = identifier;
+    DEBUG_LOG("Identifier from " << identifier << " to " << env_identifier);
 
     int InputNodeCount = dist(gen);
     DEBUG_LOG("Generating " << InputNodeCount << " root InputNode(s)");
@@ -57,7 +63,7 @@ Brain::Brain(float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<
 
         addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
     }
-
+    logBrain();
     DEBUG_LOG("Finished random Brain constructor");
 }
 
@@ -74,45 +80,31 @@ void Brain::addCopiedConnection(
 
     std::uniform_int_distribution<> newNodeChance(0, 100);
 
-    if (parentLastInputNode->getInputNodes().empty())
+    if (parentLastInputNode->getOutputNode() != nullptr)
     {
-        DEBUG_LOG("No child InputNodes to copy");
-        return;
+        OutputNode *copyOutNode =
+            parentLastInputNode->getOutputNode();
+
+        OutputNode *copiedOutNode =
+            new OutputNode(gen, copyOutNode);
+
+        lastInputNode->setOutputNode(copiedOutNode);
     }
 
-    for (int i = 0; i < parentLastInputNode->getInputNodes().size(); i++)
+    for (InputNode *copyNode :
+         parentLastInputNode->getInputNodes())
     {
-        DEBUG_LOG("Copying child InputNode " << (i + 1) << "/" << parentLastInputNode->getInputNodes().size());
-
-        InputNode *copyNode = parentLastInputNode->getInputNodes()[i];
-        InputNode *copiedNode = new InputNode(gen, copyNode);
-
-        if (copyNode->getOutputNode() != nullptr)
-        {
-            DEBUG_LOG("Copying OutputNode");
-
-            OutputNode *copyOutNode = copyNode->getOutputNode();
-            OutputNode *copiedOutNode = new OutputNode(gen, copyOutNode);
-            copiedNode->setOutputNode(copiedOutNode);
-        }
+        InputNode *copiedNode =
+            new InputNode(gen, copyNode);
 
         lastInputNode->appendInputNode(copiedNode);
 
-        if (newNodeChance(gen) <= 5 &&
-            parentLastInputNode->getInputNodes().size() < childNodeCount)
-        {
-            DEBUG_LOG("Mutation: adding additional InputNode");
-
-            InputNode *newNode = new InputNode(gen);
-            lastInputNode->appendInputNode(newNode);
-        }
-
-        if (newNodeChance(gen) <= 5 &&
+        if (newNodeChance(gen) <= 20 and
             copiedNode->getOutputNode() != nullptr)
         {
-            DEBUG_LOG("Mutation: replacing OutputNode");
+            OutputNode *newOutputNode =
+                new OutputNode(gen);
 
-            OutputNode *newOutputNode = new OutputNode(gen);
             copiedNode->setOutputNode(newOutputNode);
         }
 
@@ -126,7 +118,30 @@ void Brain::addCopiedConnection(
             brainDepth);
     }
 
-    DEBUG_LOG("Finished copying connections at level " << level);
+    if (newNodeChance(gen) <= 20 and
+        lastInputNode->getInputNodes().size() < childNodeCount and
+        level + 1 < brainDepth)
+    {
+        DEBUG_LOG("Mutation: creating new InputNode during copy");
+
+        InputNode *newNode =
+            new InputNode(gen);
+
+        lastInputNode->appendInputNode(newNode);
+
+        DEBUG_LOG(
+            "New InputNode created at depth "
+            << level + 1);
+
+        addConnection(
+            eRadiation,
+            gen,
+            newNode,
+            newNodeChance,
+            level + 1,
+            childNodeCount,
+            brainDepth);
+    }
 }
 
 void Brain::addConnection(
@@ -205,4 +220,124 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
               << inputNodes.size() << ")");
 
     return inputNodes;
+}
+
+void Brain::logBrain()
+{
+    DEBUG_LOG("Starting brain log");
+
+    std::stringstream writtenData;
+    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
+    std::ifstream CurrentLog(fileName);
+    if (CurrentLog)
+    {
+        writtenData << CurrentLog.rdbuf();
+    }
+    std::string data = writtenData.str() + "\n";
+    DEBUG_LOG("Read log file " + std::to_string(env_identifier));
+    for (InputNode *iN : inputNodes)
+    {
+        DEBUG_LOG("Starting input node log");
+        data += outputBrain(iN, 0);
+    }
+
+    CurrentLog.close();
+
+    std::ofstream updatedLog(fileName);
+    DEBUG_LOG("Writing data to file");
+    if (data == "")
+    {
+        data = "No brain found!";
+    }
+    updatedLog << data;
+
+    updatedLog.close();
+
+    DEBUG_LOG("Finished simulation cycle logging");
+}
+
+std::string Brain::outputBrain(InputNode *node, int depth)
+{
+    DEBUG_LOG("Outputting brain node at depth "
+              << depth
+              << " pointer "
+              << node);
+
+    if (!node)
+    {
+        DEBUG_LOG("Node is null");
+
+        return "";
+    }
+
+    std::string data = "";
+
+    std::string indent(
+        depth * 2,
+        ' ');
+
+    data += indent;
+
+    unsigned int key = node->getKey();
+
+    DEBUG_LOG("Node key: "
+              << key);
+
+    if (key != 255)
+    {
+        DEBUG_LOG("Valid sense key");
+
+        data +=
+            std::to_string(key) + "|" + getSenses().at(key) + "|" + std::to_string(node->getWeight());
+    }
+    else
+    {
+        DEBUG_LOG("Invalid sense key");
+
+        data +=
+            std::to_string(key) + "|INVALID_SENSE_KEY";
+    }
+
+    if (node->getOutputNode())
+    {
+        DEBUG_LOG("Node has OutputNode");
+
+        unsigned int outputKey =
+            node->getOutputNode()->getKey();
+
+        DEBUG_LOG("Output key: "
+                  << outputKey);
+
+        if (outputKey < getActions().size())
+        {
+            data +=
+                "---" + std::to_string(outputKey) + "|" + getActions().at(outputKey) + "|" + std::to_string(node->getOutputNode()->getWeight());
+        }
+        else
+        {
+            DEBUG_LOG("Invalid output key");
+
+            data +=
+                "---" + std::to_string(outputKey) + "|INVALID_ACTION_KEY";
+        }
+    }
+
+    data += "\n";
+
+    DEBUG_LOG("Processing "
+              << node->getInputNodes().size()
+              << " child nodes");
+
+    for (InputNode *cn :
+         node->getInputNodes())
+    {
+        data += outputBrain(
+            cn,
+            depth + 1);
+    }
+
+    DEBUG_LOG("Finished outputting node at depth "
+              << depth);
+
+    return data;
 }

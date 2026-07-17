@@ -5,12 +5,15 @@
 class Plant
 {
 private:
+    int env_identifier;
     float health;
     float energy;
     UnitColor plantColor;
     int x, y;
 
 public:
+    void setIdentifier(int iD) { env_identifier = iD; };
+    int getIdentifier() { return env_identifier; };
     void updateColor()
     {
         DEBUG_LOG("Updating Plant color from stats");

@@ -148,7 +148,7 @@ void InputNode::appendInputNode(InputNode *iN)
 
 void InputNode::insertInputNodeAt(int index, InputNode *iN)
 {
-    if (index >= 0 && index <= static_cast<int>(inputNodes.size()))
+    if (index >= 0 and index <= static_cast<int>(inputNodes.size()))
     {
         DEBUG_LOG("Inserting child InputNode at index " << index
                                                         << " (pointer " << iN << ")");
@@ -163,7 +163,7 @@ void InputNode::insertInputNodeAt(int index, InputNode *iN)
 
 void InputNode::deleteInputNode(int index)
 {
-    if (index >= 0 && index < static_cast<int>(inputNodes.size()))
+    if (index >= 0 and index < static_cast<int>(inputNodes.size()))
     {
         DEBUG_LOG("Removing child InputNode at index "
                   << index << " (pointer "
