@@ -65,7 +65,7 @@ void Environment::manageSimulation()
     startSimulation();
     InitWindow(800, 800, "Environment");
     SetTargetFPS(5);
-    while (!WindowShouldClose() and iteration < 100)
+    while (!WindowShouldClose() and iteration < 200)
     {
         DEBUG_LOG("Staring simulation iteration: " + std::to_string(iteration));
         manageMoment();
@@ -101,7 +101,7 @@ void Environment::manageMoment()
               << " agents");
 
     std::vector<std::string> coords;
-
+    spider->processedAgents.clear();
     for (auto &[c, a] : spider->Agents)
         coords.push_back(c);
 
