@@ -153,6 +153,7 @@ void Spider::manageSubMoment()
 
         if (it == Agents.end() or it->second == nullptr)
         {
+
             DEBUG_LOG("Agent no longer exists at " << coords);
             continue;
         }

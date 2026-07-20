@@ -25,6 +25,7 @@ Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &i
         addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
     logBrain();
+    logBrain();
     DEBUG_LOG("Finished Brain copy constructor");
 }
 
@@ -63,6 +64,7 @@ Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_i
 
         addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
     }
+    logBrain();
     logBrain();
     DEBUG_LOG("Finished random Brain constructor");
 }
@@ -220,6 +222,126 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
               << inputNodes.size() << ")");
 
     return inputNodes;
+}
+
+void Brain::logBrain()
+{
+    DEBUG_LOG("Starting brain log");
+
+    std::stringstream writtenData;
+    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
+    std::ifstream CurrentLog(fileName);
+    if (CurrentLog)
+    {
+        writtenData << CurrentLog.rdbuf();
+    }
+    std::string data = writtenData.str() + "\n";
+    DEBUG_LOG("Read log file " + std::to_string(env_identifier));
+    for (InputNode *iN : inputNodes)
+    {
+        DEBUG_LOG("Starting input node log");
+        data += outputBrain(iN, 0);
+    }
+
+    CurrentLog.close();
+
+    std::ofstream updatedLog(fileName);
+    DEBUG_LOG("Writing data to file");
+    if (data == "")
+    {
+        data = "No brain found!";
+    }
+    updatedLog << data;
+
+    updatedLog.close();
+
+    DEBUG_LOG("Finished simulation cycle logging");
+}
+
+std::string Brain::outputBrain(InputNode *node, int depth)
+{
+    DEBUG_LOG("Outputting brain node at depth "
+              << depth
+              << " pointer "
+              << node);
+
+    if (!node)
+    {
+        DEBUG_LOG("Node is null");
+
+        return "";
+    }
+
+    std::string data = "";
+
+    std::string indent(
+        depth * 2,
+        ' ');
+
+    data += indent;
+
+    unsigned int key = node->getKey();
+
+    DEBUG_LOG("Node key: "
+              << key);
+
+    if (key != 255)
+    {
+        DEBUG_LOG("Valid sense key");
+
+        data +=
+            std::to_string(key) + "|" + getSenses().at(key) + "|" + std::to_string(node->getWeight());
+    }
+    else
+    {
+        DEBUG_LOG("Invalid sense key");
+
+        data +=
+            std::to_string(key) + "|INVALID_SENSE_KEY";
+    }
+
+    if (node->getOutputNode())
+    {
+        DEBUG_LOG("Node has OutputNode");
+
+        unsigned int outputKey =
+            node->getOutputNode()->getKey();
+
+        DEBUG_LOG("Output key: "
+                  << outputKey);
+
+        if (outputKey < getActions().size())
+        {
+            data +=
+                "---" + std::to_string(outputKey) + "|" + getActions().at(outputKey) + "|" + std::to_string(node->getOutputNode()->getWeight());
+        }
+        else
+        {
+            DEBUG_LOG("Invalid output key");
+
+            data +=
+                "---" + std::to_string(outputKey) + "|INVALID_ACTION_KEY";
+        }
+    }
+
+    data += "\n";
+
+    DEBUG_LOG("Processing "
+              << node->getInputNodes().size()
+              << " child nodes");
+
+    for (InputNode *cn :
+         node->getInputNodes())
+    {
+        data += outputBrain(
+            cn,
+            depth + 1);
+    }
+
+    DEBUG_LOG("Finished outputting node at depth "
+              << depth);
+
+    return data;
 }
 
 void Brain::logBrain()
