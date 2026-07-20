@@ -99,7 +99,7 @@ void Brain::addCopiedConnection(
 
         lastInputNode->appendInputNode(copiedNode);
 
-        if (newNodeChance(gen) <= 20 and
+        if (newNodeChance(gen) <= 5 and
             copiedNode->getOutputNode() != nullptr)
         {
             OutputNode *newOutputNode =
@@ -118,7 +118,7 @@ void Brain::addCopiedConnection(
             brainDepth);
     }
 
-    if (newNodeChance(gen) <= 20 and
+    if (newNodeChance(gen) <= 5 and
         lastInputNode->getInputNodes().size() < childNodeCount and
         level + 1 < brainDepth)
     {

@@ -159,7 +159,7 @@ void Spider::manageSubMoment()
 
         Agent *agent = it->second;
 
-        if (agent->getHealth() <= 0.001)
+        if (agent->getHealth() <= 0.1)
         {
             DEBUG_LOG("Skipping dead Agent");
             continue;
@@ -486,7 +486,7 @@ void Spider::manageAction(
         return;
     }
 
-    if (Agents.at(AgentCoordinates)->getHealth() <= 0.001)
+    if (Agents.at(AgentCoordinates)->getHealth() <= 0.1)
     {
         DEBUG_LOG("Cannot act: Agent is dead");
         return;
@@ -673,7 +673,7 @@ void Spider::splitNewAgent(std::string ParentCoords)
 
     float newHealth = parent->getHealth() / 2.0f;
     float newEnergy = parent->getEnergy() / 2.0f;
-    if (newHealth < 0.001 or newEnergy < 0.001)
+    if (newHealth <= 0.1 or newEnergy <= 0.1)
     {
         DEBUG_LOG("Too low energy or health for split");
         return;

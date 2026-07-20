@@ -140,7 +140,7 @@ void Environment::manageMoment()
                   << " -> "
                   << agent->getHealth());
 
-        if (agent->getHealth() <= 0.001)
+        if (agent->getHealth() <= 0.1)
         {
             DEBUG_LOG("Agent died at "
                       << it->first);
@@ -245,7 +245,7 @@ void Environment::startSimulation()
 
         DEBUG_LOG("Generating coordinates");
 
-        generateCoords(genesis);
+        generateAgentCoords(genesis);
 
         DEBUG_LOG("Adding Agent at "
                   << genesis->getCoords());
@@ -257,50 +257,148 @@ void Environment::startSimulation()
     DEBUG_LOG("Starting window");
 }
 
-void Environment::generateCoords(Agent *ag)
+void Environment::generateAgentCoords(Agent *ag)
 {
     DEBUG_LOG("Generating coordinates for Agent");
-
+    int cycles = 0;
     if (ag == nullptr)
     {
         DEBUG_LOG("Cannot generate coordinates for null Agent");
         return;
     }
-
-    int x = insideBorders(gen) * 20;
-    int y = insideBorders(gen) * 20;
-
-    DEBUG_LOG("Generated coordinates "
-              << x
-              << "_"
-              << y);
-
-    for (auto ac : spider->Agents)
+    while (true)
     {
-        if (ac.second == nullptr)
+        if (cycles >= 300)
         {
-            continue;
-        }
-
-        if (ac.second->getX() == x and
-            ac.second->getY() == y)
-        {
-            DEBUG_LOG("Coordinates occupied by Agent at "
-                      << ac.first);
-
-            generateCoords(ag);
-
+            DEBUG_LOG("Could not generate agent coords");
             return;
         }
+        int x = insideBorders(gen) * 20;
+        int y = insideBorders(gen) * 20;
+
+        DEBUG_LOG("Generated coordinates "
+                  << x
+                  << "_"
+                  << y);
+        bool occupied = false;
+        for (auto &ac : spider->Agents)
+        {
+            if (ac.second == nullptr)
+            {
+                continue;
+            }
+
+            if (ac.second->getX() == x and
+                ac.second->getY() == y)
+            {
+                occupied = true;
+                break;
+            }
+        }
+        if (occupied == false)
+        {
+            for (auto &pl : spider->Plants)
+            {
+                if (pl.second == nullptr)
+                {
+                    continue;
+                }
+
+                if (pl.second->getX() == x and
+                    pl.second->getY() == y)
+                {
+                    occupied = true;
+                    break;
+                }
+            }
+        }
+
+        if (occupied == false)
+        {
+
+            DEBUG_LOG("Assigning coordinates "
+                      << x
+                      << "_"
+                      << y);
+
+            ag->setX(x);
+            ag->setY(y);
+            DEBUG_LOG("Finished coordinate generation");
+            return;
+        }
+        cycles += 1;
     }
+}
 
-    DEBUG_LOG("Assigning coordinates "
-              << x
-              << "_"
-              << y);
+void Environment::generatePlantCoords(Plant *pl)
+{
+    DEBUG_LOG("Generating coordinates for Agent");
+    int cycles = 0;
+    if (pl == nullptr)
+    {
+        DEBUG_LOG("Cannot generate coordinates for null Agent");
+        return;
+    }
+    while (true)
+    {
+        if (cycles >= 300)
+        {
+            DEBUG_LOG("Could not generate plant coords");
+            return;
+        }
+        int x = insideBorders(gen) * 20;
+        int y = insideBorders(gen) * 20;
 
-    ag->setX(x);
-    ag->setY(y);
+        DEBUG_LOG("Generated coordinates "
+                  << x
+                  << "_"
+                  << y);
+        bool occupied = false;
+        for (auto &ac : spider->Agents)
+        {
+            if (ac.second == nullptr)
+            {
+                continue;
+            }
 
-    DEBUG_LOG("Finished coordinate generation");
+            if (ac.second->getX() == x and
+                ac.second->getY() == y)
+            {
+                occupied = true;
+                break;
+            }
+        }
+        if (occupied == false)
+        {
+            for (auto &pl : spider->Plants)
+            {
+                if (pl.second == nullptr)
+                {
+                    continue;
+                }
+
+                if (pl.second->getX() == x and
+                    pl.second->getY() == y)
+                {
+                    occupied = true;
+                    break;
+                }
+            }
+        }
+
+        if (occupied == false)
+        {
+
+            DEBUG_LOG("Assigning coordinates "
+                      << x
+                      << "_"
+                      << y);
+
+            pl->setX(x);
+            pl->setY(y);
+            DEBUG_LOG("Finished coordinate generation");
+            return;
+        }
+        cycles += 1;
+    }
 }

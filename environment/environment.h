@@ -42,5 +42,7 @@ public:
 
     void startSimulation();
 
-    void generateCoords(Agent *ag);
+    void generateAgentCoords(Agent *ag);
+
+    void generatePlantCoords(Plant *pl);
 };

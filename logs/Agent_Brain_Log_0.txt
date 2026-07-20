@@ -1,608 +1,2304 @@
 
+0|SeeSomething|0.460000---3|MoveDown|0.800000
+3|EnergyCountBelowSet|0.960000---2|MoveUp|0.480000
+3|EnergyCountBelowSet|0.800000
+  2|EnergyCountAboveSet|0.520000
+  5|HealthCountBelowSet|0.810000
+3|EnergyCountBelowSet|0.270000
+2|EnergyCountAboveSet|0.910000---1|MoveRight|0.870000
+2|EnergyCountAboveSet|0.390000
+  1|SeeColor|0.580000---8|BiteColor|0.200000
+
+4|HealthCountAboveSet|0.440000---3|MoveDown|0.470000
+
+2|EnergyCountAboveSet|0.470000
+5|HealthCountBelowSet|0.290000
+  1|SeeColor|0.640000
+    3|EnergyCountBelowSet|0.790000
+      5|HealthCountBelowSet|0.430000---3|MoveDown|0.010000
+      4|HealthCountAboveSet|0.430000---3|MoveDown|0.670000
+    4|HealthCountAboveSet|0.470000
+3|EnergyCountBelowSet|0.360000---0|MoveLeft|0.940000
+
+2|EnergyCountAboveSet|0.420000---5|Split|0.530000
+4|HealthCountAboveSet|0.990000
+  1|SeeColor|0.370000---8|BiteColor|0.460000
+5|HealthCountBelowSet|0.690000
+  2|EnergyCountAboveSet|0.120000
+    5|HealthCountBelowSet|0.650000---3|MoveDown|0.230000
+0|SeeSomething|0.240000
+  1|SeeColor|0.090000---5|Split|0.450000
+  4|HealthCountAboveSet|0.200000
+    3|EnergyCountBelowSet|0.950000
+      2|EnergyCountAboveSet|0.090000---1|MoveRight|0.880000
+
+3|EnergyCountBelowSet|0.510000
+  4|HealthCountAboveSet|0.190000
+0|SeeSomething|0.570000
+3|EnergyCountBelowSet|0.160000---7|ExpendEnergyOnSpeed|0.420000
+3|EnergyCountBelowSet|0.850000---8|BiteColor|0.710000
+3|EnergyCountBelowSet|0.250000
+  1|SeeColor|0.270000
+    3|EnergyCountBelowSet|0.590000
+  0|SeeSomething|0.690000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.540000---5|Split|0.320000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.000000
+2|EnergyCountAboveSet|0.310000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.580000---4|Bite|0.920000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.340000---5|Split|0.980000
 
 
-3|EnergyCountBelowSet|0.540000
-  0|SeeSomething|0.880000
-3|EnergyCountBelowSet|0.450000---8|BiteColor|0.500000
-3|EnergyCountBelowSet|0.600000
-2|EnergyCountAboveSet|0.040000---0|MoveLeft|0.070000
-0|SeeSomething|0.790000---3|MoveDown|0.370000
-4|HealthCountAboveSet|0.170000---2|MoveUp|0.310000
-
-3|EnergyCountBelowSet|0.890000
-  2|EnergyCountAboveSet|0.560000
-  1|SeeColor|0.350000---5|Split|0.990000
-0|SeeSomething|0.380000---5|Split|0.310000
-4|HealthCountAboveSet|0.040000
-  2|EnergyCountAboveSet|0.370000
-    4|HealthCountAboveSet|0.310000---4|Bite|0.500000
-    2|EnergyCountAboveSet|0.110000
-      3|EnergyCountBelowSet|0.920000
-        5|HealthCountBelowSet|0.460000---0|MoveLeft|0.260000
-  3|EnergyCountBelowSet|0.460000---6|ExpendEnergyOnHealth|0.720000
-4|HealthCountAboveSet|0.770000---4|Bite|0.600000
-
-1|SeeColor|0.920000---0|MoveLeft|0.130000
-1|SeeColor|0.630000---5|Split|0.020000
-4|HealthCountAboveSet|0.920000
-  4|HealthCountAboveSet|0.850000
-
-1|SeeColor|0.950000
-  3|EnergyCountBelowSet|0.670000
-    2|EnergyCountAboveSet|0.260000---3|MoveDown|0.440000
-    3|EnergyCountBelowSet|0.820000---6|ExpendEnergyOnHealth|0.780000
-  2|EnergyCountAboveSet|0.490000---8|BiteColor|0.060000
-3|EnergyCountBelowSet|0.460000---0|MoveLeft|0.740000
-0|SeeSomething|0.080000
-0|SeeSomething|0.030000
-  2|EnergyCountAboveSet|0.300000---1|MoveRight|0.360000
-  0|SeeSomething|0.080000---1|MoveRight|0.590000
-3|EnergyCountBelowSet|0.030000---4|Bite|0.720000
-5|HealthCountBelowSet|0.480000---0|MoveLeft|0.320000
-
-5|HealthCountBelowSet|0.620000---0|MoveLeft|0.200000
-2|EnergyCountAboveSet|0.240000
-  2|EnergyCountAboveSet|0.480000
-    3|EnergyCountBelowSet|0.060000
-      4|HealthCountAboveSet|0.880000---4|Bite|0.330000
-      3|EnergyCountBelowSet|0.640000
-        3|EnergyCountBelowSet|0.510000---2|MoveUp|0.410000
-        4|HealthCountAboveSet|0.450000---0|MoveLeft|0.300000
-4|HealthCountAboveSet|0.280000
-  1|SeeColor|0.020000
-    2|EnergyCountAboveSet|0.350000---7|ExpendEnergyOnSpeed|0.150000
-    4|HealthCountAboveSet|0.790000---0|MoveLeft|0.140000
-3|EnergyCountBelowSet|0.060000---0|MoveLeft|0.910000
-
-1|SeeColor|0.600000
-  0|SeeSomething|0.660000---5|Split|0.240000
-  1|SeeColor|0.120000
-4|HealthCountAboveSet|0.680000
-1|SeeColor|0.630000
-  5|HealthCountBelowSet|0.400000
-3|EnergyCountBelowSet|0.920000---7|ExpendEnergyOnSpeed|0.650000
-0|SeeSomething|0.270000---5|Split|0.920000
-0|SeeSomething|0.540000---1|MoveRight|0.770000
-4|HealthCountAboveSet|0.190000
-
-=========================================
-
-4|HealthCountAboveSet|0.910000---0|MoveLeft|0.910000
-1|SeeColor|0.890000
-
-
-3|EnergyCountBelowSet|0.910000
-  3|EnergyCountBelowSet|0.520000
-    4|HealthCountAboveSet|0.220000
-0|SeeSomething|0.960000---5|Split|0.720000
-
-3|EnergyCountBelowSet|0.680000
-  2|EnergyCountAboveSet|0.770000
-    5|HealthCountBelowSet|0.630000
-      2|EnergyCountAboveSet|0.630000
-    4|HealthCountAboveSet|0.910000
-  2|EnergyCountAboveSet|0.500000---4|Bite|0.830000
-
-4|HealthCountAboveSet|0.160000
-  3|EnergyCountBelowSet|0.020000---6|ExpendEnergyOnHealth|0.130000
-0|SeeSomething|0.770000---5|Split|0.620000
-1|SeeColor|0.940000
-3|EnergyCountBelowSet|0.730000---6|ExpendEnergyOnHealth|0.970000
-1|SeeColor|0.490000---7|ExpendEnergyOnSpeed|0.080000
-2|EnergyCountAboveSet|0.610000
-  1|SeeColor|0.580000
-0|SeeSomething|0.750000
-
-5|HealthCountBelowSet|0.330000
-  5|HealthCountBelowSet|0.350000
-    1|SeeColor|0.360000
-      3|EnergyCountBelowSet|0.170000---8|BiteColor|0.170000
-  0|SeeSomething|0.450000---0|MoveLeft|0.570000
-2|EnergyCountAboveSet|0.570000
-0|SeeSomething|0.600000
-0|SeeSomething|0.200000
-
-
-2|EnergyCountAboveSet|0.180000---5|Split|0.370000
-2|EnergyCountAboveSet|0.310000---8|BiteColor|0.920000
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.520000---5|Split|0.330000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
 2|EnergyCountAboveSet|0.290000
 
-=========================================
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.530000---5|Split|0.310000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
 
-2|EnergyCountAboveSet|0.740000---2|MoveUp|0.500000
-2|EnergyCountAboveSet|0.340000---3|MoveDown|0.490000
-2|EnergyCountAboveSet|0.720000---5|Split|0.620000
-3|EnergyCountBelowSet|0.970000
-  2|EnergyCountAboveSet|0.240000
-    1|SeeColor|0.820000
-      4|HealthCountAboveSet|0.330000
-        3|EnergyCountBelowSet|0.320000
-          4|HealthCountAboveSet|0.140000
-          1|SeeColor|0.300000
-    3|EnergyCountBelowSet|0.590000
-      4|HealthCountAboveSet|0.290000
-        2|EnergyCountAboveSet|0.590000---3|MoveDown|0.360000
-        4|HealthCountAboveSet|0.370000
-  4|HealthCountAboveSet|0.890000---2|MoveUp|0.820000
-2|EnergyCountAboveSet|0.320000
+2|EnergyCountAboveSet|0.410000---3|MoveDown|0.550000
+4|HealthCountAboveSet|0.970000
+  1|SeeColor|0.360000---8|BiteColor|0.440000
+5|HealthCountBelowSet|0.710000
+  2|EnergyCountAboveSet|0.100000
+    5|HealthCountBelowSet|0.660000---3|MoveDown|0.230000
+0|SeeSomething|0.260000
+  1|SeeColor|0.080000---5|Split|0.460000
+  5|HealthCountBelowSet|0.190000
+    3|EnergyCountBelowSet|0.960000
+      2|EnergyCountAboveSet|0.100000---1|MoveRight|0.870000
 
-4|HealthCountAboveSet|0.060000
-  5|HealthCountBelowSet|0.260000
-    0|SeeSomething|0.510000
-      2|EnergyCountAboveSet|0.140000---5|Split|0.480000
-    2|EnergyCountAboveSet|0.930000---8|BiteColor|0.220000
-  5|HealthCountBelowSet|0.460000
-    3|EnergyCountBelowSet|0.990000
-      5|HealthCountBelowSet|0.780000---7|ExpendEnergyOnSpeed|0.940000
-1|SeeColor|0.380000---4|Bite|0.260000
-
-5|HealthCountBelowSet|0.170000
-5|HealthCountBelowSet|0.540000
-  4|HealthCountAboveSet|0.680000
-  1|SeeColor|0.310000
-    5|HealthCountBelowSet|0.960000---3|MoveDown|0.330000
-1|SeeColor|0.120000
-  0|SeeSomething|0.890000
-    0|SeeSomething|0.070000
-    0|SeeSomething|0.990000
-      3|EnergyCountBelowSet|0.070000---7|ExpendEnergyOnSpeed|0.530000
-3|EnergyCountBelowSet|0.630000---1|MoveRight|0.910000
-2|EnergyCountAboveSet|0.760000
-
-1|SeeColor|0.090000---3|MoveDown|0.410000
-
-5|HealthCountBelowSet|0.140000
-
-0|SeeSomething|0.860000---3|MoveDown|0.460000
-5|HealthCountBelowSet|0.770000---6|ExpendEnergyOnHealth|0.550000
-4|HealthCountAboveSet|0.070000
-2|EnergyCountAboveSet|0.870000---2|MoveUp|0.960000
-1|SeeColor|0.970000---7|ExpendEnergyOnSpeed|0.370000
-4|HealthCountAboveSet|0.400000
-2|EnergyCountAboveSet|0.620000
-  2|EnergyCountAboveSet|0.780000---4|Bite|0.690000
-
+2|EnergyCountAboveSet|0.440000---5|Split|0.510000
 4|HealthCountAboveSet|0.990000
-5|HealthCountBelowSet|0.200000---3|MoveDown|0.750000
-2|EnergyCountAboveSet|0.150000
-  0|SeeSomething|0.300000---2|MoveUp|0.050000
+  1|SeeColor|0.360000---8|BiteColor|0.460000
+5|HealthCountBelowSet|0.710000
+  2|EnergyCountAboveSet|0.130000
+    5|HealthCountBelowSet|0.630000---3|MoveDown|0.240000
+0|SeeSomething|0.220000
+  1|SeeColor|0.100000---5|Split|0.460000
+  4|HealthCountAboveSet|0.210000
+    3|EnergyCountBelowSet|0.950000
+      2|EnergyCountAboveSet|0.080000---1|MoveRight|0.890000
 
-2|EnergyCountAboveSet|0.900000
-4|HealthCountAboveSet|0.190000---4|Bite|0.040000
-5|HealthCountBelowSet|0.740000---6|ExpendEnergyOnHealth|0.200000
-0|SeeSomething|0.550000
-  3|EnergyCountBelowSet|0.470000---0|MoveLeft|0.220000
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
 
-=========================================
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.460000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.280000
+        4|HealthCountAboveSet|0.410000
+        3|EnergyCountBelowSet|0.830000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.350000---5|Split|0.980000
 
-0|SeeSomething|0.660000---2|MoveUp|0.780000
-0|SeeSomething|0.230000---4|Bite|0.840000
-4|HealthCountAboveSet|0.590000---3|MoveDown|0.240000
-0|SeeSomething|0.930000---8|BiteColor|0.050000
-1|SeeColor|0.690000---4|Bite|0.100000
-1|SeeColor|0.670000---6|ExpendEnergyOnHealth|0.270000
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.510000---5|Split|0.310000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.270000
 
-0|SeeSomething|0.820000
-  5|HealthCountBelowSet|0.070000
-  4|HealthCountAboveSet|0.370000---0|MoveLeft|0.600000
-3|EnergyCountBelowSet|0.740000
-  5|HealthCountBelowSet|0.910000
-    4|HealthCountAboveSet|0.320000
-      1|SeeColor|0.800000---3|MoveDown|0.230000
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.230000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.290000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.850000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
 
-4|HealthCountAboveSet|0.120000---5|Split|0.990000
-2|EnergyCountAboveSet|0.230000
-  5|HealthCountBelowSet|0.750000---0|MoveLeft|0.830000
-  2|EnergyCountAboveSet|0.130000---2|MoveUp|0.280000
-1|SeeColor|0.260000
-  4|HealthCountAboveSet|0.560000
-    4|HealthCountAboveSet|0.790000
-5|HealthCountBelowSet|0.060000
-  3|EnergyCountBelowSet|0.090000
-    3|EnergyCountBelowSet|0.020000---4|Bite|0.310000
-    2|EnergyCountAboveSet|0.420000---3|MoveDown|0.530000
-  1|SeeColor|0.650000---6|ExpendEnergyOnHealth|0.170000
-4|HealthCountAboveSet|0.140000
-  0|SeeSomething|0.430000
-  1|SeeColor|0.650000---6|ExpendEnergyOnHealth|0.790000
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.550000---5|Split|0.300000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
 
-4|HealthCountAboveSet|0.560000---5|Split|0.230000
-4|HealthCountAboveSet|0.890000---6|ExpendEnergyOnHealth|0.600000
-0|SeeSomething|0.320000
-  4|HealthCountAboveSet|0.610000
-    3|EnergyCountBelowSet|0.220000---7|ExpendEnergyOnSpeed|0.510000
-1|SeeColor|0.860000
-  2|EnergyCountAboveSet|0.850000---3|MoveDown|0.490000
-  2|EnergyCountAboveSet|0.170000
-    0|SeeSomething|0.540000---0|MoveLeft|0.460000
-    5|HealthCountBelowSet|0.460000---6|ExpendEnergyOnHealth|0.690000
-4|HealthCountAboveSet|0.420000
-  4|HealthCountAboveSet|0.910000---8|BiteColor|0.240000
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.550000---5|Split|0.300000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.290000
 
-2|EnergyCountAboveSet|0.640000---0|MoveLeft|0.680000
-1|SeeColor|0.610000
-1|SeeColor|0.150000---2|MoveUp|0.630000
-3|EnergyCountBelowSet|0.990000---4|Bite|0.520000
-2|EnergyCountAboveSet|0.920000
-  2|EnergyCountAboveSet|0.390000---2|MoveUp|0.560000
-1|SeeColor|0.460000
-1|SeeColor|0.170000---0|MoveLeft|0.980000
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.370000
+3|EnergyCountBelowSet|0.540000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.430000
 
-0|SeeSomething|0.910000---7|ExpendEnergyOnSpeed|0.670000
-2|EnergyCountAboveSet|0.810000---1|MoveRight|0.380000
-
-1|SeeColor|0.800000---1|MoveRight|0.820000
-0|SeeSomething|0.980000---7|ExpendEnergyOnSpeed|0.040000
-
-5|HealthCountBelowSet|0.390000
-  4|HealthCountAboveSet|0.790000---4|Bite|0.220000
-  4|HealthCountAboveSet|0.670000---8|BiteColor|0.040000
-0|SeeSomething|0.440000
-  5|HealthCountBelowSet|0.110000---4|Bite|0.410000
-  4|HealthCountAboveSet|0.690000---5|Split|0.340000
-4|HealthCountAboveSet|0.320000---7|ExpendEnergyOnSpeed|0.970000
-5|HealthCountBelowSet|0.220000
-  3|EnergyCountBelowSet|0.470000
-  4|HealthCountAboveSet|0.630000---3|MoveDown|0.820000
-4|HealthCountAboveSet|0.930000
-
-4|HealthCountAboveSet|0.110000---5|Split|0.990000
+4|HealthCountAboveSet|0.100000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
 2|EnergyCountAboveSet|0.250000
-  5|HealthCountBelowSet|0.730000---0|MoveLeft|0.810000
-  2|EnergyCountAboveSet|0.130000---2|MoveUp|0.280000
-    1|SeeColor|0.170000---0|MoveLeft|0.800000
-1|SeeColor|0.270000
-  4|HealthCountAboveSet|0.570000
-    4|HealthCountAboveSet|0.780000
-      4|HealthCountAboveSet|0.570000---0|MoveLeft|0.940000
-4|HealthCountAboveSet|0.050000
-  3|EnergyCountBelowSet|0.100000
-    3|EnergyCountBelowSet|0.010000---4|Bite|0.300000
-    2|EnergyCountAboveSet|0.420000---3|MoveDown|0.510000
-  1|SeeColor|0.660000---6|ExpendEnergyOnHealth|0.160000
-    2|EnergyCountAboveSet|0.140000---4|Bite|0.170000
-4|HealthCountAboveSet|0.150000
-  0|SeeSomething|0.410000
-    0|SeeSomething|0.420000---5|Split|0.870000
-  1|SeeColor|0.650000---6|ExpendEnergyOnHealth|0.770000
 
-4|HealthCountAboveSet|0.570000---5|Split|0.220000
-4|HealthCountAboveSet|0.870000---6|ExpendEnergyOnHealth|0.620000
-0|SeeSomething|0.320000
-  4|HealthCountAboveSet|0.590000
-    3|EnergyCountBelowSet|0.210000---7|ExpendEnergyOnSpeed|0.500000
-1|SeeColor|0.870000
-  2|EnergyCountAboveSet|0.870000---4|Bite|0.510000
-  2|EnergyCountAboveSet|0.180000
-    0|SeeSomething|0.520000---0|MoveLeft|0.440000
-    5|HealthCountBelowSet|0.470000---5|Split|0.680000
-4|HealthCountAboveSet|0.400000
-  4|HealthCountAboveSet|0.900000---8|BiteColor|0.250000
-    1|SeeColor|0.400000
-      0|SeeSomething|0.750000
-        5|HealthCountBelowSet|0.730000
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.530000---5|Split|0.290000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
 
-4|HealthCountAboveSet|0.540000---5|Split|0.210000
-4|HealthCountAboveSet|0.870000---6|ExpendEnergyOnHealth|0.610000
-  1|SeeColor|0.540000---5|Split|0.730000
-0|SeeSomething|0.300000
-  4|HealthCountAboveSet|0.620000
-    3|EnergyCountBelowSet|0.210000---7|ExpendEnergyOnSpeed|0.500000
-    0|SeeSomething|0.280000---3|MoveDown|0.780000
-1|SeeColor|0.850000
-  2|EnergyCountAboveSet|0.830000---3|MoveDown|0.470000
-  2|EnergyCountAboveSet|0.180000
-    0|SeeSomething|0.530000---0|MoveLeft|0.450000
-    5|HealthCountBelowSet|0.470000---6|ExpendEnergyOnHealth|0.680000
-  4|HealthCountAboveSet|0.820000
-2|EnergyCountAboveSet|0.440000
-  4|HealthCountAboveSet|0.900000---8|BiteColor|0.220000
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.530000---5|Split|0.290000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.280000
 
-4|HealthCountAboveSet|0.580000---5|Split|0.220000
-4|HealthCountAboveSet|0.880000---6|ExpendEnergyOnHealth|0.630000
-0|SeeSomething|0.300000
-  4|HealthCountAboveSet|0.570000
-    2|EnergyCountAboveSet|0.220000---7|ExpendEnergyOnSpeed|0.480000
-    1|SeeColor|0.640000
-      5|HealthCountBelowSet|0.660000---7|ExpendEnergyOnSpeed|0.980000
-1|SeeColor|0.880000
-  2|EnergyCountAboveSet|0.890000---4|Bite|0.490000
-  2|EnergyCountAboveSet|0.170000
-    0|SeeSomething|0.510000---0|MoveLeft|0.420000
-    5|HealthCountBelowSet|0.470000---5|Split|0.680000
-4|HealthCountAboveSet|0.380000
-  4|HealthCountAboveSet|0.920000---8|BiteColor|0.250000
-    1|SeeColor|0.400000
-      0|SeeSomething|0.740000
-        5|HealthCountBelowSet|0.720000
-      2|EnergyCountAboveSet|0.930000---8|BiteColor|0.060000
-  5|HealthCountBelowSet|0.730000---8|BiteColor|0.390000
-
-=========================================
-
-0|SeeSomething|0.040000
-  5|HealthCountBelowSet|0.030000
-    3|EnergyCountBelowSet|0.800000---4|Bite|0.260000
-    0|SeeSomething|0.200000
-      2|EnergyCountAboveSet|0.340000---4|Bite|0.050000
-      3|EnergyCountBelowSet|0.060000---6|ExpendEnergyOnHealth|0.970000
-  2|EnergyCountAboveSet|0.700000
-    1|SeeColor|0.820000
-      4|HealthCountAboveSet|0.420000
-      0|SeeSomething|0.040000---0|MoveLeft|0.570000
-0|SeeSomething|0.970000
-  3|EnergyCountBelowSet|0.340000
-    5|HealthCountBelowSet|0.190000
-      3|EnergyCountBelowSet|0.760000---0|MoveLeft|0.890000
-
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.530000---5|Split|0.340000
+2|EnergyCountAboveSet|0.010000---8|BiteColor|0.020000
 2|EnergyCountAboveSet|0.320000
-  3|EnergyCountBelowSet|0.050000
-0|SeeSomething|0.780000
-4|HealthCountAboveSet|0.810000---1|MoveRight|0.920000
 
-1|SeeColor|0.790000
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.900000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.350000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.550000---5|Split|0.330000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.550000---5|Split|0.310000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.430000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.530000---5|Split|0.340000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.550000---5|Split|0.300000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.060000
+3|EnergyCountBelowSet|0.270000
+
+2|EnergyCountAboveSet|0.170000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.520000---5|Split|0.270000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.070000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.550000---5|Split|0.340000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+4|HealthCountAboveSet|0.080000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.020000
+3|EnergyCountBelowSet|0.250000
+
+3|EnergyCountBelowSet|0.140000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.540000---5|Split|0.300000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.550000---6|ExpendEnergyOnHealth|0.420000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.490000---5|Split|0.300000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.260000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.530000---5|Split|0.290000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.080000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.510000---5|Split|0.350000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+  4|HealthCountAboveSet|0.590000
+    1|SeeColor|0.320000---1|MoveRight|0.300000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.510000---7|ExpendEnergyOnSpeed|0.350000
+2|EnergyCountAboveSet|0.030000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.340000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.560000---5|Split|0.320000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.350000
+5|HealthCountBelowSet|0.530000---5|Split|0.330000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.310000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.850000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.380000---5|Split|0.990000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.570000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.600000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.270000
+        4|HealthCountAboveSet|0.410000
+        3|EnergyCountBelowSet|0.840000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.290000
+  3|EnergyCountBelowSet|0.590000---4|Bite|0.920000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.360000---3|MoveDown|0.990000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.570000---4|Bite|0.930000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.330000---5|Split|0.960000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.570000---4|Bite|0.940000
+    2|EnergyCountAboveSet|0.190000
+      5|HealthCountBelowSet|0.460000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.890000
+        5|HealthCountBelowSet|0.270000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.820000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.350000---5|Split|0.990000
+
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.230000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.920000
+        5|HealthCountBelowSet|0.330000
+        5|HealthCountBelowSet|0.420000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.110000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.530000---5|Split|0.350000
+  2|EnergyCountAboveSet|0.820000
+    4|HealthCountAboveSet|0.710000---5|Split|0.650000
+    4|HealthCountAboveSet|0.530000
+      3|EnergyCountBelowSet|0.870000---8|BiteColor|0.220000
+      2|EnergyCountAboveSet|0.170000
+        5|HealthCountBelowSet|0.220000
+        4|HealthCountAboveSet|0.760000
+      4|HealthCountAboveSet|0.620000
+    2|EnergyCountAboveSet|0.040000---0|MoveLeft|0.010000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.340000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.340000
+3|EnergyCountBelowSet|0.570000---5|Split|0.300000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.450000
+
+4|HealthCountAboveSet|0.090000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.260000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.330000
+5|HealthCountBelowSet|0.550000---5|Split|0.350000
+  0|SeeSomething|0.500000---8|BiteColor|0.860000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.550000---5|Split|0.330000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.540000---5|Split|0.330000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.300000
+  1|SeeColor|0.830000
+    3|EnergyCountBelowSet|0.290000
+      5|HealthCountBelowSet|0.790000
+        5|HealthCountBelowSet|0.280000
+        2|EnergyCountAboveSet|0.090000
+        3|EnergyCountBelowSet|0.480000
+      0|SeeSomething|0.290000---8|BiteColor|0.450000
+      1|SeeColor|0.230000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.350000
+  4|HealthCountAboveSet|0.170000
+    2|EnergyCountAboveSet|0.550000
+      4|HealthCountAboveSet|0.330000---6|ExpendEnergyOnHealth|0.230000
+      0|SeeSomething|0.180000
+        2|EnergyCountAboveSet|0.920000
+      5|HealthCountBelowSet|0.350000
+        1|SeeColor|0.070000
+    5|HealthCountBelowSet|0.890000---3|MoveDown|0.730000
+    4|HealthCountAboveSet|0.070000---0|MoveLeft|0.020000
+5|HealthCountBelowSet|0.510000---5|Split|0.300000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.240000
   4|HealthCountAboveSet|0.810000
-    5|HealthCountBelowSet|0.810000
-      3|EnergyCountBelowSet|0.500000
-    1|SeeColor|0.360000---5|Split|0.180000
-2|EnergyCountAboveSet|0.790000
-  4|HealthCountAboveSet|0.980000
-0|SeeSomething|0.290000
-0|SeeSomething|0.460000
-4|HealthCountAboveSet|0.400000---7|ExpendEnergyOnSpeed|0.420000
-1|SeeColor|0.930000
-2|EnergyCountAboveSet|0.200000---1|MoveRight|0.450000
+    4|HealthCountAboveSet|0.020000---5|Split|0.670000
 
-0|SeeSomething|0.790000---6|ExpendEnergyOnHealth|0.390000
-3|EnergyCountBelowSet|0.970000---6|ExpendEnergyOnHealth|0.060000
-4|HealthCountAboveSet|0.320000
-  5|HealthCountBelowSet|0.860000---5|Split|0.170000
-  4|HealthCountAboveSet|0.350000---7|ExpendEnergyOnSpeed|0.510000
-3|EnergyCountBelowSet|0.720000
+4|HealthCountAboveSet|0.080000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.530000---5|Split|0.340000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.030000
+3|EnergyCountBelowSet|0.260000
 
-5|HealthCountBelowSet|0.540000
-  0|SeeSomething|0.450000---7|ExpendEnergyOnSpeed|0.720000
-  5|HealthCountBelowSet|0.710000
-    0|SeeSomething|0.160000---1|MoveRight|0.380000
-    3|EnergyCountBelowSet|0.340000
-      3|EnergyCountBelowSet|0.060000---8|BiteColor|0.890000
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.530000---5|Split|0.280000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.260000
 
-1|SeeColor|0.500000
-  3|EnergyCountBelowSet|0.740000
-  0|SeeSomething|0.640000---1|MoveRight|0.530000
-3|EnergyCountBelowSet|0.650000---6|ExpendEnergyOnHealth|0.590000
-4|HealthCountAboveSet|0.800000---5|Split|0.640000
-2|EnergyCountAboveSet|0.650000---8|BiteColor|0.050000
+1|SeeColor|0.140000---0|MoveLeft|0.380000
+  4|HealthCountAboveSet|0.740000
+    4|HealthCountAboveSet|0.390000
+    5|HealthCountBelowSet|0.020000---4|Bite|0.250000
+5|HealthCountBelowSet|0.540000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.060000
+3|EnergyCountBelowSet|0.250000
 
-5|HealthCountBelowSet|0.090000
-5|HealthCountBelowSet|0.510000---6|ExpendEnergyOnHealth|0.480000
-4|HealthCountAboveSet|0.930000
-  3|EnergyCountBelowSet|0.290000
-    1|SeeColor|0.320000
-      0|SeeSomething|0.150000---7|ExpendEnergyOnSpeed|0.520000
-      2|EnergyCountAboveSet|0.320000
-        3|EnergyCountBelowSet|0.890000---1|MoveRight|0.390000
-        3|EnergyCountBelowSet|0.430000---1|MoveRight|0.140000
-    0|SeeSomething|0.290000---7|ExpendEnergyOnSpeed|0.210000
-5|HealthCountBelowSet|0.210000
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.540000---5|Split|0.310000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
 
+2|EnergyCountAboveSet|0.070000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.510000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+3|EnergyCountBelowSet|0.300000
 
-=========================================
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.380000
+4|HealthCountAboveSet|0.510000---5|Split|0.330000
+2|EnergyCountAboveSet|0.020000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.330000
 
-5|HealthCountBelowSet|0.900000
-  5|HealthCountBelowSet|0.710000---0|MoveLeft|0.890000
-5|HealthCountBelowSet|0.150000---6|ExpendEnergyOnHealth|0.950000
-3|EnergyCountBelowSet|0.210000---8|BiteColor|0.870000
-2|EnergyCountAboveSet|0.160000---6|ExpendEnergyOnHealth|0.310000
-4|HealthCountAboveSet|0.050000
-  4|HealthCountAboveSet|0.430000---2|MoveUp|0.740000
-  3|EnergyCountBelowSet|0.770000
-    1|SeeColor|0.610000---7|ExpendEnergyOnSpeed|0.110000
-    5|HealthCountBelowSet|0.980000
-1|SeeColor|0.390000---0|MoveLeft|0.280000
-5|HealthCountBelowSet|0.830000
-  4|HealthCountAboveSet|0.660000---3|MoveDown|0.310000
-  2|EnergyCountAboveSet|0.340000
-    1|SeeColor|0.560000---8|BiteColor|0.340000
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.390000
+  3|EnergyCountBelowSet|0.090000---0|MoveLeft|0.790000
+5|HealthCountBelowSet|0.530000---5|Split|0.270000
+5|HealthCountBelowSet|0.030000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.260000
 
-4|HealthCountAboveSet|0.380000---8|BiteColor|0.160000
+3|EnergyCountBelowSet|0.140000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.540000---3|MoveDown|0.320000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.340000
+  4|HealthCountAboveSet|0.570000---6|ExpendEnergyOnHealth|0.430000
 
-0|SeeSomething|0.170000
-  4|HealthCountAboveSet|0.280000---3|MoveDown|0.850000
-  5|HealthCountBelowSet|0.650000---8|BiteColor|0.090000
-4|HealthCountAboveSet|0.490000
-1|SeeColor|0.690000
-  1|SeeColor|0.100000
-    0|SeeSomething|0.720000---7|ExpendEnergyOnSpeed|0.980000
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.570000---5|Split|0.360000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.020000
+  3|EnergyCountBelowSet|0.060000
+    3|EnergyCountBelowSet|0.620000---1|MoveRight|0.140000
+    3|EnergyCountBelowSet|0.100000---5|Split|0.350000
+    5|HealthCountBelowSet|0.170000---7|ExpendEnergyOnSpeed|0.800000
+2|EnergyCountAboveSet|0.320000
 
-5|HealthCountBelowSet|0.450000---2|MoveUp|0.520000
+2|EnergyCountAboveSet|0.170000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.550000---5|Split|0.270000
+3|EnergyCountBelowSet|0.090000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.330000
 
-4|HealthCountAboveSet|0.210000
-  0|SeeSomething|0.030000---8|BiteColor|0.080000
-4|HealthCountAboveSet|0.920000---1|MoveRight|0.980000
-1|SeeColor|0.320000---0|MoveLeft|0.670000
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.230000
+      5|HealthCountBelowSet|0.460000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.290000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.850000
+3|EnergyCountBelowSet|0.120000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
 
-2|EnergyCountAboveSet|0.920000---5|Split|0.760000
-0|SeeSomething|0.100000
-  5|HealthCountBelowSet|0.090000---0|MoveLeft|0.720000
-0|SeeSomething|0.140000
-  3|EnergyCountBelowSet|0.380000
-    0|SeeSomething|0.030000---6|ExpendEnergyOnHealth|0.310000
-    3|EnergyCountBelowSet|0.390000
-      4|HealthCountAboveSet|0.820000
-        3|EnergyCountBelowSet|0.140000
-          0|SeeSomething|0.850000
-          4|HealthCountAboveSet|0.810000
-        0|SeeSomething|0.770000---2|MoveUp|0.870000
-  2|EnergyCountAboveSet|0.400000---4|Bite|0.710000
-3|EnergyCountBelowSet|0.850000
-  3|EnergyCountBelowSet|0.670000---8|BiteColor|0.070000
-5|HealthCountBelowSet|0.190000
-  0|SeeSomething|0.510000---1|MoveRight|0.160000
-4|HealthCountAboveSet|0.890000
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.570000---4|Bite|0.940000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.460000
+        3|EnergyCountBelowSet|0.580000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.950000
+        5|HealthCountBelowSet|0.260000
+        4|HealthCountAboveSet|0.420000
+        3|EnergyCountBelowSet|0.850000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.330000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.190000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.530000---5|Split|0.280000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.310000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.180000
+      5|HealthCountBelowSet|0.480000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.320000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.880000
+        5|HealthCountBelowSet|0.260000
+        3|EnergyCountBelowSet|0.390000
+        3|EnergyCountBelowSet|0.800000
+3|EnergyCountBelowSet|0.120000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.350000---5|Split|0.990000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.580000---4|Bite|0.930000
+  1|SeeColor|0.670000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.320000---5|Split|0.960000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.300000
+    2|EnergyCountAboveSet|0.300000---1|MoveRight|0.860000
+  3|EnergyCountBelowSet|0.530000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.240000
+      5|HealthCountBelowSet|0.480000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.890000
+        5|HealthCountBelowSet|0.320000
+        4|HealthCountAboveSet|0.390000
+        3|EnergyCountBelowSet|0.830000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.390000---5|Split|0.980000
+
+2|EnergyCountAboveSet|0.060000---2|MoveUp|0.430000
+5|HealthCountBelowSet|0.520000---5|Split|0.330000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.020000
+3|EnergyCountBelowSet|0.290000
+  3|EnergyCountBelowSet|0.550000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.310000
+5|HealthCountBelowSet|0.570000---5|Split|0.360000
+  0|SeeSomething|0.480000---8|BiteColor|0.840000
+  4|HealthCountAboveSet|0.200000
+    4|HealthCountAboveSet|0.560000
+      4|HealthCountAboveSet|0.760000
+        0|SeeSomething|0.770000
+        2|EnergyCountAboveSet|0.230000
+        0|SeeSomething|0.940000
+      3|EnergyCountBelowSet|0.320000---8|BiteColor|0.150000
+      0|SeeSomething|0.610000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.510000---5|Split|0.270000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.530000---5|Split|0.310000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.540000---5|Split|0.320000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.570000---5|Split|0.340000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.340000
+
+4|HealthCountAboveSet|0.060000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.540000---5|Split|0.360000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.020000
+  5|HealthCountBelowSet|0.380000---2|MoveUp|0.230000
+3|EnergyCountBelowSet|0.250000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+  2|EnergyCountAboveSet|0.800000
+    4|HealthCountAboveSet|0.690000---5|Split|0.670000
+    4|HealthCountAboveSet|0.520000
+      3|EnergyCountBelowSet|0.860000---8|BiteColor|0.220000
+      2|EnergyCountAboveSet|0.150000
+        5|HealthCountBelowSet|0.210000
+        4|HealthCountAboveSet|0.740000
+      2|EnergyCountAboveSet|0.600000
+    2|EnergyCountAboveSet|0.040000---0|MoveLeft|0.010000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.350000
+  5|HealthCountBelowSet|0.400000
+    2|EnergyCountAboveSet|0.410000
+    2|EnergyCountAboveSet|0.600000
+      1|SeeColor|0.250000
+        0|SeeSomething|0.420000
+        3|EnergyCountBelowSet|0.010000
+        2|EnergyCountAboveSet|0.800000
+      4|HealthCountAboveSet|0.380000
+        4|HealthCountAboveSet|0.800000
+      0|SeeSomething|0.500000---5|Split|0.670000
+3|EnergyCountBelowSet|0.550000---5|Split|0.320000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.450000
+
+3|EnergyCountBelowSet|0.150000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.530000---4|Bite|0.300000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.300000
+  4|HealthCountAboveSet|0.570000---6|ExpendEnergyOnHealth|0.420000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.530000---5|Split|0.330000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+1|SeeColor|0.130000---0|MoveLeft|0.400000
+  4|HealthCountAboveSet|0.740000
+    4|HealthCountAboveSet|0.400000
+    5|HealthCountBelowSet|0.010000---4|Bite|0.230000
+5|HealthCountBelowSet|0.560000---5|Split|0.290000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.070000
+3|EnergyCountBelowSet|0.240000
+
+2|EnergyCountAboveSet|0.190000---0|MoveLeft|0.350000
+5|HealthCountBelowSet|0.530000---5|Split|0.280000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.050000
+0|SeeSomething|0.320000
+  2|EnergyCountAboveSet|0.730000---6|ExpendEnergyOnHealth|0.900000
+
+2|EnergyCountAboveSet|0.190000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.560000---5|Split|0.280000
+3|EnergyCountBelowSet|0.070000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.340000
+  4|HealthCountAboveSet|0.190000
+    4|HealthCountAboveSet|0.560000
+      3|EnergyCountBelowSet|0.320000---6|ExpendEnergyOnHealth|0.210000
+      0|SeeSomething|0.180000
+        2|EnergyCountAboveSet|0.940000
+      5|HealthCountBelowSet|0.350000
+        1|SeeColor|0.060000
+    5|HealthCountBelowSet|0.890000---3|MoveDown|0.750000
+    4|HealthCountAboveSet|0.070000---0|MoveLeft|0.020000
+5|HealthCountBelowSet|0.520000---5|Split|0.280000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.250000
+  4|HealthCountAboveSet|0.800000
+    4|HealthCountAboveSet|0.040000---5|Split|0.650000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.370000
+  3|EnergyCountBelowSet|0.080000---0|MoveLeft|0.810000
+5|HealthCountBelowSet|0.510000---5|Split|0.250000
+5|HealthCountBelowSet|0.030000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.280000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.550000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.060000
+3|EnergyCountBelowSet|0.250000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.580000---4|Bite|0.880000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
 
 1|SeeColor|0.140000
-2|EnergyCountAboveSet|0.570000---6|ExpendEnergyOnHealth|0.210000
-
-0|SeeSomething|0.520000---1|MoveRight|0.070000
-3|EnergyCountBelowSet|0.540000
-  1|SeeColor|0.070000
-    2|EnergyCountAboveSet|0.370000---4|Bite|0.800000
-  4|HealthCountAboveSet|0.370000---7|ExpendEnergyOnSpeed|0.780000
-1|SeeColor|0.110000---5|Split|0.270000
-
-2|EnergyCountAboveSet|0.940000---5|Split|0.780000
-0|SeeSomething|0.120000
-  5|HealthCountBelowSet|0.090000---0|MoveLeft|0.700000
-0|SeeSomething|0.150000
-  3|EnergyCountBelowSet|0.370000
-    0|SeeSomething|0.040000---6|ExpendEnergyOnHealth|0.290000
-      4|HealthCountAboveSet|0.200000---7|ExpendEnergyOnSpeed|0.660000
-    3|EnergyCountBelowSet|0.370000
-      4|HealthCountAboveSet|0.830000
-        3|EnergyCountBelowSet|0.140000
-          0|SeeSomething|0.830000
-          4|HealthCountAboveSet|0.810000
-        0|SeeSomething|0.770000---2|MoveUp|0.890000
-  2|EnergyCountAboveSet|0.420000---3|MoveDown|0.710000
-  3|EnergyCountBelowSet|0.510000---5|Split|0.110000
-3|EnergyCountBelowSet|0.840000
-  3|EnergyCountBelowSet|0.650000---8|BiteColor|0.060000
-5|HealthCountBelowSet|0.190000
-  0|SeeSomething|0.520000---1|MoveRight|0.150000
-4|HealthCountAboveSet|0.870000
-  2|EnergyCountAboveSet|0.880000---0|MoveLeft|0.200000
-
-2|EnergyCountAboveSet|0.940000---5|Split|0.760000
-0|SeeSomething|0.100000
-  5|HealthCountBelowSet|0.110000---0|MoveLeft|0.720000
-0|SeeSomething|0.150000
-  5|HealthCountBelowSet|0.400000
-    0|SeeSomething|0.030000---6|ExpendEnergyOnHealth|0.320000
-    3|EnergyCountBelowSet|0.410000
-      5|HealthCountBelowSet|0.800000
-        3|EnergyCountBelowSet|0.160000
-          0|SeeSomething|0.860000
-          4|HealthCountAboveSet|0.810000
-        0|SeeSomething|0.760000---2|MoveUp|0.870000
-  2|EnergyCountAboveSet|0.400000---4|Bite|0.690000
-3|EnergyCountBelowSet|0.830000
-  3|EnergyCountBelowSet|0.670000---8|BiteColor|0.090000
-5|HealthCountBelowSet|0.200000
-  0|SeeSomething|0.500000---1|MoveRight|0.180000
-4|HealthCountAboveSet|0.900000
-
-2|EnergyCountAboveSet|0.960000---5|Split|0.770000
-0|SeeSomething|0.140000
-  5|HealthCountBelowSet|0.080000---0|MoveLeft|0.720000
-    4|HealthCountAboveSet|0.860000---4|Bite|0.410000
-0|SeeSomething|0.130000
-  3|EnergyCountBelowSet|0.390000
-    0|SeeSomething|0.050000---6|ExpendEnergyOnHealth|0.300000
-      4|HealthCountAboveSet|0.200000---7|ExpendEnergyOnSpeed|0.650000
-    3|EnergyCountBelowSet|0.380000
-      4|HealthCountAboveSet|0.810000
-        3|EnergyCountBelowSet|0.120000
-          0|SeeSomething|0.820000
-          4|HealthCountAboveSet|0.830000
-        0|SeeSomething|0.780000---2|MoveUp|0.900000
-    5|HealthCountBelowSet|0.570000
-      1|SeeColor|0.970000
-        0|SeeSomething|0.380000
-        0|SeeSomething|0.990000
+  4|HealthCountAboveSet|0.310000
+    2|EnergyCountAboveSet|0.580000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.480000
+        0|SeeSomething|0.580000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.890000
         5|HealthCountBelowSet|0.270000
-  2|EnergyCountAboveSet|0.440000---3|MoveDown|0.720000
-  3|EnergyCountBelowSet|0.500000---5|Split|0.130000
-    2|EnergyCountAboveSet|0.370000
-      2|EnergyCountAboveSet|0.900000
-        4|HealthCountAboveSet|0.330000
-      2|EnergyCountAboveSet|0.110000---2|MoveUp|0.110000
-      3|EnergyCountBelowSet|0.960000---7|ExpendEnergyOnSpeed|0.400000
-3|EnergyCountBelowSet|0.840000
-  3|EnergyCountBelowSet|0.650000---8|BiteColor|0.070000
-5|HealthCountBelowSet|0.180000
-  0|SeeSomething|0.520000---1|MoveRight|0.170000
-    0|SeeSomething|0.230000---7|ExpendEnergyOnSpeed|0.970000
-4|HealthCountAboveSet|0.880000
-  2|EnergyCountAboveSet|0.870000---0|MoveLeft|0.210000
+        4|HealthCountAboveSet|0.410000
+        3|EnergyCountBelowSet|0.830000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.420000
+5|HealthCountBelowSet|0.380000---5|Split|0.970000
 
-2|EnergyCountAboveSet|0.940000---5|Split|0.780000
-0|SeeSomething|0.120000
-  5|HealthCountBelowSet|0.090000---0|MoveLeft|0.720000
-  3|EnergyCountBelowSet|0.080000---2|MoveUp|0.490000
-0|SeeSomething|0.170000
-  3|EnergyCountBelowSet|0.360000
-    0|SeeSomething|0.050000---6|ExpendEnergyOnHealth|0.310000
-      4|HealthCountAboveSet|0.210000---7|ExpendEnergyOnSpeed|0.670000
-      4|HealthCountAboveSet|0.730000
-    3|EnergyCountBelowSet|0.380000
-      4|HealthCountAboveSet|0.830000
-        3|EnergyCountBelowSet|0.130000
-          0|SeeSomething|0.830000
-          4|HealthCountAboveSet|0.810000
-        0|SeeSomething|0.760000---2|MoveUp|0.890000
-      1|SeeColor|0.880000---0|MoveLeft|0.760000
-    2|EnergyCountAboveSet|0.140000---3|MoveDown|0.900000
-  2|EnergyCountAboveSet|0.430000---3|MoveDown|0.720000
-  3|EnergyCountBelowSet|0.530000---7|ExpendEnergyOnSpeed|0.100000
-3|EnergyCountBelowSet|0.840000
-  3|EnergyCountBelowSet|0.630000---8|BiteColor|0.070000
-  3|EnergyCountBelowSet|0.560000---3|MoveDown|0.710000
-5|HealthCountBelowSet|0.190000
-  0|SeeSomething|0.540000---1|MoveRight|0.140000
-4|HealthCountAboveSet|0.880000
-  2|EnergyCountAboveSet|0.870000---0|MoveLeft|0.180000
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.360000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.290000
+        4|HealthCountAboveSet|0.390000
+        3|EnergyCountBelowSet|0.840000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.380000---5|Split|0.970000
 
-2|EnergyCountAboveSet|0.920000---5|Split|0.770000
-0|SeeSomething|0.110000
-  5|HealthCountBelowSet|0.110000---0|MoveLeft|0.710000
-  3|EnergyCountBelowSet|0.540000
-    1|SeeColor|0.260000---6|ExpendEnergyOnHealth|0.080000
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.910000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.510000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.310000
+        5|HealthCountBelowSet|0.440000
+        3|EnergyCountBelowSet|0.860000
+2|EnergyCountAboveSet|0.110000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.370000---5|Split|0.980000
+
+2|EnergyCountAboveSet|0.180000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.520000---5|Split|0.300000
+  4|HealthCountAboveSet|0.820000---7|ExpendEnergyOnSpeed|0.390000
+3|EnergyCountBelowSet|0.070000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.480000---6|ExpendEnergyOnHealth|0.300000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.250000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.550000---5|Split|0.290000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.470000
+
+1|SeeColor|0.120000---0|MoveLeft|0.370000
+  4|HealthCountAboveSet|0.730000
+    4|HealthCountAboveSet|0.410000
+    5|HealthCountBelowSet|0.030000---4|Bite|0.270000
+5|HealthCountBelowSet|0.560000---5|Split|0.320000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.040000
+3|EnergyCountBelowSet|0.270000
+
+2|EnergyCountAboveSet|0.080000---0|MoveLeft|0.350000
+  3|EnergyCountBelowSet|0.080000---2|MoveUp|0.810000
+  5|HealthCountBelowSet|0.880000
+    5|HealthCountBelowSet|0.640000
+      5|HealthCountBelowSet|0.370000
+        4|HealthCountAboveSet|0.120000
+    2|EnergyCountAboveSet|0.910000---2|MoveUp|0.710000
+    1|SeeColor|0.510000
+5|HealthCountBelowSet|0.500000---5|Split|0.260000
+5|HealthCountBelowSet|0.020000---8|BiteColor|0.010000
+  3|EnergyCountBelowSet|0.030000
+    5|HealthCountBelowSet|0.170000
+2|EnergyCountAboveSet|0.290000
+
+1|SeeColor|0.120000---0|MoveLeft|0.400000
+  4|HealthCountAboveSet|0.740000
+    4|HealthCountAboveSet|0.400000
+    5|HealthCountBelowSet|0.010000---4|Bite|0.220000
+5|HealthCountBelowSet|0.580000---5|Split|0.280000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.090000
+3|EnergyCountBelowSet|0.230000
+
+0|SeeSomething|0.170000---0|MoveLeft|0.370000
+  5|HealthCountBelowSet|0.510000
+    1|SeeColor|0.350000---0|MoveLeft|0.730000
+    2|EnergyCountAboveSet|0.980000
+      3|EnergyCountBelowSet|0.150000---4|Bite|0.920000
+      2|EnergyCountAboveSet|0.980000---1|MoveRight|0.980000
+    1|SeeColor|0.630000
+      5|HealthCountBelowSet|0.270000
+        2|EnergyCountAboveSet|0.140000
+        0|SeeSomething|0.350000
+        5|HealthCountBelowSet|0.020000
+      2|EnergyCountAboveSet|0.260000---8|BiteColor|0.540000
+      4|HealthCountAboveSet|0.200000---0|MoveLeft|0.830000
+3|EnergyCountBelowSet|0.520000---5|Split|0.350000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.290000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.360000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.910000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.510000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.370000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.950000
+        5|HealthCountBelowSet|0.320000
+        5|HealthCountBelowSet|0.450000
+        3|EnergyCountBelowSet|0.860000
+2|EnergyCountAboveSet|0.090000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.360000---5|Split|0.980000
+
+1|SeeColor|0.150000
+  4|HealthCountAboveSet|0.310000
+    2|EnergyCountAboveSet|0.300000---1|MoveRight|0.840000
+      0|SeeSomething|0.270000---2|MoveUp|0.220000
+  3|EnergyCountBelowSet|0.510000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.260000
+      5|HealthCountBelowSet|0.460000
+        2|EnergyCountAboveSet|0.540000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.870000
+        5|HealthCountBelowSet|0.330000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.110000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.390000---5|Split|0.990000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.940000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.310000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.330000
+        4|HealthCountAboveSet|0.380000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.080000---5|Split|0.410000
+5|HealthCountBelowSet|0.380000---5|Split|0.990000
+  1|SeeColor|0.840000---5|Split|0.360000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.230000
+      4|HealthCountAboveSet|0.510000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.360000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.310000
+        5|HealthCountBelowSet|0.430000
+        3|EnergyCountBelowSet|0.830000
+2|EnergyCountAboveSet|0.130000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.350000---5|Split|0.980000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.520000---4|Bite|0.940000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.440000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.310000
+        4|HealthCountAboveSet|0.400000
+        2|EnergyCountAboveSet|0.870000
+3|EnergyCountBelowSet|0.130000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.380000---5|Split|0.980000
+
+1|SeeColor|0.160000
+  4|HealthCountAboveSet|0.320000
+    2|EnergyCountAboveSet|0.570000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.190000
+      5|HealthCountBelowSet|0.500000
+        1|SeeColor|0.590000
+        5|HealthCountBelowSet|0.350000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.280000
+        4|HealthCountAboveSet|0.420000
+        3|EnergyCountBelowSet|0.840000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.370000---5|Split|0.950000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.910000
+    5|HealthCountBelowSet|0.250000
+      3|EnergyCountBelowSet|0.810000
+        0|SeeSomething|0.590000
+        0|SeeSomething|0.700000
+      3|EnergyCountBelowSet|0.750000---7|ExpendEnergyOnSpeed|0.380000
+      5|HealthCountBelowSet|0.280000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.350000---7|ExpendEnergyOnSpeed|0.990000
+
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.390000
+  3|EnergyCountBelowSet|0.110000---0|MoveLeft|0.790000
+5|HealthCountBelowSet|0.530000---5|Split|0.280000
+5|HealthCountBelowSet|0.040000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.240000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.520000---5|Split|0.320000
+  2|EnergyCountAboveSet|0.810000
+    4|HealthCountAboveSet|0.700000---5|Split|0.650000
+    4|HealthCountAboveSet|0.510000
+      3|EnergyCountBelowSet|0.840000---8|BiteColor|0.240000
+      2|EnergyCountAboveSet|0.160000
+        5|HealthCountBelowSet|0.200000
+        4|HealthCountAboveSet|0.760000
+      2|EnergyCountAboveSet|0.600000
+    2|EnergyCountAboveSet|0.050000---0|MoveLeft|0.010000
+  1|SeeColor|0.190000---3|MoveDown|0.470000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.330000
+
+4|HealthCountAboveSet|0.120000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.520000---5|Split|0.310000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.350000
+  5|HealthCountBelowSet|0.420000
+    2|EnergyCountAboveSet|0.420000
+    2|EnergyCountAboveSet|0.590000
+      1|SeeColor|0.230000
+        0|SeeSomething|0.400000
+        3|EnergyCountBelowSet|0.010000
+        2|EnergyCountAboveSet|0.810000
+      4|HealthCountAboveSet|0.400000
+        4|HealthCountAboveSet|0.810000
+      0|SeeSomething|0.500000---5|Split|0.670000
+3|EnergyCountBelowSet|0.540000---5|Split|0.340000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.430000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.590000---5|Split|0.350000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.030000
+  3|EnergyCountBelowSet|0.070000
+    3|EnergyCountBelowSet|0.620000---0|MoveLeft|0.150000
+    5|HealthCountBelowSet|0.110000---5|Split|0.350000
+    5|HealthCountBelowSet|0.180000---7|ExpendEnergyOnSpeed|0.800000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+  2|EnergyCountAboveSet|0.830000
+    4|HealthCountAboveSet|0.730000---5|Split|0.640000
+    4|HealthCountAboveSet|0.540000
+      3|EnergyCountBelowSet|0.860000---8|BiteColor|0.220000
+      2|EnergyCountAboveSet|0.180000
+        5|HealthCountBelowSet|0.240000
+        4|HealthCountAboveSet|0.740000
+      4|HealthCountAboveSet|0.630000
+    2|EnergyCountAboveSet|0.060000---0|MoveLeft|0.020000
+5|HealthCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.360000
+
+2|EnergyCountAboveSet|0.070000---0|MoveLeft|0.450000
+5|HealthCountBelowSet|0.550000---5|Split|0.360000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.340000
+
+3|EnergyCountBelowSet|0.120000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.550000---5|Split|0.260000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.080000
+  0|SeeSomething|0.140000---8|BiteColor|0.440000
+2|EnergyCountAboveSet|0.250000
+
+2|EnergyCountAboveSet|0.050000---2|MoveUp|0.440000
+5|HealthCountBelowSet|0.530000---5|Split|0.340000
+  1|SeeColor|0.380000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.030000
+3|EnergyCountBelowSet|0.310000
+  3|EnergyCountBelowSet|0.550000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.520000---6|ExpendEnergyOnHealth|0.330000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.030000
+3|EnergyCountBelowSet|0.310000
+
+1|SeeColor|0.140000
+  4|HealthCountAboveSet|0.310000
+  4|HealthCountAboveSet|0.530000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.370000
+        0|SeeSomething|0.580000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.280000
+        5|HealthCountBelowSet|0.390000
+        3|EnergyCountBelowSet|0.850000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.370000---5|Split|0.960000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.190000
+      5|HealthCountBelowSet|0.500000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.890000
+        5|HealthCountBelowSet|0.260000
+        3|EnergyCountBelowSet|0.390000
+        3|EnergyCountBelowSet|0.780000
+3|EnergyCountBelowSet|0.140000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.310000
+  4|HealthCountAboveSet|0.590000---4|Bite|0.860000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.330000---5|Split|0.980000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.570000---4|Bite|0.900000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
+
+0|SeeSomething|0.180000---0|MoveLeft|0.380000
+  5|HealthCountBelowSet|0.530000
+    1|SeeColor|0.360000---0|MoveLeft|0.730000
+    2|EnergyCountAboveSet|0.960000
+      3|EnergyCountBelowSet|0.160000---4|Bite|0.900000
+      2|EnergyCountAboveSet|0.960000---1|MoveRight|0.990000
+    1|SeeColor|0.620000
+      5|HealthCountBelowSet|0.290000
+        2|EnergyCountAboveSet|0.150000
+        0|SeeSomething|0.350000
+        5|HealthCountBelowSet|0.020000
+      2|EnergyCountAboveSet|0.270000---8|BiteColor|0.530000
+      4|HealthCountAboveSet|0.220000---0|MoveLeft|0.830000
+3|EnergyCountBelowSet|0.500000---5|Split|0.360000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.270000
+  2|EnergyCountAboveSet|0.080000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.570000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.040000
+3|EnergyCountBelowSet|0.280000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.350000
+  5|HealthCountBelowSet|0.420000
+    2|EnergyCountAboveSet|0.440000
+    2|EnergyCountAboveSet|0.610000
+      1|SeeColor|0.250000
+        0|SeeSomething|0.410000
+        3|EnergyCountBelowSet|0.010000
+        2|EnergyCountAboveSet|0.830000
+      4|HealthCountAboveSet|0.380000
+        4|HealthCountAboveSet|0.790000
+      0|SeeSomething|0.510000---5|Split|0.660000
+3|EnergyCountBelowSet|0.550000---5|Split|0.330000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.010000
+  5|HealthCountBelowSet|0.380000
+4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.530000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.350000
+  5|HealthCountBelowSet|0.400000
+    2|EnergyCountAboveSet|0.390000
+    2|EnergyCountAboveSet|0.580000
+      1|SeeColor|0.260000
+        0|SeeSomething|0.430000
+        3|EnergyCountBelowSet|0.010000
+        2|EnergyCountAboveSet|0.800000
+      4|HealthCountAboveSet|0.400000
+        4|HealthCountAboveSet|0.780000
+      0|SeeSomething|0.480000---5|Split|0.680000
+3|EnergyCountBelowSet|0.540000---5|Split|0.340000
+  4|HealthCountAboveSet|0.160000---3|MoveDown|0.590000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.610000---6|ExpendEnergyOnHealth|0.430000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.590000---5|Split|0.320000
+4|HealthCountAboveSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.440000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.370000
+3|EnergyCountBelowSet|0.560000---5|Split|0.300000
+  4|HealthCountAboveSet|0.590000---8|BiteColor|0.490000
+4|HealthCountAboveSet|0.050000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.460000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.550000---5|Split|0.320000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.340000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.350000
+3|EnergyCountBelowSet|0.560000---5|Split|0.330000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.040000
+3|EnergyCountBelowSet|0.310000
+  3|EnergyCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.510000---5|Split|0.350000
+2|EnergyCountAboveSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.170000---0|MoveLeft|0.400000
+  4|HealthCountAboveSet|0.570000---5|Split|0.170000
+3|EnergyCountBelowSet|0.550000---5|Split|0.320000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.170000---0|MoveLeft|0.340000
+5|HealthCountBelowSet|0.520000---4|Bite|0.300000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.510000---5|Split|0.270000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.280000
+
+4|HealthCountAboveSet|0.090000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.510000---5|Split|0.310000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.040000
+3|EnergyCountBelowSet|0.230000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.360000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.910000
+    2|EnergyCountAboveSet|0.180000
+      5|HealthCountBelowSet|0.530000
+        2|EnergyCountAboveSet|0.540000
+        5|HealthCountBelowSet|0.370000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.950000
+        5|HealthCountBelowSet|0.340000
+        5|HealthCountBelowSet|0.440000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.110000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.350000---5|Split|0.990000
+
+1|SeeColor|0.170000
+  4|HealthCountAboveSet|0.320000
+    4|HealthCountAboveSet|0.300000---1|MoveRight|0.860000
+      0|SeeSomething|0.250000---2|MoveUp|0.240000
+  3|EnergyCountBelowSet|0.510000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.250000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.520000
+        4|HealthCountAboveSet|0.350000
+        0|SeeSomething|0.640000
+      5|HealthCountBelowSet|0.860000
+        5|HealthCountBelowSet|0.350000
+        4|HealthCountAboveSet|0.410000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.130000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.380000---5|Split|0.970000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.310000
+    1|SeeColor|0.440000
+      1|SeeColor|0.410000
+        1|SeeColor|0.720000
+        3|EnergyCountBelowSet|0.340000
+        2|EnergyCountAboveSet|0.870000
+  4|HealthCountAboveSet|0.580000---4|Bite|0.840000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.330000
+5|HealthCountBelowSet|0.310000---5|Split|0.990000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.570000---4|Bite|0.870000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
 0|SeeSomething|0.130000
-  3|EnergyCountBelowSet|0.390000
-    0|SeeSomething|0.030000---6|ExpendEnergyOnHealth|0.280000
-      4|HealthCountAboveSet|0.210000---7|ExpendEnergyOnSpeed|0.670000
-    3|EnergyCountBelowSet|0.390000
-      4|HealthCountAboveSet|0.850000
-        3|EnergyCountBelowSet|0.130000
-          0|SeeSomething|0.830000
-          4|HealthCountAboveSet|0.810000
-        0|SeeSomething|0.770000---2|MoveUp|0.890000
-  2|EnergyCountAboveSet|0.420000---3|MoveDown|0.710000
-  3|EnergyCountBelowSet|0.500000---5|Split|0.110000
-3|EnergyCountBelowSet|0.830000
-  3|EnergyCountBelowSet|0.630000---8|BiteColor|0.070000
-5|HealthCountBelowSet|0.190000
-  0|SeeSomething|0.500000---1|MoveRight|0.130000
-4|HealthCountAboveSet|0.880000
-  2|EnergyCountAboveSet|0.890000---0|MoveLeft|0.200000
-    4|HealthCountAboveSet|0.820000---0|MoveLeft|0.160000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.900000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.920000
+        3|EnergyCountBelowSet|0.320000
+        5|HealthCountBelowSet|0.420000
+        5|HealthCountBelowSet|0.880000
+2|EnergyCountAboveSet|0.110000---6|ExpendEnergyOnHealth|0.430000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
 
-2|EnergyCountAboveSet|0.940000---5|Split|0.770000
-0|SeeSomething|0.110000
-  5|HealthCountBelowSet|0.090000---0|MoveLeft|0.710000
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.940000
+    2|EnergyCountAboveSet|0.160000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.880000
+        3|EnergyCountBelowSet|0.280000
+        3|EnergyCountBelowSet|0.380000
+        3|EnergyCountBelowSet|0.820000
+3|EnergyCountBelowSet|0.140000---6|ExpendEnergyOnHealth|0.400000
+  1|SeeColor|0.500000---1|MoveRight|0.900000
+5|HealthCountBelowSet|0.330000---5|Split|0.970000
+
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.570000---2|MoveUp|0.920000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.310000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.100000---5|Split|0.390000
+5|HealthCountBelowSet|0.390000---5|Split|0.970000
+  1|SeeColor|0.840000---5|Split|0.360000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.240000
+      5|HealthCountBelowSet|0.510000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.370000
+        0|SeeSomething|0.640000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.310000
+        5|HealthCountBelowSet|0.410000
+        3|EnergyCountBelowSet|0.830000
+    1|SeeColor|0.900000---3|MoveDown|0.490000
+2|EnergyCountAboveSet|0.120000---5|Split|0.400000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+1|SeeColor|0.050000
+  4|HealthCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.190000
+      5|HealthCountBelowSet|0.500000
+        2|EnergyCountAboveSet|0.590000
+        5|HealthCountBelowSet|0.320000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.280000
+        3|EnergyCountBelowSet|0.410000
+        3|EnergyCountBelowSet|0.760000
+3|EnergyCountBelowSet|0.150000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.360000---5|Split|0.970000
+
+0|SeeSomething|0.150000
+  4|HealthCountAboveSet|0.300000
+  4|HealthCountAboveSet|0.520000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.360000
+        0|SeeSomething|0.580000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.290000
+        5|HealthCountBelowSet|0.380000
+        3|EnergyCountBelowSet|0.870000
+3|EnergyCountBelowSet|0.070000---5|Split|0.390000
+5|HealthCountBelowSet|0.380000---5|Split|0.940000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.330000
+  4|HealthCountAboveSet|0.600000---4|Bite|0.890000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.350000---6|ExpendEnergyOnHealth|0.990000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.380000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.540000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.380000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.940000
+        5|HealthCountBelowSet|0.340000
+        5|HealthCountBelowSet|0.430000
+        3|EnergyCountBelowSet|0.820000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.370000---5|Split|0.970000
+  3|EnergyCountBelowSet|0.940000
+    2|EnergyCountAboveSet|0.100000
+    3|EnergyCountBelowSet|0.930000---2|MoveUp|0.640000
+    5|HealthCountBelowSet|0.730000
+      1|SeeColor|0.140000---4|Bite|0.020000
+
 0|SeeSomething|0.160000
-  3|EnergyCountBelowSet|0.370000
-    0|SeeSomething|0.030000---6|ExpendEnergyOnHealth|0.290000
-      4|HealthCountAboveSet|0.210000---7|ExpendEnergyOnSpeed|0.650000
-    3|EnergyCountBelowSet|0.380000
-      4|HealthCountAboveSet|0.830000
-        3|EnergyCountBelowSet|0.130000
-          0|SeeSomething|0.850000
-          4|HealthCountAboveSet|0.800000
-        0|SeeSomething|0.770000---2|MoveUp|0.910000
-  2|EnergyCountAboveSet|0.400000---3|MoveDown|0.720000
-  3|EnergyCountBelowSet|0.490000---5|Split|0.110000
-    4|HealthCountAboveSet|0.250000---5|Split|0.020000
-3|EnergyCountBelowSet|0.820000
-  3|EnergyCountBelowSet|0.630000---8|BiteColor|0.070000
-    1|SeeColor|0.430000---6|ExpendEnergyOnHealth|0.540000
-5|HealthCountBelowSet|0.180000
-  2|EnergyCountAboveSet|0.540000---1|MoveRight|0.170000
-    2|EnergyCountAboveSet|0.020000---4|Bite|0.750000
-4|HealthCountAboveSet|0.850000
-  2|EnergyCountAboveSet|0.870000---0|MoveLeft|0.190000
-  5|HealthCountBelowSet|0.520000
-    0|SeeSomething|0.560000
+  4|HealthCountAboveSet|0.280000
+  4|HealthCountAboveSet|0.540000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.540000
+        4|HealthCountAboveSet|0.350000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.300000
+        5|HealthCountBelowSet|0.400000
+        3|EnergyCountBelowSet|0.890000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.370000---5|Split|0.950000
+
+2|EnergyCountAboveSet|0.050000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.150000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.600000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.860000
+        3|EnergyCountBelowSet|0.300000
+        3|EnergyCountBelowSet|0.360000
+        3|EnergyCountBelowSet|0.800000
+3|EnergyCountBelowSet|0.120000---6|ExpendEnergyOnHealth|0.390000
+  1|SeeColor|0.510000---1|MoveRight|0.900000
+  5|HealthCountBelowSet|0.820000---4|Bite|0.950000
+5|HealthCountBelowSet|0.320000---5|Split|0.970000
+
+1|SeeColor|0.130000
+  5|HealthCountBelowSet|0.290000
+  4|HealthCountAboveSet|0.530000---4|Bite|0.960000
+    2|EnergyCountAboveSet|0.200000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.360000
+        0|SeeSomething|0.600000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.260000
+        5|HealthCountBelowSet|0.380000
+        3|EnergyCountBelowSet|0.840000
+    5|HealthCountBelowSet|0.320000
+      2|EnergyCountAboveSet|0.250000
+        4|HealthCountAboveSet|0.690000
+      3|EnergyCountBelowSet|0.050000
+        0|SeeSomething|0.560000
+        3|EnergyCountBelowSet|0.420000
+        4|HealthCountAboveSet|0.290000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.360000---5|Split|0.940000
+
+1|SeeColor|0.160000
+  4|HealthCountAboveSet|0.300000
+    4|HealthCountAboveSet|0.290000---1|MoveRight|0.870000
+      0|SeeSomething|0.270000---2|MoveUp|0.220000
+  3|EnergyCountBelowSet|0.490000---4|Bite|0.900000
+    2|EnergyCountAboveSet|0.250000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.520000
+        4|HealthCountAboveSet|0.360000
+        0|SeeSomething|0.650000
+      5|HealthCountBelowSet|0.840000
+        5|HealthCountBelowSet|0.350000
+        4|HealthCountAboveSet|0.420000
+        3|EnergyCountBelowSet|0.840000
+  3|EnergyCountBelowSet|0.640000---0|MoveLeft|0.950000
+2|EnergyCountAboveSet|0.130000---4|Bite|0.430000
+5|HealthCountBelowSet|0.370000---5|Split|0.960000
+
+0|SeeSomething|0.150000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.900000
+    2|EnergyCountAboveSet|0.230000
+      5|HealthCountBelowSet|0.500000
+        3|EnergyCountBelowSet|0.560000
+        5|HealthCountBelowSet|0.330000
+        2|EnergyCountAboveSet|0.620000
+      5|HealthCountBelowSet|0.930000
+        3|EnergyCountBelowSet|0.330000
+        5|HealthCountBelowSet|0.430000
+        5|HealthCountBelowSet|0.890000
+3|EnergyCountBelowSet|0.100000---6|ExpendEnergyOnHealth|0.420000
+  4|HealthCountAboveSet|0.440000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.330000
+    1|SeeColor|0.420000
+      1|SeeColor|0.420000
+        1|SeeColor|0.710000
+        3|EnergyCountBelowSet|0.360000
+        2|EnergyCountAboveSet|0.860000
+    0|SeeSomething|0.460000
+      5|HealthCountBelowSet|0.960000---1|MoveRight|0.690000
+      3|EnergyCountBelowSet|0.390000---5|Split|0.640000
+      2|EnergyCountAboveSet|0.230000---5|Split|0.000000
+  4|HealthCountAboveSet|0.590000---4|Bite|0.850000
+3|EnergyCountBelowSet|0.070000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.310000---5|Split|0.990000
+
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.560000---2|MoveUp|0.940000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.450000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.310000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.950000
+        5|HealthCountBelowSet|0.330000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.850000
+  1|SeeColor|0.790000
+    5|HealthCountBelowSet|0.340000
+      3|EnergyCountBelowSet|0.770000
+      5|HealthCountBelowSet|0.500000
+        3|EnergyCountBelowSet|0.380000
+        3|EnergyCountBelowSet|0.500000
+        0|SeeSomething|0.240000
+      3|EnergyCountBelowSet|0.530000
+        3|EnergyCountBelowSet|0.060000
+    1|SeeColor|0.100000---2|MoveUp|0.970000
+2|EnergyCountAboveSet|0.090000---5|Split|0.370000
+5|HealthCountBelowSet|0.400000---5|Split|0.950000
+  1|SeeColor|0.860000---5|Split|0.360000
+    1|SeeColor|0.490000---7|ExpendEnergyOnSpeed|0.490000
+
+1|SeeColor|0.050000
+  4|HealthCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.600000---4|Bite|0.870000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.320000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.130000
+  4|HealthCountAboveSet|0.290000
+    2|EnergyCountAboveSet|0.290000---1|MoveRight|0.830000
+      0|SeeSomething|0.290000---2|MoveUp|0.230000
+  3|EnergyCountBelowSet|0.490000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.270000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.560000
+        5|HealthCountBelowSet|0.360000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.850000
+        5|HealthCountBelowSet|0.320000
+        4|HealthCountAboveSet|0.400000
+        3|EnergyCountBelowSet|0.820000
+2|EnergyCountAboveSet|0.090000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.380000---5|Split|0.990000
+
+3|EnergyCountBelowSet|0.110000
+  4|HealthCountAboveSet|0.350000
+  3|EnergyCountBelowSet|0.550000---4|Bite|0.890000
+    2|EnergyCountAboveSet|0.180000
+      5|HealthCountBelowSet|0.500000
+        0|SeeSomething|0.540000
+        5|HealthCountBelowSet|0.390000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.340000
+        5|HealthCountBelowSet|0.470000
+        3|EnergyCountBelowSet|0.850000
+2|EnergyCountAboveSet|0.090000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
+  1|SeeColor|0.900000
+    1|SeeColor|0.770000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.340000
+  1|SeeColor|0.570000---4|Bite|0.890000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.350000---5|Split|0.990000
+
+3|EnergyCountBelowSet|0.160000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.520000---5|Split|0.280000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.070000
+2|EnergyCountAboveSet|0.340000
+  4|HealthCountAboveSet|0.530000---6|ExpendEnergyOnHealth|0.440000
+
+2|EnergyCountAboveSet|0.060000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.280000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.570000---5|Split|0.320000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.350000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.570000---5|Split|0.330000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.020000
+  3|EnergyCountBelowSet|0.070000
+    3|EnergyCountBelowSet|0.630000---0|MoveLeft|0.150000
+    5|HealthCountBelowSet|0.120000---5|Split|0.360000
+    5|HealthCountBelowSet|0.160000---7|ExpendEnergyOnSpeed|0.820000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.420000
+3|EnergyCountBelowSet|0.550000---5|Split|0.370000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.040000
+  3|EnergyCountBelowSet|0.050000
+    3|EnergyCountBelowSet|0.620000---1|MoveRight|0.160000
+    3|EnergyCountBelowSet|0.110000---7|ExpendEnergyOnSpeed|0.340000
+    5|HealthCountBelowSet|0.160000---7|ExpendEnergyOnSpeed|0.810000
+2|EnergyCountAboveSet|0.310000
+
+4|HealthCountAboveSet|0.090000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.510000---5|Split|0.330000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.260000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.570000---5|Split|0.340000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.570000---5|Split|0.350000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.340000
+5|HealthCountBelowSet|0.510000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.280000
+
+2|EnergyCountAboveSet|0.070000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.510000---5|Split|0.320000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.550000---5|Split|0.340000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.350000
+
+1|SeeColor|0.150000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.930000
+    0|SeeSomething|0.230000
+      5|HealthCountBelowSet|0.510000
+        2|EnergyCountAboveSet|0.570000
+        5|HealthCountBelowSet|0.380000
+        0|SeeSomething|0.650000
+      5|HealthCountBelowSet|0.920000
+        5|HealthCountBelowSet|0.330000
+        5|HealthCountBelowSet|0.430000
+        3|EnergyCountBelowSet|0.850000
+    1|SeeColor|0.910000---3|MoveDown|0.470000
+2|EnergyCountAboveSet|0.100000---5|Split|0.410000
+5|HealthCountBelowSet|0.330000---5|Split|0.990000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.310000
+  4|HealthCountAboveSet|0.580000---4|Bite|0.890000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.560000---5|Split|0.310000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.340000
+5|HealthCountBelowSet|0.530000---5|Split|0.280000
+3|EnergyCountBelowSet|0.070000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.550000---5|Split|0.270000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.400000
+  1|SeeColor|0.850000---1|MoveRight|0.740000
+3|EnergyCountBelowSet|0.560000---5|Split|0.370000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.030000
+  3|EnergyCountBelowSet|0.070000
+    3|EnergyCountBelowSet|0.600000---1|MoveRight|0.160000
+    1|SeeColor|0.110000---5|Split|0.340000
+    5|HealthCountBelowSet|0.190000---7|ExpendEnergyOnSpeed|0.810000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.510000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.280000
+
+0|SeeSomething|0.100000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.540000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.410000
+  5|HealthCountBelowSet|0.020000---4|Bite|0.940000
+5|HealthCountBelowSet|0.570000---5|Split|0.290000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.560000---5|Split|0.290000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.530000---5|Split|0.340000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.570000---5|Split|0.290000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.060000
+2|EnergyCountAboveSet|0.300000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.580000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.160000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.590000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.870000
+        3|EnergyCountBelowSet|0.290000
+        3|EnergyCountBelowSet|0.360000
+        3|EnergyCountBelowSet|0.820000
+2|EnergyCountAboveSet|0.150000---6|ExpendEnergyOnHealth|0.410000
+  1|SeeColor|0.520000---1|MoveRight|0.910000
+5|HealthCountBelowSet|0.320000---5|Split|0.960000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.610000---4|Bite|0.860000
+3|EnergyCountBelowSet|0.070000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.320000---5|Split|0.990000
+  3|EnergyCountBelowSet|0.260000
+    0|SeeSomething|0.440000---4|Bite|0.390000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.300000
+  5|HealthCountBelowSet|0.600000---4|Bite|0.850000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.320000---5|Split|0.970000
+
+3|EnergyCountBelowSet|0.080000
+  4|HealthCountAboveSet|0.340000
+  4|HealthCountAboveSet|0.570000---4|Bite|0.890000
+5|HealthCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.330000
+5|HealthCountBelowSet|0.330000---5|Split|0.970000
+
+2|EnergyCountAboveSet|0.050000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.490000---5|Split|0.330000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.540000---5|Split|0.330000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.560000---5|Split|0.360000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+
+1|SeeColor|0.110000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.530000---5|Split|0.330000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+1|SeeColor|0.290000
+
+2|EnergyCountAboveSet|0.080000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.520000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---7|ExpendEnergyOnSpeed|0.010000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.340000
+3|EnergyCountBelowSet|0.550000---5|Split|0.320000
+  0|SeeSomething|0.670000---8|BiteColor|0.800000
+4|HealthCountAboveSet|0.010000---8|BiteColor|0.030000
+0|SeeSomething|0.290000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.420000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.340000
+5|HealthCountBelowSet|0.510000---5|Split|0.340000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+  5|HealthCountBelowSet|0.640000---5|Split|0.690000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.570000---5|Split|0.340000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.030000
+  3|EnergyCountBelowSet|0.070000
+    3|EnergyCountBelowSet|0.640000---0|MoveLeft|0.150000
+    5|HealthCountBelowSet|0.100000---5|Split|0.350000
+    5|HealthCountBelowSet|0.140000---7|ExpendEnergyOnSpeed|0.840000
+2|EnergyCountAboveSet|0.300000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.360000
+5|HealthCountBelowSet|0.560000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.540000---5|Split|0.340000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+  4|HealthCountAboveSet|0.360000---8|BiteColor|0.590000
+
+3|EnergyCountBelowSet|0.150000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.510000---5|Split|0.300000
+4|HealthCountAboveSet|0.040000---8|BiteColor|0.080000
+2|EnergyCountAboveSet|0.320000
+  4|HealthCountAboveSet|0.550000---6|ExpendEnergyOnHealth|0.420000
+
+3|EnergyCountBelowSet|0.130000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.540000---5|Split|0.310000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.300000
+  4|HealthCountAboveSet|0.570000---6|ExpendEnergyOnHealth|0.440000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.580000---5|Split|0.360000
+3|EnergyCountBelowSet|0.080000---8|BiteColor|0.020000
+  3|EnergyCountBelowSet|0.080000
+    3|EnergyCountBelowSet|0.600000---0|MoveLeft|0.150000
+    5|HealthCountBelowSet|0.120000---5|Split|0.330000
+    5|HealthCountBelowSet|0.200000---7|ExpendEnergyOnSpeed|0.810000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.560000---5|Split|0.360000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.020000
+  3|EnergyCountBelowSet|0.050000
+    3|EnergyCountBelowSet|0.630000---1|MoveRight|0.180000
+    3|EnergyCountBelowSet|0.100000---7|ExpendEnergyOnSpeed|0.360000
+    5|HealthCountBelowSet|0.150000---7|ExpendEnergyOnSpeed|0.820000
+2|EnergyCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.600000
+
+1|SeeColor|0.100000
+  4|HealthCountAboveSet|0.290000
+  4|HealthCountAboveSet|0.590000---4|Bite|0.900000
+3|EnergyCountBelowSet|0.060000---6|ExpendEnergyOnHealth|0.350000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.890000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.360000---5|Split|0.990000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.330000
+    1|SeeColor|0.440000
+      1|SeeColor|0.430000
+        1|SeeColor|0.700000
+        3|EnergyCountBelowSet|0.340000
+        2|EnergyCountAboveSet|0.860000
+    0|SeeSomething|0.470000
+      5|HealthCountBelowSet|0.950000---1|MoveRight|0.690000
+      3|EnergyCountBelowSet|0.370000---5|Split|0.620000
+      2|EnergyCountAboveSet|0.240000---7|ExpendEnergyOnSpeed|0.010000
+  4|HealthCountAboveSet|0.610000---4|Bite|0.860000
+3|EnergyCountBelowSet|0.060000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.320000---5|Split|0.990000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.360000
+  1|SeeColor|0.550000---5|Split|0.870000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.580000---5|Split|0.360000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.030000
+  5|HealthCountBelowSet|0.490000---6|ExpendEnergyOnHealth|0.970000
+2|EnergyCountAboveSet|0.320000
+  2|EnergyCountAboveSet|0.030000---5|Split|0.050000
+
+2|EnergyCountAboveSet|0.050000---0|MoveLeft|0.440000
+5|HealthCountBelowSet|0.520000---5|Split|0.340000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.290000
+
+2|EnergyCountAboveSet|0.160000---0|MoveLeft|0.340000
+3|EnergyCountBelowSet|0.540000---5|Split|0.340000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.540000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.290000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.950000
+    2|EnergyCountAboveSet|0.220000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.290000
+        0|SeeSomething|0.620000
+      5|HealthCountBelowSet|0.900000
+        5|HealthCountBelowSet|0.350000
+        4|HealthCountAboveSet|0.380000
+        3|EnergyCountBelowSet|0.830000
+2|EnergyCountAboveSet|0.070000---5|Split|0.430000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
+  1|SeeColor|0.860000---5|Split|0.360000
+
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.340000
+        2|EnergyCountAboveSet|0.620000
+      5|HealthCountBelowSet|0.940000
+        5|HealthCountBelowSet|0.310000
+        5|HealthCountBelowSet|0.400000
+        3|EnergyCountBelowSet|0.850000
+2|EnergyCountAboveSet|0.090000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.340000---7|ExpendEnergyOnSpeed|0.990000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.310000
+  4|HealthCountAboveSet|0.630000---4|Bite|0.880000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.370000
+  3|EnergyCountBelowSet|0.260000
+    1|SeeColor|0.430000---3|MoveDown|0.390000
+5|HealthCountBelowSet|0.330000---5|Split|0.990000
+  3|EnergyCountBelowSet|0.240000
+    0|SeeSomething|0.450000---4|Bite|0.370000
+      2|EnergyCountAboveSet|0.990000---1|MoveRight|0.640000
+
+1|SeeColor|0.150000
+  4|HealthCountAboveSet|0.310000
+    2|EnergyCountAboveSet|0.280000---1|MoveRight|0.880000
+  3|EnergyCountBelowSet|0.540000---5|Split|0.940000
+    2|EnergyCountAboveSet|0.240000
+      5|HealthCountBelowSet|0.470000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.910000
+        5|HealthCountBelowSet|0.330000
+        4|HealthCountAboveSet|0.370000
+        3|EnergyCountBelowSet|0.830000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.390000---5|Split|0.970000
+  5|HealthCountBelowSet|0.440000---8|BiteColor|0.920000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.340000
+  4|HealthCountAboveSet|0.620000---4|Bite|0.850000
+3|EnergyCountBelowSet|0.060000---6|ExpendEnergyOnHealth|0.350000
+  1|SeeColor|0.810000---1|MoveRight|0.990000
+5|HealthCountBelowSet|0.330000---5|Split|0.990000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.880000
+3|EnergyCountBelowSet|0.120000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.350000---4|Bite|0.990000
+  3|EnergyCountBelowSet|0.070000---4|Bite|0.270000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.380000
+  1|SeeColor|0.550000---5|Split|0.860000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.350000---4|Bite|0.990000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+5|HealthCountBelowSet|0.520000---5|Split|0.310000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.560000---5|Split|0.330000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.390000
+5|HealthCountBelowSet|0.570000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.550000---5|Split|0.360000
+3|EnergyCountBelowSet|0.050000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.270000
+  4|HealthCountAboveSet|0.370000---8|BiteColor|0.590000
+  1|SeeColor|0.780000---4|Bite|0.090000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.870000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.350000
+  1|SeeColor|0.820000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+  5|HealthCountBelowSet|0.430000
+    3|EnergyCountBelowSet|0.380000---6|ExpendEnergyOnHealth|0.650000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.350000
+  3|EnergyCountBelowSet|0.520000---4|Bite|0.900000
+    2|EnergyCountAboveSet|0.240000
+      5|HealthCountBelowSet|0.510000
+        1|SeeColor|0.590000
+        5|HealthCountBelowSet|0.340000
+        0|SeeSomething|0.590000
+      5|HealthCountBelowSet|0.920000
+        5|HealthCountBelowSet|0.310000
+        5|HealthCountBelowSet|0.460000
+        3|EnergyCountBelowSet|0.840000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.400000
+5|HealthCountBelowSet|0.380000---5|Split|0.970000
+
+1|SeeColor|0.090000
+  4|HealthCountAboveSet|0.310000
+  4|HealthCountAboveSet|0.570000---4|Bite|0.900000
+3|EnergyCountBelowSet|0.060000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
+  0|SeeSomething|0.910000
+    3|EnergyCountBelowSet|0.210000---7|ExpendEnergyOnSpeed|0.890000
+    3|EnergyCountBelowSet|0.960000---7|ExpendEnergyOnSpeed|0.860000
+    5|HealthCountBelowSet|0.920000---1|MoveRight|0.710000
+
+1|SeeColor|0.110000
+  4|HealthCountAboveSet|0.310000
+    0|SeeSomething|0.440000
+      1|SeeColor|0.400000
+        1|SeeColor|0.720000
+        3|EnergyCountBelowSet|0.360000
+        2|EnergyCountAboveSet|0.860000
+    2|EnergyCountAboveSet|0.470000
+      5|HealthCountBelowSet|0.960000---1|MoveRight|0.700000
+      3|EnergyCountBelowSet|0.380000---5|Split|0.620000
+      2|EnergyCountAboveSet|0.220000---5|Split|0.020000
+  4|HealthCountAboveSet|0.570000---4|Bite|0.850000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.360000
+5|HealthCountBelowSet|0.290000---5|Split|0.990000
+
+1|SeeColor|0.080000
+  4|HealthCountAboveSet|0.300000
+  4|HealthCountAboveSet|0.610000---4|Bite|0.890000
+3|EnergyCountBelowSet|0.040000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.370000---5|Split|0.990000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.290000
+    5|HealthCountBelowSet|0.740000
+  5|HealthCountBelowSet|0.620000---4|Bite|0.830000
+3|EnergyCountBelowSet|0.080000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.300000---5|Split|0.980000
+
+1|SeeColor|0.040000
+  4|HealthCountAboveSet|0.340000
+  1|SeeColor|0.590000---4|Bite|0.870000
+3|EnergyCountBelowSet|0.090000---5|Split|0.390000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+1|SeeColor|0.060000
+  4|HealthCountAboveSet|0.340000
+    1|SeeColor|0.440000
+      1|SeeColor|0.450000
+        1|SeeColor|0.690000
+        3|EnergyCountBelowSet|0.350000
+        2|EnergyCountAboveSet|0.840000
+    0|SeeSomething|0.470000
+      5|HealthCountBelowSet|0.930000---1|MoveRight|0.690000
+      3|EnergyCountBelowSet|0.350000---5|Split|0.620000
+      2|EnergyCountAboveSet|0.220000---7|ExpendEnergyOnSpeed|0.010000
+  4|HealthCountAboveSet|0.600000---4|Bite|0.880000
+3|EnergyCountBelowSet|0.050000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.310000---5|Split|0.990000
+
+1|SeeColor|0.130000
+  4|HealthCountAboveSet|0.300000
+    2|EnergyCountAboveSet|0.310000---1|MoveRight|0.850000
+  3|EnergyCountBelowSet|0.530000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.260000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.550000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.610000
+      5|HealthCountBelowSet|0.870000
+        5|HealthCountBelowSet|0.310000
+        4|HealthCountAboveSet|0.380000
+        3|EnergyCountBelowSet|0.830000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.410000
+5|HealthCountBelowSet|0.380000---5|Split|0.980000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.380000
+2|EnergyCountAboveSet|0.540000---5|Split|0.310000
+2|EnergyCountAboveSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.350000
+  3|EnergyCountBelowSet|0.550000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.570000---5|Split|0.340000
+  0|SeeSomething|0.670000---8|BiteColor|0.800000
+4|HealthCountAboveSet|0.020000---8|BiteColor|0.040000
+0|SeeSomething|0.270000
+  3|EnergyCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.420000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.420000
+5|HealthCountBelowSet|0.510000---5|Split|0.310000
+1|SeeColor|0.050000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.310000
+
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.920000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.490000
+        2|EnergyCountAboveSet|0.540000
+        5|HealthCountBelowSet|0.330000
+        0|SeeSomething|0.630000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.330000
+        4|HealthCountAboveSet|0.380000
+        3|EnergyCountBelowSet|0.850000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.380000---5|Split|0.970000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.420000
+3|EnergyCountBelowSet|0.550000---5|Split|0.380000
+3|EnergyCountBelowSet|0.070000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.270000
+  4|HealthCountAboveSet|0.380000---8|BiteColor|0.570000
+  1|SeeColor|0.770000---4|Bite|0.070000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.370000
+  1|SeeColor|0.060000
+    5|HealthCountBelowSet|0.400000
+      5|HealthCountBelowSet|0.550000---6|ExpendEnergyOnHealth|0.940000
+3|EnergyCountBelowSet|0.560000---6|ExpendEnergyOnHealth|0.310000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.080000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.550000---5|Split|0.310000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.420000
+  3|EnergyCountBelowSet|0.830000---1|MoveRight|0.720000
+5|HealthCountBelowSet|0.560000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+3|EnergyCountBelowSet|0.320000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.560000---5|Split|0.340000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.300000
+  4|HealthCountAboveSet|0.370000---8|BiteColor|0.610000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.500000---5|Split|0.340000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.280000
+
+1|SeeColor|0.110000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.540000---5|Split|0.350000
+2|EnergyCountAboveSet|0.010000---8|BiteColor|0.040000
+  1|SeeColor|0.860000
+2|EnergyCountAboveSet|0.340000
+
+1|SeeColor|0.100000---0|MoveLeft|0.410000
+3|EnergyCountBelowSet|0.540000---5|Split|0.350000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.050000
+  1|SeeColor|0.840000
+2|EnergyCountAboveSet|0.340000
+
+2|EnergyCountAboveSet|0.150000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.520000---5|Split|0.340000
+2|EnergyCountAboveSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.370000
+3|EnergyCountBelowSet|0.530000---5|Split|0.320000
+4|HealthCountAboveSet|0.030000---8|BiteColor|0.020000
+  4|HealthCountAboveSet|0.860000---5|Split|0.180000
+2|EnergyCountAboveSet|0.290000
+  3|EnergyCountBelowSet|0.560000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.480000---5|Split|0.360000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+3|EnergyCountBelowSet|0.280000
+
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.520000---5|Split|0.350000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.300000
+
+1|SeeColor|0.120000
+  4|HealthCountAboveSet|0.340000
+  3|EnergyCountBelowSet|0.580000---4|Bite|0.930000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.510000
+        2|EnergyCountAboveSet|0.540000
+        5|HealthCountBelowSet|0.310000
+        0|SeeSomething|0.640000
+      5|HealthCountBelowSet|0.950000
+        5|HealthCountBelowSet|0.340000
+        4|HealthCountAboveSet|0.360000
+        3|EnergyCountBelowSet|0.870000
+  2|EnergyCountAboveSet|0.140000---1|MoveRight|0.580000
+2|EnergyCountAboveSet|0.100000---6|ExpendEnergyOnHealth|0.370000
+5|HealthCountBelowSet|0.380000---6|ExpendEnergyOnHealth|0.990000
+
+1|SeeColor|0.150000
+  4|HealthCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.540000---4|Bite|0.910000
+    2|EnergyCountAboveSet|0.210000
+      5|HealthCountBelowSet|0.460000
+        2|EnergyCountAboveSet|0.580000
+        5|HealthCountBelowSet|0.310000
+        0|SeeSomething|0.640000
+      5|HealthCountBelowSet|0.930000
+        5|HealthCountBelowSet|0.300000
+        4|HealthCountAboveSet|0.420000
+        3|EnergyCountBelowSet|0.850000
+2|EnergyCountAboveSet|0.080000---6|ExpendEnergyOnHealth|0.390000
+5|HealthCountBelowSet|0.370000---5|Split|0.970000
+
+1|SeeColor|0.070000
+  4|HealthCountAboveSet|0.330000
+  3|EnergyCountBelowSet|0.560000---4|Bite|0.900000
+3|EnergyCountBelowSet|0.110000---6|ExpendEnergyOnHealth|0.380000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+
+0|SeeSomething|0.120000---0|MoveLeft|0.430000
+5|HealthCountBelowSet|0.500000---7|ExpendEnergyOnSpeed|0.370000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+3|EnergyCountBelowSet|0.290000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.550000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.330000
+  5|HealthCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.370000
+  3|EnergyCountBelowSet|0.090000---5|Split|0.270000
+3|EnergyCountBelowSet|0.500000---5|Split|0.370000
+2|EnergyCountAboveSet|0.030000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.310000
+
+2|EnergyCountAboveSet|0.170000---0|MoveLeft|0.380000
+5|HealthCountBelowSet|0.520000---5|Split|0.350000
+2|EnergyCountAboveSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.340000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.520000---5|Split|0.360000
+2|EnergyCountAboveSet|0.030000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.330000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.550000---5|Split|0.340000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.310000
+  1|SeeColor|0.250000---0|MoveLeft|0.010000
+
+2|EnergyCountAboveSet|0.110000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.500000---5|Split|0.320000
+  2|EnergyCountAboveSet|0.250000
+    0|SeeSomething|0.220000
+      2|EnergyCountAboveSet|0.810000
+        4|HealthCountAboveSet|0.170000
+      2|EnergyCountAboveSet|0.040000---7|ExpendEnergyOnSpeed|0.370000
+      4|HealthCountAboveSet|0.360000
+        1|SeeColor|0.690000
+        3|EnergyCountBelowSet|0.500000
+        1|SeeColor|0.680000
+    5|HealthCountBelowSet|0.840000---5|Split|0.940000
+    1|SeeColor|0.090000---7|ExpendEnergyOnSpeed|0.210000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.270000
+
+2|EnergyCountAboveSet|0.100000---0|MoveLeft|0.370000
+5|HealthCountBelowSet|0.510000---5|Split|0.340000
+3|EnergyCountBelowSet|0.060000---8|BiteColor|0.010000
+2|EnergyCountAboveSet|0.320000
+
+2|EnergyCountAboveSet|0.140000---0|MoveLeft|0.410000
+5|HealthCountBelowSet|0.480000---5|Split|0.350000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.010000
+0|SeeSomething|0.290000
+
+1|SeeColor|0.150000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.520000---5|Split|0.330000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.020000
+  3|EnergyCountBelowSet|0.560000
+    2|EnergyCountAboveSet|0.400000---1|MoveRight|0.240000
+    2|EnergyCountAboveSet|0.960000---3|MoveDown|0.370000
+2|EnergyCountAboveSet|0.310000
+  3|EnergyCountBelowSet|0.580000---5|Split|0.430000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.570000---5|Split|0.320000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.050000
+2|EnergyCountAboveSet|0.310000
+  5|HealthCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.460000
+
+1|SeeColor|0.130000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.500000---5|Split|0.320000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.010000
+  3|EnergyCountBelowSet|0.550000
+    2|EnergyCountAboveSet|0.380000---1|MoveRight|0.220000
+    2|EnergyCountAboveSet|0.970000---3|MoveDown|0.370000
+2|EnergyCountAboveSet|0.300000
+  3|EnergyCountBelowSet|0.590000---5|Split|0.420000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.590000---5|Split|0.300000
+3|EnergyCountBelowSet|0.030000---8|BiteColor|0.070000
+2|EnergyCountAboveSet|0.330000
+  5|HealthCountBelowSet|0.560000---6|ExpendEnergyOnHealth|0.480000
+
+1|SeeColor|0.070000
+  5|HealthCountBelowSet|0.310000
+  4|HealthCountAboveSet|0.580000---4|Bite|0.850000
+3|EnergyCountBelowSet|0.070000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.340000---5|Split|0.990000
+  5|HealthCountBelowSet|0.300000
+    3|EnergyCountBelowSet|0.970000---0|MoveLeft|0.130000
+
+1|SeeColor|0.080000
+  5|HealthCountBelowSet|0.300000
+  4|HealthCountAboveSet|0.590000---4|Bite|0.880000
+3|EnergyCountBelowSet|0.090000---6|ExpendEnergyOnHealth|0.340000
+5|HealthCountBelowSet|0.330000---5|Split|0.980000
+
+2|EnergyCountAboveSet|0.090000---0|MoveLeft|0.370000
+3|EnergyCountBelowSet|0.530000---5|Split|0.300000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.320000
+  5|HealthCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.460000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.550000---5|Split|0.310000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.020000
+2|EnergyCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.130000---0|MoveLeft|0.350000
+3|EnergyCountBelowSet|0.550000---5|Split|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.580000---6|ExpendEnergyOnHealth|0.440000
+
+1|SeeColor|0.130000---0|MoveLeft|0.360000
+3|EnergyCountBelowSet|0.530000---5|Split|0.340000
+4|HealthCountAboveSet|0.040000---8|BiteColor|0.040000
+  3|EnergyCountBelowSet|0.560000
+    2|EnergyCountAboveSet|0.410000---1|MoveRight|0.240000
+    2|EnergyCountAboveSet|0.960000---3|MoveDown|0.360000
+2|EnergyCountAboveSet|0.320000
+  3|EnergyCountBelowSet|0.560000---5|Split|0.410000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.530000---5|Split|0.330000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.320000
+  5|HealthCountBelowSet|0.550000---6|ExpendEnergyOnHealth|0.450000
+
+1|SeeColor|0.130000---0|MoveLeft|0.380000
+3|EnergyCountBelowSet|0.480000---5|Split|0.310000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.010000
+  3|EnergyCountBelowSet|0.570000
+    2|EnergyCountAboveSet|0.390000---1|MoveRight|0.230000
+    2|EnergyCountAboveSet|0.990000---5|Split|0.360000
+2|EnergyCountAboveSet|0.290000
+  3|EnergyCountBelowSet|0.610000---7|ExpendEnergyOnSpeed|0.420000
+
+0|SeeSomething|0.090000---0|MoveLeft|0.390000
+3|EnergyCountBelowSet|0.550000---4|Bite|0.320000
+3|EnergyCountBelowSet|0.020000---8|BiteColor|0.030000
+2|EnergyCountAboveSet|0.320000
+  5|HealthCountBelowSet|0.590000---6|ExpendEnergyOnHealth|0.450000
+
+2|EnergyCountAboveSet|0.080000---2|MoveUp|0.420000
+3|EnergyCountBelowSet|0.580000---5|Split|0.280000
+5|HealthCountBelowSet|0.040000---8|BiteColor|0.070000
+2|EnergyCountAboveSet|0.310000
+  5|HealthCountBelowSet|0.550000---6|ExpendEnergyOnHealth|0.470000
+
+2|EnergyCountAboveSet|0.120000---0|MoveLeft|0.340000
+3|EnergyCountBelowSet|0.540000---6|ExpendEnergyOnHealth|0.300000
+3|EnergyCountBelowSet|0.040000---8|BiteColor|0.010000
+3|EnergyCountBelowSet|0.320000
+  3|EnergyCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.470000
+
+2|EnergyCountAboveSet|0.080000---0|MoveLeft|0.400000
+3|EnergyCountBelowSet|0.550000---5|Split|0.310000
+3|EnergyCountBelowSet|0.010000---8|BiteColor|0.040000
+2|EnergyCountAboveSet|0.330000
+  5|HealthCountBelowSet|0.570000---6|ExpendEnergyOnHealth|0.480000
 
 =========================================
