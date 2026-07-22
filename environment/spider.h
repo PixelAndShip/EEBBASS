@@ -18,7 +18,7 @@ public:
     std::vector<PendingAction> actionQueue;
     std::vector<std::pair<std::string, Agent *>> pendingBirths;
 
-    std::unordered_map<std::string, bool> proximateCoords;
+    // std::unordered_map<std::string, bool> proximateCoords;
 
     float radiation;
     int maxBrainLevel;
@@ -35,7 +35,7 @@ public:
     ~Spider();
     Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
 
-    void setProximities(std::string coords);
+    // void setProximities(std::string coords);
 
     void setNextAgent(std::string oldCoords, std::string newCoords, Agent *Self);
 

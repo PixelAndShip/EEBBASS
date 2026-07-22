@@ -18,17 +18,10 @@ private:
 public:
     void updateColor()
     {
-        DEBUG_LOG("Updating Agent color from stats");
 
         agentColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
         agentColor.green = std::clamp(static_cast<int>(std::round(health)), 0, 255);
         agentColor.blue = std::clamp(static_cast<int>(std::round(speed)), 0, 255);
-
-        DEBUG_LOG("Updated Agent color to: "
-                  << agentColor.red << ", "
-                  << agentColor.green << ", "
-                  << agentColor.blue << ", "
-                  << agentColor.transparency);
     }
 
     void setIdentifier(int iD)
@@ -38,52 +31,42 @@ public:
 
     void setHealth(float iH)
     {
-        DEBUG_LOG("Setting health from " << health << " to " << iH);
+
         health = iH;
     }
 
     void setEnergy(float iE)
     {
-        DEBUG_LOG("Setting energy from " << energy << " to " << iE);
+
         energy = iE;
     }
 
     void setPlantDiet(float iPD)
     {
-        DEBUG_LOG("Setting plant diet from " << plantDiet << " to " << iPD);
+
         plantDiet = iPD;
     }
 
     void setAgentColor(UnitColor iAC)
     {
-        DEBUG_LOG("Setting Agent color from ("
-                  << agentColor.red << ", "
-                  << agentColor.green << ", "
-                  << agentColor.blue << ", "
-                  << agentColor.transparency << ") to ("
-                  << iAC.red << ", "
-                  << iAC.green << ", "
-                  << iAC.blue << ", "
-                  << iAC.transparency << ")");
 
         agentColor = iAC;
     }
 
     void setX(int iX)
     {
-        DEBUG_LOG("Setting X from " << x << " to " << iX);
+
         x = iX;
     }
 
     void setY(int iY)
     {
-        DEBUG_LOG("Setting Y from " << y << " to " << iY);
+
         y = iY;
     }
 
     void setCoords(std::string coords)
     {
-        DEBUG_LOG("Setting coordinates from string: " << coords);
 
         auto _pos = coords.find("_");
 
@@ -96,25 +79,22 @@ public:
         }
         catch (...)
         {
-            DEBUG_LOG("Failed to parse coordinates");
+
             return;
         }
 
         x = aX;
         y = aY;
-
-        DEBUG_LOG("Coordinates set to (" << x << ", " << y << ")");
     }
 
     void setSpeed(float iS)
     {
-        DEBUG_LOG("Setting speed from " << speed << " to " << iS);
+
         speed = iS;
     }
 
     void setBrain() // idk if possible, brain consists of pointer tree
     {
-        DEBUG_LOG("setBrain() called (currently unimplemented)");
     }
 
     int getIdentifier()
@@ -124,61 +104,56 @@ public:
 
     float getHealth()
     {
-        DEBUG_LOG("Getting health: " << health);
+
         return health;
     }
 
     float getEnergy()
     {
-        DEBUG_LOG("Getting energy: " << energy);
+
         return energy;
     }
 
     float getPlantDiet()
     {
-        DEBUG_LOG("Getting plant diet: " << plantDiet);
+
         return plantDiet;
     }
 
     UnitColor getAgentColor()
     {
-        DEBUG_LOG("Getting Agent color: "
-                  << agentColor.red << ", "
-                  << agentColor.green << ", "
-                  << agentColor.blue << ", "
-                  << agentColor.transparency);
 
         return agentColor;
     }
 
     int getX()
     {
-        DEBUG_LOG("Getting X: " << x);
+
         return x;
     }
 
     int getY()
     {
-        DEBUG_LOG("Getting Y: " << y);
+
         return y;
     }
 
     float getSpeed()
     {
-        DEBUG_LOG("Getting speed: " << speed);
+
         return speed;
     }
 
     const Brain &getBrain()
     {
-        DEBUG_LOG("Getting Brain");
+
         return brain;
     }
 
     std::string getCoords()
     {
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
-        DEBUG_LOG("Getting coordinates: " << coords);
+
         return coords;
     }
 
