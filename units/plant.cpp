@@ -2,17 +2,17 @@
 
 Plant::Plant()
 {
-    health = 100;
+    health = 200;
     // energy = 100;
-    updateColor();
     x = 10;
     y = 10;
     plantColor.blue = 255;
+    updateColor();
 }
 
 Plant::Plant(float eRadiation, std::mt19937 &gen)
 {
-    health = 100;
+    health = 200;
     // energy = 100;
     x = 10;
     y = 10;

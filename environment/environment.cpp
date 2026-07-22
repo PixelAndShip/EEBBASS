@@ -3,7 +3,7 @@
 
 Environment::Environment()
 {
-    DEBUG_LOG("Starting Environment constructor");
+
     identifier = 0;
     radiation = 0.5;
     iteration = 0;
@@ -12,36 +12,21 @@ Environment::Environment()
     maxBrainLevel = 5;
     maxBrainChildNodes = 2;
 
-    DEBUG_LOG("Environment settings initialized");
-    DEBUG_LOG("Radiation: " << radiation);
-    DEBUG_LOG("Carbon count: " << carbon_count);
-    DEBUG_LOG("Max brain level: " << maxBrainLevel);
-    DEBUG_LOG("Max brain child nodes: " << maxBrainChildNodes);
-
-    DEBUG_LOG("Creating Spider");
-
     spider = new Spider();
 
     std::random_device rd;
     std::mt19937 g(rd());
 
     std::uniform_int_distribution<> d(0, 7);
-    std::uniform_int_distribution<> iB(0, 40);
+    std::uniform_int_distribution<> iB(0, 100);
 
     gen = g;
     dist = d;
     insideBorders = iB;
-
-    DEBUG_LOG("Random generators initialized");
-
-    DEBUG_LOG("Finished Environment constructor");
 }
 
 Environment::~Environment()
 {
-    DEBUG_LOG("Starting Environment destructor");
-
-    DEBUG_LOG("Deleting Spider");
 
     delete spider;
     std::stringstream writtenData;
@@ -56,66 +41,79 @@ Environment::~Environment()
     std::ofstream endOfSim(fileName);
     endOfSim << data + "\n=========================================\n";
     endOfSim.close();
-    DEBUG_LOG("Finished Environment destructor");
 }
 
 void Environment::manageSimulation()
 {
-    DEBUG_LOG("Managing simulation");
+
     startSimulation();
     InitWindow(800, 800, "Environment");
-    SetTargetFPS(5);
+    SetTargetFPS(4);
+    int AgentsCount = 0;
+    int PlantsCount = 0;
+    std::string text = "";
     while (!WindowShouldClose() and iteration < 200)
     {
-        DEBUG_LOG("Staring simulation iteration: " + std::to_string(iteration));
+        AgentsCount = (int)spider->Agents.size();
+        PlantsCount = (int)spider->Plants.size();
+        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount);
         manageMoment();
         BeginDrawing();
         ClearBackground(BLACK);
         makeWindow();
+        DrawText(text.c_str(), 20, 20, 30, WHITE);
         EndDrawing();
-        DEBUG_LOG("Ending simulation iteration: " + std::to_string(iteration));
+
         iteration++;
     }
-    DEBUG_LOG("Ending simulation");
+
     CloseWindow();
 }
 
 void Environment::managePlantCount()
 {
-    DEBUG_LOG("Managing plant count");
 }
 
 void Environment::manageAgentCount()
 {
-    DEBUG_LOG("Managing agent count");
+    int maxAgentCount = 200;
+    if (spider->Agents.size() > maxAgentCount)
+    {
+        int cullingCount = spider->Agents.size() * 0.1;
+
+        std::vector<std::string> ids;
+
+        for (auto &[id, agent] : spider->Agents)
+        {
+            if (agent != nullptr)
+            {
+                ids.push_back(id);
+            }
+        }
+
+        std::shuffle(
+            ids.begin(),
+            ids.end(),
+            gen);
+
+        for (int i = 0; i < cullingCount and i < ids.size(); i++)
+        {
+            auto it = spider->Agents.find(ids[i]);
+
+            if (it != spider->Agents.end())
+            {
+                delete it->second;
+                spider->Agents.erase(it);
+            }
+        }
+    }
 }
 
 void Environment::manageMoment()
 {
-    DEBUG_LOG("Starting simulation moment");
-
-    std::string agentCoords = "";
-
-    DEBUG_LOG("Processing "
-              << spider->Agents.size()
-              << " agents");
-
-    std::vector<std::string> coords;
-    spider->processedAgents.clear();
-    for (auto &[c, a] : spider->Agents)
-        coords.push_back(c);
-
-    for (auto &c : coords)
-    {
-        DEBUG_LOG("Processing Agent at "
-                  << c);
-        if (spider->Agents.find(c) != spider->Agents.end())
-            manageSubMoment(c);
-    }
-
-    DEBUG_LOG("Applying passive health drain");
 
     Agent *agent = nullptr;
+
     for (auto it = spider->Agents.begin();
          it != spider->Agents.end();)
     {
@@ -123,7 +121,6 @@ void Environment::manageMoment()
 
         if (agent == nullptr)
         {
-            DEBUG_LOG("Found null Agent, removing");
             it = spider->Agents.erase(it);
             continue;
         }
@@ -133,17 +130,8 @@ void Environment::manageMoment()
         agent->setHealth(
             oldHealth - 0.1);
 
-        DEBUG_LOG("Agent "
-                  << it->first
-                  << " health "
-                  << oldHealth
-                  << " -> "
-                  << agent->getHealth());
-
         if (agent->getHealth() <= 0.1)
         {
-            DEBUG_LOG("Agent died at "
-                      << it->first);
 
             delete agent;
 
@@ -151,88 +139,126 @@ void Environment::manageMoment()
         }
         else
         {
-            DEBUG_LOG("Updating Agent color");
-
             agent->updateColor();
-
             ++it;
         }
     }
+    Plant *plant = nullptr;
+    for (auto pl = spider->Plants.begin();
+         pl != spider->Plants.end();)
+    {
+        plant = pl->second;
 
-    DEBUG_LOG("Finished simulation moment");
+        if (plant == nullptr)
+        {
+            pl = spider->Plants.erase(pl);
+            continue;
+        }
+
+        float oldPlantHealth = plant->getHealth();
+
+        plant->setHealth(
+            oldPlantHealth - 0.1);
+
+        if (plant->getHealth() <= 0.1)
+        {
+
+            delete plant;
+
+            pl = spider->Plants.erase(pl);
+        }
+        else
+        {
+            plant->updateColor();
+            ++pl;
+        }
+    }
+
+    spider->manageSubMoment();
+    manageAgentCount();
 }
 
-void Environment::manageSubMoment(std::string coords)
-{
-    DEBUG_LOG("Managing sub moment for "
-              << coords);
+// void Environment::manageSubMoment(std::string coords)
+// {
+//     DEBUG_LOG("Managing sub moment for "
+//               << coords);
 
-    if (coords == "")
-    {
-        DEBUG_LOG("Invalid empty coordinates");
-        return;
-    }
+//     if (coords == "")
+//     {
+//         DEBUG_LOG("Invalid empty coordinates");
+//         return;
+//     }
 
-    if (spider->proximateCoords.find(coords) ==
-        spider->proximateCoords.end())
-    {
-        DEBUG_LOG("Coordinates not initialized in proximity map");
+//     if (spider->proximateCoords.find(coords) ==
+//         spider->proximateCoords.end())
+//     {
+//         DEBUG_LOG("Coordinates not initialized in proximity map");
 
-        spider->proximateCoords.clear();
+//         spider->proximateCoords.clear();
 
-        spider->proximateCoords[coords] = true;
+//         spider->proximateCoords[coords] = true;
 
-        DEBUG_LOG("Setting proximities");
+//         DEBUG_LOG("Setting proximities");
 
-        spider->setProximities(coords);
+//         spider->setProximities(coords);
 
-        DEBUG_LOG("Managing Spider sub moment");
+//         DEBUG_LOG("Managing Spider sub moment");
 
-        spider->manageSubMoment();
-    }
-    else
-    {
-        DEBUG_LOG("Coordinates already processed");
-    }
+//         spider->manageSubMoment();
+//     }
+//     else
+//     {
+//         DEBUG_LOG("Coordinates already processed");
+//     }
 
-    DEBUG_LOG("Finished sub moment for "
-              << coords);
-}
+//     DEBUG_LOG("Finished sub moment for "
+//               << coords);
+// }
 void Environment::makeWindow()
 {
 
     for (auto &[coords, agent] : spider->Agents)
     {
         if (!agent)
+        {
             continue;
-
+        }
         UnitColor color = agent->getAgentColor();
 
         DrawCircle(
             agent->getX(),
             agent->getY(),
-            10,
+            4,
             {(unsigned char)color.red,
              (unsigned char)color.green,
              (unsigned char)color.blue,
              (unsigned char)color.transparency});
     }
+    for (auto &[coords, plant] : spider->Plants)
+    {
+        if (!plant)
+        {
+            continue;
+        }
+        UnitColor plC = plant->getPlantColor();
+        DrawCircle(
+            plant->getX(),
+            plant->getY(),
+            3,
+            {(unsigned char)plC.red,
+             (unsigned char)plC.green,
+             (unsigned char)plC.blue,
+             (unsigned char)plC.transparency});
+    }
 }
 
 void Environment::startSimulation()
 {
-    DEBUG_LOG("Starting simulation");
 
-    int AgentCount = 8;
-
-    DEBUG_LOG("Creating "
-              << AgentCount
-              << " starting agents");
-
+    int AgentCount = 60;
+    int PlantCount = 40;
     for (int i = 0; i < AgentCount; i++)
     {
-        DEBUG_LOG("Creating genesis Agent "
-                  << i);
 
         Agent *genesis =
             new Agent(
@@ -243,43 +269,38 @@ void Environment::startSimulation()
                 maxBrainChildNodes,
                 maxBrainLevel);
 
-        DEBUG_LOG("Generating coordinates");
-
         generateAgentCoords(genesis);
-
-        DEBUG_LOG("Adding Agent at "
-                  << genesis->getCoords());
 
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
 
-    DEBUG_LOG("Starting window");
+    for (int j = 0; j < PlantCount; j++)
+    {
+        Plant *pl = new Plant(radiation, gen);
+        generatePlantCoords(pl);
+        spider->Plants[pl->getCoords()] = pl;
+    }
 }
 
 void Environment::generateAgentCoords(Agent *ag)
 {
-    DEBUG_LOG("Generating coordinates for Agent");
+
     int cycles = 0;
     if (ag == nullptr)
     {
-        DEBUG_LOG("Cannot generate coordinates for null Agent");
+
         return;
     }
     while (true)
     {
         if (cycles >= 300)
         {
-            DEBUG_LOG("Could not generate agent coords");
+
             return;
         }
-        int x = insideBorders(gen) * 20;
-        int y = insideBorders(gen) * 20;
-
-        DEBUG_LOG("Generated coordinates "
-                  << x
-                  << "_"
-                  << y);
+        int x = insideBorders(gen) * 8;
+        int y = insideBorders(gen) * 8;
         bool occupied = false;
         for (auto &ac : spider->Agents)
         {
@@ -316,14 +337,9 @@ void Environment::generateAgentCoords(Agent *ag)
         if (occupied == false)
         {
 
-            DEBUG_LOG("Assigning coordinates "
-                      << x
-                      << "_"
-                      << y);
-
             ag->setX(x);
             ag->setY(y);
-            DEBUG_LOG("Finished coordinate generation");
+
             return;
         }
         cycles += 1;
@@ -332,27 +348,23 @@ void Environment::generateAgentCoords(Agent *ag)
 
 void Environment::generatePlantCoords(Plant *pl)
 {
-    DEBUG_LOG("Generating coordinates for Agent");
+
     int cycles = 0;
     if (pl == nullptr)
     {
-        DEBUG_LOG("Cannot generate coordinates for null Agent");
+
         return;
     }
     while (true)
     {
         if (cycles >= 300)
         {
-            DEBUG_LOG("Could not generate plant coords");
+
             return;
         }
-        int x = insideBorders(gen) * 20;
-        int y = insideBorders(gen) * 20;
+        int x = insideBorders(gen) * 8;
+        int y = insideBorders(gen) * 8;
 
-        DEBUG_LOG("Generated coordinates "
-                  << x
-                  << "_"
-                  << y);
         bool occupied = false;
         for (auto &ac : spider->Agents)
         {
@@ -389,14 +401,9 @@ void Environment::generatePlantCoords(Plant *pl)
         if (occupied == false)
         {
 
-            DEBUG_LOG("Assigning coordinates "
-                      << x
-                      << "_"
-                      << y);
-
             pl->setX(x);
             pl->setY(y);
-            DEBUG_LOG("Finished coordinate generation");
+
             return;
         }
         cycles += 1;

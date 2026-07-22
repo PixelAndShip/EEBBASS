@@ -2,30 +2,18 @@
 
 SimManager::SimManager()
 {
-    DEBUG_LOG("Starting SimManager constructor");
-
-    DEBUG_LOG("Creating Environment");
 
     Environment *ce = new Environment();
 
     currentEnvironment = ce;
 
     cycle = 0;
-
-    DEBUG_LOG("Simulation cycle initialized to 0");
-
-    DEBUG_LOG("Finished SimManager constructor");
 }
 
 SimManager::~SimManager()
 {
-    DEBUG_LOG("Starting SimManager destructor");
-
-    DEBUG_LOG("Deleting current Environment");
 
     delete currentEnvironment;
-
-    DEBUG_LOG("Finished SimManager destructor");
 }
 
 // void SimManager::logSimCycle()
