@@ -52,11 +52,16 @@ void Environment::manageSimulation()
     int AgentsCount = 0;
     int PlantsCount = 0;
     std::string text = "";
-    while (!WindowShouldClose() and iteration < 200)
+    while (!WindowShouldClose())
     {
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
-        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount);
+        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+        if (iteration >= 200)
+        {
+            iteration = 0;
+            cultivateSimulation();
+        }
         manageMoment();
         BeginDrawing();
         ClearBackground(BLACK);
@@ -70,16 +75,31 @@ void Environment::manageSimulation()
     CloseWindow();
 }
 
-void Environment::managePlantCount()
+void Environment::cultivateSimulation()
+{
+    manageAgentCount(80, 0.5);
+    for (auto &[coords, agent] : spider->Agents)
+    {
+        if (agent == nullptr)
+        {
+            continue;
+        }
+        agent->setHealth(200);
+        agent->setEnergy(100);
+    }
+    startSimulation();
+}
+
+void Environment::managePlantCount(int count, float cullingCount)
 {
 }
 
-void Environment::manageAgentCount()
+void Environment::manageAgentCount(int count, float cullingCount)
 {
-    int maxAgentCount = 200;
+    int maxAgentCount = count;
     if (spider->Agents.size() > maxAgentCount)
     {
-        int cullingCount = spider->Agents.size() * 0.1;
+        int cL = spider->Agents.size() * cullingCount;
 
         std::vector<std::string> ids;
 
@@ -96,7 +116,7 @@ void Environment::manageAgentCount()
             ids.end(),
             gen);
 
-        for (int i = 0; i < cullingCount and i < ids.size(); i++)
+        for (int i = 0; i < cL and i < ids.size(); i++)
         {
             auto it = spider->Agents.find(ids[i]);
 
@@ -254,12 +274,10 @@ void Environment::makeWindow()
 
 void Environment::startSimulation()
 {
-
-    int AgentCount = 60;
-    int PlantCount = 40;
+    int AgentCount = 100;
+    int PlantCount = 50;
     for (int i = 0; i < AgentCount; i++)
     {
-
         Agent *genesis =
             new Agent(
                 identifier,
@@ -268,9 +286,7 @@ void Environment::startSimulation()
                 dist,
                 maxBrainChildNodes,
                 maxBrainLevel);
-
         generateAgentCoords(genesis);
-
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
