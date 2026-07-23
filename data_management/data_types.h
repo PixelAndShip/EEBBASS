@@ -10,7 +10,7 @@ struct UnitColor
 
 inline const std::unordered_map<int, std::string> &getSenses()
 {
-    DEBUG_LOG("Calling getSenses");
+
     static const std::unordered_map<int, std::string> Senses = {
         {0, "SeeSomething"},
         {1, "SeeColor"},
@@ -23,7 +23,7 @@ inline const std::unordered_map<int, std::string> &getSenses()
 
 inline const std::unordered_map<int, std::string> &getActions()
 {
-    DEBUG_LOG("Calling getActions");
+
     static const std::unordered_map<int, std::string> Actions = {
         {0, "MoveLeft"},
         {1, "MoveRight"},

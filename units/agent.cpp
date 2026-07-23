@@ -3,16 +3,16 @@
 Agent::Agent()
 {
 
-    health = 100.0;
+    health = 200.0;
 
-    energy = 100.0;
+    energy = 200.0;
 
     plantDiet = 0.5;
 
     agentColor = {100, 100, 1, 255};
 
-    x = 25;
-    y = 25;
+    x = 1000;
+    y = 1000;
 
     speed = 1.0;
 }
@@ -37,8 +37,8 @@ Agent::Agent(
 
     agentColor = {100, 100, 1, 255};
 
-    x = 25;
-    y = 25;
+    x = 1000;
+    y = 1000;
 
     speed = 1.0;
 
