@@ -57,7 +57,7 @@ void Environment::manageSimulation()
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
         text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
-        if (iteration >= 200)
+        if (iteration >= 120)
         {
             iteration = 0;
             cultivateSimulation();
@@ -75,19 +75,62 @@ void Environment::manageSimulation()
     CloseWindow();
 }
 
-void Environment::cultivateSimulation()
+void Environment::cultivateSimulation(int targetPop)
 {
-    manageAgentCount(80, 0.5);
+
+    std::vector<std::pair<std::string, float>> rankedAgents;
+
     for (auto &[coords, agent] : spider->Agents)
     {
         if (agent == nullptr)
-        {
             continue;
-        }
-        agent->setHealth(200);
-        agent->setEnergy(100);
+
+        float fitness = agent->getHealth() + agent->getEnergy();
+        rankedAgents.push_back({coords, fitness});
     }
-    startSimulation();
+
+    std::sort(rankedAgents.begin(), rankedAgents.end(),
+              [](const auto &a, const auto &b)
+              {
+                  return a.second > b.second;
+              });
+
+    int originalPopulation = rankedAgents.size();
+    int survivors = originalPopulation / 2;
+
+    for (int i = 0; i < survivors; i++)
+    {
+        Agent *agent = spider->Agents[rankedAgents[i].first];
+
+        if (agent != nullptr)
+        {
+            agent->setHealth(200);
+            agent->setEnergy(200);
+        }
+    }
+
+    for (int i = survivors; i < originalPopulation; i++)
+    {
+        auto it = spider->Agents.find(rankedAgents[i].first);
+
+        if (it != spider->Agents.end())
+        {
+            delete it->second;
+            spider->Agents.erase(it);
+        }
+    }
+    int plantTargetPop = 150 - (int)spider->Plants.size();
+    int agentTargetPop = targetPop - survivors;
+    if (plantTargetPop <= 0)
+    {
+        plantTargetPop = 50;
+    }
+    if (targetPop - survivors <= 0)
+    {
+        agentTargetPop = 100;
+    }
+    startSimulation(
+        agentTargetPop, plantTargetPop);
 }
 
 void Environment::managePlantCount(int count, float cullingCount)
@@ -146,15 +189,19 @@ void Environment::manageMoment()
         }
 
         float oldHealth = agent->getHealth();
-
+        float oldEnergy = agent->getEnergy();
         agent->setHealth(
-            oldHealth - 0.1);
-
+            oldHealth - 1);
+        agent->setEnergy(oldEnergy - 1);
+        if (agent->getEnergy() <= 0.1)
+        {
+            agent->setEnergy(0);
+            agent->setHealth(
+                agent->getHealth() - 1);
+        }
         if (agent->getHealth() <= 0.1)
         {
-
             delete agent;
-
             it = spider->Agents.erase(it);
         }
         else
@@ -178,7 +225,7 @@ void Environment::manageMoment()
         float oldPlantHealth = plant->getHealth();
 
         plant->setHealth(
-            oldPlantHealth - 0.1);
+            oldPlantHealth - 1);
 
         if (plant->getHealth() <= 0.1)
         {
@@ -272,10 +319,10 @@ void Environment::makeWindow()
     }
 }
 
-void Environment::startSimulation()
+void Environment::startSimulation(int agentCount, int plantCount)
 {
-    int AgentCount = 100;
-    int PlantCount = 50;
+    int AgentCount = agentCount;
+    int PlantCount = plantCount;
     for (int i = 0; i < AgentCount; i++)
     {
         Agent *genesis =
@@ -287,6 +334,11 @@ void Environment::startSimulation()
                 maxBrainChildNodes,
                 maxBrainLevel);
         generateAgentCoords(genesis);
+        if (genesis->getX() == 1000)
+        {
+            delete genesis;
+            continue;
+        }
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
@@ -295,6 +347,11 @@ void Environment::startSimulation()
     {
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
+        if (pl->getX() == 1000)
+        {
+            delete pl;
+            continue;
+        }
         spider->Plants[pl->getCoords()] = pl;
     }
 }

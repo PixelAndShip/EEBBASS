@@ -28,7 +28,7 @@ public:
 
     void managePlantCount(int count = 100, float cullingCount = 0.4); // makes sure sim does not crash
 
-    void manageAgentCount(int count = 300, float cullingCount = 0.4); // makes sure sim does not crash
+    void manageAgentCount(int count = 200, float cullingCount = 0.4); // makes sure sim does not crash
 
     void manageMoment(); /*
     loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
@@ -39,11 +39,11 @@ public:
 
     // void manageSubMoment(std::string coords);
 
-    void cultivateSimulation();
+    void cultivateSimulation(int targetPop = 200);
 
     void makeWindow();
 
-    void startSimulation();
+    void startSimulation(int agentCount = 100, int plantCount = 50);
 
     void generateAgentCoords(Agent *ag);
 
