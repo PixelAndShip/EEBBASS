@@ -29,9 +29,9 @@ Agent::Agent(
 
     env_identifier = identifier;
 
-    health = 200.0;
+    health = 100.0;
 
-    energy = 200.0;
+    energy = 100.0;
 
     plantDiet = 0.5;
 
@@ -80,10 +80,4 @@ Agent::Agent(
 
 void Agent::generateStart(std::mt19937 &gen)
 {
-    DEBUG_LOG("generateStart() called");
-
-    // Currently no generation logic exists.
-    // Add random starting attributes here when needed.
-
-    DEBUG_LOG("Finished generateStart()");
 }

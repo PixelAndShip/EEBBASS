@@ -19,8 +19,6 @@ Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &i
 
         addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
-    logBrain();
-    logBrain();
 }
 
 Brain::~Brain()
@@ -50,8 +48,6 @@ Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_i
 
         addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
     }
-    logBrain();
-    logBrain();
 }
 
 void Brain::addCopiedConnection(
@@ -191,7 +187,7 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
     return inputNodes;
 }
 
-void Brain::logBrain()
+void Brain::logBrain() const
 {
 
     std::stringstream writtenData;
@@ -222,7 +218,7 @@ void Brain::logBrain()
     updatedLog.close();
 }
 
-std::string Brain::outputBrain(InputNode *node, int depth)
+std::string Brain::outputBrain(InputNode *node, int depth) const
 {
 
     if (!node)
