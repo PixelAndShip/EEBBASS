@@ -34,6 +34,6 @@ public:
 
     void setIdentifier(int iD) { env_identifier = iD; };
     int getIdentifier() { return env_identifier; };
-    void logBrain();
-    std::string outputBrain(InputNode *node, int depth = 0);
+    void logBrain() const;
+    std::string outputBrain(InputNode *node, int depth = 0) const;
 };

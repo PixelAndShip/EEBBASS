@@ -104,9 +104,10 @@ void Environment::cultivateSimulation(int targetPop)
 
         if (agent != nullptr)
         {
-            agent->setHealth(200);
-            agent->setEnergy(200);
+            agent->setHealth(100);
+            agent->setEnergy(100);
         }
+        agent->getBrain().logBrain();
     }
 
     for (int i = survivors; i < originalPopulation; i++)
