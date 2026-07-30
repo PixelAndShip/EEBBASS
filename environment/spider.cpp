@@ -277,11 +277,9 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     switch (key)
     {
     case 0:
-
         return touchSomething(&Agents, &Plants, AgentCoordinates);
 
     case 1:
-
         return touchColor(
             &Agents,
             &Plants,
@@ -289,28 +287,56 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
             Sense->getUnitColor());
 
     case 2:
-
         return energyCountAboveSet(
             Agents.at(AgentCoordinates)->getEnergy(),
             Sense->getSetAmount());
 
     case 3:
-
         return energyCountBelowSet(
             Agents.at(AgentCoordinates)->getEnergy(),
             Sense->getSetAmount());
 
     case 4:
-
         return healthCountAboveSet(
             Agents.at(AgentCoordinates)->getHealth(),
             Sense->getSetAmount());
 
     case 5:
-
         return healthCountBelowSet(
             Agents.at(AgentCoordinates)->getHealth(),
             Sense->getSetAmount());
+
+    case 6:
+        return seeSomething(6, &Agents, &Plants, AgentCoordinates);
+        break;
+
+    case 7:
+        return seeSomething(7, &Agents, &Plants, AgentCoordinates);
+        break;
+
+    case 8:
+        return seeSomething(8, &Agents, &Plants, AgentCoordinates);
+        break;
+
+    case 9:
+        return seeSomething(9, &Agents, &Plants, AgentCoordinates);
+        break;
+
+    case 10:
+        return seeColor(10, &Agents, &Plants, AgentCoordinates, Sense->getUnitColor());
+        break;
+
+    case 11:
+        return seeColor(11, &Agents, &Plants, AgentCoordinates, Sense->getUnitColor());
+        break;
+
+    case 12:
+        return seeColor(12, &Agents, &Plants, AgentCoordinates, Sense->getUnitColor());
+        break;
+
+    case 13:
+        return seeColor(13, &Agents, &Plants, AgentCoordinates, Sense->getUnitColor());
+        break;
 
     default:
 
