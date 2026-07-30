@@ -4,18 +4,27 @@
 
 /*
 
-{0,"SeeSomething"},
-{1,"SeeColor"},
-{2,"EnergyCountAboveSet"},
-{3,"EnergyCountBelowSet"},
-{4,"HealthCountAboveSet"},
-{5,"HealthCountBelowSet"}
+{0, "TouchSomething"},
+{1, "TouchColor"},
+{2, "EnergyCountAboveSet"},
+{3, "EnergyCountBelowSet"},
+{4, "HealthCountAboveSet"},
+{5, "HealthCountBelowSet"},
+
+{6, "SeeSomethingLeft"},
+{7, "SeeSomethingRight"},
+{8, "SeeSomethingUp"},
+{9, "SeeSomethingDown"},
+{10, "SeeColorLeft"},
+{11, "SeeColorRight"},
+{12, "SeeColorUp"},
+{13, "SeeColorDown"}
 
 */
 
-extern bool seeSomething(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates);
+extern bool touchSomething(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates);
 
-extern bool seeColor(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates, UnitColor setC);
+extern bool touchColor(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates, UnitColor setC);
 
 extern bool energyCountAboveSet(float energy, float setAmount);
 
@@ -24,6 +33,8 @@ extern bool energyCountBelowSet(float energy, float setAmount);
 extern bool healthCountAboveSet(float health, float setAmount);
 
 extern bool healthCountBelowSet(float health, float setAmount);
+
+extern bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates);
 
 /*
 

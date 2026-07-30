@@ -1,6 +1,6 @@
 #include "node_functions.h"
 
-bool seeSomething(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
+bool touchSomething(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
 {
 
     std::vector<std::string> proximateAgentCs = getProximateAgents(Agents, AgentCoordinates);
@@ -15,7 +15,7 @@ bool seeSomething(const std::unordered_map<std::string, Agent *> *Agents, const 
     return true;
 }
 
-bool seeColor(
+bool touchColor(
     const std::unordered_map<std::string, Agent *> *Agents,
     const std::unordered_map<std::string, Plant *> *Plants,
     std::string AgentCoordinates,
@@ -118,8 +118,52 @@ bool healthCountAboveSet(float health, float setAmount)
 
 bool healthCountBelowSet(float health, float setAmount)
 {
-
+    DEBUG_LOG("returning" + std::to_string(health < setAmount));
     return health < setAmount;
+}
+
+// {6, "SeeSomethingLeft"},
+// {7, "SeeSomethingRight"},
+// {8, "SeeSomethingUp"},
+// {9, "SeeSomethingDown"},
+// {10, "SeeColorLeft"},
+// {11, "SeeColorRight"},
+// {12, "SeeColorUp"},
+// {13, "SeeColorDown"}
+
+bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
+{
+    // need to check both coords and color if needed
+    switch (id)
+    {
+    case 6:
+
+        break;
+    case 7:
+
+        break;
+    case 8:
+
+        break;
+    case 9:
+
+        break;
+    case 10:
+
+        break;
+    case 11:
+
+        break;
+    case 12:
+
+        break;
+    case 13:
+
+        break;
+
+    default:
+        break;
+    };
 }
 
 void updateSpeed(float deltaEnergy, Agent *Self)
@@ -342,7 +386,6 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
     Plant *pl = nullptr;
     for (std::string cs2 : proximatePlantCs)
     {
-        DEBUG_LOG("Checking Plant at " << cs2);
 
         pl = Plants->at(cs2);
 

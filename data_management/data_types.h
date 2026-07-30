@@ -7,17 +7,27 @@ struct UnitColor
 {
     unsigned int red, green, blue, transparency;
 };
+const unsigned int agentSize = 4;
+const unsigned int plantSize = 3;
 
 inline const std::unordered_map<int, std::string> &getSenses()
 {
 
     static const std::unordered_map<int, std::string> Senses = {
-        {0, "SeeSomething"},
-        {1, "SeeColor"},
+        {0, "TouchSomething"},
+        {1, "TouchColor"},
         {2, "EnergyCountAboveSet"},
         {3, "EnergyCountBelowSet"},
         {4, "HealthCountAboveSet"},
-        {5, "HealthCountBelowSet"}};
+        {5, "HealthCountBelowSet"},
+        {6, "SeeSomethingLeft"},
+        {7, "SeeSomethingRight"},
+        {8, "SeeSomethingUp"},
+        {9, "SeeSomethingDown"},
+        {10, "SeeColorLeft"},
+        {11, "SeeColorRight"},
+        {12, "SeeColorUp"},
+        {13, "SeeColorDown"}};
     return Senses;
 }
 

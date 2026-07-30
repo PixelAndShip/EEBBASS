@@ -120,7 +120,7 @@ void Environment::cultivateSimulation(int targetPop)
             spider->Agents.erase(it);
         }
     }
-    int plantTargetPop = 150 - (int)spider->Plants.size();
+    int plantTargetPop = 100 - (int)spider->Plants.size();
     int agentTargetPop = targetPop - survivors;
     if (plantTargetPop <= 0)
     {
@@ -296,7 +296,7 @@ void Environment::makeWindow()
         DrawCircle(
             agent->getX(),
             agent->getY(),
-            4,
+            agentSize,
             {(unsigned char)color.red,
              (unsigned char)color.green,
              (unsigned char)color.blue,
@@ -312,7 +312,7 @@ void Environment::makeWindow()
         DrawCircle(
             plant->getX(),
             plant->getY(),
-            3,
+            plantSize,
             {(unsigned char)plC.red,
              (unsigned char)plC.green,
              (unsigned char)plC.blue,
@@ -324,6 +324,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
 {
     int AgentCount = agentCount;
     int PlantCount = plantCount;
+    bool inside = false;
     for (int i = 0; i < AgentCount; i++)
     {
         Agent *genesis =
@@ -335,7 +336,8 @@ void Environment::startSimulation(int agentCount, int plantCount)
                 maxBrainChildNodes,
                 maxBrainLevel);
         generateAgentCoords(genesis);
-        if (genesis->getX() == 1000)
+        inside = genesis->getX() > 0 and genesis->getX() < 800 and genesis->getY() > 0 and genesis->getY() < 800;
+        if (!inside)
         {
             delete genesis;
             continue;
@@ -348,7 +350,8 @@ void Environment::startSimulation(int agentCount, int plantCount)
     {
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
-        if (pl->getX() == 1000)
+        inside = pl->getX() > 0 and pl->getX() < 800 and pl->getY() > 0 and pl->getY() < 800;
+        if (!inside)
         {
             delete pl;
             continue;
@@ -373,39 +376,13 @@ void Environment::generateAgentCoords(Agent *ag)
 
             return;
         }
-        int x = insideBorders(gen) * 8;
-        int y = insideBorders(gen) * 8;
-        bool occupied = false;
-        for (auto &ac : spider->Agents)
+        int x = insideBorders(gen) * agentSize * 2;
+        int y = insideBorders(gen) * agentSize * 2;
+        bool occupied = true;
+        std::string coords = std::to_string(x) + "_" + std::to_string(y);
+        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
         {
-            if (ac.second == nullptr)
-            {
-                continue;
-            }
-
-            if (ac.second->getX() == x and
-                ac.second->getY() == y)
-            {
-                occupied = true;
-                break;
-            }
-        }
-        if (occupied == false)
-        {
-            for (auto &pl : spider->Plants)
-            {
-                if (pl.second == nullptr)
-                {
-                    continue;
-                }
-
-                if (pl.second->getX() == x and
-                    pl.second->getY() == y)
-                {
-                    occupied = true;
-                    break;
-                }
-            }
+            occupied = false;
         }
 
         if (occupied == false)
@@ -436,40 +413,13 @@ void Environment::generatePlantCoords(Plant *pl)
 
             return;
         }
-        int x = insideBorders(gen) * 8;
-        int y = insideBorders(gen) * 8;
-
-        bool occupied = false;
-        for (auto &ac : spider->Agents)
+        int x = insideBorders(gen) * agentSize * 2;
+        int y = insideBorders(gen) * agentSize * 2;
+        bool occupied = true;
+        std::string coords = std::to_string(x) + "_" + std::to_string(y);
+        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
         {
-            if (ac.second == nullptr)
-            {
-                continue;
-            }
-
-            if (ac.second->getX() == x and
-                ac.second->getY() == y)
-            {
-                occupied = true;
-                break;
-            }
-        }
-        if (occupied == false)
-        {
-            for (auto &pl : spider->Plants)
-            {
-                if (pl.second == nullptr)
-                {
-                    continue;
-                }
-
-                if (pl.second->getX() == x and
-                    pl.second->getY() == y)
-                {
-                    occupied = true;
-                    break;
-                }
-            }
+            occupied = false;
         }
 
         if (occupied == false)
