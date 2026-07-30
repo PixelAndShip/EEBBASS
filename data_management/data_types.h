@@ -10,6 +10,8 @@ struct UnitColor
 const unsigned int agentSize = 4;
 const unsigned int plantSize = 3;
 
+const std::vector<int> dCoords = {-(int)agentSize * 2, -(int)agentSize, 0, (int)agentSize, (int)agentSize * 2};
+
 inline const std::unordered_map<int, std::string> &getSenses()
 {
 

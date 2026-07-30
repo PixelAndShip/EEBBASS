@@ -1,5 +1,13 @@
 #include "node_functions.h"
 
+inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 10)
+{
+    return std::abs(static_cast<int>(a.red) - static_cast<int>(b.red)) <= tolerance &&
+           std::abs(static_cast<int>(a.green) - static_cast<int>(b.green)) <= tolerance &&
+           std::abs(static_cast<int>(a.blue) - static_cast<int>(b.blue)) <= tolerance &&
+           std::abs(static_cast<int>(a.transparency) - static_cast<int>(b.transparency)) <= tolerance;
+}
+
 bool touchSomething(const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
 {
 
@@ -34,13 +42,6 @@ bool touchColor(
     Plant *pl = nullptr;
     UnitColor clr = {};
 
-    unsigned int r, g, b, t;
-
-    bool r_in_range = false;
-    bool g_in_range = false;
-    bool b_in_range = false;
-    bool t_in_range = false;
-
     for (std::string cs : proximateAgentCs)
     {
 
@@ -50,17 +51,7 @@ bool touchColor(
         {
             clr = ag->getAgentColor();
 
-            r = clr.red;
-            g = clr.green;
-            b = clr.blue;
-            t = clr.transparency;
-
-            r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
-            g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
-            b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
-            t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
-
-            if (r_in_range and g_in_range and b_in_range and t_in_range)
+            if (colorMatches(clr, setC))
             {
 
                 return true;
@@ -73,21 +64,11 @@ bool touchColor(
 
         pl = Plants->at(cs);
 
-        if (ag != nullptr)
+        if (pl != nullptr)
         {
             clr = pl->getPlantColor();
 
-            r = clr.red;
-            g = clr.green;
-            b = clr.blue;
-            t = clr.transparency;
-
-            r_in_range = r <= setC.red + 10 and r >= setC.red - 10;
-            g_in_range = g <= setC.green + 10 and g >= setC.green - 10;
-            b_in_range = b <= setC.blue + 10 and b >= setC.blue - 10;
-            t_in_range = t <= setC.transparency + 10 and t >= setC.transparency - 10;
-
-            if (r_in_range and g_in_range and b_in_range and t_in_range)
+            if (colorMatches(clr, setC))
             {
 
                 return true;
@@ -133,37 +114,183 @@ bool healthCountBelowSet(float health, float setAmount)
 
 bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
 {
-    // need to check both coords and color if needed
+    std::string coords = "";
+    auto _pos = AgentCoordinates.find("_");
+
+    int aX, aY;
+
+    try
+    {
+        aX = std::stoi(AgentCoordinates.substr(0, _pos));
+        aY = std::stoi(AgentCoordinates.substr(_pos + 1));
+    }
+    catch (...)
+    {
+        return false;
+    }
     switch (id)
     {
     case 6:
 
+        for (int y : dCoords)
+        {
+            coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
+            {
+                return true;
+            }
+        }
         break;
     case 7:
-
+        for (int y : dCoords)
+        {
+            coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
+            {
+                return true;
+            }
+        }
         break;
     case 8:
-
+        for (int x : dCoords)
+        {
+            coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
+            if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
+            {
+                return true;
+            }
+        }
         break;
     case 9:
-
+        for (int x : dCoords)
+        {
+            coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
+            if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
+            {
+                return true;
+            }
+        }
         break;
-    case 10:
-
-        break;
-    case 11:
-
-        break;
-    case 12:
-
-        break;
-    case 13:
-
-        break;
-
     default:
         break;
     };
+    return false;
+}
+
+bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates, UnitColor Target)
+{
+
+    std::string coords = "";
+    auto _pos = AgentCoordinates.find("_");
+
+    int aX, aY;
+
+    try
+    {
+        aX = std::stoi(AgentCoordinates.substr(0, _pos));
+        aY = std::stoi(AgentCoordinates.substr(_pos + 1));
+    }
+    catch (...)
+    {
+        return false;
+    }
+    UnitColor clr = {};
+    switch (id)
+    {
+    case 10:
+
+        for (int y : dCoords)
+        {
+            coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            if (Agents->find(coords) != Agents->end())
+            {
+                clr = Agents->at(coords)->getAgentColor();
+            }
+            else if (Plants->find(coords) != Plants->end())
+            {
+                clr = Plants->at(coords)->getPlantColor();
+            }
+            else
+            {
+                continue;
+            }
+
+            if (colorMatches(clr, Target))
+            {
+                return true;
+            }
+        }
+        break;
+    case 11:
+        for (int y : dCoords)
+        {
+            coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            if (Agents->find(coords) != Agents->end())
+            {
+                clr = Agents->at(coords)->getAgentColor();
+            }
+            else if (Plants->find(coords) != Plants->end())
+            {
+                clr = Plants->at(coords)->getPlantColor();
+            }
+            else
+            {
+                continue;
+            }
+            if (colorMatches(clr, Target))
+            {
+                return true;
+            }
+        }
+        break;
+    case 12:
+        for (int x : dCoords)
+        {
+            coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
+            if (Agents->find(coords) != Agents->end())
+            {
+                clr = Agents->at(coords)->getAgentColor();
+            }
+            else if (Plants->find(coords) != Plants->end())
+            {
+                clr = Plants->at(coords)->getPlantColor();
+            }
+            else
+            {
+                continue;
+            }
+            if (colorMatches(clr, Target))
+            {
+                return true;
+            }
+        }
+        break;
+    case 13:
+        for (int x : dCoords)
+        {
+            coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
+            if (Agents->find(coords) != Agents->end())
+            {
+                clr = Agents->at(coords)->getAgentColor();
+            }
+            else if (Plants->find(coords) != Plants->end())
+            {
+                clr = Plants->at(coords)->getPlantColor();
+            }
+            else
+            {
+                continue;
+            }
+            if (colorMatches(clr, Target))
+            {
+                return true;
+            }
+        }
+        break;
+    default:
+        break;
+    };
+    return false;
 }
 
 void updateSpeed(float deltaEnergy, Agent *Self)
@@ -303,19 +430,19 @@ void move(const std::unordered_map<std::string, Agent *> *Agents, std::string Ag
     switch (Direction)
     {
     case 'u':
-        aY -= 8;
+        aY -= agentSize * 2;
         break;
 
     case 'd':
-        aY += 8;
+        aY += agentSize * 2;
         break;
 
     case 'l':
-        aX -= 8;
+        aX -= agentSize * 2;
         break;
 
     case 'r':
-        aX += 8;
+        aX += agentSize * 2;
         break;
     }
 
@@ -353,26 +480,7 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
         {
             UnitColor clr = ag->getAgentColor();
 
-            bool r_in_range =
-                clr.red <= Target.red + 10 and
-                clr.red >= Target.red - 10;
-
-            bool g_in_range =
-                clr.green <= Target.green + 10 and
-                clr.green >= Target.green - 10;
-
-            bool b_in_range =
-                clr.blue <= Target.blue + 10 and
-                clr.blue >= Target.blue - 10;
-
-            bool t_in_range =
-                clr.transparency <= Target.transparency + 10 and
-                clr.transparency >= Target.transparency - 10;
-
-            if (r_in_range and
-                g_in_range and
-                b_in_range and
-                t_in_range)
+            if (colorMatches(clr, Target))
             {
 
                 ag->setHealth(
@@ -393,26 +501,7 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
         {
             UnitColor clr = pl->getPlantColor();
 
-            bool r_in_range =
-                clr.red <= Target.red + 10 and
-                clr.red >= Target.red - 10;
-
-            bool g_in_range =
-                clr.green <= Target.green + 10 and
-                clr.green >= Target.green - 10;
-
-            bool b_in_range =
-                clr.blue <= Target.blue + 10 and
-                clr.blue >= Target.blue - 10;
-
-            bool t_in_range =
-                clr.transparency <= Target.transparency + 10 and
-                clr.transparency >= Target.transparency - 10;
-
-            if (r_in_range and
-                g_in_range and
-                b_in_range and
-                t_in_range)
+            if (colorMatches(clr, Target))
             {
 
                 pl->setHealth(
@@ -444,31 +533,27 @@ std::vector<std::string> getProximatePlants(const std::unordered_map<std::string
         return proximatePlantCs;
     }
 
-    std::vector<std::string> InRadius =
+    std::vector<std::vector<int>> InRadius =
         {
-            "0_-8",
-            "8_-8",
-            "8_0",
-            "8_8",
-            "0_8",
-            "-8_8",
-            "-8_0",
-            "-8_-8"};
+            {0, -(int)agentSize * 2},
+            {(int)agentSize * 2, -(int)agentSize * 2},
+            {(int)agentSize * 2, 0},
+            {(int)agentSize * 2, (int)agentSize * 2},
+            {0, (int)agentSize * 2},
+            {-(int)agentSize * 2, (int)agentSize * 2},
+            {-(int)agentSize * 2, 0},
+            {-(int)agentSize * 2, -(int)agentSize * 2}};
 
-    for (std::string r : InRadius)
+    for (auto pair : InRadius)
     {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-
+        int dx = pair[0];
+        int dy = pair[1];
         std::string checkCoords =
             std::to_string(aX + dx) + "_" +
             std::to_string(aY + dy);
 
         if (Plants->find(checkCoords) != Plants->end())
         {
-
             proximatePlantCs.push_back(checkCoords);
         }
     }
@@ -494,24 +579,21 @@ std::string getSplitCoords(const std::unordered_map<std::string, Agent *> *Agent
         return "";
     }
 
-    std::vector<std::string> InRadius =
+    std::vector<std::vector<int>> InRadius =
         {
-            "0_-8",
-            "8_-8",
-            "8_0",
-            "8_8",
-            "0_8",
-            "-8_8",
-            "-8_0",
-            "-8_-8"};
+            {0, -(int)agentSize * 2},
+            {(int)agentSize * 2, -(int)agentSize * 2},
+            {(int)agentSize * 2, 0},
+            {(int)agentSize * 2, (int)agentSize * 2},
+            {0, (int)agentSize * 2},
+            {-(int)agentSize * 2, (int)agentSize * 2},
+            {-(int)agentSize * 2, 0},
+            {-(int)agentSize * 2, -(int)agentSize * 2}};
 
-    for (std::string r : InRadius)
+    for (auto pair : InRadius)
     {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
-
+        int dx = pair[0];
+        int dy = pair[1];
         std::string newCoords =
             std::to_string(aX + dx) + "_" +
             std::to_string(aY + dy);
@@ -547,23 +629,21 @@ std::vector<std::string> getProximateAgents(const std::unordered_map<std::string
         return proximateAgentCs;
     }
 
-    std::vector<std::string> InRadius =
+    std::vector<std::vector<int>> InRadius =
         {
-            "0_-8",
-            "8_-8",
-            "8_0",
-            "8_8",
-            "0_8",
-            "-8_8",
-            "-8_0",
-            "-8_-8"};
+            {0, -(int)agentSize * 2},
+            {(int)agentSize * 2, -(int)agentSize * 2},
+            {(int)agentSize * 2, 0},
+            {(int)agentSize * 2, (int)agentSize * 2},
+            {0, (int)agentSize * 2},
+            {-(int)agentSize * 2, (int)agentSize * 2},
+            {-(int)agentSize * 2, 0},
+            {-(int)agentSize * 2, -(int)agentSize * 2}};
 
-    for (std::string r : InRadius)
+    for (auto pair : InRadius)
     {
-        auto _pos = r.find("_");
-
-        int dx = std::stoi(r.substr(0, _pos));
-        int dy = std::stoi(r.substr(_pos + 1));
+        int dx = pair[0];
+        int dy = pair[1];
 
         std::string checkCoords =
             std::to_string(aX + dx) + "_" +

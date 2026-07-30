@@ -36,6 +36,7 @@ extern bool healthCountBelowSet(float health, float setAmount);
 
 extern bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates);
 
+extern bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates, UnitColor Target);
 /*
 
 {0,"MoveLeft"},
