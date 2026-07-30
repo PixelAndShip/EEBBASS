@@ -278,11 +278,11 @@ bool Spider::manageSense(std::string AgentCoordinates, InputNode *Sense)
     {
     case 0:
 
-        return seeSomething(&Agents, &Plants, AgentCoordinates);
+        return touchSomething(&Agents, &Plants, AgentCoordinates);
 
     case 1:
 
-        return seeColor(
+        return touchColor(
             &Agents,
             &Plants,
             AgentCoordinates,
