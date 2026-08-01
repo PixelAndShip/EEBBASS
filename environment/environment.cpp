@@ -48,7 +48,7 @@ void Environment::manageSimulation()
 
     startSimulation();
     InitWindow(800, 800, "Environment");
-    SetTargetFPS(4);
+    SetTargetFPS(60);
     int AgentsCount = 0;
     int PlantsCount = 0;
     std::string text = "";
@@ -336,12 +336,16 @@ void Environment::startSimulation(int agentCount, int plantCount)
                 maxBrainChildNodes,
                 maxBrainLevel);
         generateAgentCoords(genesis);
+
         inside = genesis->getX() > 0 and genesis->getX() < 800 and genesis->getY() > 0 and genesis->getY() < 800;
+
         if (!inside)
         {
+
             delete genesis;
             continue;
         }
+        // genesis->getBrain().logBrain();
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
@@ -350,9 +354,12 @@ void Environment::startSimulation(int agentCount, int plantCount)
     {
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
+
         inside = pl->getX() > 0 and pl->getX() < 800 and pl->getY() > 0 and pl->getY() < 800;
+
         if (!inside)
         {
+
             delete pl;
             continue;
         }
@@ -378,9 +385,10 @@ void Environment::generateAgentCoords(Agent *ag)
         }
         int x = insideBorders(gen) * agentSize * 2;
         int y = insideBorders(gen) * agentSize * 2;
+
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
-        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
+        if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())
         {
             occupied = false;
         }
@@ -417,7 +425,7 @@ void Environment::generatePlantCoords(Plant *pl)
         int y = insideBorders(gen) * agentSize * 2;
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
-        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
+        if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())
         {
             occupied = false;
         }
