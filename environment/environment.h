@@ -23,6 +23,7 @@ public:
     Spider *spider = nullptr;
 
     Environment();
+    Environment(int id);
     ~Environment();
 
     void manageSimulation();

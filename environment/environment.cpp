@@ -25,6 +25,30 @@ Environment::Environment()
     insideBorders = iB;
 }
 
+Environment::Environment(int id)
+{
+
+    identifier = id;
+    radiation = 0.5;
+    iteration = 0;
+    carbon_count = 1;
+
+    maxBrainLevel = 5;
+    maxBrainChildNodes = 2;
+
+    spider = new Spider();
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::uniform_int_distribution<> d(0, 7);
+    std::uniform_int_distribution<> iB(0, 100);
+
+    gen = g;
+    dist = d;
+    insideBorders = iB;
+}
+
 Environment::~Environment()
 {
 
@@ -47,7 +71,8 @@ void Environment::manageSimulation()
 {
 
     startSimulation();
-    InitWindow(800, 800, "Environment");
+    std::string windowName = "Environment" + std::to_string(identifier);
+    InitWindow(800, 800, windowName.c_str());
     SetTargetFPS(60);
     int AgentsCount = 0;
     int PlantsCount = 0;
