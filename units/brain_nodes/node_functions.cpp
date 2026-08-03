@@ -2,9 +2,9 @@
 
 inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 10)
 {
-    return std::abs(static_cast<int>(a.red) - static_cast<int>(b.red)) <= tolerance &&
-           std::abs(static_cast<int>(a.green) - static_cast<int>(b.green)) <= tolerance &&
-           std::abs(static_cast<int>(a.blue) - static_cast<int>(b.blue)) <= tolerance &&
+    return std::abs(static_cast<int>(a.red) - static_cast<int>(b.red)) <= tolerance and
+           std::abs(static_cast<int>(a.green) - static_cast<int>(b.green)) <= tolerance and
+           std::abs(static_cast<int>(a.blue) - static_cast<int>(b.blue)) <= tolerance and
            std::abs(static_cast<int>(a.transparency) - static_cast<int>(b.transparency)) <= tolerance;
 }
 
@@ -99,7 +99,6 @@ bool healthCountAboveSet(float health, float setAmount)
 
 bool healthCountBelowSet(float health, float setAmount)
 {
-    DEBUG_LOG("returning" + std::to_string(health < setAmount));
     return health < setAmount;
 }
 
@@ -305,7 +304,7 @@ void updateSpeed(float deltaEnergy, Agent *Self)
     float currentEnergy = Self->getEnergy();
     float currentSpeed = Self->getSpeed();
 
-    if (currentEnergy <= 0.001)
+    if (currentEnergy <= 0.001 or deltaEnergy > currentEnergy)
     {
 
         return;
@@ -349,7 +348,7 @@ void updateHealth(float deltaEnergy, Agent *Self)
     float currentEnergy = Self->getEnergy();
     float currentHealth = Self->getHealth();
 
-    if (currentEnergy <= 0.001 or currentHealth <= 0.001)
+    if (currentEnergy <= 0.001 or currentHealth <= 0.001 or deltaEnergy > currentEnergy)
     {
 
         return;
@@ -398,9 +397,15 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
 
         if (ag != nullptr)
         {
-
-            ag->setHealth(ag->getHealth() - energyCost);
-            agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()));
+            if (ag->getHealth() - energyCost <= 0)
+            {
+                ag->setHealth(0);
+            }
+            else
+            {
+                ag->setHealth(ag->getHealth() - energyCost);
+            }
+            agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()) - 0.5 * energyCost);
             return;
         }
     }
@@ -414,8 +419,15 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
         if (pl != nullptr)
         {
 
-            pl->setHealth(pl->getHealth() - energyCost);
-            agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet());
+            if (pl->getHealth() - energyCost <= 0)
+            {
+                pl->setHealth(0);
+            }
+            else
+            {
+                pl->setHealth(pl->getHealth() - energyCost);
+            }
+            agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet() - energyCost * 0.5);
             return;
         }
     }
@@ -483,9 +495,15 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
             if (colorMatches(clr, Target))
             {
 
-                ag->setHealth(
-                    ag->getHealth() - energyCost);
-                agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()));
+                if (ag->getHealth() - energyCost <= 0)
+                {
+                    ag->setHealth(0);
+                }
+                else
+                {
+                    ag->setHealth(ag->getHealth() - energyCost);
+                }
+                agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()) - energyCost * 0.5);
                 return;
             }
         }
@@ -504,9 +522,15 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
             if (colorMatches(clr, Target))
             {
 
-                pl->setHealth(
-                    pl->getHealth() - energyCost);
-                agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet());
+                if (pl->getHealth() - energyCost <= 0)
+                {
+                    pl->setHealth(0);
+                }
+                else
+                {
+                    pl->setHealth(pl->getHealth() - energyCost);
+                }
+                agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet() - energyCost * 0.5);
                 return;
             }
         }

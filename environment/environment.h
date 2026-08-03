@@ -7,7 +7,7 @@
 #include <unistd.h>
 class Environment
 {
-public:
+private:
     int identifier;
     float radiation;
     int iteration;
@@ -15,6 +15,7 @@ public:
     int maxBrainLevel;
     int maxBrainChildNodes;
 
+public:
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
     std::uniform_int_distribution<> insideBorders;
@@ -22,13 +23,14 @@ public:
     Spider *spider = nullptr;
 
     Environment();
+    Environment(int id);
     ~Environment();
 
     void manageSimulation();
 
-    void managePlantCount(int count = 100, float cullingCount = 0.4); // makes sure sim does not crash
+    void managePlantCount(int count = 100, float cullingCount = 0.25); // makes sure sim does not crash
 
-    void manageAgentCount(int count = 200, float cullingCount = 0.4); // makes sure sim does not crash
+    void manageAgentCount(int count = 250, float cullingCount = 0.25); // makes sure sim does not crash
 
     void manageMoment(); /*
     loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
@@ -43,9 +45,11 @@ public:
 
     void makeWindow();
 
-    void startSimulation(int agentCount = 100, int plantCount = 50);
+    void startSimulation(int agentCount = 200, int plantCount = 50);
 
     void generateAgentCoords(Agent *ag);
 
     void generatePlantCoords(Plant *pl);
+
+    void customizeAgent();
 };

@@ -527,7 +527,7 @@ void Spider::setNextAgent(
 {
 
     bool spotNotTaken =
-        Agents.find(newCoords) == Agents.end();
+        Agents.find(newCoords) == Agents.end() and Plants.find(newCoords) == Plants.end();
 
     bool notPlant =
         Plants.find(oldCoords) == Plants.end();

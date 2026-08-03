@@ -1,22 +1,16 @@
 #pragma once
 #include "environment/environment.h"
 #include <fstream>
+#include <thread>
 class SimManager
 {
 private:
-    Environment *currentEnvironment;
-    int cycle;
+    std::vector<Environment *> environments;
 
 public:
     SimManager();
     ~SimManager();
-    Environment *getEnvironment() { return currentEnvironment; };
-    int getCycle() { return cycle; };
-    void setEnvironment(Environment *en)
-    {
-        currentEnvironment = en;
-    }
-    void setCycle(int c) { cycle = c; };
-    // void logSimCycle();
-    // std::string outputBrain(InputNode *node, int depth = 0);
+
+    std::vector<Environment *> &getEnvironments() { return environments; }
+    void runSimulation();
 };

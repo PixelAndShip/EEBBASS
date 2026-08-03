@@ -25,6 +25,30 @@ Environment::Environment()
     insideBorders = iB;
 }
 
+Environment::Environment(int id)
+{
+
+    identifier = id;
+    radiation = 0.5;
+    iteration = 0;
+    carbon_count = 1;
+
+    maxBrainLevel = 5;
+    maxBrainChildNodes = 2;
+
+    spider = new Spider();
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::uniform_int_distribution<> d(0, 7);
+    std::uniform_int_distribution<> iB(0, 100);
+
+    gen = g;
+    dist = d;
+    insideBorders = iB;
+}
+
 Environment::~Environment()
 {
 
@@ -47,32 +71,36 @@ void Environment::manageSimulation()
 {
 
     startSimulation();
-    InitWindow(800, 800, "Environment");
-    SetTargetFPS(4);
+    int cycle = 0;
+    // std::string windowName = "Environment" + std::to_string(identifier);
+    // InitWindow(800, 800, windowName.c_str());
+    // SetTargetFPS(60);
     int AgentsCount = 0;
     int PlantsCount = 0;
-    std::string text = "";
-    while (!WindowShouldClose())
+    // std::string text = "";
+
+    while (cycle <= 100)
     {
+
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
-        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+        // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
         if (iteration >= 120)
         {
+
             iteration = 0;
             cultivateSimulation();
+            cycle += 1;
         }
-        manageMoment();
-        BeginDrawing();
-        ClearBackground(BLACK);
-        makeWindow();
-        DrawText(text.c_str(), 20, 20, 30, WHITE);
-        EndDrawing();
 
+        manageMoment();
+        // BeginDrawing();
+        // ClearBackground(BLACK);
+        // makeWindow();
+        // DrawText(text.c_str(), 20, 20, 30, WHITE);
+        // EndDrawing();
         iteration++;
     }
-
-    CloseWindow();
 }
 
 void Environment::cultivateSimulation(int targetPop)
@@ -130,6 +158,7 @@ void Environment::cultivateSimulation(int targetPop)
     {
         agentTargetPop = 100;
     }
+
     startSimulation(
         agentTargetPop, plantTargetPop);
 }
@@ -322,6 +351,7 @@ void Environment::makeWindow()
 
 void Environment::startSimulation(int agentCount, int plantCount)
 {
+
     int AgentCount = agentCount;
     int PlantCount = plantCount;
     bool inside = false;
@@ -335,13 +365,19 @@ void Environment::startSimulation(int agentCount, int plantCount)
                 dist,
                 maxBrainChildNodes,
                 maxBrainLevel);
+
         generateAgentCoords(genesis);
+
         inside = genesis->getX() > 0 and genesis->getX() < 800 and genesis->getY() > 0 and genesis->getY() < 800;
+
         if (!inside)
         {
+
             delete genesis;
             continue;
         }
+        // genesis->getBrain().logBrain();
+
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
@@ -350,9 +386,12 @@ void Environment::startSimulation(int agentCount, int plantCount)
     {
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
+
         inside = pl->getX() > 0 and pl->getX() < 800 and pl->getY() > 0 and pl->getY() < 800;
+
         if (!inside)
         {
+
             delete pl;
             continue;
         }
@@ -378,9 +417,10 @@ void Environment::generateAgentCoords(Agent *ag)
         }
         int x = insideBorders(gen) * agentSize * 2;
         int y = insideBorders(gen) * agentSize * 2;
+
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
-        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
+        if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())
         {
             occupied = false;
         }
@@ -417,7 +457,7 @@ void Environment::generatePlantCoords(Plant *pl)
         int y = insideBorders(gen) * agentSize * 2;
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
-        if (spider->Agents.find(coords) != spider->Agents.end() and spider->Plants.find(coords) != spider->Plants.end())
+        if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())
         {
             occupied = false;
         }
