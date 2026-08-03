@@ -71,33 +71,36 @@ void Environment::manageSimulation()
 {
 
     startSimulation();
-    std::string windowName = "Environment" + std::to_string(identifier);
-    InitWindow(800, 800, windowName.c_str());
-    SetTargetFPS(60);
+    int cycle = 0;
+    // std::string windowName = "Environment" + std::to_string(identifier);
+    // InitWindow(800, 800, windowName.c_str());
+    // SetTargetFPS(60);
     int AgentsCount = 0;
     int PlantsCount = 0;
-    std::string text = "";
-    while (!WindowShouldClose())
+    // std::string text = "";
+
+    while (cycle <= 100)
     {
+
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
-        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+        // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
         if (iteration >= 120)
         {
+
             iteration = 0;
             cultivateSimulation();
+            cycle += 1;
         }
-        manageMoment();
-        BeginDrawing();
-        ClearBackground(BLACK);
-        makeWindow();
-        DrawText(text.c_str(), 20, 20, 30, WHITE);
-        EndDrawing();
 
+        manageMoment();
+        // BeginDrawing();
+        // ClearBackground(BLACK);
+        // makeWindow();
+        // DrawText(text.c_str(), 20, 20, 30, WHITE);
+        // EndDrawing();
         iteration++;
     }
-
-    CloseWindow();
 }
 
 void Environment::cultivateSimulation(int targetPop)
@@ -155,6 +158,7 @@ void Environment::cultivateSimulation(int targetPop)
     {
         agentTargetPop = 100;
     }
+
     startSimulation(
         agentTargetPop, plantTargetPop);
 }
@@ -347,6 +351,7 @@ void Environment::makeWindow()
 
 void Environment::startSimulation(int agentCount, int plantCount)
 {
+
     int AgentCount = agentCount;
     int PlantCount = plantCount;
     bool inside = false;
@@ -360,6 +365,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
                 dist,
                 maxBrainChildNodes,
                 maxBrainLevel);
+
         generateAgentCoords(genesis);
 
         inside = genesis->getX() > 0 and genesis->getX() < 800 and genesis->getY() > 0 and genesis->getY() < 800;
@@ -371,6 +377,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
             continue;
         }
         // genesis->getBrain().logBrain();
+
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
