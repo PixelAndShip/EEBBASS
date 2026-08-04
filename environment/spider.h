@@ -14,7 +14,7 @@ class Spider
 public:
     std::unordered_map<std::string, Agent *> Agents;
     std::unordered_map<std::string, Plant *> Plants;
-    std::vector<std::string> processedAgents;
+    // std::vector<std::string> processedAgents;
     std::vector<PendingAction> actionQueue;
     std::vector<std::pair<std::string, Agent *>> pendingBirths;
 

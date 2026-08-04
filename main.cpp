@@ -5,9 +5,24 @@
 
 int main()
 {
-    SimManager sm = SimManager();
+    std::string eC = "";
+    std::cout << "Enter simulation environment count: ";
+    std::cin >> eC;
+    try
+    {
 
-    sm.runSimulation();
+        int iEC = std::stoi(eC);
+        std::cout << "Starting simulation with " << eC << " environments!";
+        SimManager sm = SimManager(iEC);
+        sm.runSimulation();
+    }
+    catch (...)
+    {
+        std::cout << "Custom environment count failed, starting with default 8 environments!";
+        SimManager sm = SimManager();
+        sm.runSimulation();
+    }
+
     // Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);

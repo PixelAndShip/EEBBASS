@@ -5,6 +5,7 @@
 class Agent
 {
 private:
+    bool processed;
     int env_identifier;
     float health;
     float energy;
@@ -16,6 +17,10 @@ private:
     Brain brain;
 
 public:
+    void setProcessed(bool iP)
+    {
+        processed = iP;
+    }
     void updateColor()
     {
 
@@ -97,6 +102,10 @@ public:
     {
     }
 
+    bool getProcessed()
+    {
+        return processed;
+    }
     int getIdentifier()
     {
         return env_identifier;

@@ -85,7 +85,7 @@ void Environment::manageSimulation()
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
         // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
-        if (iteration >= 120)
+        if (iteration >= 110)
         {
 
             iteration = 0;

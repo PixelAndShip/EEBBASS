@@ -10,7 +10,7 @@ private:
 public:
     SimManager();
     ~SimManager();
-
+    SimManager(int threadCount);
     std::vector<Environment *> &getEnvironments() { return environments; }
     void runSimulation();
 };
