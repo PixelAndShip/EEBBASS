@@ -5,6 +5,17 @@
 
 int main()
 {
+
+    std::string simTypeChoiceStr = "";
+    std::cout << "Enter simulation type: ";
+    std::cin >> simTypeChoiceStr;
+    if (simTypeChoiceStr == "v")
+    {
+        Environment env = Environment(3000);
+        env.manageVisualizedSimulation();
+        return 0;
+    }
+
     std::string eC = "";
     std::cout << "Enter simulation environment count: ";
     std::cin >> eC;

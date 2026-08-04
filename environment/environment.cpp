@@ -103,6 +103,42 @@ void Environment::manageSimulation()
     }
 }
 
+void Environment::manageVisualizedSimulation()
+{
+
+    startSimulation();
+    int cycle = 0;
+    std::string windowName = "Environment" + std::to_string(identifier);
+    InitWindow(800, 800, windowName.c_str());
+    SetTargetFPS(5);
+    int AgentsCount = 0;
+    int PlantsCount = 0;
+    std::string text = "";
+
+    while (!WindowShouldClose())
+    {
+
+        AgentsCount = (int)spider->Agents.size();
+        PlantsCount = (int)spider->Plants.size();
+        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+        if (iteration >= 110)
+        {
+            iteration = 0;
+            cultivateSimulation();
+            cycle += 1;
+        }
+
+        manageMoment();
+        BeginDrawing();
+        ClearBackground(BLACK);
+        makeWindow();
+        DrawText(text.c_str(), 20, 20, 30, WHITE);
+        EndDrawing();
+        iteration++;
+    }
+    CloseWindow();
+}
+
 void Environment::cultivateSimulation(int targetPop)
 {
 
@@ -132,10 +168,11 @@ void Environment::cultivateSimulation(int targetPop)
 
         if (agent != nullptr)
         {
+            std::cout << "Survivor in environment: " << identifier;
             agent->setHealth(100);
             agent->setEnergy(100);
+            agent->getBrain().logBrain();
         }
-        agent->getBrain().logBrain();
     }
 
     for (int i = survivors; i < originalPopulation; i++)
