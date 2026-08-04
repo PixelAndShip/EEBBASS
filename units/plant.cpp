@@ -17,7 +17,7 @@ Plant::Plant(float eRadiation, std::mt19937 &gen)
     x = 1000;
     y = 1000;
     plantColor.blue = 255;
-    std::uniform_int_distribution<> healthGen(-50, 50);
+    std::uniform_int_distribution<> healthGen(-20, 50);
     health += healthGen(gen);
     updateColor();
 }
