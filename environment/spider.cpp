@@ -116,7 +116,7 @@ void Spider::manageSubMoment()
 {
 
     actionQueue.clear();
-    processedAgents.clear();
+    // processedAgents.clear();
 
     for (auto &[coords, bol] : Agents)
     {
@@ -172,7 +172,6 @@ void Spider::manageSubMoment()
             return Agents.at(a.coords)->getSpeed() >
                    Agents.at(b.coords)->getSpeed();
         });
-    bool processed = false;
     for (auto pending : actionQueue)
     {
 
@@ -182,22 +181,13 @@ void Spider::manageSubMoment()
             continue;
         }
 
-        for (std::string processedAgent : processedAgents)
+        if (Agents[pending.coords]->getProcessed() == false)
         {
-            if (processedAgent == pending.coords)
-            {
-                processed = true;
-                break;
-            }
-        }
-        if (!processed)
-        {
+            Agents[pending.coords]->setProcessed(true);
             manageAction(
                 pending.coords,
                 pending.action);
-            processedAgents.push_back(pending.coords);
         }
-        processed = false;
     }
 
     std::vector<std::pair<std::string, std::string>> moves;
@@ -236,7 +226,7 @@ void Spider::manageSubMoment()
 
             Agents[coords] = child;
             child->setCoords(coords);
-            processedAgents.push_back(coords);
+            Agents[coords]->setProcessed(true);
         }
         else
         {
@@ -245,6 +235,10 @@ void Spider::manageSubMoment()
     }
 
     pendingBirths.clear();
+    for (auto agentEntry : Agents)
+    {
+        agentEntry.second->setProcessed(false);
+    }
 }
 std::vector<std::string> Spider::sortAgentsBySpeed(std::vector<std::string> agents)
 {

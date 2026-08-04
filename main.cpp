@@ -5,9 +5,35 @@
 
 int main()
 {
-    SimManager sm = SimManager();
 
-    sm.runSimulation();
+    std::string simTypeChoiceStr = "";
+    std::cout << "Enter simulation type: ";
+    std::cin >> simTypeChoiceStr;
+    if (simTypeChoiceStr == "v")
+    {
+        Environment env = Environment(3000);
+        env.manageVisualizedSimulation();
+        return 0;
+    }
+
+    std::string eC = "";
+    std::cout << "Enter simulation environment count: ";
+    std::cin >> eC;
+    try
+    {
+
+        int iEC = std::stoi(eC);
+        std::cout << "Starting simulation with " << eC << " environments!";
+        SimManager sm = SimManager(iEC);
+        sm.runSimulation();
+    }
+    catch (...)
+    {
+        std::cout << "Custom environment count failed, starting with default 8 environments!";
+        SimManager sm = SimManager();
+        sm.runSimulation();
+    }
+
     // Agent a = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent b = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);
     // Agent c = Agent(e.radiation, e.gen, e.dist, e.maxBrainChildNodes, e.maxBrainLevel);

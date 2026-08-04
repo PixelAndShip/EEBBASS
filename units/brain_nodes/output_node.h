@@ -50,7 +50,7 @@ public:
 
         std::uniform_int_distribution<> weightDist(0, 99);
         std::uniform_int_distribution<> colorDist(0, 255);
-        std::uniform_int_distribution<> energyCostDist(1, 10);
+        std::uniform_int_distribution<> energyCostDist(1, 25);
         std::uniform_int_distribution<> actionsDist(0, getActions().size() - 1);
 
         unitColor = {

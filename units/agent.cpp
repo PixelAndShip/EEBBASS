@@ -3,6 +3,8 @@
 Agent::Agent()
 {
 
+    processed = false;
+
     health = 200.0;
 
     energy = 200.0;
@@ -26,6 +28,7 @@ Agent::Agent(
     int brainDepth)
     : brain(identifier, eRadiation, gen, dist, childNodeCount, brainDepth)
 {
+    processed = false;
 
     env_identifier = identifier;
 
@@ -75,6 +78,7 @@ Agent::Agent(
 
     x = 25;
     y = 25;
+
     updateColor();
 }
 

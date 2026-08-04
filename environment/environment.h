@@ -38,7 +38,7 @@ public:
     determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
 
     */
-
+    void manageVisualizedSimulation();
     // void manageSubMoment(std::string coords);
 
     void cultivateSimulation(int targetPop = 200);
