@@ -227,7 +227,6 @@ std::string Brain::outputBrain(InputNode *node, int depth) const
     }
 
     std::string data = "";
-
     std::string indent(
         depth * 2,
         ' ');
@@ -279,4 +278,214 @@ std::string Brain::outputBrain(InputNode *node, int depth) const
     }
 
     return data;
+}
+
+void Brain::constructCustomBrain(std::string fileName)
+{
+    std::string line, allData = "";
+    std::ifstream customBrainFile(fileName);
+
+    if (!customBrainFile.is_open())
+    {
+        return;
+    }
+
+    while (getline(customBrainFile, line))
+    {
+        constructCustomNode(line);
+    }
+
+    customBrainFile.close();
+}
+
+// [1]+weight/setAmount/key/{unitColor}
+// [1.1]...-weight/energyCost/key/{unitColor}
+
+void Brain::constructCustomNode(std::string line)
+{
+    auto idS = line.find("[");
+    auto idE = line.find("]");
+
+    if (idS == std::string::npos or idE == std::string::npos)
+    {
+        return;
+    }
+
+    std::string id = line.substr(idS + 1, idE - idS - 1);
+
+    std::vector<int> coordinates;
+    std::string num;
+
+    for (char data : id)
+    {
+        if (isdigit(data))
+        {
+            num += data;
+        }
+        else if (!num.empty())
+        {
+            coordinates.push_back(std::stoi(num));
+            num = "";
+        }
+    }
+
+    if (!num.empty())
+    {
+        coordinates.push_back(std::stoi(num));
+    }
+
+    if (idE + 1 >= line.size())
+    {
+        return;
+    }
+    char nodeType = line[idE + 1];
+
+    bool isInput = nodeType == '+';
+    bool isOutput = nodeType == '-';
+
+    if (!isInput and !isOutput)
+    {
+        return;
+    }
+
+    float weight = 0.0;
+    float energyCost = 0.0;
+    float setAmount = 0.0;
+    int key;
+
+    UnitColor unitColor = {0, 0, 0, 255};
+
+    size_t pos = idE + 2;
+
+    while (pos < line.size())
+    {
+        char indicator = line[pos];
+
+        if (indicator == 'K')
+        {
+
+            size_t start = pos + 1;
+            size_t end = line.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = line.size();
+            }
+            key = std::stoi(line.substr(start, end - start));
+
+            pos = end;
+        }
+        else if (indicator == 'W')
+        {
+
+            size_t start = pos + 1;
+            size_t end = line.find('/', start);
+
+            std::string value = line.substr(start, end - start);
+
+            weight = std::stof(value);
+
+            pos = end;
+        }
+        else if (indicator == 'E')
+        {
+
+            size_t start = pos + 1;
+            size_t end = line.find('/', start);
+
+            std::string value = line.substr(start, end - start);
+
+            if (isInput)
+            {
+                setAmount = std::stof(value);
+            }
+            else
+            {
+                energyCost = std::stof(value);
+            }
+            pos = end;
+        }
+        else if (indicator == 'C')
+        {
+
+            size_t start = line.find('{', pos);
+
+            if (start == std::string::npos)
+            {
+                break;
+            }
+            size_t end = line.find('}', start);
+
+            if (end == std::string::npos)
+            {
+                break;
+            }
+
+            std::string colorString = line.substr(start + 1, end - start - 1);
+
+            std::vector<int> values;
+            std::string num;
+
+            for (char c : colorString)
+            {
+                if (isdigit(c))
+                {
+                    num += c;
+                }
+                else if (!num.empty())
+                {
+                    values.push_back(std::stoi(num));
+                    num = "";
+                }
+            }
+
+            if (!num.empty())
+                values.push_back(std::stoi(num));
+
+            if (values.size() == 4)
+            {
+                unitColor = {
+                    (unsigned char)values[0],
+                    (unsigned char)values[1],
+                    (unsigned char)values[2],
+                    (unsigned char)values[3]};
+            }
+
+            pos = end + 1;
+        }
+        else
+        {
+            pos++;
+        }
+    }
+
+    if (isInput)
+    {
+        InputNode *iN = new InputNode();
+        iN->setWeight(weight);
+        iN->setSetAmount(setAmount);
+        iN->setKey(key);
+        iN->setUnitColor(unitColor);
+    }
+    else
+    {
+        // outputNode
+    }
+}
+
+InputNode *Brain::getCustomNodeParent(InputNode *parent, std::vector<int> coordinates, int index)
+{
+    if (parent == nullptr or coordinates.size() == 0 or index >= coordinates.size())
+    {
+        return nullptr;
+    }
+    int id = coordinates[index];
+    if (index == coordinates.size() - 1)
+    {
+        return parent->getInputNodes()[id];
+    }
+    else
+    {
+        getCustomNodeParent(parent->getInputNodes()[id], coordinates, index + 1);
+    }
 }

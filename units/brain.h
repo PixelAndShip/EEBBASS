@@ -36,4 +36,8 @@ public:
     int getIdentifier() { return env_identifier; };
     void logBrain() const;
     std::string outputBrain(InputNode *node, int depth = 0) const;
+
+    void constructCustomBrain(std::string fileName);
+    void constructCustomNode(std::string line);
+    InputNode *getCustomNodeParent(InputNode *parent, std::vector<int> coordinates, int index);
 };
