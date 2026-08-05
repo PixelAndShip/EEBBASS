@@ -7,8 +7,8 @@ class InputNode
 private:
     float weight = 1;
     float setAmount = 0;
-    UnitColor unitColor = {255, 255, 255, 255};
     unsigned int key = 255;
+    UnitColor unitColor = {255, 255, 255, 255};
     std::vector<InputNode *> inputNodes = {};
     OutputNode *outputNode = nullptr;
 
