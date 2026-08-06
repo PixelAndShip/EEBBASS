@@ -5,7 +5,7 @@
 
 int main()
 {
-    std::string fileName = "customBrain.txt";
+    std::string fileName = "";
     std::string simTypeChoiceStr = "";
     std::cout << "Enter simulation type: ";
     std::cin >> simTypeChoiceStr;
@@ -17,6 +17,8 @@ int main()
     }
     else if (simTypeChoiceStr == "c")
     {
+        std::cout << "Enter custom brain file name: ";
+        std::cin >> fileName;
         Agent *customA = new Agent(fileName, true, 4000, 200, 200, 0.6, {200, 200, 255, 255}, 300, 300, 4);
         customA->getBrain().logBrain();
         return 0;
