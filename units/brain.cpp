@@ -313,27 +313,6 @@ void Brain::constructCustomNode(std::string line)
 
     std::string id = line.substr(idS + 1, idE - idS - 1);
 
-    std::vector<int> coordinates;
-    std::string num;
-
-    for (char data : id)
-    {
-        if (isdigit(data))
-        {
-            num += data;
-        }
-        else if (!num.empty())
-        {
-            coordinates.push_back(std::stoi(num));
-            num = "";
-        }
-    }
-
-    if (!num.empty())
-    {
-        coordinates.push_back(std::stoi(num));
-    }
-
     if (idE + 1 >= line.size())
     {
         return;
@@ -351,7 +330,7 @@ void Brain::constructCustomNode(std::string line)
     float weight = 0.0;
     float energyCost = 0.0;
     float setAmount = 0.0;
-    int key;
+    unsigned int key = 255;
 
     UnitColor unitColor = {0, 0, 0, 255};
 
@@ -461,31 +440,36 @@ void Brain::constructCustomNode(std::string line)
 
     if (isInput)
     {
-        InputNode *iN = new InputNode();
-        iN->setWeight(weight);
-        iN->setSetAmount(setAmount);
-        iN->setKey(key);
-        iN->setUnitColor(unitColor);
-    }
-    else
-    {
-        // outputNode
-    }
-}
+        InputNode *iN = new InputNode(weight, setAmount, key, unitColor);
+        if (id.size() == 1)
+        {
+            inputNodes.push_back(iN);
+            customNodes[id] = iN;
+        }
+        else
+        {
+            std::string parentId = "";
 
-InputNode *Brain::getCustomNodeParent(InputNode *parent, std::vector<int> coordinates, int index)
-{
-    if (parent == nullptr or coordinates.size() == 0 or index >= coordinates.size())
-    {
-        return nullptr;
-    }
-    int id = coordinates[index];
-    if (index == coordinates.size() - 1)
-    {
-        return parent->getInputNodes()[id];
+            size_t pos = id.rfind('.');
+
+            if (pos != std::string::npos)
+            {
+                parentId = id.substr(0, pos);
+            }
+            customNodes[parentId]->appendInputNode(iN);
+        }
     }
     else
     {
-        getCustomNodeParent(parent->getInputNodes()[id], coordinates, index + 1);
+        OutputNode *oN = new OutputNode(weight, energyCost, key, unitColor);
+        std::string parentId = "";
+
+        size_t pos = id.rfind('.');
+
+        if (pos != std::string::npos)
+        {
+            parentId = id.substr(0, pos);
+        }
+        customNodes[parentId]->setOutputNode(oN);
     }
 }

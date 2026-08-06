@@ -4,6 +4,14 @@ InputNode::InputNode()
 {
 }
 
+InputNode::InputNode(float iW, float setA, unsigned int iK, UnitColor iU)
+{
+    weight = iW;
+    setAmount = setA;
+    key = iK;
+    unitColor = iU;
+}
+
 // float weight = 1;
 // float setAmount = 0;
 // UnitColor unitColor = {255, 255, 255, 255};
