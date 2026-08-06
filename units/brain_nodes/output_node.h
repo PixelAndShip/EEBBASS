@@ -16,6 +16,14 @@ public:
 
     };
 
+    OutputNode(float iW, float iE, unsigned int iK, UnitColor iU)
+    {
+        weight = iW;
+        energyCost = iE;
+        key = iK;
+        unitColor = iU;
+    }
+
     OutputNode(std::mt19937 &gen, OutputNode *copyNode)
     {
 

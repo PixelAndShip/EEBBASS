@@ -5,7 +5,7 @@
 
 int main()
 {
-
+    std::string fileName = "customBrain.txt";
     std::string simTypeChoiceStr = "";
     std::cout << "Enter simulation type: ";
     std::cin >> simTypeChoiceStr;
@@ -15,7 +15,13 @@ int main()
         env.manageVisualizedSimulation();
         return 0;
     }
-
+    else if (simTypeChoiceStr == "c")
+    {
+        Agent *customA = new Agent(fileName, true, 4000, 200, 200, 0.6, {200, 200, 255, 255}, 300, 300, 4);
+        customA->getBrain().logBrain();
+        return 0;
+    }
+    //  Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS);
     std::string eC = "";
     std::cout << "Enter simulation environment count: ";
     std::cin >> eC;

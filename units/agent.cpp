@@ -19,6 +19,19 @@ Agent::Agent()
     speed = 1.0;
 }
 
+Agent::Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS) : brain(fileName, iEID)
+{
+    processed = iP;
+    env_identifier = iEID;
+    health = iH;
+    energy = iE;
+    plantDiet = iPD;
+    agentColor = iC;
+    x = ix;
+    y = iy;
+    speed = iS;
+};
+
 Agent::Agent(
     int identifier,
     float eRadiation,

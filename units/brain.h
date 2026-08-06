@@ -10,9 +10,12 @@ class Brain
 private:
     int env_identifier;
     std::vector<InputNode *> inputNodes;
+    std::unordered_map<std::string, InputNode *> customNodes;
 
 public:
     Brain();
+
+    Brain(std::string fileName, int iE);
 
     Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
@@ -39,5 +42,5 @@ public:
 
     void constructCustomBrain(std::string fileName);
     void constructCustomNode(std::string line);
-    InputNode *getCustomNodeParent(InputNode *parent, std::vector<int> coordinates, int index);
+    InputNode *getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index);
 };
