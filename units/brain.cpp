@@ -4,6 +4,12 @@ Brain::Brain()
 {
 }
 
+Brain::Brain(std::string fileName, int iEID)
+{
+    env_identifier = iEID;
+    constructCustomBrain(fileName);
+}
+
 Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
 {
 
@@ -233,6 +239,9 @@ std::string Brain::outputBrain(InputNode *node, int depth) const
 
     data += indent;
 
+    // float weight = node->getWeight();
+    // float setAmount = node->getSetAmount();
+    // UnitColor unitColor = node->getUnitColor();
     unsigned int key = node->getKey();
 
     if (key != 255)
@@ -444,7 +453,6 @@ void Brain::constructCustomNode(std::string line)
         if (id.size() == 1)
         {
             inputNodes.push_back(iN);
-            customNodes[id] = iN;
         }
         else
         {
@@ -458,6 +466,7 @@ void Brain::constructCustomNode(std::string line)
             }
             customNodes[parentId]->appendInputNode(iN);
         }
+        customNodes[id] = iN;
     }
     else
     {

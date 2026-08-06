@@ -168,6 +168,8 @@ public:
 
     Agent();
 
+    Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS);
+
     Agent(
         int identifier,
         float eRadiation,
