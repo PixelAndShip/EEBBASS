@@ -147,9 +147,9 @@ void Brain::addConnection(
 
     if (mutated)
     {
-        std::uniform_int_distribution<> dist(0, childNodeCount);
+        std::uniform_int_distribution<> nextDist(0, childNodeCount);
 
-        int nextNodesCount = dist(gen);
+        int nextNodesCount = nextDist(gen);
 
         for (int i = 0; i < nextNodesCount; i++)
         {

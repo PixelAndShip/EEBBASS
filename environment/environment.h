@@ -23,7 +23,29 @@ public:
     Spider *spider = nullptr;
 
     Environment();
-    Environment(int id);
+
+    // identifier = id;
+    // radiation = 0.5;
+    // iteration = 0;
+    // carbon_count = 1;
+
+    // maxBrainLevel = 5;
+    // maxBrainChildNodes = 2;
+
+    // spider = new Spider();
+
+    // std::random_device rd;
+    // std::mt19937 g(rd());
+
+    // std::uniform_int_distribution<> d(0, 7);
+    // std::uniform_int_distribution<> iB(0, 100);
+
+    // gen = g;
+    // dist = d;
+    // insideBorders = iB;
+    Environment(int id = 5000);
+    // Environment(int id = 5000, float eRad = 0.5, int iT = 0, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderSize = 100);
+
     ~Environment();
 
     void manageSimulation();
