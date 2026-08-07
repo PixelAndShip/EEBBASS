@@ -3,6 +3,45 @@
 
 #include "test.h"
 
+void visualSim()
+{
+    float eRad;
+    int iT;
+    int maxCultivate;
+    int maxCycle;
+    int cb;
+    int maxBL;
+    int maxBCN;
+    int rootNodesCount;
+    int borderX;
+    int borderY;
+    std::cout << "Enter radiation (0.0 - 1.0): ";
+    std::cin >> eRad;
+    std::cout << "Enter iteration start (number): ";
+    std::cin >> iT;
+    std::cout << "Enter max cultivation iterations (number): ";
+    std::cin >> maxCultivate;
+    std::cout << "Enter max total cycles (number): ";
+    std::cin >> maxCycle;
+    std::cout << "Enter carbon count (number) (not implemented yet): ";
+    std::cin >> cb;
+    std::cout << "Enter max brain depth (1+): ";
+    std::cin >> maxBL;
+    std::cout << "Enter max brain child nodes count (1+): ";
+    std::cin >> maxBCN;
+    std::cout << "Enter brain root nodes count (1+): ";
+    std::cin >> rootNodesCount;
+    std::cout << "Enter visual border width (2+): ";
+    std::cin >> borderWidth;
+    std::cout << "Enter visual border height (2+): ";
+    std::cin >> borderHeight;
+    std::cout << "Enter agent size (1+): ";
+    std::cin >> agentSize;
+    std::cout << "Enter plant size (1+): ";
+    std::cin >> plantSize;
+    Environment env = Environment(3000, eRad, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
+    env.manageVisualizedSimulation();
+}
 int main()
 {
     std::string fileName = "";
@@ -11,8 +50,7 @@ int main()
     std::cin >> simTypeChoiceStr;
     if (simTypeChoiceStr == "v")
     {
-        Environment env = Environment(3000);
-        env.manageVisualizedSimulation();
+        visualSim();
         return 0;
     }
     else if (simTypeChoiceStr == "c")

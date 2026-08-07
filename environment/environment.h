@@ -11,6 +11,8 @@ private:
     int identifier;
     float radiation;
     int iteration;
+    int maxCultivateIteration;
+    int maxCycle;
     int carbon_count;
     int maxBrainLevel;
     int maxBrainChildNodes;
@@ -18,11 +20,10 @@ private:
 public:
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
-    std::uniform_int_distribution<> insideBorders;
+    std::uniform_int_distribution<> insideX;
+    std::uniform_int_distribution<> insideY;
 
     Spider *spider = nullptr;
-
-    Environment();
 
     // identifier = id;
     // radiation = 0.5;
@@ -43,8 +44,8 @@ public:
     // gen = g;
     // dist = d;
     // insideBorders = iB;
-    Environment(int id = 5000);
-    // Environment(int id = 5000, float eRad = 0.5, int iT = 0, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderSize = 100);
+    // Environment(int id = 5000);
+    Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 120, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = 100, int borderH = 100);
 
     ~Environment();
 

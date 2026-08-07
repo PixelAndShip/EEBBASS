@@ -31,9 +31,8 @@ public:
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
 
-    Spider();
     ~Spider();
-    Spider(float rad, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
+    Spider(float rad = 0.5, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
 
     // void setProximities(std::string coords);
 
