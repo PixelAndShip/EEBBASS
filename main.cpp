@@ -3,6 +3,8 @@
 
 #include "test.h"
 
+#include <filesystem>
+
 void visualSim()
 {
     float eRad;
@@ -42,8 +44,14 @@ void visualSim()
     Environment env = Environment(3000, eRad, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
     env.manageVisualizedSimulation();
 }
+
 int main()
 {
+
+    std::filesystem::path currentDir = std::filesystem::current_path();
+    std::filesystem::create_directories(currentDir / "ES" / "logs");
+    std::filesystem::current_path(currentDir / "ES");
+
     std::string fileName = "";
     std::string simTypeChoiceStr = "";
     std::cout << "Enter simulation type: ";
