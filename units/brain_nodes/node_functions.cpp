@@ -1,6 +1,6 @@
 #include "node_functions.h"
 
-inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 10)
+inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 25)
 {
     return std::abs(static_cast<int>(a.red) - static_cast<int>(b.red)) <= tolerance and
            std::abs(static_cast<int>(a.green) - static_cast<int>(b.green)) <= tolerance and
@@ -578,6 +578,7 @@ std::vector<std::string> getProximatePlants(const std::unordered_map<std::string
 
         if (Plants->find(checkCoords) != Plants->end())
         {
+
             proximatePlantCs.push_back(checkCoords);
         }
     }
