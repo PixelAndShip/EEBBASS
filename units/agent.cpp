@@ -98,3 +98,51 @@ Agent::Agent(
 void Agent::generateStart(std::mt19937 &gen)
 {
 }
+
+void Agent::logAgent() const
+{
+    std::stringstream writtenData;
+    std::string fileName = "logs/Environment_Log_" + std::to_string(env_identifier) + ".txt";
+    std::ifstream CurrentLog(fileName);
+    if (CurrentLog)
+    {
+        writtenData << CurrentLog.rdbuf();
+    }
+    std::string data = writtenData.str() + "\n";
+
+    data += outputAgentStats();
+
+    CurrentLog.close();
+
+    std::ofstream updatedLog(fileName);
+
+    if (data == "")
+    {
+        data = "No agent data found!";
+    }
+    data += "\n";
+    data += "B\n";
+    data += brain.logBrain();
+    updatedLog << data;
+
+    updatedLog.close();
+}
+
+std::string Agent::outputAgentStats() const
+{
+    std::string agentData;
+    agentData += "A\n";
+    agentData += 'P' + processed;
+    agentData += "|I" + env_identifier;
+    agentData += "|H" + std::to_string(health);
+    agentData += "|E" + std::to_string(energy);
+    agentData += "|D" + std::to_string(plantDiet);
+    agentData += "|C{" + std::to_string(agentColor.red);
+    agentData += ',' + std::to_string(agentColor.green);
+    agentData += ',' + std::to_string(agentColor.blue);
+    agentData += ',' + std::to_string(agentColor.transparency);
+    agentData += "}|X" + std::to_string(x);
+    agentData += "|Y" + std::to_string(y);
+    agentData += "|S" + std::to_string(speed);
+    return agentData;
+}

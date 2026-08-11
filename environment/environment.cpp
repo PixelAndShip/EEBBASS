@@ -37,7 +37,7 @@ Environment::~Environment()
 
     delete spider;
     std::stringstream writtenData;
-    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(identifier) + ".txt";
+    std::string fileName = "logs/Environment_Log_" + std::to_string(identifier) + ".txt";
     std::ifstream CurrentLog(fileName);
     if (CurrentLog)
     {
@@ -155,7 +155,7 @@ void Environment::cultivateSimulation(int targetPop)
             std::cout << "Survivor in environment: " << identifier;
             agent->setHealth(100);
             agent->setEnergy(100);
-            agent->getBrain().logBrain();
+            agent->logAgent();
         }
     }
 
@@ -397,7 +397,6 @@ void Environment::startSimulation(int agentCount, int plantCount)
             delete genesis;
             continue;
         }
-        // genesis->getBrain().logBrain();
 
         spider->Agents[genesis->getCoords()] =
             genesis;

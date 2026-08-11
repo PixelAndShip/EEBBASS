@@ -191,4 +191,8 @@ public:
         int brainDepth);
 
     void generateStart(std::mt19937 &gen);
+
+    void logAgent() const;
+
+    std::string outputAgentStats() const;
 };

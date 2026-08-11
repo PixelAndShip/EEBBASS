@@ -193,17 +193,18 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
     return inputNodes;
 }
 
-void Brain::logBrain() const
+std::string Brain::logBrain() const
 {
 
-    std::stringstream writtenData;
-    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
-    std::ifstream CurrentLog(fileName);
-    if (CurrentLog)
-    {
-        writtenData << CurrentLog.rdbuf();
-    }
-    std::string data = writtenData.str() + "\n";
+    // std::stringstream writtenData;
+    // std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
+    // std::ifstream CurrentLog(fileName);
+    // if (CurrentLog)
+    // {
+    //     writtenData << CurrentLog.rdbuf();
+    // }
+    // std::string data = writtenData.str() + "\n";
+    std::string data = "";
     int id = 1;
     for (InputNode *iN : inputNodes)
     {
@@ -212,17 +213,19 @@ void Brain::logBrain() const
         id++;
     }
 
-    CurrentLog.close();
+    // CurrentLog.close();
 
-    std::ofstream updatedLog(fileName);
+    // std::ofstream updatedLog(fileName);
 
     if (data == "")
     {
         data = "No brain found!";
     }
-    updatedLog << data;
+    // updatedLog << data;
 
-    updatedLog.close();
+    // updatedLog.close();
+
+    return data;
 }
 
 std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const

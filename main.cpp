@@ -111,7 +111,7 @@ int main()
         std::cout << "Enter custom brain file name: ";
         std::cin >> fileName;
         Agent *customA = new Agent(fileName, true, 4000, 200, 200, 0.6, {200, 200, 255, 255}, 300, 300, 4);
-        customA->getBrain().logBrain();
+        customA->logAgent();
         return 0;
     }
     case 'm':
