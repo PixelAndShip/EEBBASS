@@ -495,3 +495,41 @@ void Environment::generatePlantCoords(Plant *pl)
         cycles += 1;
     }
 }
+
+void Environment::constructEnvironment(std::string fileName)
+{
+    std::ifstream file(fileName);
+    if (!file.is_open())
+    {
+        return;
+    }
+    std::string line, agentData, brainData;
+    Agent *currentAgent = nullptr;
+    bool processingAgentData = true;
+    while (std::getline(file, line))
+    {
+        if (line == "A" or line == "A\n")
+        {
+            processingAgentData = true;
+        }
+        else if (line == "B" or line == "B\n")
+        {
+            processingAgentData = false;
+        }
+        else if (line == "---" or line == "---\n")
+        {
+            // make custom agent with custom brain
+            spider->Agents[currentAgent->getCoords()] = currentAgent;
+            currentAgent = nullptr;
+        }
+        else if (processingAgentData)
+        {
+            agentData += line;
+        }
+        else
+        {
+            brainData += line;
+        }
+    }
+    file.close();
+}

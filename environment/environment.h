@@ -74,5 +74,5 @@ public:
 
     void generatePlantCoords(Plant *pl);
 
-    void customizeAgent();
+    void constructEnvironment(std::string fileName);
 };

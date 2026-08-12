@@ -104,16 +104,6 @@ int main()
         visualSim();
         return 0;
     }
-
-    case 'c':
-    {
-        std::string fileName = "";
-        std::cout << "Enter custom brain file name: ";
-        std::cin >> fileName;
-        Agent *customA = new Agent(fileName, true, 4000, 200, 200, 0.6, {200, 200, 255, 255}, 300, 300, 4);
-        customA->logAgent();
-        return 0;
-    }
     case 'm':
     {
         multiThreadSim();

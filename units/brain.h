@@ -15,7 +15,7 @@ private:
 public:
     Brain();
 
-    Brain(std::string fileName, int iE);
+    Brain(std::string data, int iE);
 
     Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 

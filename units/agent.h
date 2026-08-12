@@ -168,6 +168,8 @@ public:
 
     Agent();
 
+    Agent(std::string selfData, std::string brainData, int iEID);
+
     Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS);
 
     Agent(
@@ -195,4 +197,6 @@ public:
     void logAgent() const;
 
     std::string outputAgentStats() const;
+
+    void constructCustomAgent(std::string data);
 };

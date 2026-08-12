@@ -4,10 +4,10 @@ Brain::Brain()
 {
 }
 
-Brain::Brain(std::string fileName, int iEID)
+Brain::Brain(std::string data, int iEID)
 {
     env_identifier = iEID;
-    constructCustomBrain(fileName);
+    constructCustomBrain(data);
 }
 
 Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
@@ -301,22 +301,30 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
     return data;
 }
 
-void Brain::constructCustomBrain(std::string fileName)
+void Brain::constructCustomBrain(std::string data)
 {
-    std::string line, allData = "";
-    std::ifstream customBrainFile(fileName);
+    std::string line = "";
 
-    if (!customBrainFile.is_open())
+    for (char letter : data)
     {
-        return;
+        if (letter == '\n')
+        {
+            if (!line.empty() and line.back() == '\r')
+            {
+                line.pop_back();
+            }
+            constructCustomNode(line);
+            line = "";
+        }
+        else
+        {
+            line += letter;
+        }
     }
-
-    while (getline(customBrainFile, line))
+    if (!line.empty())
     {
         constructCustomNode(line);
     }
-
-    customBrainFile.close();
 }
 
 // [1]+weight/setAmount/key/{unitColor}
