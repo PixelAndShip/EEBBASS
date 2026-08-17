@@ -508,19 +508,22 @@ void Environment::constructEnvironment(std::string fileName)
     bool processingAgentData = true;
     while (std::getline(file, line))
     {
-        if (line == "A" or line == "A\n")
+        if (line == "A")
         {
             processingAgentData = true;
         }
-        else if (line == "B" or line == "B\n")
+        else if (line == "B")
         {
             processingAgentData = false;
         }
-        else if (line == "---" or line == "---\n")
+        else if (line == "---")
         {
             // make custom agent with custom brain
+            currentAgent = new Agent(agentData, brainData, identifier);
             spider->Agents[currentAgent->getCoords()] = currentAgent;
             currentAgent = nullptr;
+            agentData.clear();
+            brainData.clear();
         }
         else if (processingAgentData)
         {
@@ -532,4 +535,6 @@ void Environment::constructEnvironment(std::string fileName)
         }
     }
     file.close();
+
+    startSimulation(0, 50);
 }

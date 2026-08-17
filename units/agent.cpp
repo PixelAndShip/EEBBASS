@@ -129,6 +129,7 @@ void Agent::logAgent() const
     data += "\n";
     data += "B\n";
     data += brain.logBrain();
+    data += "---";
     updatedLog << data;
 
     updatedLog.close();
