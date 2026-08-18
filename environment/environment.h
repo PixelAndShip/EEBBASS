@@ -47,6 +47,8 @@ public:
     // Environment(int id = 5000);
     Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 120, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
 
+    Environment(std::string saveFile);
+
     ~Environment();
 
     void manageSimulation();
@@ -74,5 +76,9 @@ public:
 
     void generatePlantCoords(Plant *pl);
 
+    void logEnvironment(std::string fileName = "");
+
     void constructEnvironment(std::string fileName);
+
+    void setCustomEnvironmentValues(std::string data);
 };

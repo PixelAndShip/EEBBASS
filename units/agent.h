@@ -194,7 +194,7 @@ public:
 
     void generateStart(std::mt19937 &gen);
 
-    void logAgent() const;
+    void logAgent(std::string fileName = "") const;
 
     std::string outputAgentStats() const;
 

@@ -105,10 +105,13 @@ void Agent::generateStart(std::mt19937 &gen)
 {
 }
 
-void Agent::logAgent() const
+void Agent::logAgent(std::string fileName) const
 {
     std::stringstream writtenData;
-    std::string fileName = "logs/Environment_Log_" + std::to_string(env_identifier) + ".txt";
+    if (fileName == "")
+    {
+        fileName = "logs/Environment_Log_" + std::to_string(env_identifier) + ".txt";
+    }
     std::ifstream CurrentLog(fileName);
     if (CurrentLog)
     {
