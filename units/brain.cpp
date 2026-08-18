@@ -4,10 +4,10 @@ Brain::Brain()
 {
 }
 
-Brain::Brain(std::string fileName, int iEID)
+Brain::Brain(std::string data, int iEID)
 {
     env_identifier = iEID;
-    constructCustomBrain(fileName);
+    constructCustomBrain(data);
 }
 
 Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
@@ -147,9 +147,9 @@ void Brain::addConnection(
 
     if (mutated)
     {
-        std::uniform_int_distribution<> dist(0, childNodeCount);
+        std::uniform_int_distribution<> nextDist(0, childNodeCount);
 
-        int nextNodesCount = dist(gen);
+        int nextNodesCount = nextDist(gen);
 
         for (int i = 0; i < nextNodesCount; i++)
         {
@@ -193,118 +193,138 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
     return inputNodes;
 }
 
-void Brain::logBrain() const
+std::string Brain::logBrain() const
 {
 
-    std::stringstream writtenData;
-    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
-    std::ifstream CurrentLog(fileName);
-    if (CurrentLog)
-    {
-        writtenData << CurrentLog.rdbuf();
-    }
-    std::string data = writtenData.str() + "\n";
-
+    // std::stringstream writtenData;
+    // std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
+    // std::ifstream CurrentLog(fileName);
+    // if (CurrentLog)
+    // {
+    //     writtenData << CurrentLog.rdbuf();
+    // }
+    // std::string data = writtenData.str() + "\n";
+    std::string data = "";
+    int id = 1;
     for (InputNode *iN : inputNodes)
     {
 
-        data += outputBrain(iN, 0);
+        data += outputBrain(iN, {id});
+        id++;
     }
 
-    CurrentLog.close();
+    // CurrentLog.close();
 
-    std::ofstream updatedLog(fileName);
+    // std::ofstream updatedLog(fileName);
 
     if (data == "")
     {
         data = "No brain found!";
     }
-    updatedLog << data;
+    // updatedLog << data;
 
-    updatedLog.close();
+    // updatedLog.close();
+
+    return data;
 }
 
-std::string Brain::outputBrain(InputNode *node, int depth) const
+std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
 {
 
     if (!node)
     {
         return "";
     }
+    std::string data = "[";
 
-    std::string data = "";
-    std::string indent(
-        depth * 2,
-        ' ');
-
-    data += indent;
-
-    // float weight = node->getWeight();
-    // float setAmount = node->getSetAmount();
-    // UnitColor unitColor = node->getUnitColor();
+    for (int num : id)
+    {
+        data += std::to_string(num) + ".";
+    }
+    if (!data.empty() and data.back() == '.')
+    {
+        data.pop_back();
+    }
+    data += "]";
+    data += "+";
+    float weight = node->getWeight();
+    float setAmount = node->getSetAmount();
     unsigned int key = node->getKey();
+    UnitColor unitColor = node->getUnitColor();
 
-    if (key != 255)
-    {
+    data += "W" + std::to_string(weight);
+    data += "/E" + std::to_string(setAmount);
+    data += "/K" + std::to_string(key);
 
-        data +=
-            std::to_string(key) + "|" + getSenses().at(key) + "|" + std::to_string(node->getWeight());
-    }
-    else
-    {
-
-        data +=
-            std::to_string(key) + "|INVALID_SENSE_KEY";
-    }
-
+    data += "/{";
+    data += std::to_string(unitColor.red) + ",";
+    data += std::to_string(unitColor.green) + ",";
+    data += std::to_string(unitColor.blue) + ",";
+    data += std::to_string(unitColor.transparency) + "}";
+    data += "\n";
     if (node->getOutputNode())
     {
-
-        unsigned int outputKey =
-            node->getOutputNode()->getKey();
-
-        if (outputKey < getActions().size())
+        OutputNode *oN = node->getOutputNode();
+        data += "[";
+        for (int num : id)
         {
-            data +=
-                "---" + std::to_string(outputKey) + "|" + getActions().at(outputKey) + "|" + std::to_string(node->getOutputNode()->getWeight());
+            data += std::to_string(num) + ".";
         }
-        else
-        {
+        data += "1]";
+        data += "-";
+        weight = oN->getWeight();
+        float energyCost = oN->getEnergyCost();
+        key = oN->getKey();
+        unitColor = oN->getUnitColor();
 
-            data +=
-                "---" + std::to_string(outputKey) + "|INVALID_ACTION_KEY";
-        }
+        data += "W" + std::to_string(weight);
+        data += "/E" + std::to_string(energyCost);
+        data += "/K" + std::to_string(key);
+
+        data += "/{";
+        data += std::to_string(unitColor.red) + ",";
+        data += std::to_string(unitColor.green) + ",";
+        data += std::to_string(unitColor.blue) + ",";
+        data += std::to_string(unitColor.transparency) + "}";
+        data += "\n";
     }
 
-    data += "\n";
-
-    for (InputNode *cn :
-         node->getInputNodes())
+    int nextId = 1;
+    for (InputNode *cn : node->getInputNodes())
     {
-        data += outputBrain(
-            cn,
-            depth + 1);
+        id.push_back(nextId);
+        data += outputBrain(cn, id);
+        nextId++;
+        id.pop_back();
     }
 
     return data;
 }
 
-void Brain::constructCustomBrain(std::string fileName)
+void Brain::constructCustomBrain(std::string data)
 {
-    std::string line, allData = "";
-    std::ifstream customBrainFile(fileName);
+    std::string line = "";
 
-    if (!customBrainFile.is_open())
+    for (char letter : data)
     {
-        return;
+        if (letter == '\n')
+        {
+            if (!line.empty() and line.back() == '\r')
+            {
+                line.pop_back();
+            }
+            constructCustomNode(line);
+            line = "";
+        }
+        else
+        {
+            line += letter;
+        }
     }
-
-    while (getline(customBrainFile, line))
+    if (!line.empty())
     {
         constructCustomNode(line);
     }
-
-    customBrainFile.close();
 }
 
 // [1]+weight/setAmount/key/{unitColor}

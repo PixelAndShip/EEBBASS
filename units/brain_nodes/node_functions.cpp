@@ -1,6 +1,6 @@
 #include "node_functions.h"
 
-inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 10)
+inline bool colorMatches(const UnitColor &a, const UnitColor &b, int tolerance = 25)
 {
     return std::abs(static_cast<int>(a.red) - static_cast<int>(b.red)) <= tolerance and
            std::abs(static_cast<int>(a.green) - static_cast<int>(b.green)) <= tolerance and
@@ -131,7 +131,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
     {
     case 6:
 
-        for (int y : dCoords)
+        for (int y : getDCoords())
         {
             coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
@@ -141,7 +141,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
         }
         break;
     case 7:
-        for (int y : dCoords)
+        for (int y : getDCoords())
         {
             coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
@@ -151,7 +151,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
         }
         break;
     case 8:
-        for (int x : dCoords)
+        for (int x : getDCoords())
         {
             coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
@@ -161,7 +161,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
         }
         break;
     case 9:
-        for (int x : dCoords)
+        for (int x : getDCoords())
         {
             coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
@@ -198,7 +198,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
     {
     case 10:
 
-        for (int y : dCoords)
+        for (int y : getDCoords())
         {
             coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end())
@@ -221,7 +221,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
         }
         break;
     case 11:
-        for (int y : dCoords)
+        for (int y : getDCoords())
         {
             coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end())
@@ -243,7 +243,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
         }
         break;
     case 12:
-        for (int x : dCoords)
+        for (int x : getDCoords())
         {
             coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
             if (Agents->find(coords) != Agents->end())
@@ -265,7 +265,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
         }
         break;
     case 13:
-        for (int x : dCoords)
+        for (int x : getDCoords())
         {
             coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
             if (Agents->find(coords) != Agents->end())
@@ -578,6 +578,7 @@ std::vector<std::string> getProximatePlants(const std::unordered_map<std::string
 
         if (Plants->find(checkCoords) != Plants->end())
         {
+
             proximatePlantCs.push_back(checkCoords);
         }
     }

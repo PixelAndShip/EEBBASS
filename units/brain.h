@@ -15,7 +15,7 @@ private:
 public:
     Brain();
 
-    Brain(std::string fileName, int iE);
+    Brain(std::string data, int iE);
 
     Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
 
@@ -37,8 +37,8 @@ public:
 
     void setIdentifier(int iD) { env_identifier = iD; };
     int getIdentifier() { return env_identifier; };
-    void logBrain() const;
-    std::string outputBrain(InputNode *node, int depth = 0) const;
+    std::string logBrain() const;
+    std::string outputBrain(InputNode *node, std::vector<int> id) const;
 
     void constructCustomBrain(std::string fileName);
     void constructCustomNode(std::string line);

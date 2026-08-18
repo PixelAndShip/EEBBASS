@@ -1,14 +1,5 @@
 #include "sim_manager.h"
 
-SimManager::SimManager()
-{
-    for (int i = 0; i < 8; i++)
-    {
-        Environment *ce = new Environment(i);
-        environments.push_back(ce);
-    }
-}
-
 SimManager::~SimManager()
 {
     for (Environment *env : environments)
@@ -17,13 +8,13 @@ SimManager::~SimManager()
     }
 }
 
-SimManager::SimManager(int threadCount)
+SimManager::SimManager(int threadCount, float eRad, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
 {
     if (threadCount > 0)
     {
         for (int i = 0; i < threadCount; i++)
         {
-            Environment *ce = new Environment(i);
+            Environment *ce = new Environment(i, eRad, iT, maxIT, maxCYCLE, cb, maxBL, maxBCN, rootNodesCount, borderW, borderHeight);
             environments.push_back(ce);
         }
     }

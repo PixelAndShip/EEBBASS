@@ -1,22 +1,5 @@
 #include "spider.h"
 
-Spider::Spider()
-{
-
-    std::mt19937 g(rd());
-    std::uniform_int_distribution<> d(0, 100);
-
-    gen = g;
-    dist = d;
-
-    radiation = 0.5;
-    maxBrainChildNodes = 3;
-    maxBrainLevel = 4;
-
-    terrariumHeight = 800;
-    terrariumWidth = 800;
-}
-
 Spider::~Spider()
 {
 
@@ -507,9 +490,9 @@ bool Spider::borderCheck(std::string coords)
 
     bool inside =
         aX >= 0 and
-        aX <= terrariumWidth and
+        aX <= (terrariumWidth * agentSize * 2) and
         aY >= 0 and
-        aY <= terrariumHeight;
+        aY <= (terrariumHeight * agentSize * 2);
 
     return inside;
 }

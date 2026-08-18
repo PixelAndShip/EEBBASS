@@ -11,6 +11,8 @@ private:
     int identifier;
     float radiation;
     int iteration;
+    int maxCultivateIteration;
+    int maxCycle;
     int carbon_count;
     int maxBrainLevel;
     int maxBrainChildNodes;
@@ -18,12 +20,35 @@ private:
 public:
     std::mt19937 gen;
     std::uniform_int_distribution<> dist;
-    std::uniform_int_distribution<> insideBorders;
+    std::uniform_int_distribution<> insideX;
+    std::uniform_int_distribution<> insideY;
 
     Spider *spider = nullptr;
 
-    Environment();
-    Environment(int id);
+    // identifier = id;
+    // radiation = 0.5;
+    // iteration = 0;
+    // carbon_count = 1;
+
+    // maxBrainLevel = 5;
+    // maxBrainChildNodes = 2;
+
+    // spider = new Spider();
+
+    // std::random_device rd;
+    // std::mt19937 g(rd());
+
+    // std::uniform_int_distribution<> d(0, 7);
+    // std::uniform_int_distribution<> iB(0, 100);
+
+    // gen = g;
+    // dist = d;
+    // insideBorders = iB;
+    // Environment(int id = 5000);
+    Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 120, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
+
+    Environment(std::string saveFile);
+
     ~Environment();
 
     void manageSimulation();
@@ -51,5 +76,9 @@ public:
 
     void generatePlantCoords(Plant *pl);
 
-    void customizeAgent();
+    void logEnvironment(std::string fileName = "");
+
+    void constructEnvironment(std::string fileName);
+
+    void setCustomEnvironmentValues(std::string data);
 };

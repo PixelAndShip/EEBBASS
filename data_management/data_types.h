@@ -7,10 +7,12 @@ struct UnitColor
 {
     unsigned int red, green, blue, transparency;
 };
-const unsigned int agentSize = 4;
-const unsigned int plantSize = 3;
+inline unsigned int agentSize = 4;
+inline unsigned int plantSize = 3;
+inline unsigned int borderWidth = 100;
+inline unsigned int borderHeight = 100;
 
-const std::vector<int> dCoords = {-(int)agentSize * 2, -(int)agentSize, 0, (int)agentSize, (int)agentSize * 2};
+inline std::vector<int> getDCoords() { return {-(int)agentSize * 2, -(int)agentSize, 0, (int)agentSize, (int)agentSize * 2}; }
 
 inline const std::unordered_map<int, std::string> &getSenses()
 {

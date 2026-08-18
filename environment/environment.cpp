@@ -1,70 +1,61 @@
 #include "environment.h"
 #include <vector>
 
-Environment::Environment()
-{
-
-    identifier = 0;
-    radiation = 0.5;
-    iteration = 0;
-    carbon_count = 1;
-
-    maxBrainLevel = 5;
-    maxBrainChildNodes = 2;
-
-    spider = new Spider();
-
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::uniform_int_distribution<> d(0, 7);
-    std::uniform_int_distribution<> iB(0, 100);
-
-    gen = g;
-    dist = d;
-    insideBorders = iB;
-}
-
-Environment::Environment(int id)
+Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
 {
 
     identifier = id;
-    radiation = 0.5;
-    iteration = 0;
-    carbon_count = 1;
+    radiation = eRad;
+    iteration = iT;
+    maxCultivateIteration = maxIT;
+    maxCycle = maxCYCLE;
+    carbon_count = cb;
 
-    maxBrainLevel = 5;
-    maxBrainChildNodes = 2;
+    maxBrainLevel = maxBL;
+    maxBrainChildNodes = maxBCN;
 
-    spider = new Spider();
+    spider = new Spider(eRad, maxBL, maxBCN, borderW, borderH);
 
     std::random_device rd;
     std::mt19937 g(rd());
 
-    std::uniform_int_distribution<> d(0, 7);
-    std::uniform_int_distribution<> iB(0, 100);
+    borderWidth = borderW;
+    borderHeight = borderH;
+
+    std::uniform_int_distribution<> d(0, rootNodesCount);
+    std::uniform_int_distribution<> insidex(0, borderWidth);
+    std::uniform_int_distribution<> insidey(0, borderHeight);
 
     gen = g;
     dist = d;
-    insideBorders = iB;
+    insideX = insidex;
+    insideY = insidey;
+
+    std::string fileName = "environments/Environment_" + std::to_string(identifier) + ".txt";
+    std::ifstream SaveFile(fileName);
+}
+Environment::Environment(std::string saveFile)
+{
+    constructEnvironment(saveFile);
 }
 
 Environment::~Environment()
 {
-
+    // save environment and agent data into save file
+    logEnvironment();
     delete spider;
-    std::stringstream writtenData;
-    std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(identifier) + ".txt";
-    std::ifstream CurrentLog(fileName);
-    if (CurrentLog)
-    {
-        writtenData << CurrentLog.rdbuf();
-    }
-    std::string data = writtenData.str();
-    CurrentLog.close();
-    std::ofstream endOfSim(fileName);
-    endOfSim << data + "\n=========================================\n";
-    endOfSim.close();
+    // std::stringstream writtenData;
+    // std::string fileName = "logs/Environment_Log_" + std::to_string(identifier) + ".txt";
+    // std::ifstream CurrentLog(fileName);
+    // if (CurrentLog)
+    // {
+    //     writtenData << CurrentLog.rdbuf();
+    // }
+    // std::string data = writtenData.str();
+    // CurrentLog.close();
+    // std::ofstream endOfSim(fileName);
+    // endOfSim << data + "\n=========================================\n";
+    // endOfSim.close();
 }
 
 void Environment::manageSimulation()
@@ -79,13 +70,13 @@ void Environment::manageSimulation()
     int PlantsCount = 0;
     // std::string text = "";
 
-    while (cycle <= 100)
+    while (cycle <= maxCycle)
     {
 
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
         // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
-        if (iteration >= 120)
+        if (iteration >= maxCultivateIteration)
         {
 
             iteration = 0;
@@ -109,19 +100,20 @@ void Environment::manageVisualizedSimulation()
     startSimulation();
     int cycle = 0;
     std::string windowName = "Environment" + std::to_string(identifier);
-    InitWindow(800, 800, windowName.c_str());
+    int X = borderWidth * agentSize * 2;
+    int Y = borderHeight * agentSize * 2;
+    InitWindow(X, Y, windowName.c_str());
     SetTargetFPS(5);
     int AgentsCount = 0;
     int PlantsCount = 0;
     std::string text = "";
-
     while (!WindowShouldClose())
     {
 
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
         text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
-        if (iteration >= 120)
+        if (iteration >= maxCultivateIteration)
         {
             iteration = 0;
             cultivateSimulation();
@@ -171,7 +163,7 @@ void Environment::cultivateSimulation(int targetPop)
             std::cout << "Survivor in environment: " << identifier;
             agent->setHealth(100);
             agent->setEnergy(100);
-            agent->getBrain().logBrain();
+            agent->logAgent();
         }
     }
 
@@ -219,6 +211,7 @@ void Environment::manageAgentCount(int count, float cullingCount)
             {
                 ids.push_back(id);
             }
+            std::string data = "Environment\n";
         }
 
         std::shuffle(
@@ -363,10 +356,10 @@ void Environment::makeWindow()
             agent->getX(),
             agent->getY(),
             agentSize,
-            {(unsigned char)color.red,
-             (unsigned char)color.green,
-             (unsigned char)color.blue,
-             (unsigned char)color.transparency});
+            {(unsigned char)(color.red * 2),
+             (unsigned char)(color.green * 2),
+             (unsigned char)(color.blue * 2),
+             (unsigned char)(color.transparency * 2)});
     }
     for (auto &[coords, plant] : spider->Plants)
     {
@@ -389,8 +382,12 @@ void Environment::makeWindow()
 void Environment::startSimulation(int agentCount, int plantCount)
 {
 
-    int AgentCount = agentCount;
-    int PlantCount = plantCount;
+    int AgentCount = agentCount - (int)spider->Agents.size();
+    int PlantCount = plantCount - (int)spider->Plants.size();
+    if (AgentCount <= 0)
+    {
+        return;
+    }
     bool inside = false;
     for (int i = 0; i < AgentCount; i++)
     {
@@ -405,7 +402,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
 
         generateAgentCoords(genesis);
 
-        inside = genesis->getX() > 0 and genesis->getX() < 800 and genesis->getY() > 0 and genesis->getY() < 800;
+        inside = genesis->getX() > 0 and genesis->getX() < (borderWidth * agentSize * 2) and genesis->getY() > 0 and genesis->getY() < (borderHeight * agentSize * 2);
 
         if (!inside)
         {
@@ -413,18 +410,20 @@ void Environment::startSimulation(int agentCount, int plantCount)
             delete genesis;
             continue;
         }
-        // genesis->getBrain().logBrain();
 
         spider->Agents[genesis->getCoords()] =
             genesis;
     }
-
+    if (PlantCount <= 0)
+    {
+        return;
+    }
     for (int j = 0; j < PlantCount; j++)
     {
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
 
-        inside = pl->getX() > 0 and pl->getX() < 800 and pl->getY() > 0 and pl->getY() < 800;
+        inside = pl->getX() > 0 and pl->getX() < (borderWidth * agentSize * 2) and pl->getY() > 0 and pl->getY() < (borderHeight * agentSize * 2);
 
         if (!inside)
         {
@@ -452,8 +451,9 @@ void Environment::generateAgentCoords(Agent *ag)
 
             return;
         }
-        int x = insideBorders(gen) * agentSize * 2;
-        int y = insideBorders(gen) * agentSize * 2;
+
+        int x = insideX(gen) * agentSize * 2;
+        int y = insideY(gen) * agentSize * 2;
 
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
@@ -487,11 +487,11 @@ void Environment::generatePlantCoords(Plant *pl)
     {
         if (cycles >= 300)
         {
-
             return;
         }
-        int x = insideBorders(gen) * agentSize * 2;
-        int y = insideBorders(gen) * agentSize * 2;
+
+        int x = insideX(gen) * agentSize * 2;
+        int y = insideY(gen) * agentSize * 2;
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
         if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())
@@ -509,4 +509,118 @@ void Environment::generatePlantCoords(Plant *pl)
         }
         cycles += 1;
     }
+}
+
+void Environment::logEnvironment(std::string fileName)
+{
+    // int identifier;
+    // float radiation;
+    // int iteration; skipped
+    // int maxCultivateIteration;
+    // int maxCycle;
+    // int carbon_count;
+    // int maxBrainLevel;
+    // int maxBrainChildNodes;
+    // int maxWidth
+    // int maxHeight
+    // int agentSize
+    // int plantSize
+    if (fileName == "")
+    {
+        fileName = "environments/Environment_" + std::to_string(identifier) + ".txt";
+    }
+    std::ofstream saveFile(fileName);
+    std::string data = "Environment\n";
+    data += 'I' + std::to_string(identifier) + '\n';
+    data += "/R" + std::to_string(radiation) + '\n';
+    data += "/C" + std::to_string(maxCultivateIteration) + '\n';
+    data += "/Y" + std::to_string(maxCycle) + '\n';
+    data += "/c" + std::to_string(carbon_count) + '\n';
+    data += "/L" + std::to_string(maxBrainLevel) + '\n';
+    data += "/N" + std::to_string(maxBrainChildNodes) + '\n';
+    data += "/W" + std::to_string(borderWidth) + '\n';
+    data += "/H" + std::to_string(borderHeight) + '\n';
+    data += "/A" + std::to_string(agentSize) + '\n';
+    data += "/P" + std::to_string(plantSize) + '\n';
+    data += "Agents\n";
+    for (auto &[coordinates, agent] : spider->Agents)
+    {
+        agent->logAgent(fileName);
+    }
+    saveFile.close();
+}
+
+void Environment::constructEnvironment(std::string fileName)
+{
+
+    std::ifstream file(fileName);
+    if (!file.is_open())
+    {
+        return;
+    }
+    std::string line, environmentData, agentData, brainData;
+    Agent *currentAgent = nullptr;
+    bool processingAgentData = false;
+    bool processingEnvironmentData = true;
+
+    while (std::getline(file, line))
+    {
+        if (processingEnvironmentData == true)
+        {
+            processingEnvironmentData = false;
+            environmentData = line;
+            setCustomEnvironmentValues(environmentData);
+        }
+        else if (line == "Agents")
+        {
+            processingEnvironmentData = false;
+        }
+        else if (line == "Environment")
+        {
+            processingEnvironmentData = true;
+        }
+        else if (line == "A")
+        {
+            processingAgentData = true;
+        }
+        else if (line == "B")
+        {
+            processingAgentData = false;
+        }
+        else if (line == "---")
+        {
+            currentAgent = new Agent(agentData, brainData, identifier);
+            spider->Agents[currentAgent->getCoords()] = currentAgent;
+            currentAgent = nullptr;
+            agentData.clear();
+            brainData.clear();
+        }
+        else if (processingAgentData and !processingEnvironmentData)
+        {
+            agentData += line;
+        }
+        else if (!processingAgentData and !processingEnvironmentData)
+        {
+            brainData += line;
+        }
+    }
+    file.close();
+
+    startSimulation(0, 50);
+}
+
+void Environment::setCustomEnvironmentValues(std::string data)
+{
+    // int identifier;
+    // float radiation;
+    // int iteration;
+    // int maxCultivateIteration;
+    // int maxCycle;
+    // int carbon_count;
+    // int maxBrainLevel;
+    // int maxBrainChildNodes;
+    // int maxWidth
+    // int maxHeight
+    // int agentSize
+    // int plantSize
 }
