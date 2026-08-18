@@ -43,6 +43,12 @@ void visualSim()
     env.manageVisualizedSimulation();
 }
 
+void defaultVisual()
+{
+    Environment env = Environment();
+    env.manageVisualizedSimulation();
+}
+
 void multiThreadSim()
 {
     float eRad;
@@ -99,6 +105,9 @@ int main()
 
     switch (simTypeChoiceStr)
     {
+    case 'd':
+        defaultVisual();
+        return 0;
     case 'v':
     {
         visualSim();

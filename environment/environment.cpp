@@ -356,10 +356,10 @@ void Environment::makeWindow()
             agent->getX(),
             agent->getY(),
             agentSize,
-            {(unsigned char)color.red,
-             (unsigned char)color.green,
-             (unsigned char)color.blue,
-             (unsigned char)color.transparency});
+            {(unsigned char)(color.red * 2),
+             (unsigned char)(color.green * 2),
+             (unsigned char)(color.blue * 2),
+             (unsigned char)(color.transparency * 2)});
     }
     for (auto &[coords, plant] : spider->Plants)
     {
