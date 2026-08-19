@@ -219,7 +219,7 @@ std::string Brain::logBrain() const
 
     if (data == "")
     {
-        data = "No brain found!";
+        data = "No brain found!\n";
     }
     // updatedLog << data;
 

@@ -37,31 +37,24 @@ Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, in
 Environment::Environment(std::string saveFile)
 {
     constructEnvironment(saveFile);
+    custom = true;
 }
 
 Environment::~Environment()
 {
-    // save environment and agent data into save file
+
     logEnvironment();
+
     delete spider;
-    // std::stringstream writtenData;
-    // std::string fileName = "logs/Environment_Log_" + std::to_string(identifier) + ".txt";
-    // std::ifstream CurrentLog(fileName);
-    // if (CurrentLog)
-    // {
-    //     writtenData << CurrentLog.rdbuf();
-    // }
-    // std::string data = writtenData.str();
-    // CurrentLog.close();
-    // std::ofstream endOfSim(fileName);
-    // endOfSim << data + "\n=========================================\n";
-    // endOfSim.close();
 }
 
 void Environment::manageSimulation()
 {
+    if (!custom)
+    {
+        startSimulation();
+    }
 
-    startSimulation();
     int cycle = 0;
     // std::string windowName = "Environment" + std::to_string(identifier);
     // InitWindow(800, 800, windowName.c_str());
@@ -161,9 +154,9 @@ void Environment::cultivateSimulation(int targetPop)
         if (agent != nullptr)
         {
             std::cout << "Survivor in environment: " << identifier;
+            agent->logAgent();
             agent->setHealth(100);
             agent->setEnergy(100);
-            agent->logAgent();
         }
     }
 
@@ -187,9 +180,15 @@ void Environment::cultivateSimulation(int targetPop)
     {
         agentTargetPop = 100;
     }
-
-    startSimulation(
-        agentTargetPop, plantTargetPop);
+    if (custom)
+    {
+        startSimulation(
+            0, plantTargetPop);
+    }
+    else
+    {
+        startSimulation(agentTargetPop, plantTargetPop);
+    }
 }
 
 void Environment::managePlantCount(int count, float cullingCount)
@@ -513,18 +512,7 @@ void Environment::generatePlantCoords(Plant *pl)
 
 void Environment::logEnvironment(std::string fileName)
 {
-    // int identifier;
-    // float radiation;
-    // int iteration; skipped
-    // int maxCultivateIteration;
-    // int maxCycle;
-    // int carbon_count;
-    // int maxBrainLevel;
-    // int maxBrainChildNodes;
-    // int maxWidth
-    // int maxHeight
-    // int agentSize
-    // int plantSize
+
     if (fileName == "")
     {
         fileName = "environments/Environment_" + std::to_string(identifier) + ".txt";
@@ -543,11 +531,12 @@ void Environment::logEnvironment(std::string fileName)
     data += "/A" + std::to_string(agentSize);
     data += "/P" + std::to_string(plantSize);
     data += "\nAgents\n";
+    saveFile << data;
+    saveFile.close();
     for (auto &[coordinates, agent] : spider->Agents)
     {
         agent->logAgent(fileName);
     }
-    saveFile.close();
 }
 
 void Environment::constructEnvironment(std::string fileName)
@@ -780,3 +769,4 @@ void Environment::setCustomEnvironmentValues(std::string data)
         }
         }
     }
+}

@@ -94,9 +94,10 @@ void multiThreadSim()
 
 int main()
 {
-
+    DEBUG_LOG("Starting sim");
     std::filesystem::path currentDir = std::filesystem::current_path();
     std::filesystem::create_directories(currentDir / "ES" / "logs");
+    std::filesystem::create_directories(currentDir / "ES" / "environments");
     std::filesystem::current_path(currentDir / "ES");
 
     char simTypeChoiceStr;

@@ -16,6 +16,7 @@ private:
     int carbon_count;
     int maxBrainLevel;
     int maxBrainChildNodes;
+    bool custom;
 
 public:
     std::mt19937 gen;
@@ -45,7 +46,7 @@ public:
     // dist = d;
     // insideBorders = iB;
     // Environment(int id = 5000);
-    Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 120, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
+    Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 115, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
 
     Environment(std::string saveFile);
 
