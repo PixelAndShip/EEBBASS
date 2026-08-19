@@ -531,18 +531,18 @@ void Environment::logEnvironment(std::string fileName)
     }
     std::ofstream saveFile(fileName);
     std::string data = "Environment\n";
-    data += 'I' + std::to_string(identifier) + '\n';
-    data += "/R" + std::to_string(radiation) + '\n';
-    data += "/C" + std::to_string(maxCultivateIteration) + '\n';
-    data += "/Y" + std::to_string(maxCycle) + '\n';
-    data += "/c" + std::to_string(carbon_count) + '\n';
-    data += "/L" + std::to_string(maxBrainLevel) + '\n';
-    data += "/N" + std::to_string(maxBrainChildNodes) + '\n';
-    data += "/W" + std::to_string(borderWidth) + '\n';
-    data += "/H" + std::to_string(borderHeight) + '\n';
-    data += "/A" + std::to_string(agentSize) + '\n';
-    data += "/P" + std::to_string(plantSize) + '\n';
-    data += "Agents\n";
+    data += 'I' + std::to_string(identifier);
+    data += "/R" + std::to_string(radiation);
+    data += "/C" + std::to_string(maxCultivateIteration);
+    data += "/Y" + std::to_string(maxCycle);
+    data += "/c" + std::to_string(carbon_count);
+    data += "/L" + std::to_string(maxBrainLevel);
+    data += "/N" + std::to_string(maxBrainChildNodes);
+    data += "/W" + std::to_string(borderWidth);
+    data += "/H" + std::to_string(borderHeight);
+    data += "/A" + std::to_string(agentSize);
+    data += "/P" + std::to_string(plantSize);
+    data += "\nAgents\n";
     for (auto &[coordinates, agent] : spider->Agents)
     {
         agent->logAgent(fileName);
@@ -611,16 +611,172 @@ void Environment::constructEnvironment(std::string fileName)
 
 void Environment::setCustomEnvironmentValues(std::string data)
 {
-    // int identifier;
-    // float radiation;
-    // int iteration;
-    // int maxCultivateIteration;
-    // int maxCycle;
-    // int carbon_count;
-    // int maxBrainLevel;
-    // int maxBrainChildNodes;
-    // int maxWidth
-    // int maxHeight
-    // int agentSize
-    // int plantSize
-}
+    // data += 'I' + std::to_string(identifier);
+    // data += "/R" + std::to_string(radiation);
+    // data += "/C" + std::to_string(maxCultivateIteration);
+    // data += "/Y" + std::to_string(maxCycle);
+    // data += "/c" + std::to_string(carbon_count);
+    // data += "/L" + std::to_string(maxBrainLevel);
+    // data += "/N" + std::to_string(maxBrainChildNodes);
+    // data += "/W" + std::to_string(borderWidth);
+    // data += "/H" + std::to_string(borderHeight);
+    // data += "/A" + std::to_string(agentSize);
+    // data += "/P" + std::to_string(plantSize);
+
+    size_t pos = 0;
+
+    while (pos < data.size())
+    {
+        char indicator = data[pos];
+        switch (indicator)
+        {
+        case 'I':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            identifier = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'R':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            radiation = std::stof(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'C':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxCultivateIteration = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'Y':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxCycle = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'c':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            carbon_count = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'L':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxBrainLevel = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'N':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxBrainChildNodes = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'W':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            borderWidth = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'H':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            borderHeight = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'A':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            agentSize = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'P':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            plantSize = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        default:
+        {
+            pos++;
+            break;
+        }
+        }
+    }
