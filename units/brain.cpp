@@ -10,7 +10,7 @@ Brain::Brain(std::string data, int iEID)
     constructCustomBrain(data);
 }
 
-Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int childNodeCount, int brainDepth)
+Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int maxRootNodesCount, int childNodeCount, int brainDepth)
 {
 
     env_identifier = identifier;
@@ -25,6 +25,21 @@ Brain::Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &i
 
         addCopiedConnection(eRadiation, gen, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
+
+    int extraRootNodeCount = maxRootNodesCount - copyInputNodes.size();
+    if (extraRootNodeCount <= 0)
+    {
+        return;
+    }
+    std::uniform_int_distribution<> extraRootNode(0, extraRootNodeCount);
+    int extraCount = extraRootNode(gen);
+    std::uniform_int_distribution<> mutationChance(0, 100);
+    for (int i = 0; i < extraCount; i++)
+    {
+        InputNode *startNode = new InputNode(gen);
+        inputNodes.push_back(startNode);
+        addConnection(eRadiation, gen, startNode, mutationChance, 0, childNodeCount, brainDepth);
+    }
 }
 
 Brain::~Brain()
@@ -32,7 +47,6 @@ Brain::~Brain()
 
     for (InputNode *node : inputNodes)
     {
-
         delete node;
     }
 }
@@ -68,7 +82,7 @@ void Brain::addCopiedConnection(
 
     std::uniform_int_distribution<> newNodeChance(0, 100);
 
-    if (parentLastInputNode->getOutputNode() != nullptr)
+    if (parentLastInputNode->getOutputNode() != nullptr and lastInputNode->getOutputNode() == nullptr)
     {
         OutputNode *copyOutNode =
             parentLastInputNode->getOutputNode();
@@ -77,6 +91,7 @@ void Brain::addCopiedConnection(
             new OutputNode(gen, copyOutNode);
 
         lastInputNode->setOutputNode(copiedOutNode);
+        return;
     }
 
     for (InputNode *copyNode :
@@ -88,12 +103,13 @@ void Brain::addCopiedConnection(
         lastInputNode->appendInputNode(copiedNode);
 
         if (newNodeChance(gen) <= 5 and
-            copiedNode->getOutputNode() != nullptr)
+            copiedNode->getOutputNode() == nullptr and copyNode->getInputNodes().empty())
         {
             OutputNode *newOutputNode =
                 new OutputNode(gen);
 
             copiedNode->setOutputNode(newOutputNode);
+            continue;
         }
 
         addCopiedConnection(

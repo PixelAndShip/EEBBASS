@@ -14,6 +14,7 @@ private:
     int maxCultivateIteration;
     int maxCycle;
     int carbon_count;
+    int maxRootNodes;
     int maxBrainLevel;
     int maxBrainChildNodes;
     bool custom;

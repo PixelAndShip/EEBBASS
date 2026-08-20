@@ -78,9 +78,10 @@ Agent::Agent(
     const Brain &iBrain,
     float eRadiation,
     std::mt19937 &gen,
+    int maxRootNodesCount,
     int childNodeCount,
     int brainDepth)
-    : brain(identifier, eRadiation, gen, iBrain, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, gen, iBrain, maxRootNodesCount, childNodeCount, brainDepth)
 {
 
     env_identifier = identifier;

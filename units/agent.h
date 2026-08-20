@@ -189,6 +189,7 @@ public:
         const Brain &iBrain,
         float eRadiation,
         std::mt19937 &gen,
+        int maxRootNodesCount,
         int childNodeCount,
         int brainDepth);
 

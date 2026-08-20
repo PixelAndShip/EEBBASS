@@ -92,6 +92,15 @@ void multiThreadSim()
     sm.runSimulation();
 }
 
+void customEnvironment()
+{
+    std::string saveFileStr;
+    std::cout << "Enter environment save file name: ";
+    std::cin >> saveFileStr;
+    Environment env = Environment(saveFileStr);
+    env.manageVisualizedSimulation();
+}
+
 int main()
 {
     DEBUG_LOG("Starting sim");
@@ -106,9 +115,16 @@ int main()
 
     switch (simTypeChoiceStr)
     {
+    case 'c':
+    {
+        customEnvironment();
+        return 0;
+    }
     case 'd':
+    {
         defaultVisual();
         return 0;
+    }
     case 'v':
     {
         visualSim();

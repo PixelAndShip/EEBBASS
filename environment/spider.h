@@ -21,6 +21,7 @@ public:
     // std::unordered_map<std::string, bool> proximateCoords;
 
     float radiation;
+    int maxRootNodes;
     int maxBrainLevel;
     int maxBrainChildNodes;
 
@@ -32,7 +33,7 @@ public:
     std::uniform_int_distribution<> dist;
 
     ~Spider();
-    Spider(float rad = 0.5, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
+    Spider(float rad = 0.5, int maxRN = 3, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
 
     // void setProximities(std::string coords);
 

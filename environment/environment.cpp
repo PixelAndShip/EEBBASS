@@ -11,10 +11,11 @@ Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, in
     maxCycle = maxCYCLE;
     carbon_count = cb;
 
+    maxRootNodes = rootNodesCount;
     maxBrainLevel = maxBL;
     maxBrainChildNodes = maxBCN;
 
-    spider = new Spider(eRad, maxBL, maxBCN, borderW, borderH);
+    spider = new Spider(eRad, rootNodesCount, maxBL, maxBCN, borderW, borderH);
 
     std::random_device rd;
     std::mt19937 g(rd());
@@ -22,7 +23,7 @@ Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, in
     borderWidth = borderW;
     borderHeight = borderH;
 
-    std::uniform_int_distribution<> d(0, rootNodesCount);
+    std::uniform_int_distribution<> d(0, maxRootNodes);
     std::uniform_int_distribution<> insidex(0, borderWidth);
     std::uniform_int_distribution<> insidey(0, borderHeight);
 
@@ -30,13 +31,19 @@ Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, in
     dist = d;
     insideX = insidex;
     insideY = insidey;
-
-    std::string fileName = "environments/Environment_" + std::to_string(identifier) + ".txt";
-    std::ifstream SaveFile(fileName);
 }
 Environment::Environment(std::string saveFile)
 {
     constructEnvironment(saveFile);
+    std::uniform_int_distribution<> d(0, maxRootNodes);
+    std::uniform_int_distribution<> insidex(0, borderWidth);
+    std::uniform_int_distribution<> insidey(0, borderHeight);
+    std::random_device rd;
+    std::mt19937 g(rd());
+    gen = g;
+    dist = d;
+    insideX = insidex;
+    insideY = insidey;
     custom = true;
 }
 
@@ -50,7 +57,11 @@ Environment::~Environment()
 
 void Environment::manageSimulation()
 {
-    if (!custom)
+    if (custom)
+    {
+        startSimulation(0, 50);
+    }
+    else
     {
         startSimulation();
     }
@@ -380,12 +391,11 @@ void Environment::makeWindow()
 
 void Environment::startSimulation(int agentCount, int plantCount)
 {
-
     int AgentCount = agentCount - (int)spider->Agents.size();
     int PlantCount = plantCount - (int)spider->Plants.size();
     if (AgentCount <= 0)
     {
-        return;
+        AgentCount = 0;
     }
     bool inside = false;
     for (int i = 0; i < AgentCount; i++)
@@ -524,6 +534,8 @@ void Environment::logEnvironment(std::string fileName)
     data += "/C" + std::to_string(maxCultivateIteration);
     data += "/Y" + std::to_string(maxCycle);
     data += "/c" + std::to_string(carbon_count);
+    data += "/c" + std::to_string(carbon_count);
+    data += "/O" + std::to_string(maxRootNodes);
     data += "/L" + std::to_string(maxBrainLevel);
     data += "/N" + std::to_string(maxBrainChildNodes);
     data += "/W" + std::to_string(borderWidth);
@@ -550,7 +562,7 @@ void Environment::constructEnvironment(std::string fileName)
     std::string line, environmentData, agentData, brainData;
     Agent *currentAgent = nullptr;
     bool processingAgentData = false;
-    bool processingEnvironmentData = true;
+    bool processingEnvironmentData = false;
 
     while (std::getline(file, line))
     {
@@ -559,6 +571,7 @@ void Environment::constructEnvironment(std::string fileName)
             processingEnvironmentData = false;
             environmentData = line;
             setCustomEnvironmentValues(environmentData);
+            spider = new Spider(radiation, maxRootNodes, maxBrainLevel, maxBrainChildNodes, borderWidth, borderHeight);
         }
         else if (line == "Agents")
         {
@@ -594,8 +607,6 @@ void Environment::constructEnvironment(std::string fileName)
         }
     }
     file.close();
-
-    startSimulation(0, 50);
 }
 
 void Environment::setCustomEnvironmentValues(std::string data)
@@ -681,6 +692,19 @@ void Environment::setCustomEnvironmentValues(std::string data)
                 end = data.size();
             }
             carbon_count = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'O':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxRootNodes = std::stoi(data.substr(start, end - start));
             pos = end;
             break;
         }
