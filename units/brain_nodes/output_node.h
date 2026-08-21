@@ -1,8 +1,6 @@
 #pragma once
 #include "data_management/data_types.h"
 
-#include <random>
-
 class OutputNode
 {
 private:
@@ -12,10 +10,6 @@ private:
     UnitColor unitColor = {255, 255, 255, 255};
 
 public:
-    OutputNode() {
-
-    };
-
     OutputNode(float iW, float iE, unsigned int iK, UnitColor iU)
     {
         weight = iW;
@@ -24,12 +18,11 @@ public:
         unitColor = iU;
     }
 
-    OutputNode(std::mt19937 &gen, OutputNode *copyNode)
+    OutputNode(OutputNode *copyNode)
     {
 
         // Initialize mutation
         std::uniform_int_distribution<> mutationDist(-2, 2);
-        std::uniform_int_distribution<> keyMutationChance(0, 100);
 
         weight = std::clamp(copyNode->getWeight() + mutationDist(gen) / 100.0f, 0.01f, 0.99f);
 
@@ -39,7 +32,7 @@ public:
 
         key = copyNode->getKey();
 
-        int mutatedKeyChance = keyMutationChance(gen);
+        int mutatedKeyChance = dist(gen);
 
         if (mutatedKeyChance <= 5)
         {
@@ -53,7 +46,7 @@ public:
         }
     }
 
-    OutputNode(std::mt19937 &gen)
+    OutputNode()
     {
 
         std::uniform_int_distribution<> weightDist(0, 99);

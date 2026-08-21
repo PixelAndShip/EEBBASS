@@ -16,16 +16,11 @@ Spider::~Spider()
     }
 }
 
-Spider::Spider(float rad, int maxBL, int maxBCN, int terW, int terH)
+Spider::Spider(float rad, int maxRN, int maxBL, int maxBCN, int terW, int terH)
 {
 
-    std::mt19937 g(rd());
-    std::uniform_int_distribution<> d(0, 100);
-
-    gen = g;
-    dist = d;
-
     radiation = rad;
+    maxRootNodes = maxRN;
     maxBrainChildNodes = maxBCN;
     maxBrainLevel = maxBL;
 
@@ -569,7 +564,7 @@ void Spider::splitNewAgent(std::string ParentCoords)
         parent->getSpeed(),
         parent->getBrain(),
         radiation,
-        gen,
+        maxRootNodes,
         maxBrainChildNodes,
         maxBrainLevel);
     parent->updateColor();

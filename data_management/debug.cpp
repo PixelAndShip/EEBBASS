@@ -1,3 +1,3 @@
 #include "debug.h"
 
-std::ofstream debugFile("logs/debug.log", std::ios::out);
+std::ofstream debugFile("ES/logs/debug.log", std::ios::out);
