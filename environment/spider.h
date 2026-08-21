@@ -28,10 +28,6 @@ public:
     int terrariumWidth;
     int terrariumHeight;
 
-    std::random_device rd;
-    std::mt19937 gen;
-    std::uniform_int_distribution<> dist;
-
     ~Spider();
     Spider(float rad = 0.5, int maxRN = 3, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
 

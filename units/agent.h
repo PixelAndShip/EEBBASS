@@ -175,11 +175,8 @@ public:
     Agent(
         int identifier,
         float eRadiation,
-        std::mt19937 &gen,
-        std::uniform_int_distribution<> &dist,
         int childNodeCount,
         int brainDepth);
-
     Agent(
         int identifier,
         float iHealth,
@@ -188,12 +185,11 @@ public:
         float iSpeed,
         const Brain &iBrain,
         float eRadiation,
-        std::mt19937 &gen,
         int maxRootNodesCount,
         int childNodeCount,
         int brainDepth);
 
-    void generateStart(std::mt19937 &gen);
+    void generateStart();
 
     void logAgent(std::string fileName = "") const;
 

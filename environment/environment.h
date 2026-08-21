@@ -20,12 +20,7 @@ private:
     bool custom;
 
 public:
-    std::mt19937 gen;
-    std::uniform_int_distribution<> dist;
-    std::uniform_int_distribution<> insideX;
-    std::uniform_int_distribution<> insideY;
-
-    Spider *spider = nullptr;
+        Spider *spider = nullptr;
 
     // identifier = id;
     // radiation = 0.5;

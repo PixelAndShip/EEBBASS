@@ -41,11 +41,9 @@ Agent::Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float 
 Agent::Agent(
     int identifier,
     float eRadiation,
-    std::mt19937 &gen,
-    std::uniform_int_distribution<> &dist,
     int childNodeCount,
     int brainDepth)
-    : brain(identifier, eRadiation, gen, dist, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, childNodeCount, brainDepth)
 {
     processed = false;
 
@@ -64,7 +62,7 @@ Agent::Agent(
 
     speed = 1.0;
 
-    generateStart(gen);
+    generateStart();
 
     updateColor();
 }
@@ -77,11 +75,10 @@ Agent::Agent(
     float iSpeed,
     const Brain &iBrain,
     float eRadiation,
-    std::mt19937 &gen,
     int maxRootNodesCount,
     int childNodeCount,
     int brainDepth)
-    : brain(identifier, eRadiation, gen, iBrain, maxRootNodesCount, childNodeCount, brainDepth)
+    : brain(identifier, eRadiation, iBrain, maxRootNodesCount, childNodeCount, brainDepth)
 {
 
     env_identifier = identifier;
@@ -102,7 +99,7 @@ Agent::Agent(
     updateColor();
 }
 
-void Agent::generateStart(std::mt19937 &gen)
+void Agent::generateStart()
 {
 }
 

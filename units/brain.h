@@ -17,9 +17,9 @@ public:
 
     Brain(std::string data, int iE);
 
-    Brain(int identifier, float eRadiation, std::mt19937 &gen, std::uniform_int_distribution<> &dist, int childNodeCount, int brainDepth);
+    Brain(int identifier, float eRadiation, int childNodeCount, int brainDepth);
 
-    Brain(int identifier, float eRadiation, std::mt19937 &gen, const Brain &iBrain, int maxRootNodesCount, int childNodeCount, int brainDepth);
+    Brain(int identifier, float eRadiation, const Brain &iBrain, int maxRootNodesCount, int childNodeCount, int brainDepth);
 
     ~Brain();
 
@@ -28,10 +28,10 @@ public:
     Brain(Brain &&) = delete;
     Brain &operator=(Brain &&) = delete;
 
-    void addCopiedConnection(float eRadiation, std::mt19937 &gen, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth);
+    void addCopiedConnection(float eRadiation, InputNode *parentLastInputNode, InputNode *lastInputNode, int level, int childNodeCount, int brainDepth);
 
     const std::vector<InputNode *> &getInputNodes() const;
-    void addConnection(float eRadiation, std::mt19937 &gen, InputNode *inputChainLast, std::uniform_int_distribution<> &mutationChance, int level, int childNodeCount, int brainDepth);
+    void addConnection(float eRadiation, InputNode *inputChainLast, int level, int childNodeCount, int brainDepth);
     void manageConnections();
     void sendSignal();
 

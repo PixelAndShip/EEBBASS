@@ -1,9 +1,5 @@
 #include "input_node.h"
 
-InputNode::InputNode()
-{
-}
-
 InputNode::InputNode(float iW, float setA, unsigned int iK, UnitColor iU)
 {
     weight = iW;
@@ -19,7 +15,7 @@ InputNode::InputNode(float iW, float setA, unsigned int iK, UnitColor iU)
 // std::vector<InputNode *> inputNodes = {};
 // OutputNode *outputNode = nullptr;
 
-InputNode::InputNode(std::mt19937 &gen, InputNode *copyNode)
+InputNode::InputNode(InputNode *copyNode)
 {
 
     std::uniform_int_distribution<> mutationDist(-2, 2);
@@ -47,7 +43,7 @@ InputNode::InputNode(std::mt19937 &gen, InputNode *copyNode)
     }
 }
 
-InputNode::InputNode(std::mt19937 &gen)
+InputNode::InputNode()
 {
 
     std::uniform_int_distribution<> weightDist(1, 99);

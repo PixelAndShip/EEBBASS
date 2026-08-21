@@ -15,8 +15,7 @@ private:
 public:
     InputNode();
     InputNode(float iW, float setA, unsigned int iK, UnitColor iU);
-    InputNode(std::mt19937 &gen, InputNode *copyNode);
-    InputNode(std::mt19937 &gen);
+    InputNode(InputNode *copyNode);
     ~InputNode();
     void setWeight(float iW);
     void setSetAmount(float iSA);
