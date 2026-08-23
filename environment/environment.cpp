@@ -582,8 +582,9 @@ void Environment::constructEnvironment(std::string fileName)
         {
             processingAgentData = false;
         }
-        else if (line == "---")
+        else if (line == "=")
         {
+
             currentAgent = new Agent(agentData, brainData, identifier);
             spider->Agents[currentAgent->getCoords()] = currentAgent;
             currentAgent = nullptr;

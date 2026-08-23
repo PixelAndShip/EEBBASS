@@ -16,13 +16,12 @@ Brain::Brain(int identifier, float eRadiation, const Brain &iBrain, int maxRootN
     env_identifier = identifier;
 
     std::vector<InputNode *> copyInputNodes = iBrain.getInputNodes();
-
+    std::cout << copyInputNodes.size();
     for (InputNode *iN : copyInputNodes)
     {
 
         InputNode *newInputNode = new InputNode(iN);
         inputNodes.push_back(newInputNode);
-
         addCopiedConnection(eRadiation, iN, newInputNode, 0, childNodeCount, brainDepth);
     }
 
@@ -265,7 +264,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
     data += std::to_string(unitColor.red) + ",";
     data += std::to_string(unitColor.green) + ",";
     data += std::to_string(unitColor.blue) + ",";
-    data += std::to_string(unitColor.transparency) + "}";
+    data += std::to_string(unitColor.transparency) + "};";
     data += "\n";
     if (node->getOutputNode())
     {
@@ -290,7 +289,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
         data += std::to_string(unitColor.red) + ",";
         data += std::to_string(unitColor.green) + ",";
         data += std::to_string(unitColor.blue) + ",";
-        data += std::to_string(unitColor.transparency) + "}";
+        data += std::to_string(unitColor.transparency) + "};";
         data += "\n";
     }
 
@@ -312,12 +311,13 @@ void Brain::constructCustomBrain(std::string data)
 
     for (char letter : data)
     {
-        if (letter == '\n')
+        if (letter == ';')
         {
             if (!line.empty() and line.back() == '\r')
             {
                 line.pop_back();
             }
+            std::cout << line;
             constructCustomNode(line);
             line = "";
         }
@@ -329,6 +329,10 @@ void Brain::constructCustomBrain(std::string data)
     if (!line.empty())
     {
         constructCustomNode(line);
+    }
+    for (auto &[coord, node] : customNodes)
+    {
+        std::cout << coord;
     }
 }
 
@@ -481,6 +485,7 @@ void Brain::constructCustomNode(std::string line)
         }
         else
         {
+
             std::string parentId = "";
 
             size_t pos = id.rfind('.');
@@ -489,6 +494,7 @@ void Brain::constructCustomNode(std::string line)
             {
                 parentId = id.substr(0, pos);
             }
+
             customNodes[parentId]->appendInputNode(iN);
         }
         customNodes[id] = iN;
@@ -507,3 +513,20 @@ void Brain::constructCustomNode(std::string line)
         customNodes[parentId]->setOutputNode(oN);
     }
 }
+
+// InputNode *Brain::getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index)
+// {
+//     if (parent == nullptr or coordinates.size() == 0 or index >= coordinates.size())
+//     {
+//         return nullptr;
+//     }
+//     int id = coordinates[index];
+//     if (index == coordinates.size() - 1)
+//     {
+//         return parent->getInputNodes()[id];
+//     }
+//     else
+//     {
+//         getCustomParentNode(parent->getInputNodes()[id], coordinates, index + 1);
+//     }
+// }

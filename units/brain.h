@@ -42,5 +42,5 @@ public:
 
     void constructCustomBrain(std::string fileName);
     void constructCustomNode(std::string line);
-    InputNode *getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index);
+    // InputNode *getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index);
 };
