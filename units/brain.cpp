@@ -16,7 +16,7 @@ Brain::Brain(int identifier, float eRadiation, const Brain &iBrain, int maxRootN
     env_identifier = identifier;
 
     std::vector<InputNode *> copyInputNodes = iBrain.getInputNodes();
-    std::cout << copyInputNodes.size();
+
     for (InputNode *iN : copyInputNodes)
     {
 
@@ -317,7 +317,7 @@ void Brain::constructCustomBrain(std::string data)
             {
                 line.pop_back();
             }
-            std::cout << line;
+
             constructCustomNode(line);
             line = "";
         }
@@ -329,10 +329,6 @@ void Brain::constructCustomBrain(std::string data)
     if (!line.empty())
     {
         constructCustomNode(line);
-    }
-    for (auto &[coord, node] : customNodes)
-    {
-        std::cout << coord;
     }
 }
 

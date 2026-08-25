@@ -18,7 +18,7 @@ public:
     {
 
         // plantColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
-        plantColor.green = std::clamp(static_cast<int>(std::round(health)), 0, 255);
+        plantColor.blue = std::clamp(static_cast<int>(std::round(health)), 0, 255);
     }
 
     void setHealth(float iH)

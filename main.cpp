@@ -97,50 +97,87 @@ void customEnvironment()
     std::string saveFileStr;
     std::cout << "Enter environment save file name: ";
     std::cin >> saveFileStr;
-    Environment env = Environment(saveFileStr);
-    env.manageVisualizedSimulation();
+    try
+    {
+        Environment env = Environment(saveFileStr);
+
+        env.manageVisualizedSimulation();
+    }
+    catch (...)
+    {
+        std::cout << "An error has been encountered, use global function DEBUG_LOG to debug code";
+    }
 }
 
+void Helper()
+{
+    std::cout << "EEBBASS current version supports these inputs:\n";
+    std::cout << "f to exit application;\n";
+    std::cout << "d to run default visual simulation;\n";
+    std::cout << "c to enter custom environment file for visualized simulation;\n";
+    std::cout << "v to manually customize visualized simulation variables;\n";
+    std::cout << "m to multithreaded customized environments simulation;\n";
+    std::cout << "h to call helper function\n";
+    std::cout << "Thank you for using this application, if you have any inquiries, please refer to the github repository hosted on:\nhttps://github.com/PixelAndShip/EEBBASS\n";
+}
+// Environmentally engineered behavior based agent simulation system
 int main()
 {
-    DEBUG_LOG("Starting sim");
+
     std::filesystem::path currentDir = std::filesystem::current_path();
-    std::filesystem::create_directories(currentDir / "ES" / "logs");
-    std::filesystem::create_directories(currentDir / "ES" / "environments");
-    std::filesystem::current_path(currentDir / "ES");
+    std::filesystem::create_directories(currentDir / "EEBBASS" / "logs");
+    std::filesystem::create_directories(currentDir / "EEBBASS" / "environments");
+    std::filesystem::current_path(currentDir / "EEBBASS");
 
     char simTypeChoiceStr;
-    std::cout << "Enter simulation type: ";
+    std::cout << "Enter use case, h for help: ";
     std::cin >> simTypeChoiceStr;
 
-    switch (simTypeChoiceStr)
+    while (simTypeChoiceStr != 'f')
     {
-    case 'c':
-    {
-        customEnvironment();
-        return 0;
-    }
-    case 'd':
-    {
-        defaultVisual();
-        return 0;
-    }
-    case 'v':
-    {
-        visualSim();
-        return 0;
-    }
-    case 'm':
-    {
-        multiThreadSim();
-        return 0;
-    }
-    default:
-    {
-        std::cout << "Custom environment count failed, starting with default 8 environments!";
-        SimManager sm = SimManager();
-        sm.runSimulation();
-        break;
-    }
+        try
+        {
+            switch (simTypeChoiceStr)
+            {
+            case 'h':
+            {
+                Helper();
+                break;
+            }
+            case 'c':
+            {
+                customEnvironment();
+                break;
+            }
+            case 'd':
+            {
+                defaultVisual();
+                break;
+            }
+            case 'v':
+            {
+                visualSim();
+                break;
+            }
+            case 'm':
+            {
+                multiThreadSim();
+                break;
+            }
+            default:
+            {
+                std::cout << "Invalid input! Enter h for help!";
+                break;
+            }
+            }
+            std::cout << "Enter use case: ";
+            std::cin >> simTypeChoiceStr;
+        }
+        catch (...)
+        {
+            std::cout << "An error has been encountered, use global function DEBUG_LOG to debug code";
+            std::cout << "Enter use case: ";
+            std::cin >> simTypeChoiceStr;
+        }
     }
 }

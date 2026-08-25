@@ -42,8 +42,19 @@ Environment::~Environment()
     delete spider;
 }
 
+EnvironmentState Environment::getState() const
+{
+    return environmentState;
+}
+
+void Environment::setState(EnvironmentState iES)
+{
+    environmentState = iES;
+}
+
 void Environment::manageSimulation()
 {
+
     if (custom)
     {
         startSimulation(0, 50);
@@ -61,6 +72,7 @@ void Environment::manageSimulation()
     int PlantsCount = 0;
     // std::string text = "";
     int iteration = 0;
+    environmentState = EnvironmentState::Running;
     while (cycle <= maxCycle)
     {
 
@@ -71,7 +83,9 @@ void Environment::manageSimulation()
         {
 
             iteration = 0;
+            environmentState = EnvironmentState::Paused;
             cultivateSimulation();
+            environmentState = EnvironmentState::Running;
             cycle += 1;
         }
 
@@ -83,6 +97,7 @@ void Environment::manageSimulation()
         // EndDrawing();
         iteration++;
     }
+    environmentState = EnvironmentState::Finished;
 }
 
 void Environment::manageVisualizedSimulation()
@@ -104,29 +119,37 @@ void Environment::manageVisualizedSimulation()
     SetTargetFPS(5);
     int AgentsCount = 0;
     int PlantsCount = 0;
-    std::string text = "";
+    std::string agentCountSTR, plantCountSTR, iterationSTR;
     int iteration = 0;
+    environmentState = EnvironmentState::Running;
     while (!WindowShouldClose())
     {
 
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
-        text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+        agentCountSTR = "Agent count: " + std::to_string(AgentsCount);
+        plantCountSTR = "Plant count: " + std::to_string(PlantsCount);
+        iterationSTR = "Iteration: " + std::to_string(iteration);
         if (iteration >= maxCultivateIteration)
         {
 
             iteration = 0;
+            environmentState = EnvironmentState::Paused;
             cultivateSimulation();
+            environmentState = EnvironmentState::Running;
         }
 
         manageMoment();
         BeginDrawing();
         ClearBackground(BLACK);
         makeWindow();
-        DrawText(text.c_str(), 20, 20, 30, WHITE);
+        DrawText(agentCountSTR.c_str(), 20, 20, 30, YELLOW);
+        DrawText(plantCountSTR.c_str(), 20, 50, 30, GREEN);
+        DrawText(iterationSTR.c_str(), 20, 80, 30, BLUE);
         EndDrawing();
         iteration++;
     }
+    environmentState = EnvironmentState::Finished;
     CloseWindow();
 }
 
