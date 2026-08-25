@@ -5,6 +5,15 @@
 #include "raylib.h"
 #include "spider.h"
 #include <unistd.h>
+
+enum class EnvironmentState
+{
+    Running,
+    Paused,
+    Finished,
+    Observed
+};
+
 class Environment
 {
 private:
@@ -19,8 +28,10 @@ private:
     int maxBrainChildNodes;
     bool custom;
 
+    EnvironmentState environmentState = EnvironmentState::Finished;
+
 public:
-        Spider *spider = nullptr;
+    Spider *spider = nullptr;
 
     // identifier = id;
     // radiation = 0.5;
@@ -47,6 +58,10 @@ public:
     Environment(std::string saveFile);
 
     ~Environment();
+
+    EnvironmentState getState() const;
+
+    void setState(EnvironmentState iES);
 
     void manageSimulation();
 

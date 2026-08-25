@@ -14,7 +14,7 @@ SimManager::SimManager(int threadCount, float eRad, int iT, int maxIT, int maxCY
     {
         for (int i = 0; i < threadCount; i++)
         {
-            Environment *ce = new Environment(i, eRad, iT, maxIT, maxCYCLE, cb, maxBL, maxBCN, rootNodesCount, borderW, borderHeight);
+            Environment *ce = new Environment(i, eRad, iT, maxIT, maxCYCLE, cb, maxBL, maxBCN, rootNodesCount, borderW, borderH);
             environments.push_back(ce);
         }
     }
@@ -29,7 +29,10 @@ void SimManager::runSimulation()
     {
 
         threads.emplace_back([env]()
-                             { env->manageSimulation(); });
+                             { 
+        env->setState(EnvironmentState::Running);
+        env->manageSimulation();
+        env->setState(EnvironmentState::Finished); });
     }
     for (std::thread &thr : threads)
     {

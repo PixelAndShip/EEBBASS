@@ -26,7 +26,7 @@
                 "-lrt",
                 "-lX11",
                 "-o",
-                "${fileDirname}/main"
+                "${fileDirname}/main_linux"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
