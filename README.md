@@ -29,16 +29,12 @@ Provided via using ldd (List Dynamic Dependencies):
 * Make sure your current directory supports directory creation and file creation. This is needed to save and use save files for environment loading.
 * This application uses raylib to visualize simulations, raylib may need to be installed as a library to recompil the source code.
 * Multithreading option may clog up the cpu cores.
+* To use custom environment option, make sure to have your usable save file in the current working directory, otherwise the current implementation will not be able to read it.
 
 ### Known Issues
 
 * Uknown/unobtainable custom save file entry causes a core dump (crash).
 
-### Important Behaviour
-
-* Explain anything that may not be immediately obvious.
-* Mention file locations, save behaviour, threading, performance considerations, etc.
-* Mention anything that could cause unexpected behaviour if modified.
 
 ---
 
@@ -48,121 +44,153 @@ Provided via using ldd (List Dynamic Dependencies):
 
 ```
 Project/
+├── dbgtools/
+│   ├── debug.cpp
+│   ├── debug.h
 ├── src/
-│   ├── main.cpp
-│   ├── ...
-│
-├── include/
-│   ├── ...
-│
-├── saves/
-│   ├── ...
-│
-├── logs/
-│   ├── ...
-│
+│   ├── core/
+│   |   ├── environment.cpp
+│   |   ├── environment.h
+│   |   ├── spider.cpp
+│   |   ├── spider.h
+│   ├── data_management/
+│   |   ├── data_types.h
+│   |   ├── sim_manager.cpp
+│   |   ├── sim_manager.h
+│   ├── ui/
+│   |   ├── interface.cpp
+│   |   ├── interface.h
+│   ├── units/
+│   |   ├── brain_nodes/
+│   |   |   ├── input_node.cpp
+│   |   |   ├── input_node.h
+│   |   |   ├── node_functions.cpp
+│   |   |   ├── node_functions.h
+│   |   |   ├── output_node.h
+│   |   ├── agent.cpp
+│   |   ├── agent.h
+│   |   ├── brain.cpp
+│   |   ├── brain.h
+│   |   ├── plant.cpp
+│   |   ├── plant.h
+├── test/
+│   ├── test.h
+├── main.cpp
+├── main
 └── README.md
 ```
 
-Describe the purpose of the important directories and files.
+IMPORTANT NOTE!
+
+File directory EEBASS is created upon activating the main executable, in which subdirectories *environments* and *logs* are also created. *environments* houses environment save files, logs contain DEBUG_LOG() outputs.
+
+
 
 ---
 
 ### Core Components
 
-#### Component 1
+IMPORTANT NOTE!
 
-Explain what the component does, what its responsibilities are, and how it interacts with other components.
+Behaviors refers to the brain + input node + output node structure.
 
-#### Component 2
+#### Units
 
-Explain its purpose and important implementation details.
+The dynamic variables upon which behavior experimentation is conducted. Contains Agents and Plants.
 
-#### Component 3
+#### Agent
 
-Explain its purpose and important implementation details.
+Subsection of Units, primary variable, on which behaviors are applied and adjusted.
+
+#### Plant
+
+Static source of energy for Agents, provides continuous opportunity for further life time.
+
+#### Brain
+
+Houses root nodes for linked list type Node behavior management.
+
+#### Input node
+
+Saves sensor node variables, from which node functions derive further actions.
+
+#### Output node
+
+Saves output variables from which node functions derive further actions.
+
+#### Node functions 
+
+Provided information from nodes and spider, enacts specified changes on the environments units.
+
+#### Environment
+
+Enacts cyclic simulation, to cultivate agent behaviors and their life cycles.
+
+#### Spider
+
+Manages linking between agents, behaviors and environment.
+
+#### Data types
+
+Globally accessable data types, used in environment customization.
+
+#### Simulation management
+
+Provides multi threading support for multiple environment simulations.
+
+#### Interface
+
+Not yet developed, plans for windowed user interface with the system are being considered.
+
+#### Debug tools
+
+Provides DEBUG_LOG for source code debugging.
 
 ---
 
 ### How It Works
 
-Describe the overall program flow.
 
-For example:
-
-```text
-Program starts
-      ↓
-Initialize simulation
-      ↓
-Create environments
-      ↓
-Create agents
-      ↓
-Start simulation
-      ↓
-Agents perform actions
-      ↓
-Environment updates
-      ↓
-Save / observe environment
-      ↓
-Next simulation cycle
 ```
 
-Explain each stage in more detail below.
+```
+
+
 
 ---
 
 ### Configuration
+ <!-- int identifier;
+    float radiation;
+    int iteration;
+    int maxCultivateIteration;
+    int maxCycle;
+    int carbon_count;
+    int maxRootNodes;
+    int maxBrainLevel;
+    int maxBrainChildNodes;
+    bool custom;
 
-Document important configuration variables and what they control.
-
-| Variable    | Description             | Example |
-| ----------- | ----------------------- | ------- |
-| `variable1` | Description of variable | `100`   |
-| `variable2` | Description of variable | `0.5`   |
-| `variable3` | Description of variable | `true`  |
+    EnvironmentState environmentState = EnvironmentState::Finished; -->
+#### Environment variables
+| Variable    | Description            
+| ----------- | ----------------------- 
+| `identifier`| Environment identifer, used for save files, automatically set
+| `radiation` |  Chance of behavior mutation, valued between 0.0 and 1.0
+| `iteration` | Current cycle iteration, each iteration is considered a moment
+| `max cultivation iterations` | Upon iteration reaching this set value, cultivation begins.
+| `max cultivation iterations` | Upon iteration reaching this set value, cultivation begins.
 
 ---
 
 ### File Format
 
-If the project uses custom save/configuration files, document their format here.
-
-```text
-Example file format:
-
-...
-...
-...
-```
-
-Explain each section and value.
+Environment save files are used in .txt format.
 
 ---
 
-### Simulation / Program Logic
 
-Describe the important algorithms and logic used by the project.
 
-#### Step 1 — Initialization
-
-Explain what happens when the program starts.
-
-#### Step 2 — Processing
-
-Explain how the main processing/simulation loop works.
-
-#### Step 3 — Updates
-
-Explain how objects, environments, agents, or other components are updated.
-
-#### Step 4 — Saving / Loading
-
-Explain how data is saved and loaded.
-
----
 
 ### Multithreading
 
@@ -179,14 +207,7 @@ If applicable, document:
 
 ### User Interface
 
-Document the available screens, controls, buttons, keyboard inputs, and their behaviour.
 
-| Input   | Action |
-| ------- | ------ |
-| `W`     | Action |
-| `S`     | Action |
-| `Enter` | Action |
-| `Esc`   | Action |
 
 ---
 
@@ -239,29 +260,40 @@ Examples:
 
 ### Future Improvements
 
-* [ ] Improvement 1
-* [ ] Improvement 2
-* [ ] Improvement 3
-* [ ] Improvement 4
+* 
+
 
 ---
 
 ### Credits / References
 
-List external libraries, resources, algorithms, tutorials, or other projects used.
 
-* Library / Resource 1
-* Library / Resource 2
-* Reference 3
 
 ---
 
 ### License
 
-Specify the project's license here.
 
-Example:
+```
+MIT License
 
-```text
-This project is licensed under the MIT License.
+Copyright (c) 2026 EEBASS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
