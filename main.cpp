@@ -1,7 +1,7 @@
 #include <iostream>
-#include "data_management/sim_manager.h"
+#include "src/data_management/sim_manager.h"
 
-#include "test.h"
+#include "test/test.h"
 
 #include <filesystem>
 

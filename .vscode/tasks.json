@@ -9,14 +9,25 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-std=c++20",
-                "-I.",
-                "-Iunits",
-                "-Iunits/brain_nodes",
+                "-I${workspaceFolder}",
+                "-I${workspaceFolder}/src",
+                "-I${workspaceFolder}/src/units",
+                "-I${workspaceFolder}/src/units/brain_nodes",
+                "-I${workspaceFolder}/src/data_management",
+                "-I${workspaceFolder}/src/core",
+                "-I${workspaceFolder}/src/ui",
+                "-I${workspaceFolder}/dbgtools",
                 "main.cpp",
-                "data_management/*.cpp",
-                "environment/*.cpp",
-                "units/*.cpp",
-                "units/brain_nodes/*.cpp",
+                "src/data_management/sim_manager.cpp",
+                "src/core/environment.cpp",
+                "src/core/spider.cpp",
+                "src/ui/interface.cpp",
+                "src/units/agent.cpp",
+                "src/units/brain.cpp",
+                "src/units/plant.cpp",
+                "src/units/brain_nodes/input_node.cpp",
+                "src/units/brain_nodes/node_functions.cpp",
+                "dbgtools/debug.cpp",
                 "-L/usr/local/lib",
                 "-lraylib",
                 "-lGL",
@@ -26,7 +37,7 @@
                 "-lrt",
                 "-lX11",
                 "-o",
-                "${fileDirname}/main_linux"
+                "${workspaceFolder}/main_linux"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -51,13 +62,24 @@
                 "-fsanitize=address",
                 "-fno-omit-frame-pointer",
                 "-I.",
-                "-Iunits",
-                "-Iunits/brain_nodes",
+                "-Isrc",
+                "-Isrc/data_management",
+                "-Isrc/core",
+                "-Isrc/ui",
+                "-Isrc/units",
+                "-Isrc/units/brain_nodes",
+                "-Idebug",
                 "main.cpp",
-                "data_management/*.cpp",
-                "environment/*.cpp",
-                "units/*.cpp",
-                "units/brain_nodes/*.cpp",
+                "src/data_management/sim_manager.cpp",
+                "src/core/environment.cpp",
+                "src/core/spider.cpp",
+                "src/ui/interface.cpp",
+                "src/units/agent.cpp",
+                "src/units/brain.cpp",
+                "src/units/plant.cpp",
+                "src/units/brain_nodes/input_node.cpp",
+                "src/units/brain_nodes/node_functions.cpp",
+                "debug/debug.cpp",
                 "-L/usr/local/lib",
                 "-lraylib",
                 "-lGL",
@@ -67,7 +89,7 @@
                 "-lrt",
                 "-lX11",
                 "-o",
-                "${fileDirname}/main_asan"
+                "${workspaceFolder}/main_asan"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -77,13 +99,12 @@
             ]
         },
         {
-            "label": "AddressSanitizer",
+            "label": "Run AddressSanitizer",
             "type": "shell",
-            "command": "env",
-            "args": [
-                "ASAN_OPTIONS=abort_on_error=1:detect_leaks=1",
-                "${fileDirname}/main_asan"
-            ],
+            "command": "${workspaceFolder}/main_asan",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "dependsOn": "Build with AddressSanitizer",
             "problemMatcher": []
         },
@@ -94,9 +115,13 @@
             "args": [
                 "--leak-check=full",
                 "--show-leak-kinds=all",
-                "${fileDirname}/main"
+                "${workspaceFolder}/main_linux"
             ],
-            "dependsOn": "C/C++: g++-20 ALL files (Raylib)"
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "Build Raylib",
+            "problemMatcher": []
         }
     ]
 }

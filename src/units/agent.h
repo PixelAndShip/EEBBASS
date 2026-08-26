@@ -1,7 +1,11 @@
 #pragma once
-#include "brain.h"
-#include <random>
 
+#include "brain.h"
+
+#include <algorithm>
+#include <cmath>
+#include <random>
+#include <string>
 class Agent
 {
 private:
