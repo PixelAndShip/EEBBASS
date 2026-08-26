@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include "brain_nodes/input_node.h"
 
 // class OutputNode;

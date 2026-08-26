@@ -71,7 +71,7 @@ void Environment::manageSimulation()
     int AgentsCount = 0;
     int PlantsCount = 0;
     // std::string text = "";
-    int iteration = 0;
+    iteration = 0;
     environmentState = EnvironmentState::Running;
     while (cycle <= maxCycle)
     {
@@ -82,9 +82,9 @@ void Environment::manageSimulation()
         if (iteration >= maxCultivateIteration)
         {
 
-            iteration = 0;
             environmentState = EnvironmentState::Paused;
             cultivateSimulation();
+            iteration = 0;
             environmentState = EnvironmentState::Running;
             cycle += 1;
         }
@@ -120,7 +120,7 @@ void Environment::manageVisualizedSimulation()
     int AgentsCount = 0;
     int PlantsCount = 0;
     std::string agentCountSTR, plantCountSTR, iterationSTR;
-    int iteration = 0;
+    iteration = 0;
     environmentState = EnvironmentState::Running;
     while (!WindowShouldClose())
     {
@@ -133,9 +133,9 @@ void Environment::manageVisualizedSimulation()
         if (iteration >= maxCultivateIteration)
         {
 
-            iteration = 0;
             environmentState = EnvironmentState::Paused;
             cultivateSimulation();
+            iteration = 0;
             environmentState = EnvironmentState::Running;
         }
 
@@ -175,14 +175,21 @@ void Environment::cultivateSimulation(int targetPop)
 
     int originalPopulation = rankedAgents.size();
     int survivors = originalPopulation / 2;
-
+    if (survivors > 0)
+    {
+        maxCultivateIteration++;
+    }
+    else
+    {
+        maxCultivateIteration--;
+    }
     for (int i = 0; i < survivors; i++)
     {
         Agent *agent = spider->Agents[rankedAgents[i].first];
 
         if (agent != nullptr)
         {
-            std::cout << "Survivor in environment: " << identifier;
+            std::cout << "Survivor in environment: " << identifier << " ,Iteration: " << iteration;
             agent->logAgent();
             agent->setHealth(100);
             agent->setEnergy(100);
