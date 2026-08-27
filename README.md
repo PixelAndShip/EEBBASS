@@ -30,6 +30,7 @@ Provided via using ldd (List Dynamic Dependencies):
 * This application uses raylib to visualize simulations, raylib may need to be installed as a library to recompil the source code.
 * Multithreading option may clog up the cpu cores.
 * To use custom environment option, make sure to have your usable save file in the current working directory, otherwise the current implementation will not be able to read it.
+* main_linux is compiled using g++.
 
 ### Known Issues
 
@@ -90,57 +91,81 @@ File directory EEBASS is created upon activating the main executable, in which s
 
 ### Core Components
 
-IMPORTANT NOTE!
 
-Behaviors refers to the brain + input node + output node structure.
+#### Input Node
 
-#### Units
+Saves sensory input configuration. Hosts child Input Node pointers and Output Node pointer. Attributes:
+<br>
+* float weight - chance of activating, set between 0.0 and 1.0
+<br>
+* float setAmount - value from 0 to 255, used in Agent variable input.
+<br>
+* unsigned int key - corresponding src/data_management/data_types.h Senses from getSenses input key, which is later used to verify Node Function.
+<br>
+* UnitColor unitColor - used to identify target, check UnitColor struct in src/data_management/data_types.h for more information.
+<br>
+* std::vector<InputNode *> inputNodes - child Input Node pointers, used to form tree structure. Length is capped to settable max Child Nodes.
+<br>
+* OutputNode *outputNode - leaf Output Node, used in Agent variable output.
 
-The dynamic variables upon which behavior experimentation is conducted. Contains Agents and Plants.
+#### Output Node 
+
+Saves Agent's output configuration. Attributes:
+<br>
+* float weight - chance of activating, set between 0.0 and 1.0
+<br>
+* float energyCost - value from 0 to 255, used in Agent variable output.
+<br>
+* unsigned int key - corresponding src/data_management/data_types.h Actions from getActions input key, which is later used to verify Node Function.
+<br>
+* UnitColor unitColor - used to identify target, check UnitColor struct in src/data_management/data_types.h for more information.
+
+#### Node Functions
+
+Enacts change on the hosting Agent or target Agent / Plant, based on the Input and Output Node configurations.
+
+#### Brain 
+
+Hosts root Input Node pointers. The brain structure is a tree with leaf Output Node pointers, settable max child Input Nodes and max tree depth.
 
 #### Agent
 
-Subsection of Units, primary variable, on which behaviors are applied and adjusted.
+Main unit of the environment, hosts the Brain. Attributes:
+<br>
+* bool processed - check for moment processing, makes sure agent can only enact one Output Node - Node Function.
+<br>
+* int env_identifier - environment that the Agent enhabits.
+<br>
+* float health - current health.
+<br>
+* float energy - current energy.
+<br>
+* float plantDiet - coefficient used for biting functions in Node Functions, set from 0.0 to 1.0.
+<br>
+* UnitColor agentColor - current UnitColor.
+<br>
+* int x, y - current position in Environment.
+<br>
+* float speed - current speed, used to sort actions in a moment between Agents.
+<br>
+* Brain brain - current brain.
 
 #### Plant
 
-Static source of energy for Agents, provides continuous opportunity for further life time.
-
-#### Brain
-
-Houses root nodes for linked list type Node behavior management.
-
-#### Input node
-
-Saves sensor node variables, from which node functions derive further actions.
-
-#### Output node
-
-Saves output variables from which node functions derive further actions.
-
-#### Node functions 
-
-Provided information from nodes and spider, enacts specified changes on the environments units.
+Source of energy for Agents. Attributes:
+<br>
+* int env_identifier - environment that the Plant enhabits.
+<br>
+* float health - current health.
+<br>
+* UnitColor plantColor - current UnitColor.
+<br>
+* int x, y - current position in Environment.
 
 #### Environment
 
-Enacts cyclic simulation, to cultivate agent behaviors and their life cycles.
 
-#### Spider
 
-Manages linking between agents, behaviors and environment.
-
-#### Data types
-
-Globally accessable data types, used in environment customization.
-
-#### Simulation management
-
-Provides multi threading support for multiple environment simulations.
-
-#### Interface
-
-Not yet developed, plans for windowed user interface with the system are being considered.
 
 #### Debug tools
 
@@ -152,96 +177,18 @@ Provides DEBUG_LOG for source code debugging.
 
 
 ```
-
+Save File Environment:
+Default Visual Environment:
+Terminal configured Visual Environment:
+Multithreaded Environments:
 ```
 
 
 
 ---
 
-### Configuration
- <!-- int identifier;
-    float radiation;
-    int iteration;
-    int maxCultivateIteration;
-    int maxCycle;
-    int carbon_count;
-    int maxRootNodes;
-    int maxBrainLevel;
-    int maxBrainChildNodes;
-    bool custom;
-
-    EnvironmentState environmentState = EnvironmentState::Finished; -->
-#### Environment variables
-| Variable    | Description            
-| ----------- | ----------------------- 
-| `identifier`| Environment identifer, used for save files, automatically set
-| `radiation` |  Chance of behavior mutation, valued between 0.0 and 1.0
-| `iteration` | Current cycle iteration, each iteration is considered a moment
-| `max cultivation iterations` | Upon iteration reaching this set value, cultivation begins.
-| `max cultivation iterations` | Upon iteration reaching this set value, cultivation begins.
-
----
-
-### File Format
-
-Environment save files are used in .txt format.
-
----
 
 
-
-
-### Multithreading
-
-If applicable, document:
-
-* Which parts of the program use threads
-* How threads are created
-* What each thread is responsible for
-* How synchronization is handled
-* Which objects are shared between threads
-* Any thread-safety considerations
-
----
-
-### User Interface
-
-
-
----
-
-### Saving and Loading
-
-Explain:
-
-* Where save files are stored
-* How save files are created
-* How environments are loaded
-* What information is stored
-* What information is not stored
-* How an existing save can be viewed or resumed
-
----
-
-### Debugging / Logging
-
-Explain the project's logging system.
-
-```text
-logs/
-└── debug.log
-```
-
-Describe:
-
-* How logging is enabled
-* Where logs are stored
-* What information is logged
-* Any performance considerations
-* Whether logs should be committed to Git
-
----
 
 ### Development Notes
 

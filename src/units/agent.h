@@ -31,6 +31,7 @@ public:
         agentColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
         agentColor.green = std::clamp(static_cast<int>(std::round(health)), 0, 255);
         agentColor.blue = std::clamp(static_cast<int>(std::round(speed)), 0, 255);
+        agentColor.transparency = 255;
     }
 
     void setIdentifier(int iD)
@@ -174,8 +175,6 @@ public:
 
     Agent(std::string selfData, std::string brainData, int iEID);
 
-    Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS);
-
     Agent(
         int identifier,
         float eRadiation,
@@ -194,6 +193,8 @@ public:
         int brainDepth);
 
     void generateStart();
+
+    void mutateStart();
 
     void logAgent(std::string fileName = "") const;
 

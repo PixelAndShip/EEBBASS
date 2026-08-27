@@ -285,14 +285,21 @@ void Environment::manageMoment()
 
         float oldHealth = agent->getHealth();
         float oldEnergy = agent->getEnergy();
-        agent->setHealth(
-            oldHealth - 1);
+        float oldSpeed = agent->getSpeed();
+
+        agent->setHealth(oldHealth - 1);
         agent->setEnergy(oldEnergy - 1);
+        agent->setSpeed(oldSpeed - 1);
+
         if (agent->getEnergy() <= 0.1)
         {
             agent->setEnergy(0);
             agent->setHealth(
                 agent->getHealth() - 1);
+        }
+        if (agent->getSpeed() <= 0.1)
+        {
+            agent->setSpeed(0);
         }
         if (agent->getHealth() <= 0.1)
         {
