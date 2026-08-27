@@ -189,8 +189,8 @@ void Environment::cultivateSimulation(int targetPop)
 
         if (agent != nullptr)
         {
-            std::cout << "Survivor in environment: " << identifier << " ,Iteration: " << iteration;
-            agent->logAgent();
+
+            agent->logAgent(iteration);
             agent->setHealth(100);
             agent->setEnergy(100);
         }
@@ -577,7 +577,7 @@ void Environment::logEnvironment(std::string fileName)
     saveFile.close();
     for (auto &[coordinates, agent] : spider->Agents)
     {
-        agent->logAgent(fileName);
+        agent->logAgent(iteration, fileName);
     }
 }
 

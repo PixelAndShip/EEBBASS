@@ -384,9 +384,9 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
 {
 
     Agent *agent = Agents->at(AgentCoordinates);
+
     if (agent == nullptr)
     {
-
         return;
     }
     std::vector<std::string> proximateAgentCs = getProximateAgents(Agents, AgentCoordinates);
@@ -405,7 +405,9 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
             {
                 ag->setHealth(ag->getHealth() - energyCost);
             }
+
             agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()) - 0.5 * energyCost);
+
             return;
         }
     }
@@ -427,7 +429,9 @@ void bite(const std::unordered_map<std::string, Agent *> *Agents, const std::uno
             {
                 pl->setHealth(pl->getHealth() - energyCost);
             }
+
             agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet() - energyCost * 0.5);
+
             return;
         }
     }
@@ -468,6 +472,7 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
 {
 
     Agent *agent = Agents->at(AgentCoordinates);
+
     if (agent == nullptr)
     {
 
@@ -503,7 +508,9 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
                 {
                     ag->setHealth(ag->getHealth() - energyCost);
                 }
+
                 agent->setEnergy(agent->getEnergy() + energyCost * (1.0 - agent->getPlantDiet()) - energyCost * 0.5);
+
                 return;
             }
         }
@@ -530,7 +537,9 @@ void biteColor(const std::unordered_map<std::string, Agent *> *Agents, const std
                 {
                     pl->setHealth(pl->getHealth() - energyCost);
                 }
+
                 agent->setEnergy(agent->getEnergy() + energyCost * agent->getPlantDiet() - energyCost * 0.5);
+
                 return;
             }
         }
