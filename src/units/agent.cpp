@@ -5,18 +5,8 @@ Agent::Agent()
 
     processed = false;
 
-    health = 200.0;
-
-    energy = 200.0;
-
-    plantDiet = 0.5;
-
-    agentColor = {100, 100, 1, 255};
-
-    x = 1000;
-    y = 1000;
-
-    speed = 1.0;
+    generateStart();
+    updateColor();
 }
 
 Agent::Agent(std::string selfData, std::string brainData, int iEID) : brain(brainData, iEID)
@@ -24,19 +14,6 @@ Agent::Agent(std::string selfData, std::string brainData, int iEID) : brain(brai
     env_identifier = iEID;
     constructCustomAgent(selfData);
 }
-
-Agent::Agent(std::string fileName, bool iP, int iEID, float iH, float iE, float iPD, UnitColor iC, int ix, int iy, float iS) : brain(fileName, iEID)
-{
-    processed = iP;
-    env_identifier = iEID;
-    health = iH;
-    energy = iE;
-    plantDiet = iPD;
-    agentColor = iC;
-    x = ix;
-    y = iy;
-    speed = iS;
-};
 
 Agent::Agent(
     int identifier,
@@ -48,19 +25,6 @@ Agent::Agent(
     processed = false;
 
     env_identifier = identifier;
-
-    health = 100.0;
-
-    energy = 100.0;
-
-    plantDiet = 0.5;
-
-    agentColor = {100, 100, 1, 255};
-
-    x = 1000;
-    y = 1000;
-
-    speed = 1.0;
 
     generateStart();
 
@@ -95,12 +59,49 @@ Agent::Agent(
 
     x = 25;
     y = 25;
-
+    mutateStart();
     updateColor();
 }
 
 void Agent::generateStart()
 {
+
+    std::uniform_int_distribution<> startDist(0, 100);
+
+    health = 100;
+    energy = 100;
+    plantDiet = startDist(gen) / 100.0;
+    speed = startDist(gen);
+}
+
+void Agent::mutateStart()
+{
+    std::uniform_int_distribution<> mutateDist(-10, 10);
+
+    health += mutateDist(gen);
+    if (health < 0)
+    {
+        health = 0;
+    }
+    energy += mutateDist(gen);
+    if (energy < 0)
+    {
+        energy = 0;
+    }
+    plantDiet += mutateDist(gen) / 100.0;
+    if (plantDiet < 0)
+    {
+        plantDiet = 0;
+    }
+    else if (plantDiet > 1)
+    {
+        plantDiet = 1;
+    }
+    speed += mutateDist(gen);
+    if (speed < 0)
+    {
+        speed = 1;
+    }
 }
 
 void Agent::logAgent(std::string fileName) const
