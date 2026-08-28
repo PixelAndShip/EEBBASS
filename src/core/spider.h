@@ -2,11 +2,6 @@
 #include "units/brain_nodes/node_functions.h"
 #include <queue>
 #include <algorithm>
-struct PendingAction
-{
-    std::string coords;
-    OutputNode *action;
-};
 
 class Spider
 {
@@ -15,7 +10,7 @@ public:
     std::unordered_map<std::string, Agent *> Agents;
     std::unordered_map<std::string, Plant *> Plants;
     // std::vector<std::string> processedAgents;
-    std::vector<PendingAction> actionQueue;
+    std::vector<std::pair<std::string, OutputNode *>> actionQueue;
     std::vector<std::pair<std::string, Agent *>> pendingBirths;
 
     // std::unordered_map<std::string, bool> proximateCoords;
@@ -25,11 +20,8 @@ public:
     int maxBrainLevel;
     int maxBrainChildNodes;
 
-    int terrariumWidth;
-    int terrariumHeight;
-
     ~Spider();
-    Spider(float rad = 0.5, int maxRN = 3, int maxBL = 3, int maxBCN = 4, int terW = 800, int terH = 800);
+    Spider(float rad = 0.5, int maxRN = 3, int maxBL = 3, int maxBCN = 4);
 
     // void setProximities(std::string coords);
 

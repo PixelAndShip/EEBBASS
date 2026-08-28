@@ -8,6 +8,9 @@
 void visualSim()
 {
     float eRad;
+    int maxA;
+    int maxP;
+    float cull;
     int iT;
     int maxCultivate;
     int maxCycle;
@@ -17,6 +20,12 @@ void visualSim()
     int rootNodesCount;
     std::cout << "Enter radiation (0.0 - 1.0): ";
     std::cin >> eRad;
+    std::cout << "Enter maximum amount of Agents: ";
+    std::cin >> maxA;
+    std::cout << "Enter maximum amount of Plants: ";
+    std::cin >> maxP;
+    std::cout << "Enter cull percentage (0.0 - 1.0): ";
+    std::cin >> cull;
     std::cout << "Enter iteration start (number): ";
     std::cin >> iT;
     std::cout << "Enter max cultivation iterations (number): ";
@@ -39,7 +48,7 @@ void visualSim()
     std::cin >> agentSize;
     std::cout << "Enter plant size (1+): ";
     std::cin >> plantSize;
-    Environment env = Environment(3000, eRad, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
+    Environment env = Environment(3000, eRad, maxA, maxP, cull, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
     env.manageVisualizedSimulation();
 }
 
@@ -52,6 +61,9 @@ void defaultVisual()
 void multiThreadSim()
 {
     float eRad;
+    int maxA;
+    int maxP;
+    float cull;
     int iT;
     int maxCultivate;
     int maxCycle;
@@ -64,6 +76,12 @@ void multiThreadSim()
     std::cin >> eC;
     std::cout << "Enter radiation (0.0 - 1.0): ";
     std::cin >> eRad;
+    std::cout << "Enter maximum amount of Agents: ";
+    std::cin >> maxA;
+    std::cout << "Enter maximum amount of Plants: ";
+    std::cin >> maxP;
+    std::cout << "Enter cull percentage (0.0 - 1.0): ";
+    std::cin >> cull;
     std::cout << "Enter iteration start (number): ";
     std::cin >> iT;
     std::cout << "Enter max cultivation iterations (number): ";
@@ -88,7 +106,7 @@ void multiThreadSim()
     std::cin >> plantSize;
 
     std::cout << "Starting simulation with " << eC << " environments!";
-    SimManager sm = SimManager(eC, eRad, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
+    SimManager sm = SimManager(eC, eRad, maxA, maxP, cull, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
     sm.runSimulation();
 }
 
@@ -176,7 +194,7 @@ int main()
         catch (...)
         {
             std::cout << "An error has been encountered, use global function DEBUG_LOG to debug code";
-            std::cout << "Enter use case: ";
+            std::cout << " Enter use case: ";
             std::cin >> simTypeChoiceStr;
         }
     }

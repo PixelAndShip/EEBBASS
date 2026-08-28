@@ -8,13 +8,13 @@ SimManager::~SimManager()
     }
 }
 
-SimManager::SimManager(int threadCount, float eRad, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
+SimManager::SimManager(int threadCount, float eRad, int maxAC, int maxPC, float cullP, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
 {
     if (threadCount > 0)
     {
         for (int i = 0; i < threadCount; i++)
         {
-            Environment *ce = new Environment(i, eRad, iT, maxIT, maxCYCLE, cb, maxBL, maxBCN, rootNodesCount, borderW, borderH);
+            Environment *ce = new Environment(i, eRad, maxAC, maxPC, cullP, iT, maxIT, maxCYCLE, cb, maxBL, maxBCN, rootNodesCount, borderW, borderH);
             environments.push_back(ce);
         }
     }

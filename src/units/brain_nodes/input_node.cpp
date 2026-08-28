@@ -47,22 +47,19 @@ InputNode::InputNode()
 {
 
     std::uniform_int_distribution<> weightDist(1, 99);
-    std::uniform_int_distribution<> setAmountDist(0, 255);
-    std::uniform_int_distribution<> unitColorRedDist(0, 255);
-    std::uniform_int_distribution<> unitColorGreenDist(0, 255);
-    std::uniform_int_distribution<> unitColorBlueDist(0, 255);
-    std::uniform_int_distribution<> unitColorTransparencyDist(0, 255);
+    std::uniform_int_distribution<> valueDist(0, 255);
+
     std::uniform_int_distribution<> sensesDist(0, getSenses().size() - 1);
 
     weight = weightDist(gen) / 100.0;
 
-    setAmount = setAmountDist(gen);
+    setAmount = valueDist(gen);
 
     unitColor = {
-        (unsigned int)unitColorRedDist(gen),
-        (unsigned int)unitColorGreenDist(gen),
-        (unsigned int)unitColorBlueDist(gen),
-        (unsigned int)unitColorTransparencyDist(gen)};
+        (unsigned int)valueDist(gen),
+        (unsigned int)valueDist(gen),
+        (unsigned int)valueDist(gen),
+        (unsigned int)valueDist(gen)};
 
     key = sensesDist(gen);
 }
