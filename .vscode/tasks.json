@@ -37,7 +37,7 @@
                 "-lrt",
                 "-lX11",
                 "-o",
-                "${workspaceFolder}/main_linux"
+                "${workspaceFolder}/EEBBASS_linux"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -86,7 +86,7 @@
                 "-lrt",
                 "-lX11",
                 "-o",
-                "${workspaceFolder}/main_AS"
+                "${workspaceFolder}/EEBBASS_AS"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
