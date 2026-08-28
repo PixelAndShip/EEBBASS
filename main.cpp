@@ -3,8 +3,6 @@
 
 #include "test/test.h"
 
-#include <filesystem>
-
 void visualSim()
 {
     float eRad;

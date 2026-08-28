@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "debug/debug.h"
 #include <random>
+#include <filesystem>
 struct UnitColor
 {
     unsigned int red, green, blue, transparency;
