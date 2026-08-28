@@ -98,7 +98,7 @@
         {
             "label": "Run AddressSanitizer",
             "type": "shell",
-            "command": "${workspaceFolder}/main_asan",
+            "command": "${workspaceFolder}/EEBBASS_AS",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -112,13 +112,55 @@
             "args": [
                 "--leak-check=full",
                 "--show-leak-kinds=all",
-                "${workspaceFolder}/main_linux"
+                "${workspaceFolder}/EEBBASS_linux"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "dependsOn": "Build Raylib",
             "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "C++: Build Windows (Raylib)",
+            "command": "/usr/bin/x86_64-w64-mingw32-g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-std=c++20",
+                "-I.",
+                "-Isrc",
+                "-Iexternal/raylib-6.0_win64_mingw-w64/include",
+                "main.cpp",
+                "src/core/spider.cpp",
+                "src/core/environment.cpp",
+                "src/ui/interface.cpp",
+                "src/data_management/sim_manager.cpp",
+                "src/units/brain_nodes/input_node.cpp",
+                "src/units/brain_nodes/node_functions.cpp",
+                "src/units/plant.cpp",
+                "src/units/brain.cpp",
+                "src/units/agent.cpp",
+                "-Lexternal/raylib-6.0_win64_mingw-w64/lib",
+                "-lraylib",
+                "-lopengl32",
+                "-lgdi32",
+                "-lwinmm",
+                "-Wl,--defsym,stat64i32=_stat64",
+                "-o",
+                "EEBASS.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build EEBASS for Windows using MinGW-w64 and raylib"
         }
     ]
 }
