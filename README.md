@@ -27,7 +27,7 @@ Program uses statically linked raylib.
 ### Before Running
 
 * Make sure your current directory supports directory creation and file creation. This is needed to save and use save files for environment loading.
-* This application uses raylib to visualize simulations, raylib may need to be installed as a library to recompil the source code.
+* This application uses raylib to visualize simulations, raylib may need to be installed as a library to recompile the source code.
 * Save files are overwritten every time the corresponding Environment runs a new simulation, so make sure to save the desired Environment data elsewhere, before launching a new simulation.
 * Multithreading option may clog up the CPU cores.
 * To use the custom environment option, make sure to have your usable save file in the current working directory, otherwise the current implementation will not be able to read it.
@@ -49,6 +49,7 @@ Project/
 ├── dbgtools/
 │   ├── debug.cpp
 │   ├── debug.h
+├── external/
 ├── src/
 │   ├── core/
 │   |   ├── environment.cpp
@@ -78,8 +79,9 @@ Project/
 ├── test/
 │   ├── test.h
 ├── main.cpp
-├── main_linux
-├── main_AS
+├── EEBBASS_linux
+├── EEBBASS_AS
+├── EEBBASS_windows.exe
 └── README.md
 ```
 
