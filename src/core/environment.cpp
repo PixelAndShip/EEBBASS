@@ -29,6 +29,7 @@ Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, 
 }
 Environment::Environment(std::string saveFile)
 {
+    std::cout << "Opening file";
     constructEnvironment(saveFile);
     rootNodeDist = std::uniform_int_distribution<>(0, maxRootNodes);
     insideX = std::uniform_int_distribution<>(0, borderWidth);
@@ -618,7 +619,7 @@ void Environment::logEnvironment(std::string fileName)
 
 void Environment::constructEnvironment(std::string fileName)
 {
-
+    std::cout << "Starting construct";
     std::ifstream file(fileName);
     if (!file.is_open())
     {
