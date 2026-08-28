@@ -286,7 +286,6 @@ Example:
 Environment
 I0/R0.500000/a180/p70/e0.350000/C100/Y100/c1/O4/L3/N3/W200/H200/A2/P2
 Agents
-
 A
 P0/I0/H99.000000/E99.000000/D0.590000/C{99,99,0,255}/X148/Y48/S0.000000
 B
@@ -361,7 +360,8 @@ When chosen simulation finishes or is closed, Environment destructors are called
 ---
 ### Contact Information
 
-Post issue on https://github.com/PixelAndShip/EEBBASS/issues.
+Post issue on https://github.com/PixelAndShip/EEBBASS/issues.<br>
+Post on https://github.com/PixelAndShip/EEBBASS/discussions.
 
 ---
 
