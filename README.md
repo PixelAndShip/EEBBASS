@@ -361,7 +361,8 @@ When chosen simulation finishes or is closed, Environment destructors are called
 ---
 ### Contact Information
 
-Post issue on https://github.com/PixelAndShip/EEBBASS/issues.
+Post issue on https://github.com/PixelAndShip/EEBBASS/issues.<br>
+Post on https://github.com/PixelAndShip/EEBBASS/discussions.
 
 ---
 
