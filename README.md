@@ -36,7 +36,6 @@ Program uses statically linked raylib.
 
 ### Known Issues
 
-* Custom save file use case crashes on windows version.
 * Unknown/unobtainable custom save file entry causes a core dump (crash).
 * Invalid use case and variable inputs cause Segmentation fault (crash).
 ---

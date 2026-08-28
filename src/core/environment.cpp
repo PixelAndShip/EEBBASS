@@ -29,6 +29,7 @@ Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, 
 }
 Environment::Environment(std::string saveFile)
 {
+
     constructEnvironment(saveFile);
     rootNodeDist = std::uniform_int_distribution<>(0, maxRootNodes);
     insideX = std::uniform_int_distribution<>(0, borderWidth);
@@ -637,6 +638,7 @@ void Environment::constructEnvironment(std::string fileName)
         }
         if (processingEnvironmentData == true)
         {
+
             processingEnvironmentData = false;
             environmentData = line;
             setCustomEnvironmentValues(environmentData);
