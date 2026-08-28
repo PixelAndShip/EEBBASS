@@ -632,10 +632,10 @@ void Environment::constructEnvironment(std::string fileName)
 
     while (std::getline(file, line))
     {
-        if (!line.empty() and line.back() == '\r')
-        {
-            line.pop_back();
-        }
+        // if (!line.empty() and line.back() == '\r')
+        // {
+        //     line.pop_back();
+        // }
         if (processingEnvironmentData == true)
         {
             processingEnvironmentData = false;
