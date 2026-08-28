@@ -632,12 +632,13 @@ void Environment::constructEnvironment(std::string fileName)
 
     while (std::getline(file, line))
     {
-        // if (!line.empty() and line.back() == '\r')
-        // {
-        //     line.pop_back();
-        // }
+        if (!line.empty() and line.back() == '\r')
+        {
+            line.pop_back();
+        }
         if (processingEnvironmentData == true)
         {
+            std::cout << "Environment start";
             processingEnvironmentData = false;
             environmentData = line;
             setCustomEnvironmentValues(environmentData);
@@ -661,7 +662,7 @@ void Environment::constructEnvironment(std::string fileName)
         }
         else if (line == "=")
         {
-
+            std::cout << "Agent start";
             currentAgent = new Agent(agentData, brainData, identifier);
             spider->Agents[currentAgent->getCoords()] = currentAgent;
             currentAgent->updateColor();
