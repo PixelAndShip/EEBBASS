@@ -97,41 +97,32 @@ void Agent::mutateStart()
 
 void Agent::logAgent(int iIteration, std::string fileName) const
 {
-    std::stringstream writtenData;
     bool logFile = false;
+
     if (fileName == "")
     {
         logFile = true;
-        fileName = "logs/Environment_Log_" + std::to_string(env_identifier) + ".txt";
+        fileName = "logs/Environment_Log_" +
+                   std::to_string(env_identifier) +
+                   ".txt";
     }
-    std::ifstream CurrentLog(fileName);
-    if (CurrentLog)
+
+    std::ofstream updatedLog(fileName, std::ios::app);
+
+    if (!updatedLog)
     {
-        writtenData << CurrentLog.rdbuf();
+        return;
     }
-    std::string data = writtenData.str() + "\n";
+
     if (logFile)
     {
-        data += std::to_string(iIteration) + "\n";
+        updatedLog << iIteration << '\n';
     }
-    data += outputAgentStats();
 
-    CurrentLog.close();
-
-    std::ofstream updatedLog(fileName);
-
-    if (data == "")
-    {
-        data = "No agent data found!";
-    }
-    data += "\n";
-    data += "B\n";
-    data += brain.logBrain();
-    data += "=";
-    updatedLog
-        << data;
-
-    updatedLog.close();
+    updatedLog << outputAgentStats() << '\n';
+    updatedLog << "B\n";
+    updatedLog << brain.logBrain();
+    updatedLog << "=\n";
 }
 
 std::string Agent::outputAgentStats() const
