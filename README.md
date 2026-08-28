@@ -101,15 +101,10 @@ File directory EEBASS is created upon activating the main executable, in which s
 Saves sensory input configuration. Hosts child Input Node pointers and Output Node pointer. Attributes:
 <br>
 * float weight - chance of activating, set between 0.0 and 1.0
-<br>
 * float setAmount - value from 0 to 255, used in Agent variable input.
-<br>
 * unsigned int key - corresponding src/data_management/data_types.h Senses from getSenses input key, which is later used to verify Node Function.
-<br>
 * UnitColor unitColor - used to identify target, check UnitColor struct in src/data_management/data_types.h for more information.
-<br>
 * std::vector<InputNode *> inputNodes - child Input Node pointers, used to form tree structure. Length is capped to settable max Child Nodes.
-<br>
 * OutputNode *outputNode - leaf Output Node, used in Agent variable output.
 
 #### Output Node 
@@ -117,11 +112,8 @@ Saves sensory input configuration. Hosts child Input Node pointers and Output No
 Saves Agent's output configuration. Attributes:
 <br>
 * float weight - chance of activating, set between 0.0 and 1.0
-<br>
 * float energyCost - value from 0 to 255, used in Agent variable output.
-<br>
 * unsigned int key - corresponding src/data_management/data_types.h Actions from getActions input key, which is later used to verify Node Function.
-<br>
 * UnitColor unitColor - used to identify target, check UnitColor struct in src/data_management/data_types.h for more information.
 
 #### Node Functions
@@ -137,21 +129,13 @@ Hosts root Input Node pointers. The brain structure is a tree with leaf Output N
 Main unit of the environment, hosts the Brain. Hosts logging and saving functions. Attributes:
 <br>
 * bool processed - flag for moment processing, ensures agent can only enact one Output Node Node Function per moment.
-<br>
 * int env_identifier - environment that the Agent inhabits.
-<br>
 * float health - current health.
-<br>
 * float energy - current energy.
-<br>
 * float plantDiet - coefficient used for biting functions in Node Functions, set from 0.0 to 1.0.
-<br>
 * UnitColor agentColor - current UnitColor.
-<br>
 * int x, y - current position in Environment.
-<br>
 * float speed - current speed, used to sort actions in a moment between Agents.
-<br>
 * Brain brain - current brain.
 
 #### Plant
@@ -159,11 +143,8 @@ Main unit of the environment, hosts the Brain. Hosts logging and saving function
 Source of energy for Agents. Attributes:
 <br>
 * int env_identifier - environment that the Plant inhabits.
-<br>
 * float health - current health.
-<br>
 * UnitColor plantColor - current UnitColor.
-<br>
 * int x, y - current position in Environment.
 
 #### Environment
@@ -171,25 +152,15 @@ Source of energy for Agents. Attributes:
 Agent and Plant container, used for hosting environmentally locked variables, enacting simulation algorithms and enacting saving and logging protocols for Environment, Agent and Agent Brain data. Attributes:
 <br>
 * int identifier - unique environment identifier, used for logging and save files, values from 0+.
-<br>
 * float radiation - chance of Agent attribute or Brain structure, Input Node or Output Node attribute mutation, values from 0.0 to 1.0.
-<br>
 * int iteration - current cycle iteration.
-<br>
 * int maxCultivateIteration - max cycle iterations, once reached, a new cycle begins.
-<br>
 * int maxCycle - max amount of cycles in a simulation, once reached, the simulation ends.
-<br>
 * int carbon_count - not yet implemented.
-<br>
 * int maxRootNodes - max amount of Brain root Input Nodes.
-<br>
 * int maxBrainLevel - max depth of Brain Input Node child nodes.
-<br>
 * int maxBrainChildNodes - max amount of each Input Node child Input Nodes.
-<br>
 * bool custom - used for simulation configuration, if custom is true, only the Agents inputed from a save file will be created and cultivated.
-<br>
 * EnvironmentState environmentState - not yet implemented.
 
 #### Spider
@@ -197,21 +168,13 @@ Agent and Plant container, used for hosting environmentally locked variables, en
 The most important mechanism - it ties environment simulation to each Agent and their Brain nodes. Manages each moment (iteration) by retrieving each Agent's actionable Output Node (via sensory Input Nodes in the Agent's Brain) and enacting the appropriate Node Functions. Attributes:
 <br>
 * std::unordered_map<std::string, Agent *> Agents - pointers to all Environment bound Agents.
-<br>
 * std::unordered_map<std::string, Plant *> Plants - pointers to all Environment bound Plants.
-<br>
 * std::vector<std::pair<std::string, OutputNode *>> actionQueue - used for sorting actions by Agent Speed attribute.
-<br>
 * std::vector<std::pair<std::string, Agent *>> pendingBirths - used for creating new Agents via Split function enacted by existing Agents.
-<br>
 * float radiation - chance of Agent attribute or Brain structure, Input Node or Output Node attribute mutation, values from 0.0 to 1.0.
-<br>
 * int maxRootNodes - max amount of Brain root Input Nodes.
-<br>
 * int maxBrainLevel - max depth of Brain Input Node child nodes.
-<br>
 * int maxBrainChildNodes - max amount of each Input Node child Input Nodes.
-<br>
 
 #### Data types
 
@@ -349,13 +312,13 @@ When chosen simulation finishes or is closed, Environment destructors are called
 
 ### Future Developments / Improvements
 
-* Carbon count and its processess.
-* Plant behavior.
-* Day and night cycle, could affect Plant behavior.
-* Windowed UI.
-* Source code documentation and clean up.
-* Input safety.
-* Each use case Time and Space complexity.
+*  Carbon count and its processess.
+*  Plant behavior.
+*  Day and night cycle, could affect Plant behavior.
+*  Windowed UI.
+*  Source code documentation and clean up.
+*  Input safety.
+*  Each use case Time and Space complexity.
 
 ---
 ### Contact Information
