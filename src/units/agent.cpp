@@ -1,14 +1,5 @@
 #include "agent.h"
 
-Agent::Agent()
-{
-
-    processed = false;
-
-    generateStart();
-    updateColor();
-}
-
 Agent::Agent(std::string selfData, std::string brainData, int iEID) : brain(brainData, iEID)
 {
     env_identifier = iEID;
@@ -104,11 +95,13 @@ void Agent::mutateStart()
     }
 }
 
-void Agent::logAgent(std::string fileName) const
+void Agent::logAgent(int iIteration, std::string fileName) const
 {
     std::stringstream writtenData;
+    bool logFile = false;
     if (fileName == "")
     {
+        logFile = true;
         fileName = "logs/Environment_Log_" + std::to_string(env_identifier) + ".txt";
     }
     std::ifstream CurrentLog(fileName);
@@ -117,7 +110,10 @@ void Agent::logAgent(std::string fileName) const
         writtenData << CurrentLog.rdbuf();
     }
     std::string data = writtenData.str() + "\n";
-
+    if (logFile)
+    {
+        data += std::to_string(iIteration) + "\n";
+    }
     data += outputAgentStats();
 
     CurrentLog.close();

@@ -171,8 +171,6 @@ public:
         return coords;
     }
 
-    Agent();
-
     Agent(std::string selfData, std::string brainData, int iEID);
 
     Agent(
@@ -196,7 +194,7 @@ public:
 
     void mutateStart();
 
-    void logAgent(std::string fileName = "") const;
+    void logAgent(int iIteration, std::string fileName = "") const;
 
     std::string outputAgentStats() const;
 

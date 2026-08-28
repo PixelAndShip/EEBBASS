@@ -260,7 +260,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
     data += "/E" + std::to_string(setAmount);
     data += "/K" + std::to_string(key);
 
-    data += "/{";
+    data += "/C{";
     data += std::to_string(unitColor.red) + ",";
     data += std::to_string(unitColor.green) + ",";
     data += std::to_string(unitColor.blue) + ",";
@@ -285,7 +285,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
         data += "/E" + std::to_string(energyCost);
         data += "/K" + std::to_string(key);
 
-        data += "/{";
+        data += "/C{";
         data += std::to_string(unitColor.red) + ",";
         data += std::to_string(unitColor.green) + ",";
         data += std::to_string(unitColor.blue) + ",";

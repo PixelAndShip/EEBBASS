@@ -19,6 +19,9 @@ class Environment
 private:
     int identifier;
     float radiation;
+    int maxAgentCount;
+    int maxPlantCount;
+    float cullPercentage;
     int iteration;
     int maxCultivateIteration;
     int maxCycle;
@@ -53,7 +56,7 @@ public:
     // dist = d;
     // insideBorders = iB;
     // Environment(int id = 5000);
-    Environment(int id = 5000, float eRad = 0.5, int iT = 0, int maxIT = 115, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
+    Environment(int id = 5000, float eRad = 0.5, int maxAC = 200, int maxPC = 100, float cullP = 0.25, int iT = 0, int maxIT = 115, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
 
     Environment(std::string saveFile);
 

@@ -16,79 +16,14 @@ Spider::~Spider()
     }
 }
 
-Spider::Spider(float rad, int maxRN, int maxBL, int maxBCN, int terW, int terH)
+Spider::Spider(float rad, int maxRN, int maxBL, int maxBCN)
 {
 
     radiation = rad;
     maxRootNodes = maxRN;
     maxBrainChildNodes = maxBCN;
     maxBrainLevel = maxBL;
-
-    terrariumHeight = terH;
-    terrariumWidth = terW;
 }
-
-// void Spider::setProximities(std::string startCoords)
-// {
-//     DEBUG_LOG("Setting proximities starting from "
-//               << startCoords);
-
-//     std::queue<std::string> uncheckedQueue;
-
-//     proximateCoords[startCoords] = true;
-//     uncheckedQueue.push(startCoords);
-
-//     int checkedCount = 0;
-
-//     while (!uncheckedQueue.empty())
-//     {
-//         std::string current = uncheckedQueue.front();
-//         uncheckedQueue.pop();
-
-//         checkedCount++;
-
-//         DEBUG_LOG("Checking proximity node "
-//                   << current);
-
-//         std::vector<std::string> proximateAgents =
-//             getProximateAgents(&Agents, current);
-
-//         std::vector<std::string> proximatePlants =
-//             getProximatePlants(&Plants, current);
-
-//         std::vector<std::string> coords;
-
-//         coords.reserve(
-//             proximateAgents.size() +
-//             proximatePlants.size());
-
-//         coords.insert(
-//             coords.end(),
-//             proximateAgents.begin(),
-//             proximateAgents.end());
-
-//         coords.insert(
-//             coords.end(),
-//             proximatePlants.begin(),
-//             proximatePlants.end());
-
-//         for (const std::string &coord : coords)
-//         {
-//             if (proximateCoords.find(coord) == proximateCoords.end())
-//             {
-//                 DEBUG_LOG("Adding connected coordinate "
-//                           << coord);
-
-//                 proximateCoords[coord] = true;
-//                 uncheckedQueue.push(coord);
-//             }
-//         }
-//     }
-
-//     DEBUG_LOG("Finished setting proximities. Checked "
-//               << checkedCount
-//               << " coordinates");
-// }
 
 void Spider::manageSubMoment()
 {
@@ -144,43 +79,34 @@ void Spider::manageSubMoment()
     std::sort(
         actionQueue.begin(),
         actionQueue.end(),
-        [this](const PendingAction &a,
-               const PendingAction &b)
+        [this](const std::pair<std::string, OutputNode *> &a,
+               const std::pair<std::string, OutputNode *> &b)
         {
-            return Agents.at(a.coords)->getSpeed() >
-                   Agents.at(b.coords)->getSpeed();
+            return Agents.at(a.first)->getSpeed() >
+                   Agents.at(b.first)->getSpeed();
         });
-    for (auto pending : actionQueue)
+    for (auto &[coords, action] : actionQueue)
     {
 
-        if (Agents.find(pending.coords) == Agents.end())
+        if (Agents.find(coords) == Agents.end())
         {
 
             continue;
         }
 
-        if (Agents[pending.coords]->getProcessed() == false)
+        if (Agents[coords]->getProcessed() == false)
         {
-            Agents[pending.coords]->setProcessed(true);
+            Agents[coords]->setProcessed(true);
             manageAction(
-                pending.coords,
-                pending.action);
+                coords,
+                action);
         }
     }
 
     std::vector<std::pair<std::string, std::string>> moves;
 
-    for (auto &[oldCoords, exists] : Agents)
+    for (auto &[oldCoords, agent] : Agents)
     {
-        auto it = Agents.find(oldCoords);
-
-        if (it == Agents.end())
-        {
-            continue;
-        }
-
-        Agent *agent = it->second;
-
         if (oldCoords != agent->getCoords())
         {
             moves.push_back(
@@ -485,9 +411,9 @@ bool Spider::borderCheck(std::string coords)
 
     bool inside =
         aX >= 0 and
-        aX <= (terrariumWidth * agentSize * 2) and
+        aX <= (borderWidth * agentSize * 2) and
         aY >= 0 and
-        aY <= (terrariumHeight * agentSize * 2);
+        aY <= (borderHeight * agentSize * 2);
 
     return inside;
 }

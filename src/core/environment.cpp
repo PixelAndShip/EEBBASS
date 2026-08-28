@@ -1,11 +1,14 @@
 #include "environment.h"
 #include <vector>
 
-Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
+Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
 {
 
     identifier = id;
     radiation = eRad;
+    maxAgentCount = maxAC;
+    maxPlantCount = maxPC;
+    cullPercentage = cullP;
     iteration = iT;
     maxCultivateIteration = maxIT;
     maxCycle = maxCYCLE;
@@ -15,11 +18,10 @@ Environment::Environment(int id, float eRad, int iT, int maxIT, int maxCYCLE, in
     maxRootNodes = rootNodesCount;
     maxBrainLevel = maxBL;
     maxBrainChildNodes = maxBCN;
-
-    spider = new Spider(eRad, rootNodesCount, maxBL, maxBCN, borderW, borderH);
-
     borderWidth = borderW;
     borderHeight = borderH;
+
+    spider = new Spider(eRad, rootNodesCount, maxBL, maxBCN);
 
     rootNodeDist = std::uniform_int_distribution<>(0, maxRootNodes);
     insideX = std::uniform_int_distribution<>(0, borderWidth);
@@ -57,11 +59,11 @@ void Environment::manageSimulation()
 
     if (custom)
     {
-        startSimulation(0, 50);
+        startSimulation(0, maxPlantCount);
     }
     else
     {
-        startSimulation();
+        startSimulation(maxAgentCount, maxPlantCount);
     }
 
     int cycle = 0;
@@ -83,7 +85,7 @@ void Environment::manageSimulation()
         {
 
             environmentState = EnvironmentState::Paused;
-            cultivateSimulation();
+            cultivateSimulation(maxAgentCount);
             iteration = 0;
             environmentState = EnvironmentState::Running;
             cycle += 1;
@@ -109,7 +111,7 @@ void Environment::manageVisualizedSimulation()
     }
     else
     {
-        startSimulation();
+        startSimulation(maxAgentCount, maxPlantCount);
     }
 
     std::string windowName = "Environment" + std::to_string(identifier);
@@ -134,7 +136,7 @@ void Environment::manageVisualizedSimulation()
         {
 
             environmentState = EnvironmentState::Paused;
-            cultivateSimulation();
+            cultivateSimulation(maxAgentCount);
             iteration = 0;
             environmentState = EnvironmentState::Running;
         }
@@ -189,8 +191,8 @@ void Environment::cultivateSimulation(int targetPop)
 
         if (agent != nullptr)
         {
-            std::cout << "Survivor in environment: " << identifier << " ,Iteration: " << iteration;
-            agent->logAgent();
+
+            agent->logAgent(iteration);
             agent->setHealth(100);
             agent->setEnergy(100);
         }
@@ -229,12 +231,43 @@ void Environment::cultivateSimulation(int targetPop)
 
 void Environment::managePlantCount(int count, float cullingCount)
 {
+    int goalPlantCount = count;
+    if (spider->Plants.size() > goalPlantCount)
+    {
+        int cL = spider->Plants.size() * cullingCount;
+
+        std::vector<std::string> ids;
+
+        for (auto &[id, plant] : spider->Plants)
+        {
+            if (plant != nullptr)
+            {
+                ids.push_back(id);
+            }
+        }
+
+        std::shuffle(
+            ids.begin(),
+            ids.end(),
+            gen);
+
+        for (int i = 0; i < cL and i < ids.size(); i++)
+        {
+            auto it = spider->Plants.find(ids[i]);
+
+            if (it != spider->Plants.end())
+            {
+                delete it->second;
+                spider->Plants.erase(it);
+            }
+        }
+    }
 }
 
 void Environment::manageAgentCount(int count, float cullingCount)
 {
-    int maxAgentCount = count;
-    if (spider->Agents.size() > maxAgentCount)
+    int goalAgentCount = count;
+    if (spider->Agents.size() > goalAgentCount)
     {
         int cL = spider->Agents.size() * cullingCount;
 
@@ -246,7 +279,6 @@ void Environment::manageAgentCount(int count, float cullingCount)
             {
                 ids.push_back(id);
             }
-            std::string data = "Environment\n";
         }
 
         std::shuffle(
@@ -344,7 +376,8 @@ void Environment::manageMoment()
     }
 
     spider->manageSubMoment();
-    manageAgentCount();
+    manageAgentCount(maxAgentCount, cullPercentage);
+    managePlantCount(maxPlantCount, cullPercentage);
 }
 
 // void Environment::manageSubMoment(std::string coords)
@@ -561,9 +594,11 @@ void Environment::logEnvironment(std::string fileName)
     std::string data = "Environment\n";
     data += 'I' + std::to_string(identifier);
     data += "/R" + std::to_string(radiation);
+    data += "/a" + std::to_string(maxAgentCount);
+    data += "/p" + std::to_string(maxPlantCount);
+    data += "/e" + std::to_string(cullPercentage);
     data += "/C" + std::to_string(maxCultivateIteration);
     data += "/Y" + std::to_string(maxCycle);
-    data += "/c" + std::to_string(carbon_count);
     data += "/c" + std::to_string(carbon_count);
     data += "/O" + std::to_string(maxRootNodes);
     data += "/L" + std::to_string(maxBrainLevel);
@@ -577,7 +612,7 @@ void Environment::logEnvironment(std::string fileName)
     saveFile.close();
     for (auto &[coordinates, agent] : spider->Agents)
     {
-        agent->logAgent(fileName);
+        agent->logAgent(iteration, fileName);
     }
 }
 
@@ -601,7 +636,7 @@ void Environment::constructEnvironment(std::string fileName)
             processingEnvironmentData = false;
             environmentData = line;
             setCustomEnvironmentValues(environmentData);
-            spider = new Spider(radiation, maxRootNodes, maxBrainLevel, maxBrainChildNodes, borderWidth, borderHeight);
+            spider = new Spider(radiation, maxRootNodes, maxBrainLevel, maxBrainChildNodes);
         }
         else if (line == "Agents")
         {
@@ -624,6 +659,7 @@ void Environment::constructEnvironment(std::string fileName)
 
             currentAgent = new Agent(agentData, brainData, identifier);
             spider->Agents[currentAgent->getCoords()] = currentAgent;
+            currentAgent->updateColor();
             currentAgent = nullptr;
             agentData.clear();
             brainData.clear();
@@ -684,6 +720,45 @@ void Environment::setCustomEnvironmentValues(std::string data)
                 end = data.size();
             }
             radiation = std::stof(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'a':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxAgentCount = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'p':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            maxPlantCount = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'e':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            cullPercentage = std::stof(data.substr(start, end - start));
             pos = end;
             break;
         }
