@@ -1,55 +1,5 @@
 #include "environment.h"
 #include <vector>
-void testConstruct(std::string fileName)
-{
-    std::cout << "1 - Starting construct\n";
-
-    std::cout << "2 - Filename: ["
-              << fileName
-              << "]\n";
-
-    std::cout << "3 - Current directory: ["
-              << std::filesystem::current_path().string()
-              << "]\n";
-
-    std::filesystem::path fullPath =
-        std::filesystem::absolute(fileName);
-
-    std::cout << "4 - Absolute path: ["
-              << fullPath.string()
-              << "]\n";
-
-    std::cout << "5 - Exists: "
-              << std::filesystem::exists(fullPath)
-              << "\n";
-
-    std::cout << "6 - Before ifstream\n";
-
-    std::ifstream file(fullPath);
-
-    std::cout << "7 - After ifstream\n";
-
-    if (!file.is_open())
-    {
-        std::cout << "8 - FAILED TO OPEN\n";
-        return;
-    }
-
-    std::cout << "9 - FILE OPENED\n";
-
-    std::string line;
-
-    while (std::getline(file, line))
-    {
-        std::cout << "LINE: ["
-                  << line
-                  << "]\n";
-    }
-
-    std::cout << "10 - Finished reading\n";
-
-    file.close();
-}
 
 Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, int iT, int maxIT, int maxCYCLE, int cb, int maxBL, int maxBCN, int rootNodesCount, int borderW, int borderH)
 {
@@ -79,8 +29,7 @@ Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, 
 }
 Environment::Environment(std::string saveFile)
 {
-    std::cout << "Opening file";
-    testConstruct(saveFile);
+
     constructEnvironment(saveFile);
     rootNodeDist = std::uniform_int_distribution<>(0, maxRootNodes);
     insideX = std::uniform_int_distribution<>(0, borderWidth);
@@ -670,7 +619,7 @@ void Environment::logEnvironment(std::string fileName)
 
 void Environment::constructEnvironment(std::string fileName)
 {
-    std::cout << "Starting construct";
+
     std::ifstream file(fileName);
     if (!file.is_open())
     {
@@ -689,7 +638,7 @@ void Environment::constructEnvironment(std::string fileName)
         }
         if (processingEnvironmentData == true)
         {
-            std::cout << "Environment start";
+
             processingEnvironmentData = false;
             environmentData = line;
             setCustomEnvironmentValues(environmentData);
@@ -713,7 +662,7 @@ void Environment::constructEnvironment(std::string fileName)
         }
         else if (line == "=")
         {
-            std::cout << "Agent start";
+
             currentAgent = new Agent(agentData, brainData, identifier);
             spider->Agents[currentAgent->getCoords()] = currentAgent;
             currentAgent->updateColor();
