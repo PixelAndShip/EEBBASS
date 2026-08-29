@@ -13,16 +13,7 @@
 
 ### Requirements
 
-Provided via using ldd (List Dynamic Dependencies):
-
-* linux-vdso.so.1 
-* libstdc++.so.6 
-* libm.so.6
-* libgcc_s.so.1
-* libc.so.6
-* lib64/ld-linux-x86-64.so.2
-
-Program uses statically linked raylib.
+Both windows and linux versions use statically linked libraries, so no additional resources should be needed for use.
 
 ### Before Running
 
