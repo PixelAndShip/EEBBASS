@@ -103,7 +103,7 @@ void Environment::manageSimulation()
     environmentState = EnvironmentState::Finished;
 }
 
-void Environment::manageVisualizedSimulation()
+void Environment::manageVisualizedSimulation(int iFPS)
 {
 
     if (custom)
@@ -116,10 +116,10 @@ void Environment::manageVisualizedSimulation()
     }
 
     std::string windowName = "Environment" + std::to_string(identifier);
-    int X = borderWidth * agentSize * 2;
-    int Y = borderHeight * agentSize * 2;
+    int X = borderWidth;
+    int Y = borderHeight;
     InitWindow(X, Y, windowName.c_str());
-    SetTargetFPS(5);
+    SetTargetFPS(iFPS);
     int AgentsCount = 0;
     int PlantsCount = 0;
     std::string agentCountSTR, plantCountSTR, iterationSTR;
@@ -194,8 +194,8 @@ void Environment::cultivateSimulation(int targetPop)
         {
 
             agent->logAgent(iteration);
-            agent->setHealth(100);
-            agent->setEnergy(100);
+            agent->setHealth(agent->getHealth() + iteration);
+            agent->setEnergy(agent->getEnergy() + iteration);
         }
     }
 
@@ -475,11 +475,10 @@ void Environment::startSimulation(int agentCount, int plantCount)
 
         generateAgentCoords(genesis);
 
-        inside = genesis->getX() > 0 and genesis->getX() < (borderWidth * agentSize * 2) and genesis->getY() > 0 and genesis->getY() < (borderHeight * agentSize * 2);
+        inside = genesis->getX() > 0 and genesis->getX() < borderWidth and genesis->getY() > 0 and genesis->getY() < borderHeight;
 
         if (!inside)
         {
-
             delete genesis;
             continue;
         }
@@ -496,7 +495,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
         Plant *pl = new Plant(radiation, gen);
         generatePlantCoords(pl);
 
-        inside = pl->getX() > 0 and pl->getX() < (borderWidth * agentSize * 2) and pl->getY() > 0 and pl->getY() < (borderHeight * agentSize * 2);
+        inside = pl->getX() > 0 and pl->getX() < borderWidth and pl->getY() > 0 and pl->getY() < borderHeight;
 
         if (!inside)
         {
@@ -525,8 +524,8 @@ void Environment::generateAgentCoords(Agent *ag)
             return;
         }
 
-        int x = insideX(gen) * agentSize * 2;
-        int y = insideY(gen) * agentSize * 2;
+        int x = insideX(gen);
+        int y = insideY(gen);
 
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
@@ -563,8 +562,8 @@ void Environment::generatePlantCoords(Plant *pl)
             return;
         }
 
-        int x = insideX(gen) * agentSize * 2;
-        int y = insideY(gen) * agentSize * 2;
+        int x = insideX(gen);
+        int y = insideY(gen);
         bool occupied = true;
         std::string coords = std::to_string(x) + "_" + std::to_string(y);
         if (spider->Agents.find(coords) == spider->Agents.end() and spider->Plants.find(coords) == spider->Plants.end())

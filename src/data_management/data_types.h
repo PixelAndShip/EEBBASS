@@ -11,8 +11,8 @@ struct UnitColor
 };
 inline unsigned int agentSize = 4;
 inline unsigned int plantSize = 3;
-inline unsigned int borderWidth = 100;
-inline unsigned int borderHeight = 100;
+inline unsigned int borderWidth = 700;
+inline unsigned int borderHeight = 700;
 
 inline std::random_device rd;
 inline std::mt19937 gen(rd());
@@ -22,7 +22,7 @@ inline std::uniform_int_distribution<> rootNodeDist(0, 7);
 inline std::uniform_int_distribution<> insideX(0, 100);
 inline std::uniform_int_distribution<> insideY(0, 100);
 
-inline std::vector<int> getDCoords() { return {-(int)agentSize * 2, -(int)agentSize, 0, (int)agentSize, (int)agentSize * 2}; }
+inline std::vector<int> getDCoords() { return {-2, -1, 0, 1, 2}; }
 
 inline const std::unordered_map<int, std::string> &getSenses()
 {

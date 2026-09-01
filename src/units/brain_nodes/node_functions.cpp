@@ -133,7 +133,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
 
         for (int y : getDCoords())
         {
-            coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            coords = std::to_string(-2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
             {
                 return true;
@@ -143,7 +143,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
     case 7:
         for (int y : getDCoords())
         {
-            coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            coords = std::to_string(1 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
             {
                 return true;
@@ -153,7 +153,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
     case 8:
         for (int x : getDCoords())
         {
-            coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
+            coords = std::to_string(aX + x) + "_" + std::to_string(-2 + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
             {
                 return true;
@@ -163,7 +163,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
     case 9:
         for (int x : getDCoords())
         {
-            coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
+            coords = std::to_string(aX + x) + "_" + std::to_string(2 + aY);
             if (Agents->find(coords) != Agents->end() or Plants->find(coords) != Plants->end())
             {
                 return true;
@@ -200,7 +200,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
 
         for (int y : getDCoords())
         {
-            coords = std::to_string(-(int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            coords = std::to_string(-2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end())
             {
                 clr = Agents->at(coords)->getAgentColor();
@@ -223,7 +223,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
     case 11:
         for (int y : getDCoords())
         {
-            coords = std::to_string((int)agentSize * 2 + aX) + "_" + std::to_string(y + aY);
+            coords = std::to_string(2 + aX) + "_" + std::to_string(y + aY);
             if (Agents->find(coords) != Agents->end())
             {
                 clr = Agents->at(coords)->getAgentColor();
@@ -245,7 +245,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
     case 12:
         for (int x : getDCoords())
         {
-            coords = std::to_string(aX + x) + "_" + std::to_string(-(int)agentSize * 2 + aY);
+            coords = std::to_string(aX + x) + "_" + std::to_string(-2 + aY);
             if (Agents->find(coords) != Agents->end())
             {
                 clr = Agents->at(coords)->getAgentColor();
@@ -267,7 +267,7 @@ bool seeColor(int id, const std::unordered_map<std::string, Agent *> *Agents, co
     case 13:
         for (int x : getDCoords())
         {
-            coords = std::to_string(aX + x) + "_" + std::to_string((int)agentSize * 2 + aY);
+            coords = std::to_string(aX + x) + "_" + std::to_string(2 + aY);
             if (Agents->find(coords) != Agents->end())
             {
                 clr = Agents->at(coords)->getAgentColor();
@@ -446,19 +446,19 @@ void move(const std::unordered_map<std::string, Agent *> *Agents, std::string Ag
     switch (Direction)
     {
     case 'u':
-        aY -= agentSize * 2;
+        aY -= 1;
         break;
 
     case 'd':
-        aY += agentSize * 2;
+        aY += 1;
         break;
 
     case 'l':
-        aX -= agentSize * 2;
+        aX -= 1;
         break;
 
     case 'r':
-        aX += agentSize * 2;
+        aX += 1;
         break;
     }
 
@@ -568,14 +568,14 @@ std::vector<std::string> getProximatePlants(const std::unordered_map<std::string
 
     std::vector<std::vector<int>> InRadius =
         {
-            {0, -(int)agentSize * 2},
-            {(int)agentSize * 2, -(int)agentSize * 2},
-            {(int)agentSize * 2, 0},
-            {(int)agentSize * 2, (int)agentSize * 2},
-            {0, (int)agentSize * 2},
-            {-(int)agentSize * 2, (int)agentSize * 2},
-            {-(int)agentSize * 2, 0},
-            {-(int)agentSize * 2, -(int)agentSize * 2}};
+            {0, -1},
+            {1, -1},
+            {1, 0},
+            {1, 1},
+            {0, 1},
+            {-1, 1},
+            {-1, 0},
+            {-1, -1}};
 
     for (auto pair : InRadius)
     {
@@ -615,14 +615,14 @@ std::string getSplitCoords(const std::unordered_map<std::string, Agent *> *Agent
 
     std::vector<std::vector<int>> InRadius =
         {
-            {0, -(int)agentSize * 2},
-            {(int)agentSize * 2, -(int)agentSize * 2},
-            {(int)agentSize * 2, 0},
-            {(int)agentSize * 2, (int)agentSize * 2},
-            {0, (int)agentSize * 2},
-            {-(int)agentSize * 2, (int)agentSize * 2},
-            {-(int)agentSize * 2, 0},
-            {-(int)agentSize * 2, -(int)agentSize * 2}};
+            {0, -1},
+            {1, -1},
+            {1, 0},
+            {1, 1},
+            {0, 1},
+            {-1, 1},
+            {-1, 0},
+            {-1, -1}};
 
     for (auto pair : InRadius)
     {
@@ -665,14 +665,14 @@ std::vector<std::string> getProximateAgents(const std::unordered_map<std::string
 
     std::vector<std::vector<int>> InRadius =
         {
-            {0, -(int)agentSize * 2},
-            {(int)agentSize * 2, -(int)agentSize * 2},
-            {(int)agentSize * 2, 0},
-            {(int)agentSize * 2, (int)agentSize * 2},
-            {0, (int)agentSize * 2},
-            {-(int)agentSize * 2, (int)agentSize * 2},
-            {-(int)agentSize * 2, 0},
-            {-(int)agentSize * 2, -(int)agentSize * 2}};
+            {0, -1},
+            {1, -1},
+            {1, 0},
+            {1, 1},
+            {0, 1},
+            {-1, 1},
+            {-1, 0},
+            {-1, -1}};
 
     for (auto pair : InRadius)
     {
