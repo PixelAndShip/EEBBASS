@@ -411,9 +411,9 @@ bool Spider::borderCheck(std::string coords)
 
     bool inside =
         aX >= 0 and
-        aX <= (borderWidth * agentSize * 2) and
+        aX <= borderWidth and
         aY >= 0 and
-        aY <= (borderHeight * agentSize * 2);
+        aY <= borderHeight;
 
     return inside;
 }

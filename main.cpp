@@ -5,17 +5,10 @@
 
 void visualSim()
 {
-    float eRad;
-    int maxA;
-    int maxP;
-    float cull;
-    int iT;
-    int maxCultivate;
-    int maxCycle;
-    int cb;
-    int maxBL;
-    int maxBCN;
-    int rootNodesCount;
+    float eRad, cull;
+    int maxA, maxP, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, fps;
+    std::cout << "Enter environment frames per second 1+: ";
+    std::cin >> fps;
     std::cout << "Enter radiation (0.0 - 1.0): ";
     std::cin >> eRad;
     std::cout << "Enter maximum amount of Agents: ";
@@ -47,7 +40,7 @@ void visualSim()
     std::cout << "Enter plant size (1+): ";
     std::cin >> plantSize;
     Environment env = Environment(3000, eRad, maxA, maxP, cull, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
-    env.manageVisualizedSimulation();
+    env.manageVisualizedSimulation(fps);
 }
 
 void defaultVisual()
@@ -58,18 +51,8 @@ void defaultVisual()
 
 void multiThreadSim()
 {
-    float eRad;
-    int maxA;
-    int maxP;
-    float cull;
-    int iT;
-    int maxCultivate;
-    int maxCycle;
-    int cb;
-    int maxBL;
-    int maxBCN;
-    int rootNodesCount;
-    int eC;
+    float eRad, cull;
+    int maxA, maxP, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, eC;
     std::cout << "Enter simulation environment count: ";
     std::cin >> eC;
     std::cout << "Enter radiation (0.0 - 1.0): ";
@@ -102,7 +85,6 @@ void multiThreadSim()
     std::cin >> agentSize;
     std::cout << "Enter plant size (1+): ";
     std::cin >> plantSize;
-
     std::cout << "Starting simulation with " << eC << " environments!";
     SimManager sm = SimManager(eC, eRad, maxA, maxP, cull, iT, maxCultivate, maxCycle, cb, maxBL, maxBCN, rootNodesCount, borderWidth, borderHeight);
     sm.runSimulation();
@@ -111,13 +93,16 @@ void multiThreadSim()
 void customEnvironment()
 {
     std::string saveFileStr;
+    int fps;
     std::cout << "Enter environment save file name: ";
     std::cin >> saveFileStr;
+    std::cout << "Enter environment frames per second: ";
+    std::cin >> fps;
     try
     {
         Environment env = Environment(saveFileStr);
 
-        env.manageVisualizedSimulation();
+        env.manageVisualizedSimulation(fps);
     }
     catch (...)
     {

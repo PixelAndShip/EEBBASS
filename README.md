@@ -73,6 +73,7 @@ Project/
 ├── EEBBASS_linux
 ├── EEBBASS_AS
 ├── EEBBASS_windows.exe
+├── LICENSE
 └── README.md
 ```
 
