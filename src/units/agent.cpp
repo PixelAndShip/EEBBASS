@@ -8,6 +8,7 @@ Agent::Agent(std::string selfData, std::string brainData, int iEID) : brain(brai
 
 Agent::Agent(
     int identifier,
+    unsigned int iUniqueGenerationID,
     float eRadiation,
     int childNodeCount,
     int brainDepth)
@@ -17,6 +18,8 @@ Agent::Agent(
 
     env_identifier = identifier;
 
+    generationID.push_back(iUniqueGenerationID);
+
     generateStart();
 
     updateColor();
@@ -24,7 +27,7 @@ Agent::Agent(
 
 Agent::Agent(
     int identifier,
-    std::vector<int> iGenerationID,
+    std::vector<unsigned int> iGenerationID,
     float iHealth,
     float iEnergy,
     float iPlantDiet,
@@ -37,7 +40,9 @@ Agent::Agent(
     : brain(identifier, eRadiation, iBrain, maxRootNodesCount, childNodeCount, brainDepth)
 {
 
-        env_identifier = identifier;
+    generationID = iGenerationID;
+
+    env_identifier = identifier;
 
     health = iHealth;
 
@@ -141,6 +146,11 @@ std::string Agent::outputAgentStats() const
     agentData += ',' + std::to_string(agentColor.transparency);
     agentData += "}/X" + std::to_string(x);
     agentData += "/Y" + std::to_string(y);
+    agentData += "/G";
+    for (unsigned int id : generationID)
+    {
+        agentData += std::to_string(id) + ".";
+    }
     agentData += "/S" + std::to_string(speed);
     return agentData;
 }
@@ -290,6 +300,37 @@ void Agent::constructCustomAgent(std::string data)
                 end = data.size();
             }
             y = std::stoi(data.substr(start, end - start));
+            pos = end;
+            break;
+        }
+        case 'G':
+        {
+            size_t start = pos + 1;
+            size_t end = data.find('/', start);
+
+            if (end == std::string::npos)
+            {
+                end = data.size();
+            }
+            std::string idData = data.substr(start, end - start);
+            std::string genID;
+            for (char unit : idData)
+            {
+                switch (unit)
+                {
+                case '.':
+                {
+                    generationID.push_back((unsigned int)std::stoi(genID));
+                    genID = "";
+                    break;
+                }
+                default:
+                {
+                    genID += unit;
+                    break;
+                }
+                }
+            }
             pos = end;
             break;
         }

@@ -16,7 +16,8 @@ private:
     float plantDiet;
     UnitColor agentColor;
     int x, y;
-    std::vector<int> generationID;
+    std::vector<unsigned int> generationID;
+    unsigned int offspringCount;
     float speed;
     Brain brain;
 
@@ -74,7 +75,7 @@ public:
 
         y = iY;
     }
-    void setGenerationID(std::vector<int> iGID)
+    void setGenerationID(std::vector<unsigned int> iGID)
     {
         generationID = iGID;
     }
@@ -161,7 +162,7 @@ public:
         return y;
     }
 
-    std::vector<int> getGenerationID()
+    std::vector<unsigned int> getGenerationID()
     {
         return generationID;
     }
@@ -188,12 +189,14 @@ public:
 
     Agent(
         int identifier,
+        unsigned int iUniqueGenerationID,
         float eRadiation,
         int childNodeCount,
         int brainDepth);
+
     Agent(
         int identifier,
-        std::vector<int> iGenerationID,
+        std::vector<unsigned int> iGenerationID,
         float iHealth,
         float iEnergy,
         float iPlantDiet,
