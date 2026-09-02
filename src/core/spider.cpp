@@ -482,8 +482,13 @@ void Spider::splitNewAgent(std::string ParentCoords)
         parent->getHealth() / 2.0f);
     parent->setEnergy(parent->getEnergy() / 2.0f);
 
+    uniqueAgentID++;
+    std::vector<unsigned int> transferableID = parent->getGenerationID();
+    transferableID.push_back(uniqueAgentID);
+
     Agent *child = new Agent(
         parent->getIdentifier(),
+        transferableID,
         parent->getHealth(),
         parent->getEnergy(),
         parent->getPlantDiet(),

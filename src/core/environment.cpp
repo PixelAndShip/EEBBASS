@@ -82,7 +82,7 @@ void Environment::manageSimulation()
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
         // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
-        if (iteration >= maxCultivateIteration)
+        if (iteration == maxCultivateIteration)
         {
 
             environmentState = EnvironmentState::Paused;
@@ -133,7 +133,7 @@ void Environment::manageVisualizedSimulation(int iFPS)
         agentCountSTR = "Agent count: " + std::to_string(AgentsCount);
         plantCountSTR = "Plant count: " + std::to_string(PlantsCount);
         iterationSTR = "Iteration: " + std::to_string(iteration);
-        if (iteration >= maxCultivateIteration)
+        if (iteration == maxCultivateIteration)
         {
 
             environmentState = EnvironmentState::Paused;
@@ -177,7 +177,20 @@ void Environment::cultivateSimulation(int targetPop)
               });
 
     int originalPopulation = rankedAgents.size();
-    int survivors = originalPopulation / 2;
+    int survivors = originalPopulation * (1 - cullPercentage);
+
+    for (int i = 0; i < survivors; i++)
+    {
+        Agent *agent = spider->Agents[rankedAgents[i].first];
+
+        if (agent != nullptr)
+        {
+
+            agent->logAgent(maxCultivateIteration);
+            agent->setHealth(maxCultivateIteration);
+            agent->setEnergy(maxCultivateIteration);
+        }
+    }
     if (survivors > 0)
     {
         maxCultivateIteration++;
@@ -186,19 +199,6 @@ void Environment::cultivateSimulation(int targetPop)
     {
         maxCultivateIteration--;
     }
-    for (int i = 0; i < survivors; i++)
-    {
-        Agent *agent = spider->Agents[rankedAgents[i].first];
-
-        if (agent != nullptr)
-        {
-
-            agent->logAgent(iteration);
-            agent->setHealth(agent->getHealth() + iteration);
-            agent->setEnergy(agent->getEnergy() + iteration);
-        }
-    }
-
     for (int i = survivors; i < originalPopulation; i++)
     {
         auto it = spider->Agents.find(rankedAgents[i].first);
@@ -209,8 +209,48 @@ void Environment::cultivateSimulation(int targetPop)
             spider->Agents.erase(it);
         }
     }
+
     int plantTargetPop = 100 - (int)spider->Plants.size();
     int agentTargetPop = targetPop - survivors;
+    if (survivors > 0)
+    {
+
+        int cultivateAgentCount = (int)((agentTargetPop * (1.0 - cullPercentage)) / survivors);
+        bool inside = false;
+        for (auto &[coords, survivor] : spider->Agents)
+        {
+            for (int i = 0; i < cultivateAgentCount; i++)
+            {
+                Agent *offspring = new Agent(
+                    survivor->getIdentifier(),
+                    survivor->getGenerationID(),
+                    survivor->getHealth(),
+                    survivor->getEnergy(),
+                    survivor->getPlantDiet(),
+                    survivor->getSpeed(),
+                    survivor->getBrain(),
+                    radiation,
+                    maxRootNodes,
+                    maxBrainChildNodes,
+                    maxBrainLevel);
+                generateAgentCoords(offspring);
+
+                inside = offspring->getX() > 0 and offspring->getX() < borderWidth and offspring->getY() > 0 and offspring->getY() < borderHeight;
+
+                if (!inside)
+                {
+                    delete offspring;
+                    continue;
+                }
+                spider->uniqueAgentID++;
+                std::vector<unsigned int> transferableID = survivor->getGenerationID();
+                transferableID.push_back(spider->uniqueAgentID);
+                offspring->setGenerationID(transferableID);
+                spider->Agents[offspring->getCoords()] =
+                    offspring;
+            }
+        }
+    }
     if (plantTargetPop <= 0)
     {
         plantTargetPop = 50;
@@ -469,6 +509,7 @@ void Environment::startSimulation(int agentCount, int plantCount)
         Agent *genesis =
             new Agent(
                 identifier,
+                spider->uniqueAgentID,
                 radiation,
                 maxBrainChildNodes,
                 maxBrainLevel);
@@ -482,7 +523,8 @@ void Environment::startSimulation(int agentCount, int plantCount)
             delete genesis;
             continue;
         }
-
+        spider->uniqueAgentID++;
+        genesis->setGenerationID({spider->uniqueAgentID});
         spider->Agents[genesis->getCoords()] =
             genesis;
     }

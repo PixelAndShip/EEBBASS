@@ -19,6 +19,7 @@ public:
     int maxRootNodes;
     int maxBrainLevel;
     int maxBrainChildNodes;
+    unsigned int uniqueAgentID = 0;
 
     ~Spider();
     Spider(float rad = 0.5, int maxRN = 3, int maxBL = 3, int maxBCN = 4);
