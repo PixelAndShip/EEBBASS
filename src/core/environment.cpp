@@ -177,7 +177,7 @@ void Environment::cultivateSimulation(int targetPop)
               });
 
     int originalPopulation = rankedAgents.size();
-    int survivors = originalPopulation / 2;
+    int survivors = originalPopulation * (1 - cullPercentage);
     if (survivors > 0)
     {
         maxCultivateIteration++;
@@ -194,8 +194,8 @@ void Environment::cultivateSimulation(int targetPop)
         {
 
             agent->logAgent(iteration);
-            agent->setHealth(agent->getHealth() + iteration);
-            agent->setEnergy(agent->getEnergy() + iteration);
+            agent->setHealth(iteration);
+            agent->setEnergy(iteration);
         }
     }
 
@@ -209,8 +209,45 @@ void Environment::cultivateSimulation(int targetPop)
             spider->Agents.erase(it);
         }
     }
+
     int plantTargetPop = 100 - (int)spider->Plants.size();
     int agentTargetPop = targetPop - survivors;
+    if (survivors > 0)
+    {
+
+        int cultivateAgentCount = (int)((agentTargetPop * (1.0 - cullPercentage)) / survivors);
+        bool inside = false;
+        for (auto &[coords, survivor] : spider->Agents)
+        {
+            for (int i = 0; i < cultivateAgentCount; i++)
+            {
+                Agent *offspring = new Agent(
+                    survivor->getIdentifier(),
+                    survivor->getGenerationID(),
+                    survivor->getHealth(),
+                    survivor->getEnergy(),
+                    survivor->getPlantDiet(),
+                    survivor->getSpeed(),
+                    survivor->getBrain(),
+                    radiation,
+                    maxRootNodes,
+                    maxBrainChildNodes,
+                    maxBrainLevel);
+                generateAgentCoords(offspring);
+
+                inside = offspring->getX() > 0 and offspring->getX() < borderWidth and offspring->getY() > 0 and offspring->getY() < borderHeight;
+
+                if (!inside)
+                {
+                    delete offspring;
+                    continue;
+                }
+
+                spider->Agents[offspring->getCoords()] =
+                    offspring;
+            }
+        }
+    }
     if (plantTargetPop <= 0)
     {
         plantTargetPop = 50;

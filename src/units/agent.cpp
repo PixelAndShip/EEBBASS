@@ -24,6 +24,7 @@ Agent::Agent(
 
 Agent::Agent(
     int identifier,
+    std::vector<int> iGenerationID,
     float iHealth,
     float iEnergy,
     float iPlantDiet,
@@ -36,7 +37,7 @@ Agent::Agent(
     : brain(identifier, eRadiation, iBrain, maxRootNodesCount, childNodeCount, brainDepth)
 {
 
-    env_identifier = identifier;
+        env_identifier = identifier;
 
     health = iHealth;
 
