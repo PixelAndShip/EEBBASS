@@ -1,3 +1,4 @@
+
 #pragma once
 #include "brain.h"
 #include <random>
@@ -7,17 +8,15 @@ class Plant
 private:
     int env_identifier;
     float health;
-    // float energy;
     UnitColor plantColor;
     int x, y;
 
 public:
     void setIdentifier(int iD) { env_identifier = iD; };
     int getIdentifier() { return env_identifier; };
+
     void updateColor()
     {
-
-        // plantColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
         plantColor.blue = std::clamp(static_cast<int>(std::round(health)), 0, 255);
     }
 
@@ -26,12 +25,6 @@ public:
 
         health = iH;
     }
-
-    // void setEnergy(float iE)
-    // {
-
-    //     energy = iE;
-    // }
 
     void setPlantColor(UnitColor iAC)
     {
@@ -78,12 +71,6 @@ public:
 
         return health;
     }
-
-    // float getEnergy()
-    // {
-
-    //     return energy;
-    // }
 
     UnitColor getPlantColor()
     {

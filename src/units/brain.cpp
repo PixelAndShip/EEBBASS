@@ -57,8 +57,6 @@ Brain::Brain(int identifier, float eRadiation, int childNodeCount, int brainDept
 
     int InputNodeCount = rootNodeDist(gen);
 
-    std::uniform_int_distribution<> mutationChance(0, 100);
-
     for (int i = 0; i < InputNodeCount; i++)
     {
 
@@ -98,6 +96,7 @@ void Brain::addCopiedConnection(
 
         lastInputNode->appendInputNode(copiedNode);
 
+        // output node mutation
         if (dist(gen) <= 5 and
             copiedNode->getOutputNode() == nullptr and copyNode->getInputNodes().empty())
         {
@@ -116,7 +115,7 @@ void Brain::addCopiedConnection(
             childNodeCount,
             brainDepth);
     }
-
+    // new branch mutation
     if (dist(gen) <= 5 and
         lastInputNode->getInputNodes().size() < childNodeCount and
         level + 1 < brainDepth)
@@ -185,9 +184,6 @@ void Brain::addConnection(
         else
         {
         }
-
-        // loop through brain and check if node already exists,
-        // 0.5 chance to connect to it or make another one
     }
 }
 
@@ -200,14 +196,6 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
 std::string Brain::logBrain() const
 {
 
-    // std::stringstream writtenData;
-    // std::string fileName = "logs/Agent_Brain_Log_" + std::to_string(env_identifier) + ".txt";
-    // std::ifstream CurrentLog(fileName);
-    // if (CurrentLog)
-    // {
-    //     writtenData << CurrentLog.rdbuf();
-    // }
-    // std::string data = writtenData.str() + "\n";
     std::string data = "";
     int id = 1;
     for (InputNode *iN : inputNodes)
@@ -217,17 +205,10 @@ std::string Brain::logBrain() const
         id++;
     }
 
-    // CurrentLog.close();
-
-    // std::ofstream updatedLog(fileName);
-
     if (data == "")
     {
         data = "No brain found!\n";
     }
-    // updatedLog << data;
-
-    // updatedLog.close();
 
     return data;
 }
@@ -305,6 +286,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
     return data;
 }
 
+// takes data string from Agent constructor
 void Brain::constructCustomBrain(std::string data)
 {
     std::string line = "";
@@ -313,6 +295,7 @@ void Brain::constructCustomBrain(std::string data)
     {
         if (letter == ';')
         {
+            // windows system new line check
             if (!line.empty() and line.back() == '\r')
             {
                 line.pop_back();
@@ -331,9 +314,6 @@ void Brain::constructCustomBrain(std::string data)
         constructCustomNode(line);
     }
 }
-
-// [1]+weight/setAmount/key/{unitColor}
-// [1.1]...-weight/energyCost/key/{unitColor}
 
 void Brain::constructCustomNode(std::string line)
 {
@@ -509,20 +489,3 @@ void Brain::constructCustomNode(std::string line)
         customNodes[parentId]->setOutputNode(oN);
     }
 }
-
-// InputNode *Brain::getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index)
-// {
-//     if (parent == nullptr or coordinates.size() == 0 or index >= coordinates.size())
-//     {
-//         return nullptr;
-//     }
-//     int id = coordinates[index];
-//     if (index == coordinates.size() - 1)
-//     {
-//         return parent->getInputNodes()[id];
-//     }
-//     else
-//     {
-//         getCustomParentNode(parent->getInputNodes()[id], coordinates, index + 1);
-//     }
-// }

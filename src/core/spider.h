@@ -1,3 +1,11 @@
+/*
+Last time edited: 03.09.2026
+Last edit summary: adding documentation
+Existing issues:
+Potential additions:
+* all attributes are public, could move to private and add getter and setter functions, rn not needed for no inheritance exists
+*/
+
 #pragma once
 #include "units/brain_nodes/node_functions.h"
 #include <queue>
@@ -9,11 +17,8 @@ class Spider
 public:
     std::unordered_map<std::string, Agent *> Agents;
     std::unordered_map<std::string, Plant *> Plants;
-    // std::vector<std::string> processedAgents;
     std::vector<std::pair<std::string, OutputNode *>> actionQueue;
     std::vector<std::pair<std::string, Agent *>> pendingBirths;
-
-    // std::unordered_map<std::string, bool> proximateCoords;
 
     float radiation;
     int maxRootNodes;

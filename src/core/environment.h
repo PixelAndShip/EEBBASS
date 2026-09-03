@@ -36,26 +36,6 @@ private:
 public:
     Spider *spider = nullptr;
 
-    // identifier = id;
-    // radiation = 0.5;
-    // iteration = 0;
-    // carbon_count = 1;
-
-    // maxBrainLevel = 5;
-    // maxBrainChildNodes = 2;
-
-    // spider = new Spider();
-
-    // std::random_device rd;
-    // std::mt19937 g(rd());
-
-    // std::uniform_int_distribution<> d(0, 7);
-    // std::uniform_int_distribution<> iB(0, 100);
-
-    // gen = g;
-    // dist = d;
-    // insideBorders = iB;
-    // Environment(int id = 5000);
     Environment(int id = 5000, float eRad = 0.5, int maxAC = 200, int maxPC = 100, float cullP = 0.25, int iT = 0, int maxIT = 115, int maxCYCLE = 100, int cb = 0, int maxBL = 5, int maxBCN = 2, int rootNodesCount = 7, int borderW = borderWidth, int borderH = borderHeight);
 
     Environment(std::string saveFile);
@@ -85,7 +65,7 @@ public:
 
     void makeWindow();
 
-    void startSimulation(int agentCount = 200, int plantCount = 50);
+    void spawnUnits(int agentCount = 200, int plantCount = 50);
 
     void generateAgentCoords(Agent *ag);
 

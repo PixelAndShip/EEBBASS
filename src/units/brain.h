@@ -1,11 +1,9 @@
 #pragma once
-
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include "brain_nodes/input_node.h"
 
-// class OutputNode;
 class Brain
 {
 private:
@@ -43,5 +41,4 @@ public:
 
     void constructCustomBrain(std::string fileName);
     void constructCustomNode(std::string line);
-    // InputNode *getCustomParentNode(InputNode *parent, std::vector<int> coordinates, int index);
 };
