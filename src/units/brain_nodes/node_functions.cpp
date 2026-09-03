@@ -102,15 +102,6 @@ bool healthCountBelowSet(float health, float setAmount)
     return health < setAmount;
 }
 
-// {6, "SeeSomethingLeft"},
-// {7, "SeeSomethingRight"},
-// {8, "SeeSomethingUp"},
-// {9, "SeeSomethingDown"},
-// {10, "SeeColorLeft"},
-// {11, "SeeColorRight"},
-// {12, "SeeColorUp"},
-// {13, "SeeColorDown"}
-
 bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents, const std::unordered_map<std::string, Plant *> *Plants, std::string AgentCoordinates)
 {
     std::string coords = "";
@@ -127,6 +118,7 @@ bool seeSomething(int id, const std::unordered_map<std::string, Agent *> *Agents
     {
         return false;
     }
+    // checks sides via id (see in data_types.h get senses)
     switch (id)
     {
     case 6:

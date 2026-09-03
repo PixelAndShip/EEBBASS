@@ -113,11 +113,7 @@ public:
         speed = iS;
     }
 
-    void setBrain() // idk if possible, brain consists of pointer tree
-    {
-    }
-
-    bool getProcessed()
+        bool getProcessed()
     {
         return processed;
     }

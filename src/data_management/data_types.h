@@ -55,8 +55,8 @@ inline const std::unordered_map<int, std::string> &getActions()
         {3, "MoveDown"},
         {4, "Bite"},
         {5, "Split"},
-        {6, "ExpendEnergyOnHealth"}, // passive action
-        {7, "ExpendEnergyOnSpeed"},  // passive action
+        {6, "ExpendEnergyOnHealth"},
+        {7, "ExpendEnergyOnSpeed"},
         {8, "BiteColor"}};
     return Actions;
 }

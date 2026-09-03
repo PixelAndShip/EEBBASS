@@ -206,7 +206,7 @@ The program can run in 2 modes, Visualized and Not Visualized.
 
 Called via terminal 'd' for default values, 'v' for custom values entered via terminal.
 
-An Environment instance calls manageVisualizedSimulation(), in which 1) startSimulation() is called to create Agents and Plants, 2) A while loop, conditional upon window being opened, manageMoment() and Environment instanced attribute Spider class spider - manageSubMoment() are called each iteration to manage Unit stats and Agent behaviors. When iteration reaches maxCultivateIteration, cultivateSimulation() is called to get rid of the weaker scoring Agents and create new Agents to promote behavior diversity. If there are no survivors after one cycle, the maxCultivateIteration is decreased by 1; if instead survivors are found, it is increased by 1.
+An Environment instance calls manageVisualizedSimulation(), in which 1) spawnUnits() is called to create Agents and Plants, 2) A while loop, conditional upon window being opened, manageMoment() and Environment instanced attribute Spider class spider - manageSubMoment() are called each iteration to manage Unit stats and Agent behaviors. When iteration reaches maxCultivateIteration, cultivateSimulation() is called to get rid of the weaker scoring Agents and create new Agents to promote behavior diversity. If there are no survivors after one cycle, the maxCultivateIteration is decreased by 1; if instead survivors are found, it is increased by 1.
 
 2) Not Visualized:
 
@@ -239,7 +239,8 @@ I(identifier - int value 0+ including)/R(radiation - float value from 0.0 to 1.0
 Agents
 
 A (Agent data)
-P(processed - bool value)/I(environment id - int value, the exact same as identifier in Environment data)/H(health - int value)/E(energy - int value)/D(plant diet - float value from 0.0 to 1.0 included)/C(agent color - UnitColor value, inclosed by {})/X(agent coordinates x in environment - int value inside borders not included)/Y(agent coordinates y in environment - int value inside borders not included)/S(speed - float value)
+(Iteration in which Agent was logged, not necessary)
+P(processed - bool value)/I(environment id - int value, the exact same as identifier in Environment data)/H(health - int value)/E(energy - int value)/D(plant diet - float value from 0.0 to 1.0 included)/C(agent color - UnitColor value, inclosed by {})/X(agent coordinates x in environment - int value inside borders not included)/Y(agent coordinates y in environment - int value inside borders not included)/G(generation identifier - array of unsigned int values, each value / generation id seperated by '.', see in example)/S(speed - float value)
 B (Brain data) (IMPORTANT NOTE! All nodes are to follow each other via linear progression in coordinates, otherwise they will not be able to connect to non-existing nodes)
 [1](coordinate in tree structure)+(+ indicates Input Node)W(node activation weight - float value from 0.0 to 1.0 included)/E(set amount - int value from 0 to 255 included)/K(sense key - int value see in src/data_management/data_types.h)/C(target color - UnitColor value, inclosed by {});
 [1.1](coordinate in tree structure)-(- indicated Output Node)W(node activation weight - float value from 0.0 to 1.0 included)/E(energy cost - int value from 0 to 255 included)/K(action key - int value see in src/data_management/data_types.h)/C(target color - UnitColor value, inclosed by {});
@@ -250,36 +251,24 @@ Example:
 Environment
 I0/R0.500000/a180/p70/e0.350000/C100/Y100/c1/O4/L3/N3/W200/H200/A2/P2
 Agents
+100
 A
-P0/I0/H99.000000/E99.000000/D0.590000/C{99,99,0,255}/X148/Y48/S0.000000
+P0/I0/H9.000000/E7.000000/D0.280000/C{7,9,0,255}/X112/Y153/G5981.6198./S0.000000
 B
-[1]+W0.480000/E24.000000/K10/C{99,128,184,104};
-[2]+W0.120000/E101.000000/K13/C{255,71,86,218};
-[2.1]+W0.200000/E153.000000/K11/C{239,233,251,4};
-[2.1.1]+W0.230000/E126.000000/K1/C{195,73,255,228};
-[2.1.1.1]-W0.260000/E1.000000/K4/C{253,166,13,178};
-[2.1.2]+W0.120000/E113.000000/K4/C{3,217,22,67};
-[2.1.2.1]-W0.850000/E19.000000/K3/C{104,85,119,103};
-[2.1.3]+W0.130000/E21.000000/K12/C{51,68,250,241};
-[2.1.3.1]-W0.190000/E24.000000/K1/C{114,91,28,225};
-[2.2]+W0.710000/E224.000000/K0/C{101,130,34,177};
-[2.2.1]-W0.140000/E7.000000/K1/C{10,169,187,177};
-[2.3]+W0.600000/E89.000000/K6/C{81,58,148,115};
-[2.3.1]-W0.050000/E3.000000/K8/C{26,107,77,88};
-[3]+W0.970000/E27.000000/K4/C{163,63,50,180};
-[3.1]-W0.240000/E23.000000/K2/C{174,240,5,245};
-[4]+W0.200000/E48.000000/K1/C{112,32,111,187};
+[1]+W0.690000/E215.000000/K10/C{60,247,105,127};
+[1.1]-W0.920000/E36.000000/K8/C{43,14,200,135};
+[2]+W0.490000/E29.000000/K12/C{12,141,143,186};
+[2.1]-W0.010000/E40.000000/K5/C{203,188,146,221};
+[3]+W0.640000/E15.000000/K9/C{4,106,252,236};
+[3.1]-W0.290000/E25.000000/K1/C{175,233,135,1};
 =
+100
 A
-P0/I3/H99.000000/E99.000000/D0.250000/C{99,99,25,255}/X92/Y360/S25.000000
+P0/I0/H8.000000/E7.000000/D0.960000/C{7,8,0,255}/X23/Y59/G5929.6202./S0.000000
 B
-[1]+W0.320000/E187.000000/K6/C{64,237,88,228};
-[1.1]-W0.420000/E36.000000/K4/C{205,233,14,96};
-[2]+W0.400000/E5.000000/K11/C{128,238,171,217};
-[3]+W0.140000/E8.000000/K13/C{15,73,104,102};
-[3.1]-W0.350000/E7.000000/K7/C{22,237,47,206};
-[4]+W0.950000/E102.000000/K4/C{246,127,179,217};
-[4.1]-W0.690000/E40.000000/K8/C{179,248,143,234};
+[1]+W0.990000/E140.000000/K11/C{179,73,188,163};
+[1.1]+W0.630000/E190.000000/K2/C{95,196,3,109};
+[1.1.1]-W0.330000/E49.000000/K4/C{123,39,37,213};
 =
 
 End of example.

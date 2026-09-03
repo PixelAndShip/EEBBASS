@@ -8,13 +8,6 @@ InputNode::InputNode(float iW, float setA, unsigned int iK, UnitColor iU)
     unitColor = iU;
 }
 
-// float weight = 1;
-// float setAmount = 0;
-// UnitColor unitColor = {255, 255, 255, 255};
-// unsigned int key = 255;
-// std::vector<InputNode *> inputNodes = {};
-// OutputNode *outputNode = nullptr;
-
 InputNode::InputNode(InputNode *copyNode)
 {
 

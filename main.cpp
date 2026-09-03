@@ -1,7 +1,13 @@
+/*
+Last time edited: 03.09.2026
+Last edit summary: adding documentation
+Existing issues:
+* no input safety
+Potential additions:
+*/
+
 #include <iostream>
 #include "src/data_management/sim_manager.h"
-
-#include "test/test.h"
 
 void visualSim()
 {

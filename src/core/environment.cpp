@@ -60,20 +60,18 @@ void Environment::manageSimulation()
 
     if (custom)
     {
-        startSimulation(0, maxPlantCount);
+        spawnUnits(0, maxPlantCount);
     }
     else
     {
-        startSimulation(maxAgentCount, maxPlantCount);
+        spawnUnits(maxAgentCount, maxPlantCount);
     }
 
     int cycle = 0;
-    // std::string windowName = "Environment" + std::to_string(identifier);
-    // InitWindow(800, 800, windowName.c_str());
-    // SetTargetFPS(60);
+
     int AgentsCount = 0;
     int PlantsCount = 0;
-    // std::string text = "";
+
     iteration = 0;
     environmentState = EnvironmentState::Running;
     while (cycle <= maxCycle)
@@ -81,7 +79,7 @@ void Environment::manageSimulation()
 
         AgentsCount = (int)spider->Agents.size();
         PlantsCount = (int)spider->Plants.size();
-        // text = std::to_string(AgentsCount) + "|" + std::to_string(PlantsCount) + "|" + std::to_string(iteration);
+
         if (iteration == maxCultivateIteration)
         {
 
@@ -93,11 +91,7 @@ void Environment::manageSimulation()
         }
 
         manageMoment();
-        // BeginDrawing();
-        // ClearBackground(BLACK);
-        // makeWindow();
-        // DrawText(text.c_str(), 20, 20, 30, WHITE);
-        // EndDrawing();
+
         iteration++;
     }
     environmentState = EnvironmentState::Finished;
@@ -108,11 +102,11 @@ void Environment::manageVisualizedSimulation(int iFPS)
 
     if (custom)
     {
-        startSimulation(0, 50);
+        spawnUnits(0, 50);
     }
     else
     {
-        startSimulation(maxAgentCount, maxPlantCount);
+        spawnUnits(maxAgentCount, maxPlantCount);
     }
 
     std::string windowName = "Environment" + std::to_string(identifier);
@@ -261,12 +255,12 @@ void Environment::cultivateSimulation(int targetPop)
     }
     if (custom)
     {
-        startSimulation(
+        spawnUnits(
             0, plantTargetPop);
     }
     else
     {
-        startSimulation(agentTargetPop, plantTargetPop);
+        spawnUnits(agentTargetPop, plantTargetPop);
     }
 }
 
@@ -421,42 +415,6 @@ void Environment::manageMoment()
     managePlantCount(maxPlantCount, cullPercentage);
 }
 
-// void Environment::manageSubMoment(std::string coords)
-// {
-//     DEBUG_LOG("Managing sub moment for "
-//               << coords);
-
-//     if (coords == "")
-//     {
-//         DEBUG_LOG("Invalid empty coordinates");
-//         return;
-//     }
-
-//     if (spider->proximateCoords.find(coords) ==
-//         spider->proximateCoords.end())
-//     {
-//         DEBUG_LOG("Coordinates not initialized in proximity map");
-
-//         spider->proximateCoords.clear();
-
-//         spider->proximateCoords[coords] = true;
-
-//         DEBUG_LOG("Setting proximities");
-
-//         spider->setProximities(coords);
-
-//         DEBUG_LOG("Managing Spider sub moment");
-
-//         spider->manageSubMoment();
-//     }
-//     else
-//     {
-//         DEBUG_LOG("Coordinates already processed");
-//     }
-
-//     DEBUG_LOG("Finished sub moment for "
-//               << coords);
-// }
 void Environment::makeWindow()
 {
 
@@ -495,7 +453,7 @@ void Environment::makeWindow()
     }
 }
 
-void Environment::startSimulation(int agentCount, int plantCount)
+void Environment::spawnUnits(int agentCount, int plantCount)
 {
     int AgentCount = agentCount - (int)spider->Agents.size();
     int PlantCount = plantCount - (int)spider->Plants.size();
@@ -725,17 +683,6 @@ void Environment::constructEnvironment(std::string fileName)
 
 void Environment::setCustomEnvironmentValues(std::string data)
 {
-    // data += 'I' + std::to_string(identifier);
-    // data += "/R" + std::to_string(radiation);
-    // data += "/C" + std::to_string(maxCultivateIteration);
-    // data += "/Y" + std::to_string(maxCycle);
-    // data += "/c" + std::to_string(carbon_count);
-    // data += "/L" + std::to_string(maxBrainLevel);
-    // data += "/N" + std::to_string(maxBrainChildNodes);
-    // data += "/W" + std::to_string(borderWidth);
-    // data += "/H" + std::to_string(borderHeight);
-    // data += "/A" + std::to_string(agentSize);
-    // data += "/P" + std::to_string(plantSize);
 
     size_t pos = 0;
 
