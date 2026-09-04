@@ -179,7 +179,6 @@ void Environment::cultivateSimulation(int targetPop)
 
         if (agent != nullptr)
         {
-
             agent->logAgent(maxCultivateIteration);
             agent->setHealth(maxCultivateIteration);
             agent->setEnergy(maxCultivateIteration);
