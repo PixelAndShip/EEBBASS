@@ -9,6 +9,37 @@ struct UnitColor
 {
     unsigned int red, green, blue, transparency;
 };
+
+enum class UserInputCase
+{
+    Default,
+    Visual,
+    Multithread,
+    Custom
+};
+
+enum FloatInput
+{
+    eRad,
+    cull,
+    floatInputCount
+};
+
+enum IntInput
+{
+    maxA,
+    maxP,
+    iT,
+    maxCultivate,
+    maxCycle,
+    cb,
+    maxBL,
+    maxBCN,
+    rootNodesCount,
+    fps,
+    intInputCount
+};
+
 inline unsigned int agentSize = 4;
 inline unsigned int plantSize = 3;
 inline unsigned int borderWidth = 700;
