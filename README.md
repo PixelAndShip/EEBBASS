@@ -23,12 +23,11 @@ Both windows and linux versions use statically linked libraries, so no additiona
 * Multithreading option may clog up the CPU cores.
 * To use the custom environment option, make sure to have your usable save file in the current working directory, otherwise the current implementation will not be able to read it.
 * To make your own Environment save file, please refer to the section 'How It Works', subsection 'Environment simulation derived from save file' for data writing protocols.
-* main_linux is compiled using g++.
+* EEBBASS_linux is compiled using g++.
 
 ### Known Issues
 
 * Unknown/unobtainable custom save file entry causes a core dump (crash).
-* Invalid use case and variable inputs cause Segmentation fault (crash).
 ---
 
 ## 3. In-Depth Documentation
@@ -286,19 +285,18 @@ When chosen simulation finishes or is closed, Environment destructors are called
 
 ### Development Notes
 
-* Most core parts are saved as pointers, except Agent Brain attributes.
+* Most dynamic parts are saved as pointers, except Agent Brain attributes.
 * Random number generation is done via global variables in src/data_management/data_types.h with inline std::random_device rd; inline std::mt19937 gen(rd());
 * Most #include local dependencies are nested.
 ---
 
 ### Future Developments / Improvements
 
-*  Carbon count and its processess.
+*  Carbon count and its processes.
 *  Plant behavior.
 *  Day and night cycle, could affect Plant behavior.
 *  Windowed UI.
 *  Source code documentation and clean up.
-*  Input safety.
 *  Each use case Time and Space complexity.
 
 ---
