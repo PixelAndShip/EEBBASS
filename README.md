@@ -78,7 +78,7 @@ Project/
 
 IMPORTANT NOTE!
 
-File directory EEBASS is created upon activating the main executable, in which subdirectories environments/ and logs/ are also created. environments/ houses environment save files, logs contain DEBUG_LOG() outputs.
+File directory EEBBASS is created upon activating the main executable, in which subdirectories environments/ and logs/ are also created. environments/ houses environment save files, logs contain DEBUG_LOG() outputs.
 
 
 
