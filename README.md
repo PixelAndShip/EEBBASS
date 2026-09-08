@@ -39,36 +39,36 @@ Project/
 ├── dbgtools/
 │   ├── debug.cpp
 │   ├── debug.h
-│   └──  user_input.h
+│   └── user_input.h
 ├── external/
 ├── src/
 │   ├── core/
 │   |   ├── environment.cpp
 │   |   ├── environment.h
 │   |   ├── spider.cpp
-│   |   └──  spider.h
+│   |   └── spider.h
 │   ├── data_management/
 │   |   ├── data_types.h
 │   |   ├── sim_manager.cpp
-│   |   └──  sim_manager.h
+│   |   └── sim_manager.h
 │   ├── ui/
 │   |   ├── interface.cpp
-│   |   └──  interface.h
+│   |   └── interface.h
 │   ├── units/
 │   |   ├── brain_nodes/
 │   |   |   ├── input_node.cpp
 │   |   |   ├── input_node.h
 │   |   |   ├── node_functions.cpp
 │   |   |   ├── node_functions.h
-│   |   |   └──  output_node.h
+│   |   |   └── output_node.h
 │   |   ├── agent.cpp
 │   |   ├── agent.h
 │   |   ├── brain.cpp
 │   |   ├── brain.h
 │   |   ├── plant.cpp
-│   |   └──  plant.h
+│   |   └── plant.h
 ├── test/
-│   └──  test.h
+│   └── test.h
 ├── main.cpp
 ├── EEBBASS_linux
 ├── EEBBASS_AS
