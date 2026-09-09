@@ -172,18 +172,7 @@ void Environment::cultivateSimulation(int targetPop)
 
     int originalPopulation = rankedAgents.size();
     int survivors = originalPopulation * (1 - cullPercentage);
-
-    for (int i = 0; i < survivors; i++)
-    {
-        Agent *agent = spider->Agents[rankedAgents[i].first];
-
-        if (agent != nullptr)
-        {
-            agent->logAgent(maxCultivateIteration);
-            agent->setHealth(maxCultivateIteration);
-            agent->setEnergy(maxCultivateIteration);
-        }
-    }
+    float nHealth = static_cast<float>(maxCultivateIteration);
     if (survivors > 0)
     {
         maxCultivateIteration++;
@@ -191,7 +180,24 @@ void Environment::cultivateSimulation(int targetPop)
     else
     {
         maxCultivateIteration--;
+        nHealth--;
+        if (nHealth < 0)
+        {
+            nHealth = 0;
+        }
     }
+    for (int i = 0; i < survivors; i++)
+    {
+        Agent *agent = spider->Agents[rankedAgents[i].first];
+
+        if (agent != nullptr)
+        {
+            agent->logAgent(nHealth);
+            agent->setHealth(nHealth);
+            agent->setEnergy(nHealth);
+        }
+    }
+
     for (int i = survivors; i < originalPopulation; i++)
     {
         auto it = spider->Agents.find(rankedAgents[i].first);
