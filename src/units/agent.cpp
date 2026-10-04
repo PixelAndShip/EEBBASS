@@ -104,13 +104,14 @@ void Agent::mutateStart()
 void Agent::logAgent(int iIteration, std::string fileName) const
 {
     bool logFile = false;
-
+    bool translateKey = false;
     if (fileName == "")
     {
         logFile = true;
         fileName = "logs/Environment_Log_" +
                    std::to_string(env_identifier) +
                    ".txt";
+        translateKey = true;
     }
 
     std::ofstream updatedLog(fileName, std::ios::app);
@@ -127,7 +128,7 @@ void Agent::logAgent(int iIteration, std::string fileName) const
 
     updatedLog << outputAgentStats() << '\n';
     updatedLog << "B\n";
-    updatedLog << brain.logBrain();
+    updatedLog << brain.logBrain(translateKey);
     updatedLog << "=\n";
 }
 
