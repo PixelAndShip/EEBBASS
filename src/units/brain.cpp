@@ -240,7 +240,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id, bool transl
     data += "/E" + std::to_string(setAmount);
     if (translateKey)
     {
-        data += "/K" + getSenses().at(key);
+        data += "/K" + std::to_string(key) + "{" + getSenses().at(key) + "}";
     }
     else
     {
@@ -271,7 +271,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id, bool transl
         data += "/E" + std::to_string(energyCost);
         if (translateKey)
         {
-            data += "/K" + getActions().at(key);
+            data += "/K" + std::to_string(key) + "{" + getActions().at(key) + "}";
         }
         else
         {
