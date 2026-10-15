@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <string>
 #include <algorithm>
-#include "debug/debug.h"
 #include <random>
 #include <filesystem>
 struct UnitColor

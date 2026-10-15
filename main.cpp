@@ -9,7 +9,7 @@ Potential additions:
 #include <iostream>
 #include <filesystem>
 
-#include "src/data_management/sim_manager.h"
+#include "src/backend/data_management/sim_manager.h"
 #include "dbgtools/user_input.h"
 
 void visualSim()
