@@ -36,8 +36,8 @@ public:
 
     void setIdentifier(int iD) { env_identifier = iD; };
     int getIdentifier() { return env_identifier; };
-    std::string logBrain() const;
-    std::string outputBrain(InputNode *node, std::vector<int> id) const;
+    std::string logBrain(bool translateKey = false) const;
+    std::string outputBrain(InputNode *node, std::vector<int> id, bool translateKey = false) const;
 
     void constructCustomBrain(std::string fileName);
     void constructCustomNode(std::string line);

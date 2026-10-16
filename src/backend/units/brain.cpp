@@ -193,15 +193,14 @@ const std::vector<InputNode *> &Brain::getInputNodes() const
     return inputNodes;
 }
 
-std::string Brain::logBrain() const
+std::string Brain::logBrain(bool translateKey) const
 {
 
     std::string data = "";
     int id = 1;
     for (InputNode *iN : inputNodes)
     {
-
-        data += outputBrain(iN, {id});
+        data += outputBrain(iN, {id}, translateKey);
         id++;
     }
 
@@ -213,7 +212,7 @@ std::string Brain::logBrain() const
     return data;
 }
 
-std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
+std::string Brain::outputBrain(InputNode *node, std::vector<int> id, bool translateKey) const
 {
 
     if (!node)
@@ -239,8 +238,14 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
 
     data += "W" + std::to_string(weight);
     data += "/E" + std::to_string(setAmount);
-    data += "/K" + std::to_string(key);
-
+    if (translateKey)
+    {
+        data += "/K" + std::to_string(key) + "{" + getSenses().at(key) + "}";
+    }
+    else
+    {
+        data += "/K" + std::to_string(key);
+    }
     data += "/C{";
     data += std::to_string(unitColor.red) + ",";
     data += std::to_string(unitColor.green) + ",";
@@ -264,8 +269,14 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
 
         data += "W" + std::to_string(weight);
         data += "/E" + std::to_string(energyCost);
-        data += "/K" + std::to_string(key);
-
+        if (translateKey)
+        {
+            data += "/K" + std::to_string(key) + "{" + getActions().at(key) + "}";
+        }
+        else
+        {
+            data += "/K" + std::to_string(key);
+        }
         data += "/C{";
         data += std::to_string(unitColor.red) + ",";
         data += std::to_string(unitColor.green) + ",";
@@ -278,7 +289,7 @@ std::string Brain::outputBrain(InputNode *node, std::vector<int> id) const
     for (InputNode *cn : node->getInputNodes())
     {
         id.push_back(nextId);
-        data += outputBrain(cn, id);
+        data += outputBrain(cn, id, translateKey);
         nextId++;
         id.pop_back();
     }
