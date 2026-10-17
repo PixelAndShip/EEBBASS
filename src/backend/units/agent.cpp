@@ -52,8 +52,6 @@ Agent::Agent(
 
     speed = iSpeed;
 
-    agentColor = {100, 100, 1, 255};
-
     x = 25;
     y = 25;
     mutateStart();

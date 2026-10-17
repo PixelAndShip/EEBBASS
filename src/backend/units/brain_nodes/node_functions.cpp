@@ -305,16 +305,6 @@ void updateSpeed(float deltaEnergy, Agent *Self)
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setSpeed(currentSpeed + deltaEnergy);
 
-    unsigned int blue = std::clamp(
-        static_cast<int>(std::round(Self->getSpeed())),
-        0,
-        255);
-
-    UnitColor clr = Self->getAgentColor();
-
-    Self->setAgentColor(
-        {clr.red, clr.green, blue, clr.transparency});
-
     if (Self->getSpeed() < 0)
     {
 
@@ -348,16 +338,6 @@ void updateHealth(float deltaEnergy, Agent *Self)
 
     Self->setEnergy(currentEnergy - deltaEnergy);
     Self->setHealth(currentHealth + deltaEnergy);
-
-    unsigned int green = std::clamp(
-        static_cast<int>(std::round(Self->getHealth())),
-        0,
-        255);
-
-    UnitColor clr = Self->getAgentColor();
-
-    Self->setAgentColor(
-        {clr.red, green, clr.blue, clr.transparency});
 
     if (Self->getHealth() < 0)
     {

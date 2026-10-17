@@ -380,7 +380,6 @@ void Environment::manageMoment()
         }
         else
         {
-            agent->updateColor();
             ++it;
         }
     }
@@ -410,7 +409,6 @@ void Environment::manageMoment()
         }
         else
         {
-            plant->updateColor();
             ++pl;
         }
     }
@@ -435,10 +433,10 @@ void Environment::makeWindow()
             agent->getX(),
             agent->getY(),
             agentSize,
-            {(unsigned char)(color.red * 2),
-             (unsigned char)(color.green * 2),
-             (unsigned char)(color.blue * 2),
-             (unsigned char)(color.transparency * 2)});
+            {(unsigned char)(color.red),
+             (unsigned char)(color.green),
+             (unsigned char)(color.blue),
+             (unsigned char)(color.transparency)});
     }
     for (auto &[coords, plant] : spider->Plants)
     {
