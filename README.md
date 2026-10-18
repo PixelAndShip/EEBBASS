@@ -30,7 +30,6 @@ Both windows and linux versions use statically linked libraries, so no additiona
 ### Known Issues
 
 * Unknown/unobtainable custom save file entry causes a core dump (crash).
-* Opening save or log files may not be possible via menu, files are accessable in file system.
 ---
 
 ## 3. In-Depth Documentation
@@ -45,45 +44,31 @@ Project/
 │   └── user_input.h
 ├── external/
 ├── src/
-│   ├── backend/            simulation only, no drawing, no input
-│   │   ├── core/
-│   │   |   ├── environment.cpp
-│   │   |   ├── environment.h
-│   │   |   ├── spider.cpp
-│   │   |   └── spider.h
-│   │   ├── data_management/
-│   │   |   ├── data_types.h
-│   │   |   ├── sim_manager.cpp
-│   │   |   └── sim_manager.h
-│   │   └── units/
-│   │       ├── brain_nodes/
-│   │       |   ├── input_node.cpp
-│   │       |   ├── input_node.h
-│   │       |   ├── node_functions.cpp
-│   │       |   ├── node_functions.h
-│   │       |   └── output_node.h
-│   │       ├── agent.cpp
-│   │       ├── agent.h
-│   │       ├── brain.cpp
-│   │       ├── brain.h
-│   │       ├── plant.cpp
-│   │       └── plant.h
-│   └── frontend/           
-│       ├── components/
-│       |   ├── environment_window.cpp/.h   
-│       |   ├── input_form.cpp/.h           
-│       |   ├── side_panel.cpp/.h           
-│       |   └── ui.cpp/.h                   
-│       ├── screens/
-│       |   ├── screen.h                    
-│       |   ├── screens.cpp/.h            
-│       |   ├── screens_basic.cpp          
-│       |   ├── screens_forms.cpp           
-│       |   └── screen_current.cpp          
-│       └── services/
-│           ├── file_service.cpp/.h         
-│           ├── interface.cpp/.h            
-│           └── simulation_controller.cpp/.h  
+│   ├── core/
+│   |   ├── environment.cpp
+│   |   ├── environment.h
+│   |   ├── spider.cpp
+│   |   └── spider.h
+│   ├── data_management/
+│   |   ├── data_types.h
+│   |   ├── sim_manager.cpp
+│   |   └── sim_manager.h
+│   ├── ui/
+│   |   ├── interface.cpp
+│   |   └── interface.h
+│   ├── units/
+│   |   ├── brain_nodes/
+│   |   |   ├── input_node.cpp
+│   |   |   ├── input_node.h
+│   |   |   ├── node_functions.cpp
+│   |   |   ├── node_functions.h
+│   |   |   └── output_node.h
+│   |   ├── agent.cpp
+│   |   ├── agent.h
+│   |   ├── brain.cpp
+│   |   ├── brain.h
+│   |   ├── plant.cpp
+│   |   └── plant.h
 ├── test/
 │   └── test.h
 ├── main.cpp
@@ -308,7 +293,7 @@ When chosen simulation finishes or is closed, Environment destructors are called
 ### Development Notes
 
 * Most dynamic parts are saved as pointers, except Agent Brain attributes.
-* Random number generation is done via global variables in src/backend/data_management/data_types.h with inline std::random_device rd; inline std::mt19937 gen(rd());
+* Random number generation is done via global variables in src/data_management/data_types.h with inline std::random_device rd; inline std::mt19937 gen(rd());
 * Most #include local dependencies are nested.
 ---
 
