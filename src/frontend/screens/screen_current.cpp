@@ -34,6 +34,18 @@ namespace
         bool padded() const override { return false; }
         MenuChoice activeMenuItem() const override { return MenuChoice::Current; }
 
+        // "Current Environment" in the menu, while already looking at the
+        // environment, shows or hides the description panel.
+        bool onMenuChoice(Interface &app, MenuChoice choice) override
+        {
+            if (choice == MenuChoice::Current and app.simulation().active())
+            {
+                descriptionOpen = !descriptionOpen;
+                return true;
+            }
+            return false;
+        }
+
         void draw(Interface &app, Rectangle area) override
         {
             SimulationController &sim = app.simulation();
@@ -45,7 +57,8 @@ namespace
                 return;
             }
 
-            // ---- description panel (updated live), closable with the white line ----
+            // ---- description panel (updated live): closed with the white line,
+            //      shown / hidden with the Current Environment menu button ----
             float top = area.y;
             float textLeft = area.x + (app.menuOpen ? 16.0f : 64.0f);
 
@@ -62,10 +75,6 @@ namespace
 
                 top = area.y + DescriptionHeight;
                 DrawLineEx({area.x, top}, {area.x + area.width, top}, 2.0f, Ui::Cyan);
-            }
-            else if (Ui::menuButton({area.x + area.width - 108, area.y + 6, 48, 36}))
-            {
-                descriptionOpen = true;
             }
 
             // ---- X: kill the process ----
