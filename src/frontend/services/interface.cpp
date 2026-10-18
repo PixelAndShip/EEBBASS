@@ -146,6 +146,11 @@ void Interface::drawChrome()
         {
             menuOpen = false;
         }
+        if (menu.chosen != MenuChoice::None and screen.onMenuChoice(*this, menu.chosen))
+        {
+            menu.chosen = MenuChoice::None; // the screen dealt with it
+        }
+
         switch (menu.chosen)
         {
         case MenuChoice::Current:

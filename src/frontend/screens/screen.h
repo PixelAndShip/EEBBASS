@@ -31,6 +31,15 @@ public:
     virtual void onEnter(Interface &app) { (void)app; }
     virtual void draw(Interface &app, Rectangle area) = 0;
 
+    // A menu button was clicked while this screen is open. Return true if the
+    // screen handled it itself, false to let the Interface navigate as usual.
+    virtual bool onMenuChoice(Interface &app, MenuChoice choice)
+    {
+        (void)app;
+        (void)choice;
+        return false;
+    }
+
     // the white line in the top right corner of the window
     virtual bool hasCloseButton() const { return true; }
     virtual ScreenId closeTarget() const { return ScreenId::Tutorial; }

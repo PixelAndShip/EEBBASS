@@ -26,7 +26,7 @@ namespace
                 "by natural selection.\n"
                 "\n"
                 "Menu\n"
-                "- Current Environment: watch the environment that is running right now, or the progress of several environments running together.\n"
+                "- Current Environment: watch the environment that is running right now, or the progress of several environments running together. Click it again while watching to hide or show the description on top.\n"
                 "- Environment Logs: the log files written by environments.\n"
                 "- Environment Save files: saved environments. Click a file to open it in a text editor.\n"
                 "- Create Environment: start a default environment, a custom one, several at once or one from a save file.\n"
