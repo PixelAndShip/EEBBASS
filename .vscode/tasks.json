@@ -21,7 +21,7 @@
                 "src/backend/data_management/sim_manager.cpp",
                 "src/backend/core/environment.cpp",
                 "src/backend/core/spider.cpp",
-                "src/frontend/interface.cpp",
+                "src/frontend/services/interface.cpp",
                 "src/backend/units/agent.cpp",
                 "src/backend/units/brain.cpp",
                 "src/backend/units/plant.cpp",

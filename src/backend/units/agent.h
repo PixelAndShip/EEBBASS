@@ -28,11 +28,34 @@ public:
     }
     void updateColor()
     {
+        if (generationID.size() >= 1)
+        {
+            agentColor.red = std::clamp(static_cast<int>(getUsableColor(generationID[0])), 0, 255);
+        }
+        else
+        {
+            agentColor.red = 0;
+        }
+        agentColor.green = std::clamp(static_cast<int>(getUsableColor(generationID.size())), 0, 255);
+        if (generationID.size() >= 1)
+        {
+            agentColor.blue = std::clamp(static_cast<int>(getUsableColor(generationID[generationID.size() - 1])), 0, 255);
+        }
+        else
+        {
+            agentColor.blue = 0;
+        }
 
-        agentColor.red = std::clamp(static_cast<int>(std::round(energy)), 0, 255);
-        agentColor.green = std::clamp(static_cast<int>(std::round(health)), 0, 255);
-        agentColor.blue = std::clamp(static_cast<int>(std::round(speed)), 0, 255);
         agentColor.transparency = 255;
+    }
+
+    unsigned int getUsableColor(unsigned int iC)
+    {
+        if (iC > 255)
+        {
+            return getUsableColor((iC - 255));
+        }
+        return iC;
     }
 
     void setIdentifier(int iD)
@@ -113,7 +136,7 @@ public:
         speed = iS;
     }
 
-        bool getProcessed()
+    bool getProcessed()
     {
         return processed;
     }

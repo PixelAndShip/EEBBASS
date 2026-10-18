@@ -498,7 +498,6 @@ void Spider::splitNewAgent(std::string ParentCoords)
         maxRootNodes,
         maxBrainChildNodes,
         maxBrainLevel);
-    parent->updateColor();
     pendingBirths.push_back(
         {childCoords, child});
 }
