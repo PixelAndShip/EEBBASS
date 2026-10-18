@@ -1,30 +1,53 @@
+
+
 #pragma once
-#include "src/backend/data_management/sim_manager.h"
-#include <raylib.h>
+#include <map>
+#include <memory>
+#include <optional>
+#include "src/frontend/components/ui.h"
+#include "src/frontend/screens/screen.h"
+#include "src/frontend/services/file_service.h"
+#include "src/frontend/services/simulation_controller.h"
+
 class Interface
 {
-
 public:
-    SimManager *simulation;
+    Interface();
+    ~Interface();
 
-    void DisplayHomeScreen();
+    // Opens the window and runs until the program is closed.
+    int run();
 
-    void DisplayEnvironments(); // sidebar of selectable environments and their status (1. in multithread simulation 2. viewable)
+    // The pieces run() is made of, usable on their own:
+    bool init(int width = 1280, int height = 720);
+    void frame(); // read input, advance the simulation, draw once
+    void shutdown();
+    bool wantsExit() const { return exitRequested; }
 
-    void DisplayActiveScreen(); // prob input case char, to check which type to display on main (save file, or draw simulation)
+    // ---- used by the screens ----
+    void navigate(ScreenId id); // takes effect at the start of the next frame
+    ScreenId currentScreen() const { return current; }
+    void quit() { exitRequested = true; }
+    void toggleFullscreen();
+    SimulationController &simulation() { return controller; }
+    EditorLauncher &editor() { return textEditor; }
 
-    void DisplaySimulation();
+    bool menuOpen = true;
 
-    void DisplayEnvironmentStats();
+    // When true the caller fills Ui::input() itself instead of raylib's
+    // mouse and keyboard (used to drive the interface from code).
+    void useExternalInput(bool enabled) { externalInput = enabled; }
 
-    void DisplaySaveFile(); // add view, edit and save functionality to ES/ directory .txt files
+private:
+    SimulationController controller;
+    EditorLauncher textEditor;
+    std::map<ScreenId, std::unique_ptr<Screen>> screens;
+    ScreenId current = ScreenId::Tutorial;
+    std::optional<ScreenId> pending;
+    bool exitRequested = false;
+    bool externalInput = false;
+    bool windowOpen = false;
+
+    void applyNavigation();
+    void drawChrome();
 };
-
-/*
-    1. Home screen:
-    _________________________________________________________________________________________________________________________
-    | List of environments:       |   Active screen (selected environment details, opened text file, visual environment)     |
-    |                             |                                                                                          |
-    |_____________________________|__________________________________________________________________________________________|
-
-*/

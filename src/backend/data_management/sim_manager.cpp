@@ -2,6 +2,8 @@
 
 SimManager::~SimManager()
 {
+    requestStop();
+    waitForSimulation();
     for (Environment *env : environments)
     {
         delete env;
@@ -20,23 +22,55 @@ SimManager::SimManager(int threadCount, float eRad, int maxAC, int maxPC, float 
     }
 }
 
-void SimManager::runSimulation()
+void SimManager::startSimulation()
 {
+    if (started)
+    {
+        return;
+    }
+    started = true;
+    finishedCount = 0;
 
-    std::vector<std::thread> threads;
-    std::cout << "\nSimulation started!\n";
     for (Environment *env : environments)
     {
-
-        threads.emplace_back([env]()
-                             { 
+        threads.emplace_back([this, env]()
+                             {
         env->setState(EnvironmentState::Running);
         env->manageSimulation();
-        env->setState(EnvironmentState::Finished); });
+        env->setState(EnvironmentState::Finished);
+        finishedCount++; });
     }
+}
+
+bool SimManager::isRunning() const
+{
+    return started and finishedCount < (int)environments.size();
+}
+
+void SimManager::requestStop()
+{
+    for (Environment *env : environments)
+    {
+        env->requestStop();
+    }
+}
+
+void SimManager::waitForSimulation()
+{
     for (std::thread &thr : threads)
     {
-        thr.join();
+        if (thr.joinable())
+        {
+            thr.join();
+        }
     }
+    threads.clear();
+}
+
+void SimManager::runSimulation()
+{
+    std::cout << "\nSimulation started!\n";
+    startSimulation();
+    waitForSimulation();
     std::cout << "\nSimulation finished!\n";
 }
