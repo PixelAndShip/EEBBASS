@@ -2,10 +2,14 @@
 #include "src/backend/core/environment.h"
 #include <fstream>
 #include <thread>
+#include <atomic>
 class SimManager
 {
 private:
     std::vector<Environment *> environments;
+    std::vector<std::thread> threads;
+    std::atomic<int> finishedCount{0};
+    bool started = false;
 
 public:
     ~SimManager();
@@ -14,5 +18,16 @@ public:
     {
         return environments;
     }
+
+    // Blocking: starts every environment on its own thread and waits for all.
     void runSimulation();
+
+    // Non-blocking variant for a frontend: start, poll isRunning() /
+    // getFinishedCount(), then waitForSimulation() to join the threads.
+    void startSimulation();
+    bool isRunning() const;
+    int getFinishedCount() const { return finishedCount; }
+    int getEnvironmentCount() const { return (int)environments.size(); }
+    void requestStop();
+    void waitForSimulation();
 };

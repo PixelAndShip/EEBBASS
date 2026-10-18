@@ -1,8 +1,10 @@
+
+
 #pragma once
 #include <vector>
 #include <iostream>
 #include <random>
-#include "raylib.h"
+#include <atomic>
 #include "spider.h"
 #include <unistd.h>
 
@@ -29,9 +31,13 @@ private:
     int maxRootNodes;
     int maxBrainLevel;
     int maxBrainChildNodes;
+    int worldWidth;
+    int worldHeight;
     bool custom;
 
-    EnvironmentState environmentState = EnvironmentState::Finished;
+    std::atomic<EnvironmentState> environmentState{EnvironmentState::Finished};
+    std::atomic<int> completedCycles{0};
+    std::atomic<bool> stopRequested{false};
 
 public:
     Spider *spider = nullptr;
@@ -43,27 +49,35 @@ public:
     ~Environment();
 
     EnvironmentState getState() const;
+    int getIdentifier() const { return identifier; }
+    int getIteration() const { return iteration; }
+    int getMaxCultivateIteration() const { return maxCultivateIteration; }
+    int getCompletedCycles() const { return completedCycles; }
+    int getMaxCycle() const { return maxCycle; }
+    int getWorldWidth() const { return worldWidth; }
+    int getWorldHeight() const { return worldHeight; }
+    int getAgentCount() const { return spider ? (int)spider->Agents.size() : 0; }
+    int getPlantCount() const { return spider ? (int)spider->Plants.size() : 0; }
+    float getRadiation() const { return radiation; }
+    float getCullPercentage() const { return cullPercentage; }
+    bool isCustom() const { return custom; }
 
     void setState(EnvironmentState iES);
 
+    void requestStop() { stopRequested = true; }
+
     void manageSimulation();
+
+    void start();
+    void step();
 
     void managePlantCount(int count = 100, float cullingCount = 0.25); // makes sure sim does not crash
 
     void manageAgentCount(int count = 250, float cullingCount = 0.25); // makes sure sim does not crash
 
-    void manageMoment(); /*
-    loop through agents and their soroundings, each moment agent can perform several internal actions and 1 external action
-    this means each moment needs to be subdivided into submoments:
-    determening which agent gets to perform their external action first is determined by which agent has the higher speed stat
-
-    */
-    void manageVisualizedSimulation(int iFPS = 10);
-    // void manageSubMoment(std::string coords);
+    void manageMoment();
 
     void cultivateSimulation(int targetPop = 200);
-
-    void makeWindow();
 
     void spawnUnits(int agentCount = 200, int plantCount = 50);
 

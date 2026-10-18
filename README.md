@@ -13,31 +13,24 @@
 
 ### Requirements
 
-Provided via using ldd (List Dynamic Dependencies):
-
-* linux-vdso.so.1 
-* libstdc++.so.6 
-* libm.so.6
-* libgcc_s.so.1
-* libc.so.6
-* lib64/ld-linux-x86-64.so.2
-
-Program uses statically linked raylib.
+Both windows and linux versions use statically linked libraries, so no additional resources should be needed for use.
 
 ### Before Running
 
 * Make sure your current directory supports directory creation and file creation. This is needed to save and use save files for environment loading.
 * This application uses raylib to visualize simulations, raylib may need to be installed as a library to recompile the source code.
 * Save files are overwritten every time the corresponding Environment runs a new simulation, so make sure to save the desired Environment data elsewhere, before launching a new simulation.
-* Multithreading option may clog up the CPU cores.
-* To use the custom environment option, make sure to have your usable save file in the current working directory, otherwise the current implementation will not be able to read it.
+* The 'Create multiple environments' option may clog up the CPU cores.
+* To use 'Create Visual Environment from Save file', put your save file in the EEBBASS/environments/ directory (or in the current working directory) and type its name, with or without .txt.
+* The program is controlled with the mouse and keyboard inside its window, there is no console menu anymore. The window has a built in tutorial.
+* 'Environment Save files' and 'Environment Logs' open files with your system text editor: notepad on Windows, 'open -W -t' on macOS, xdg-open on Linux. Set the environment variable EEBBASS_EDITOR to the editor program you want to use instead.
 * To make your own Environment save file, please refer to the section 'How It Works', subsection 'Environment simulation derived from save file' for data writing protocols.
-* main_linux is compiled using g++.
+* EEBBASS_linux is compiled using g++.
 
 ### Known Issues
 
 * Unknown/unobtainable custom save file entry causes a core dump (crash).
-* Invalid use case and variable inputs cause Segmentation fault (crash).
+* Opening save or log files may not be possible via menu, files are accessable in file system.
 ---
 
 ## 3. In-Depth Documentation
@@ -49,35 +42,50 @@ Project/
 ├── dbgtools/
 │   ├── debug.cpp
 │   ├── debug.h
+│   └── user_input.h
 ├── external/
 ├── src/
-│   ├── core/
-│   |   ├── environment.cpp
-│   |   ├── environment.h
-│   |   ├── spider.cpp
-│   |   ├── spider.h
-│   ├── data_management/
-│   |   ├── data_types.h
-│   |   ├── sim_manager.cpp
-│   |   ├── sim_manager.h
-│   ├── ui/
-│   |   ├── interface.cpp
-│   |   ├── interface.h
-│   ├── units/
-│   |   ├── brain_nodes/
-│   |   |   ├── input_node.cpp
-│   |   |   ├── input_node.h
-│   |   |   ├── node_functions.cpp
-│   |   |   ├── node_functions.h
-│   |   |   ├── output_node.h
-│   |   ├── agent.cpp
-│   |   ├── agent.h
-│   |   ├── brain.cpp
-│   |   ├── brain.h
-│   |   ├── plant.cpp
-│   |   ├── plant.h
+│   ├── backend/            simulation only, no drawing, no input
+│   │   ├── core/
+│   │   |   ├── environment.cpp
+│   │   |   ├── environment.h
+│   │   |   ├── spider.cpp
+│   │   |   └── spider.h
+│   │   ├── data_management/
+│   │   |   ├── data_types.h
+│   │   |   ├── sim_manager.cpp
+│   │   |   └── sim_manager.h
+│   │   └── units/
+│   │       ├── brain_nodes/
+│   │       |   ├── input_node.cpp
+│   │       |   ├── input_node.h
+│   │       |   ├── node_functions.cpp
+│   │       |   ├── node_functions.h
+│   │       |   └── output_node.h
+│   │       ├── agent.cpp
+│   │       ├── agent.h
+│   │       ├── brain.cpp
+│   │       ├── brain.h
+│   │       ├── plant.cpp
+│   │       └── plant.h
+│   └── frontend/           
+│       ├── components/
+│       |   ├── environment_window.cpp/.h   
+│       |   ├── input_form.cpp/.h           
+│       |   ├── side_panel.cpp/.h           
+│       |   └── ui.cpp/.h                   
+│       ├── screens/
+│       |   ├── screen.h                    
+│       |   ├── screens.cpp/.h            
+│       |   ├── screens_basic.cpp          
+│       |   ├── screens_forms.cpp           
+│       |   └── screen_current.cpp          
+│       └── services/
+│           ├── file_service.cpp/.h         
+│           ├── interface.cpp/.h            
+│           └── simulation_controller.cpp/.h  
 ├── test/
-│   ├── test.h
+│   └── test.h
 ├── main.cpp
 ├── EEBBASS_linux
 ├── EEBBASS_AS
@@ -88,7 +96,7 @@ Project/
 
 IMPORTANT NOTE!
 
-File directory EEBASS is created upon activating the main executable, in which subdirectories environments/ and logs/ are also created. environments/ houses environment save files, logs contain DEBUG_LOG() outputs.
+File directory EEBBASS is created upon activating the main executable, in which subdirectories environments/ and logs/ are also created. environments/ houses environment save files, logs contain DEBUG_LOG() outputs.
 
 
 
@@ -183,11 +191,15 @@ Hosts global variables and functions.
 
 #### Sim Manager
 
-Enacts multithreading functionality.
+Enacts multithreading functionality. startSimulation() starts one thread per Environment without blocking, isRunning() / getFinishedCount() report progress, requestStop() asks every Environment to stop and waitForSimulation() joins the threads. runSimulation() does all of that in one blocking call.
 
 #### Interface
 
-Not yet implemented, future designs point toward expanding windowed user interfaces.
+Opens the raylib window and draws what every window of the design shares: title bar (full screen toggle, close program), the menu on the left and the frame. It switches between the Screens (tutorial, save files, logs, create, environment variables, save file name, current environment). Screens only use the Environment and Sim Manager through their read only functions, the simulation never draws anything.
+
+#### Simulation Controller
+
+Owns the environment (or the Sim Manager) that is currently shown and decides how fast the simulation advances: setStepsPerSecond() sets how many Environment::step() calls happen per second, independent of how often the window is redrawn. A time budget per frame stops a heavy environment from freezing the window.
 
 #### Debug tools
 
@@ -204,13 +216,13 @@ The program can run in 2 modes, Visualized and Not Visualized.
 
 1) Visualized:
 
-Called via terminal 'd' for default values, 'v' for custom values entered via terminal.
+Started from the Create Environment window: 'Create Default Visual Environment' for default values, 'Create Custom Visual Environment' for values entered in the window.
 
-An Environment instance calls manageVisualizedSimulation(), in which 1) spawnUnits() is called to create Agents and Plants, 2) A while loop, conditional upon window being opened, manageMoment() and Environment instanced attribute Spider class spider - manageSubMoment() are called each iteration to manage Unit stats and Agent behaviors. When iteration reaches maxCultivateIteration, cultivateSimulation() is called to get rid of the weaker scoring Agents and create new Agents to promote behavior diversity. If there are no survivors after one cycle, the maxCultivateIteration is decreased by 1; if instead survivors are found, it is increased by 1.
+The Simulation Controller creates an Environment and calls start(), in which spawnUnits() is called to create Agents and Plants. Then, once per drawn frame, the controller calls step() as many times as the chosen steps per second ask for. Each step() calls manageMoment() and Environment instanced attribute Spider class spider - manageSubMoment() to manage Unit stats and Agent behaviors. When iteration reaches maxCultivateIteration, cultivateSimulation() is called to get rid of the weaker scoring Agents and create new Agents to promote behavior diversity. If there are no survivors after one cycle, the maxCultivateIteration is decreased by 1; if instead survivors are found, it is increased by 1. The frontend draws the Environment's Agents and Plants from the data it reads, Environment itself does not draw.
 
 2) Not Visualized:
 
-A Sim Manager instance creates specified amount of Environment instances for which threads are mapped and manageSimulation() is callled. manageSimulation() enacts the same loop as manageVisualizedSimulation(), as mentioned in 1) Visualized:, but does not create raylib windows. The Environment loop and simulation end when the specified amount of maxCycle is reached.
+A Sim Manager instance creates specified amount of Environment instances for which threads are mapped and manageSimulation() is callled. manageSimulation() enacts the same loop as step(), as mentioned in 1) Visualized:, but is not driven from outside and has no visuals. The Environment loop and simulation end when the specified amount of maxCycle is reached, or when requestStop() is called (white X in the Current Environment window). The frontend shows an animation of how many Environments are still simulating.
 
 ```
 
@@ -232,7 +244,7 @@ Main function of Spider is manageSubMoment, that is divided into 7 parts:
 ```
 Environment Simulation Derived From A Save File:
 
-Called via terminal with input 'c', the program requires another input for the save file name, with which the Environment is then constructed. The protocol for writing Environment data is as follows (text written inside () is only used in this explanatory case):
+Called via the 'Create Visual Environment from Save file' button, the program asks for the save file name, with which the Environment is then constructed. The protocol for writing Environment data is as follows (text written inside () is only used in this explanatory case):
 
 Environment
 I(identifier - int value 0+ including)/R(radiation - float value from 0.0 to 1.0 including)/a(max amount of Agents - int value, from 1+ included)/p(max amount of Plants - int value, from 1+ included)/e(culling percentage - float value from 0.0 to 1.0 included)/C(max cultivate iterations - int value  from 1+ included)/Y(max cycle - int value from 1+ included)/c(carbon count - not yet implemented, any int value included)/O(max Agent Brain root Input Node count - int value from 1+ included)/L(max Brain child Input Node depth - int value from 1+ included)/N(max Brain Input Node child node Input Node count- int value from 1+ included)/W(environment border width - int value from agent size+ not included)/H(environment border height - int value from agent size+ not included)/A(agent size - int value from 1+ included)/P(plant size - int value from 1+ included)
@@ -280,7 +292,7 @@ When starting data is acquired, the Visualized core loop is enacted.
 ```
 Multithreaded Environments:
 
-Instanced Sim Manager, with inputed Environment attributes, maps threads for each Environment and calls Not Visualized core loop / manageSimulation().
+Instanced Sim Manager, created via 'Create multiple environments' with the inputed Environment attributes, maps threads for each Environment and calls Not Visualized core loop / manageSimulation().
 ```
 
 ```
@@ -295,19 +307,17 @@ When chosen simulation finishes or is closed, Environment destructors are called
 
 ### Development Notes
 
-* Most core parts are saved as pointers, except Agent Brain attributes.
-* Random number generation is done via global variables in src/data_management/data_types.h with inline std::random_device rd; inline std::mt19937 gen(rd());
+* Most dynamic parts are saved as pointers, except Agent Brain attributes.
+* Random number generation is done via global variables in src/backend/data_management/data_types.h with inline std::random_device rd; inline std::mt19937 gen(rd());
 * Most #include local dependencies are nested.
 ---
 
 ### Future Developments / Improvements
 
-*  Carbon count and its processess.
+*  Carbon count and its processes.
 *  Plant behavior.
 *  Day and night cycle, could affect Plant behavior.
-*  Windowed UI.
 *  Source code documentation and clean up.
-*  Input safety.
 *  Each use case Time and Space complexity.
 
 ---

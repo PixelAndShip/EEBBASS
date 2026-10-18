@@ -20,6 +20,8 @@ Environment::Environment(int id, float eRad, int maxAC, int maxPC, float cullP, 
     maxBrainChildNodes = maxBCN;
     borderWidth = borderW;
     borderHeight = borderH;
+    worldWidth = borderW;
+    worldHeight = borderH;
 
     spider = new Spider(eRad, rootNodesCount, maxBL, maxBCN);
 
@@ -31,6 +33,8 @@ Environment::Environment(std::string saveFile)
 {
 
     constructEnvironment(saveFile);
+    worldWidth = borderWidth;
+    worldHeight = borderHeight;
     rootNodeDist = std::uniform_int_distribution<>(0, maxRootNodes);
     insideX = std::uniform_int_distribution<>(0, borderWidth);
     insideY = std::uniform_int_distribution<>(0, borderHeight);
@@ -69,16 +73,11 @@ void Environment::manageSimulation()
 
     int cycle = 0;
 
-    int AgentsCount = 0;
-    int PlantsCount = 0;
-
     iteration = 0;
+    completedCycles = 0;
     environmentState = EnvironmentState::Running;
-    while (cycle <= maxCycle)
+    while (cycle <= maxCycle and !stopRequested)
     {
-
-        AgentsCount = (int)spider->Agents.size();
-        PlantsCount = (int)spider->Plants.size();
 
         if (iteration == maxCultivateIteration)
         {
@@ -88,6 +87,7 @@ void Environment::manageSimulation()
             iteration = 0;
             environmentState = EnvironmentState::Running;
             cycle += 1;
+            completedCycles = cycle;
         }
 
         manageMoment();
@@ -97,9 +97,8 @@ void Environment::manageSimulation()
     environmentState = EnvironmentState::Finished;
 }
 
-void Environment::manageVisualizedSimulation(int iFPS)
+void Environment::start()
 {
-
     if (custom)
     {
         spawnUnits(0, 50);
@@ -109,45 +108,25 @@ void Environment::manageVisualizedSimulation(int iFPS)
         spawnUnits(maxAgentCount, maxPlantCount);
     }
 
-    std::string windowName = "Environment" + std::to_string(identifier);
-    int X = borderWidth;
-    int Y = borderHeight;
-    InitWindow(X, Y, windowName.c_str());
-    SetTargetFPS(iFPS);
-    int AgentsCount = 0;
-    int PlantsCount = 0;
-    std::string agentCountSTR, plantCountSTR, iterationSTR;
     iteration = 0;
+    completedCycles = 0;
     environmentState = EnvironmentState::Running;
-    while (!WindowShouldClose())
+}
+
+void Environment::step()
+{
+    if (iteration == maxCultivateIteration)
     {
 
-        AgentsCount = (int)spider->Agents.size();
-        PlantsCount = (int)spider->Plants.size();
-        agentCountSTR = "Agent count: " + std::to_string(AgentsCount);
-        plantCountSTR = "Plant count: " + std::to_string(PlantsCount);
-        iterationSTR = "Iteration: " + std::to_string(iteration);
-        if (iteration == maxCultivateIteration)
-        {
-
-            environmentState = EnvironmentState::Paused;
-            cultivateSimulation(maxAgentCount);
-            iteration = 0;
-            environmentState = EnvironmentState::Running;
-        }
-
-        manageMoment();
-        BeginDrawing();
-        ClearBackground(BLACK);
-        makeWindow();
-        DrawText(agentCountSTR.c_str(), 20, 20, 30, YELLOW);
-        DrawText(plantCountSTR.c_str(), 20, 50, 30, GREEN);
-        DrawText(iterationSTR.c_str(), 20, 80, 30, BLUE);
-        EndDrawing();
-        iteration++;
+        environmentState = EnvironmentState::Paused;
+        cultivateSimulation(maxAgentCount);
+        iteration = 0;
+        environmentState = EnvironmentState::Running;
+        completedCycles++;
     }
-    environmentState = EnvironmentState::Finished;
-    CloseWindow();
+
+    manageMoment();
+    iteration++;
 }
 
 void Environment::cultivateSimulation(int targetPop)
@@ -380,6 +359,7 @@ void Environment::manageMoment()
         }
         else
         {
+            agent->updateColor();
             ++it;
         }
     }
@@ -409,6 +389,7 @@ void Environment::manageMoment()
         }
         else
         {
+            plant->updateColor();
             ++pl;
         }
     }
@@ -416,44 +397,6 @@ void Environment::manageMoment()
     spider->manageSubMoment();
     manageAgentCount(maxAgentCount, cullPercentage);
     managePlantCount(maxPlantCount, cullPercentage);
-}
-
-void Environment::makeWindow()
-{
-
-    for (auto &[coords, agent] : spider->Agents)
-    {
-        if (!agent)
-        {
-            continue;
-        }
-        UnitColor color = agent->getAgentColor();
-
-        DrawCircle(
-            agent->getX(),
-            agent->getY(),
-            agentSize,
-            {(unsigned char)(color.red),
-             (unsigned char)(color.green),
-             (unsigned char)(color.blue),
-             (unsigned char)(color.transparency)});
-    }
-    for (auto &[coords, plant] : spider->Plants)
-    {
-        if (!plant)
-        {
-            continue;
-        }
-        UnitColor plC = plant->getPlantColor();
-        DrawCircle(
-            plant->getX(),
-            plant->getY(),
-            plantSize,
-            {(unsigned char)plC.red,
-             (unsigned char)plC.green,
-             (unsigned char)plC.blue,
-             (unsigned char)plC.transparency});
-    }
 }
 
 void Environment::spawnUnits(int agentCount, int plantCount)
@@ -588,6 +531,10 @@ void Environment::generatePlantCoords(Plant *pl)
 
 void Environment::logEnvironment(std::string fileName)
 {
+    if (spider == nullptr)
+    {
+        return; // nothing was ever built (e.g. save file could not be read)
+    }
 
     if (fileName == "")
     {
